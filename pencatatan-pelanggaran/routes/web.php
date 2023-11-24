@@ -41,3 +41,4 @@ Route::group(function () {
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () { // FOR BK
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
 });
+Route::get('/user', [UserController::class, 'index']);
