@@ -13,12 +13,7 @@ class HukumanController extends Controller
     {
         $hukuman = Hukuman::all();
 
-        return view('', compact(['hukuman']));
-    }
-
-    public function create()
-    {
-        return view('');
+        return view('home.admin.hukuman.index', compact(['hukuman']));
     }
 
     public function store(Request $request)
@@ -31,14 +26,14 @@ class HukumanController extends Controller
             $request->except(['_token'])
         ]);
 
-        return redirect('');
+        return redirect('/hukuman');
     }
 
     public function show(string $id)
     {
         $hukuman = Hukuman::find($id);
 
-        return view('', compact(['Hukuman']));
+        return view('home.admin.hukuman.edit', compact(['Hukuman']));
     }
 
     public function update(Request $request, string $id)
@@ -47,7 +42,7 @@ class HukumanController extends Controller
 
         $hukuman->update($request->except(['_token']));
 
-        return redirect('');
+        return redirect('/hukuman');
     }
 
     public function destroy(string $id)
@@ -56,6 +51,6 @@ class HukumanController extends Controller
 
         $hukuman->delete();
 
-        return redirect('');
+        return redirect('/hukuman');
     }
 }
