@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController as KelolaPetugas;
 
@@ -16,6 +17,7 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::get('/', [DashboardPetugas::class, 'index']);
 
