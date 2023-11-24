@@ -14,16 +14,10 @@ class AturanController extends Controller
     public function index()
     {
         $aturan = Aturan::all();
-
-        return view('', compact(['aturan']));
-    }
-
-    public function create()
-    {
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
 
-        return view('', compact(['jenis','hukuman']));
+        return view('home.admin.aturan.index', compact(['aturan', 'jenis', 'hukuman']));
     }
 
     public function store(Request $request)
@@ -40,7 +34,7 @@ class AturanController extends Controller
             $request->except(['_token'])
         ]);
 
-        return redirect('');
+        return redirect('/aturan');
     }
 
     public function show(string $id)
@@ -49,7 +43,7 @@ class AturanController extends Controller
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
 
-        return view('', compact(['aturan','jenis','hukuman']));
+        return view('/aturan', compact(['aturan','jenis','hukuman']));
     }
 
     public function update(Request $request, string $id)
@@ -58,7 +52,7 @@ class AturanController extends Controller
 
         $aturan->update($request->except(['_token']));
 
-        return redirect('');
+        return redirect('/aturan');
     }
 
     public function destroy(string $id)
@@ -67,6 +61,6 @@ class AturanController extends Controller
 
         $aturan->delete();
 
-        return redirect('');
+        return redirect('/aturan');
     }
 }

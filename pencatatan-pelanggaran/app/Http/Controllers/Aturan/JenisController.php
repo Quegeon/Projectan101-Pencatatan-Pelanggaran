@@ -13,12 +13,7 @@ class JenisController extends Controller
     {
         $jenis = Jenis::all();
 
-        return view('', compact(['jenis']));
-    }
-
-    public function create()
-    {
-        return view('');
+        return view('home.admin.jenis.index', compact(['jenis']));
     }
 
     public function store(Request $request)
@@ -32,14 +27,14 @@ class JenisController extends Controller
             $request->except(['_token'])
         ]);
 
-        return redirect('');
+        return redirect('/jenis');
     }
 
     public function show(string $id)
     {
         $jenis = Jenis::find($id);
 
-        return view('', compact(['jenis']));
+        return view('home.admin.jenis.edit', compact(['jenis']));
     }
     
     public function update(Request $request, string $id)
@@ -48,7 +43,7 @@ class JenisController extends Controller
 
         $jenis->update($request->except(['_token']));
 
-        return redirect('');
+        return redirect('/jenis');
     }
 
     public function destroy(string $id)
@@ -57,6 +52,6 @@ class JenisController extends Controller
 
         $jenis->delete();
 
-        return redirect('');
+        return redirect('/jenis');
     }
 }
