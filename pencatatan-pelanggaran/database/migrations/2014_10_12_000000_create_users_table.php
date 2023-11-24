@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('level');
             $table->string('foto');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
