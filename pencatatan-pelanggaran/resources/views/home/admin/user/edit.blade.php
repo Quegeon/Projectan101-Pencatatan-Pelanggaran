@@ -27,8 +27,25 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="">Nama Petugas</label>
-                                <input class="form-control" type="text" name="nama" id="nama" value="{{  }}" placeholder="Nama Petugas">
+                                <input class="form-control" type="text" name="nama" value="{{$user->nama}}" id="nama" placeholder="Isi Nama Petugas">
                             </div>
+                            <div class="form-group">
+                                <label for="">Username</label>
+                                <input class="form-control" type="text" name="username" value="{{$user->username}}" id="username" placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input class="form-control" type="text" name="password" value="{{$user->password}}" id="password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Level</label>
+                                <input class="form-control" type="text" name="level" value="{{$user->level}}" id="level" placeholder="Level">
+                            </div>
+                            {{--foto belum ditambahkan 
+                                <div class="form-group">
+                                <label for="">Level</label>
+                                <input class="form-control" type="text" name="level" id="username" placeholder="Nama Petugas">
+                            </div> --}}
                         </form>
                     </div>
                 </div>

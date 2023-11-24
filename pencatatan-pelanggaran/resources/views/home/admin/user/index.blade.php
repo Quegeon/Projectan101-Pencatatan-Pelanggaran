@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title', 'User')
+@section('title', 'Petugas')
 @section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Data Users</h4>
+        <h4 class="page-title">Data Petugas</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -27,23 +27,30 @@
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>No</th>
+                                    {{-- tambahkan foto --}}
+                                    <th>Nama Petugas</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                    <th>Tanggal Dibuat</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($user as $u)
                                 <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    {{-- tambahkan foto --}}
+                                    <td>{{$u->nama}}</td>
+                                    <td>{{$u->username}}</td>
+                                    <td>{{$u->level}}</td>
+                                    <td>{{$u->created_at}}</td>
+                                    <td>
+                                        <a href="" class="btn btn-link" class="fa fa-edit"></a>
+                                        <a href="" class="btn btn-link" class="fa fa-delete"></a>
+                                    </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -68,12 +75,25 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">Nama Petugas</label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Petugas">
+                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Isi Nama Petugas">
                     </div>
                     <div class="form-group">
-                        <label for="">Nama Petugas</label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Petugas">
+                        <label for="">Username</label>
+                        <input class="form-control" type="text" name="username" id="username" placeholder="Username">
                     </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input class="form-control" type="text" name="password" id="username" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Level</label>
+                        <input class="form-control" type="text" name="level" id="username" placeholder="Level">
+                    </div>
+                    {{--foto belum ditambahkan 
+                        <div class="form-group">
+                        <label for="">Level</label>
+                        <input class="form-control" type="text" name="level" id="username" placeholder="Nama Petugas">
+                    </div> --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
