@@ -27,23 +27,25 @@
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>ID</th>
+                                    <th>Nama</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                    <th>Foto</th>
+                                    <th>Waktu Daftar</th>
                                 </tr>
                             </thead>
                             <tbody>
+                               @foreach ($user as $u)
                                 <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
+                                    <td>{{$u->id}}</td>
+                                    <td>{{$u->nama}}</td>
+                                    <td>{{$u->username}}</td>
+                                    <td>{{$u->level}}</td>
+                                    <td>{{$u->foto}}</td>
+                                    <td>{{$u->created_at}}</td>
                                 </tr>
+                               @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -64,15 +66,27 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="/user/tambah" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="">Nama Petugas</label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Petugas">
+                        <label for="">Nama</label>
+                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama">
                     </div>
                     <div class="form-group">
-                        <label for="">Nama Petugas</label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama Petugas">
+                        <label for="">Username</label>
+                        <input class="form-control" type="text" name="username" id="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input class="form-control" type="password" name="password" id="username" placeholder="Passowrd">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Level</label>
+                        <input class="form-control" type="text" name="level" id="level" placeholder="Level">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Foto</label>
+                        <input class="form-control" type="text" name="foto" id="foto" placeholder="foto">
                     </div>
             </div>
             <div class="modal-footer">

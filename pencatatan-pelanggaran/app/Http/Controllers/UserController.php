@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
         $user = User::all();
-        return view('home.user.index', compact('user'));
+        return view('home.admin.users.index', compact('user'));
     }
 
     public function create()
@@ -26,6 +26,7 @@ class UserController extends Controller
             'level' => $request->level,
             'username' => $request->username,
             'password' => bcrypt($request->password),
+            'foto' => $request->foto,
             $request->except(['_token']),
         ]);
         return redirect('/user');

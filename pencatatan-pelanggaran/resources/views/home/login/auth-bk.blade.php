@@ -29,6 +29,7 @@
 		<div class="container container-login animated fadeIn">
 			<h3 class="text-center">Sign In To Admin</h3>
 			<div class="login-form">
+				<form action="/login" method="POST">
 				<div class="form-group form-floating-label">
 					<input id="username" name="username" type="text" class="form-control input-border-bottom" required>
 					<label for="username" class="placeholder">Username</label>
@@ -55,6 +56,7 @@
 					<span class="msg">Don't have an account yet ?</span>
 					<a href="#" id="show-signup" class="link">Sign Up</a>
 				</div>
+				</form>
 			</div>
 		</div>
 

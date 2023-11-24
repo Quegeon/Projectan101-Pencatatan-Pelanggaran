@@ -4,21 +4,39 @@ namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Alert;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function indexbk()
     {
-        return view('home.login.admin.users.login');
+        return view('home.login.auth-bk');
     }
+
+    public function indexpetugas()
+    {
+        return view('home.login.auth-petugas');
+    }
+
+   
+    public function loginpetugas(Request $request)
+    {
+        if(Auth::attempt($request->only('username','password'))){
+            return redirect('/dashboard');
+        }else{
+            return redirect('/login')->with('error', 'Maaf Username dan Password yang Anda Masukan salah!');
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function signup()
     {
         //
     }
@@ -26,10 +44,6 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
