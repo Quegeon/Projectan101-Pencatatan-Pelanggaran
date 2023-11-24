@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
         $user = User::all();
-        return view('home.user.index', compact('user'));
+        return view('home.admin.user.index', compact('user'));
     }
 
     public function create()
     {
-        return view('home.user.create');
+        return view('home.admin.user.create');
     }
 
     public function store(Request $request)
@@ -34,7 +34,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::find($id);
-        return view('home.user.edit', compact(['user']));
+        return view('home.admin.user.edit', compact(['user']));
     }
     
     public function update(Request $request, string $id)
