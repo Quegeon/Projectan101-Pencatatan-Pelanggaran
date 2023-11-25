@@ -43,6 +43,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     {{-- tambahkan foto --}}
                                     <td>{{$u->foto}}</td>
+                                    {{-- ez lah nya tinggal di jero td na tambah img src --}}
                                     <td>{{$u->nama}}</td>
                                     <td>{{$u->username}}</td>
                                     <td>{{$u->level}}</td>
@@ -85,11 +86,17 @@
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input class="form-control" type="text" name="password" id="username" placeholder="Password">
-                    </div>
+                        <input class="form-control" type="text" name="password" id="password" placeholder="Password">
+                    </div> {{-- type na password --}}
                     <div class="form-group">
                         <label for="">Level</label>
                         <input class="form-control" type="text" name="level" id="username" placeholder="Level">
+
+                        {{-- jadiin select option cuk --}}
+                        {{-- <select name="level" class="form-control" id="">
+                            <option value="Admin">Admin</option>
+                            <option value="Petugas">Petugas</option>
+                        </select> --}}
                     </div>
                     <div class="form-group">
                         <label for="">Masukan foto</label>

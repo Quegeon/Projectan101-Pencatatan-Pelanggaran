@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\User;
+
 
 class UserController extends Controller
 {
@@ -21,19 +23,25 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //todo:tambah foto
-        $img - User::create([
-            'nama' => $request->nama,
-            'level' => $request->level,
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-            $request->except(['_token']),
-        ]);
+        $validated = $request->validate([
+            'nama' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif|max:2048',
+        ]); // validasi doang supaya si inputan teh diisi semua
+
         if($request->hasFile('foto')){
-            $request->file('foto')->move('fotopetugas/',$request->file('foto')->getClientOriginalName());
-            $img->foto = $request->file('foto')->getClientOriginalName();
-            $img->save();
-        return redirect('/user');
+            $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
+            $request->file('foto')->move('fotopetugas/',$imgName);
+            $validated['foto'] = $imgName;
+        } else {
+            $validated['foto'] = 'kosong';
         }
+
+        User::create($validated);
+
+        return redirect('/user');
     }
 
     public function show(string $id)
