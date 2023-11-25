@@ -23,7 +23,7 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="">Nama Petugas</label>
@@ -39,13 +39,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Level</label>
-                                <input class="form-control" type="text" name="level" value="{{$user->level}}" id="level" placeholder="Level">
+                                <select name="level" id='level' class="form-control">
+                                    <option value="">-----------</option></option>
+                                    <option value="Petugas">Petugas</option>
+                                </select>
                             </div>
-                            {{--foto belum ditambahkan 
-                                <div class="form-group">
-                                <label for="">Level</label>
-                                <input class="form-control" type="text" name="level" id="username" placeholder="Nama Petugas">
-                            </div> --}}
+                            <div class="form-group">
+                                <label for="">Masukan foto</label>
+                                <input type="file" class="form-control" name="foto">
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a href="/admin/user" class="btn btn-light">Cancel</a>
                         </form>
                     </div>
                 </div>

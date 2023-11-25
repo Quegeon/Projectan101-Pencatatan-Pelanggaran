@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 class UserController extends Controller
@@ -20,23 +21,30 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        //todo:tambah foto
-        $img - User::create([
-            'nama' => $request->nama,
-            'level' => $request->level,
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-            $request->except(['_token']),
+        $validated = $request->validate([
+            'nama' => 'required', 
+            'username' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
         ]);
-        if($request->hasFile('foto')){
-            $request->file('foto')->move('fotopetugas/',$request->file('foto')->getClientOriginalName());
-            $img->foto = $request->file('foto')->getClientOriginalName();
-            $img->save();
-        return redirect('/user');
-        }
-    }
 
-    public function show(string $id)
+
+        if($request->hasFile('foto')){
+            $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
+            $request->file('foto')->move('fotopetugas/',$imgName);
+            $validated['foto'] = $imgName;
+        } else {
+            $validated['foto'] = 'kosong';
+        }
+
+        User::create($validated);
+
+        return redirect('/user');
+    }
+    
+
+    public function edit(string $id)
     {
         $user = User::find($id);
         return view('home.admin.user.edit', compact(['user']));
@@ -44,15 +52,26 @@ class UserController extends Controller
     
     public function update(Request $request, string $id)
     {
-        //todo:tambah foto
         $user = User::find($id);
-        $user->update([
-            'nama' => $request->nama,
-            'level' => $request->level,
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-            $request->except(['_token']),
+        $validated = $request->validate([
+            'nama' => 'required', 
+            'username' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
         ]);
+
+
+        if($request->hasFile('foto')){
+            $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
+            $request->file('foto')->move('fotopetugas/',$imgName);
+            $validated['foto'] = $imgName;
+        } else {
+            $validated['foto'] = 'kosong';
+        }
+
+        $user->update($validated);
+
         return redirect('/user');
     }
 
