@@ -22,13 +22,14 @@
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
-                    <a href="" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
+                    <a href="/admin/user/create" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     {{-- tambahkan foto --}}
+                                    <th>Foto</th>
                                     <th>Nama Petugas</th>
                                     <th>Username</th>
                                     <th>Level</th>
@@ -41,6 +42,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     {{-- tambahkan foto --}}
+                                    <td>{{$u->foto}}</td>
                                     <td>{{$u->nama}}</td>
                                     <td>{{$u->username}}</td>
                                     <td>{{$u->level}}</td>
@@ -71,7 +73,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="/user/store" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">Nama Petugas</label>
@@ -89,11 +91,10 @@
                         <label for="">Level</label>
                         <input class="form-control" type="text" name="level" id="username" placeholder="Level">
                     </div>
-                    {{--foto belum ditambahkan 
-                        <div class="form-group">
-                        <label for="">Level</label>
-                        <input class="form-control" type="text" name="level" id="username" placeholder="Nama Petugas">
-                    </div> --}}
+                    <div class="form-group">
+                        <label for="">Masukan foto</label>
+                        <input type="file" class="form-control" name="foto">
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

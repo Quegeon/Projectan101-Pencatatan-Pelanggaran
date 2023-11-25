@@ -23,17 +23,26 @@ Route::get('/', [DashboardPetugas::class, 'index']);
 
 // TODO: LOGIN ADMIN, BK
 
-Route::group(function () {
+Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
+    Route::get('/', 'index')->name('user.index');
+    Route::get('/create', 'create')->name('user.create');
+    Route::post('/store', 'store')->name('user.store');
+    Route::get('/{id}/edit', 'edit')->name('user.edit');
+    Route::post('/{id}/update', 'update')->name('user.update');
+    Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+});
+
+Route::group(["husen ganteng"],function () {
     Route::get('dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
     Route::group(['middleware' => ['auth', 'level:admin']], function() { // FOR ADMIN
-        Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
-            Route::get('/', 'index')->name('user.index');
-            Route::get('/create', 'create')->name('user.create');
-            Route::post('/store', 'store')->name('user.store');
-            Route::get('/{id}/edit', 'edit')->name('user.edit');
-            Route::post('/{id}/update', 'update')->name('user.update');
-            Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
-        });
+        // Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
+        //     Route::get('/', 'index')->name('user.index');
+        //     Route::get('/create', 'create')->name('user.create');
+        //     Route::post('/store', 'store')->name('user.store');
+        //     Route::get('/{id}/edit', 'edit')->name('user.edit');
+        //     Route::post('/{id}/update', 'update')->name('user.update');
+        //     Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+        // });
     });
     Route::group(['middleware' => ['auth', 'level:admin,petugas']], function() { // FOR ADMIN PETUGAS
 
@@ -43,4 +52,3 @@ Route::group(function () {
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () { // FOR BK
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
 });
-Route::get('/user', [UserController::class, 'index']);

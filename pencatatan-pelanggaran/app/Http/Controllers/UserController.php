@@ -21,14 +21,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //todo:tambah foto
-        User::create([
+        $img - User::create([
             'nama' => $request->nama,
             'level' => $request->level,
             'username' => $request->username,
             'password' => bcrypt($request->password),
             $request->except(['_token']),
         ]);
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('fotopetugas/',$request->file('foto')->getClientOriginalName());
+            $img->foto = $request->file('foto')->getClientOriginalName();
+            $img->save();
         return redirect('/user');
+        }
     }
 
     public function show(string $id)
