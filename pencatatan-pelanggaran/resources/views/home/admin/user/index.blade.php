@@ -87,8 +87,8 @@
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input class="form-control" type="text" name="password" id="username" placeholder="Password">
-                    </div>
+                        <input class="form-control" type="text" name="password" id="password" placeholder="Password">
+                    </div> {{-- type na password --}}
                     <div class="form-group">
                         <label for="">Level</label>
                         <select name="level" id='level' class="form-control">
