@@ -28,6 +28,7 @@ class UserController extends Controller
             'level' => 'required',
             'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
         ]);
+        
         $validated['id'] = Str::orderedUuid();
 
         if($request->hasFile('foto')){
