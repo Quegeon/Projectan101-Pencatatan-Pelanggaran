@@ -34,14 +34,13 @@
                                     <th>Username</th>
                                     <th>Level</th>
                                     <th>Tanggal Dibuat</th>
-                                    <th>Opsi</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($user as $u)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    {{-- tambahkan foto --}}
                                     <td>
                                         <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
                                     </td>
@@ -50,8 +49,8 @@
                                     <td>{{$u->level}}</td>
                                     <td>{{$u->created_at}}</td>
                                     <td>
-                                        <a href="{{ route('user.edit', $u->id) }}" class="btn btn-link" class="fa fa-edit">Edit</a>
-                                        <a href="/user/{{$u->id}}/destroy" class="btn btn-link" class="fa fa-delete">Hapus</a>
+                                        <a href="{{ route('user.edit', $u->id) }}" class="btn btn-link"><i class="fa fa-edit fa-lg"></i></a>
+                                        <a href="{{ route('user.destroy', $u->id) }}" class="btn btn-link" data-confirm-delete="true"><i class="fa fa-trash text-danger fa-lg"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -75,7 +74,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/user/store" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">Nama Petugas</label>
@@ -87,12 +86,12 @@
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input class="form-control" type="text" name="password" id="password" placeholder="Password">
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password">
                     </div> {{-- type na password --}}
                     <div class="form-group">
                         <label for="">Level</label>
                         <select name="level" id='level' class="form-control">
-                            <option value="">-----------</option>
+                            <option value="" hidden>-- Level Petugas --</option>
                             <option value="Petugas">Petugas</option>
                         </select>
                     </div>

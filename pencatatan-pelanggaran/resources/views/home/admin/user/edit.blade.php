@@ -49,7 +49,7 @@
                                 <input type="file" class="form-control" name="foto">
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                            <a href="/admin/user" class="btn btn-light">Cancel</a>
+                            <a href="{{ route('user.index') }}" class="btn btn-light">Cancel</a>
                         </form>
                     </div>
                 </div>

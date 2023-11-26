@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\User;
 
-
 class UserController extends Controller
 {
     public function index()
@@ -29,7 +28,7 @@ class UserController extends Controller
             'level' => 'required',
             'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
         ]);
-
+        $validated['id'] = Str::orderedUuid();
 
         if($request->hasFile('foto')){
             $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
@@ -40,8 +39,7 @@ class UserController extends Controller
         }
 
         User::create($validated);
-
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Data Created Successfully!');
     }
     
 
@@ -80,6 +78,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Data Deleted Successfully!');
     }
 }
