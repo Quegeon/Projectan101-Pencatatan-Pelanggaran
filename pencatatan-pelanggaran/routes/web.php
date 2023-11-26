@@ -25,8 +25,7 @@ Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 
 Route::group(["husen ganteng"],function () {
-    Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
-    Route::group(['middleware' => ['auth', 'level:admin']], function() { // FOR ADMIN
+    Route::group(['middleware' => ['auth', 'level:Admin']], function() { // FOR ADMIN
         Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
             Route::get('/', 'index')->name('user.index');
             Route::get('/create', 'create')->name('user.create');
@@ -36,8 +35,8 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
         });
     });
-    Route::group(['middleware' => ['auth', 'level:admin,petugas']], function() { // FOR ADMIN PETUGAS
-
+    Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() { // FOR ADMIN PETUGAS
+        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
     });
 });
 
