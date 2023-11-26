@@ -23,7 +23,7 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="{{ route('bk.update', $id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('bk.update', $bk->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="">Nama</label>

@@ -10,6 +10,8 @@ class Bk extends Model
     protected $fillable = ['id', 'foto', 'nama', 'username', 'password'];
     protected $primarykey = 'id';
     protected $table ='bks';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     public function Bk()
     {
