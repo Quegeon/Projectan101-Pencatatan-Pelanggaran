@@ -33,14 +33,14 @@
                                 <label for="">Username</label>
                                 <input class="form-control" type="text" name="username" value="{{$user->username}}" id="username" placeholder="Username">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="">Password</label>
                                 <input class="form-control" type="text" name="password" value="{{$user->password}}" id="password" placeholder="Password">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="">Level</label>
                                 <select name="level" id='level' class="form-control">
-                                    <option value="">-----------</option></option>
+                                    <option value="Admin">Admin</option>
                                     <option value="Petugas">Petugas</option>
                                 </select>
                             </div>
