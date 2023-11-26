@@ -42,7 +42,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     {{-- tambahkan foto --}}
-                                    <td>{{$u->foto}}</td>
+                                    <td><img src="{{ asset('fotopetugas/'.$u->foto) }}" width="100" height="100" alt=""></td>
                                     {{-- ez lah nya tinggal di jero td na tambah img src --}}
                                     <td>{{$u->nama}}</td>
                                     <td>{{$u->username}}</td>
