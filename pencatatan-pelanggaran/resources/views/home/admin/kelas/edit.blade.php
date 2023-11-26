@@ -23,7 +23,7 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="kelas/update/{{$kelas->id}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('kelas.update', $kelas->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="">Nama Kelas</label>
@@ -33,6 +33,8 @@
                                 <label for="">Jurusan</label>
                                 <input class="form-control" type="text" name="jurusan" value="{{$kelas->jurusan}}" id="nama" placeholder="Nama Petugas">
                             </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a href="/admin/kelas" class="btn btn-light">Cancel</a>
                         </form>
                     </div>
                 </div>

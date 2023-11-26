@@ -42,15 +42,16 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     {{-- tambahkan foto --}}
-                                    <td><img src="{{ asset('fotopetugas/'.$u->foto) }}" width="100" height="100" alt=""></td>
-                                    {{-- ez lah nya tinggal di jero td na tambah img src --}}
+                                    <td>
+                                        <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
+                                    </td>
                                     <td>{{$u->nama}}</td>
                                     <td>{{$u->username}}</td>
                                     <td>{{$u->level}}</td>
                                     <td>{{$u->created_at}}</td>
                                     <td>
-                                        <a href="" class="btn btn-link" class="fa fa-edit"></a>
-                                        <a href="" class="btn btn-link" class="fa fa-delete"></a>
+                                        <a href="{{ route('user.edit', $u->id) }}" class="btn btn-link" class="fa fa-edit">Edit</a>
+                                        <a href="/user/{{$u->id}}/destroy" class="btn btn-link" class="fa fa-delete">Hapus</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -90,13 +91,10 @@
                     </div> {{-- type na password --}}
                     <div class="form-group">
                         <label for="">Level</label>
-                        <input class="form-control" type="text" name="level" id="username" placeholder="Level">
-
-                        {{-- jadiin select option cuk --}}
-                        {{-- <select name="level" class="form-control" id="">
-                            <option value="Admin">Admin</option>
+                        <select name="level" id='level' class="form-control">
+                            <option value="">-----------</option>
                             <option value="Petugas">Petugas</option>
-                        </select> --}}
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="">Masukan foto</label>
