@@ -3,7 +3,7 @@
 use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController as KelolaPetugas;
-
+use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
@@ -23,7 +23,16 @@ Route::get('/', [DashboardPetugas::class, 'index']);
 
 // TODO: LOGIN ADMIN, BK
 
-Route::group(function () {
+Route::prefix('bk')->controller(KelolaBk::class)->group(function() {
+    Route::get('/', 'index')->name('bk.index');
+    Route::get('/create', 'create')->name('bk.create');
+    Route::post('/store', 'store')->name('bk.store');
+    Route::get('/{id}/edit', 'edit')->name('bk.edit');
+    Route::post('/{id}/update', 'update')->name('bk.update');
+    Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
+});
+
+Route::group(['husen ganteng'],function () {
     Route::get('dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
     Route::group(['middleware' => ['auth', 'level:admin']], function() { // FOR ADMIN
         Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
@@ -43,4 +52,3 @@ Route::group(function () {
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () { // FOR BK
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
 });
-Route::get('/user', [UserController::class, 'index']);
