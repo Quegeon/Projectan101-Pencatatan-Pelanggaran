@@ -23,7 +23,7 @@ Route::get('/', [DashboardPetugas::class, 'index']);
 
 // TODO: LOGIN ADMIN, BK
 
-Route::group(function () {
+Route::group(["husen ganteng"],function () {
     Route::get('dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
     Route::group(['middleware' => ['auth', 'level:admin']], function() { // FOR ADMIN
         Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
@@ -43,4 +43,3 @@ Route::group(function () {
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () { // FOR BK
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
 });
-Route::get('/user', [UserController::class, 'index']);
