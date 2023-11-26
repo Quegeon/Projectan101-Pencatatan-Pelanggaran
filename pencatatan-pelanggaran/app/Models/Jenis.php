@@ -11,11 +11,15 @@ class Jenis extends Model
 
     protected $primaryKey = 'id';
 
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'nama_jenis',
         'keterangan'
     ];
+
+    public $incrementing = false;
 
     public function Jenis ()
     {
