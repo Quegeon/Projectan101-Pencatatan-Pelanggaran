@@ -22,17 +22,16 @@ class BkController extends Controller
     public function store(Request $request)
     {
       $validated = $request->validate([
-         'id'=>'required',
          'nama' => 'required', 
          'username' => 'required',
          'password' => 'required',
          'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
      ]);
-
+     $validated['id'] = Str::orderedUuid();
 
      if($request->hasFile('foto')){
       $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
-            $request->file('foto')->move('fotopetugas/',$imgName);
+            $request->file('foto')->move('fotobk/',$imgName);
             $validated['foto'] = $imgName;
         } else {
             $validated['foto'] = 'kosong';
@@ -53,17 +52,16 @@ class BkController extends Controller
     {
      $bk = Bk::find($id);
      $validated = $request->validate([
-      'id'=>'required',
       'nama' => 'required', 
       'username' => 'required',
       'password' => 'required',
       'foto' => 'required|image',
   ]);
-
+  $validated['id'] = Str::orderedUuid();
 
   if($request->hasFile('foto')){
    $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
-         $request->file('foto')->move('fotopetugas/',$imgName);
+         $request->file('foto')->move('fotobk/',$imgName);
          $validated['foto'] = $imgName;
      } else {
          $validated['foto'] = 'kosong';
@@ -73,7 +71,7 @@ class BkController extends Controller
 
      return redirect('/bk');
     }
-    public function destroy($id)
+    public function destroy(string $id)
     {
      $bk = Bk::find($id);
      $bk->delete();

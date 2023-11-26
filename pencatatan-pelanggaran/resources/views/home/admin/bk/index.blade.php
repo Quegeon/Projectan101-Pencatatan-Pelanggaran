@@ -28,8 +28,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
                                     <th>Foto</th>
+                                    <th>Nama</th>
                                     <th>Username</th>
                                     <th>Tanggal Dibuat</th>
                                     <th>Opsi</th>
@@ -39,10 +39,10 @@
                                 @foreach ($bk as $u)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$u->nama}}</td>
                                     <td>
-                                        <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
+                                        <img src="{{asset('fotobk/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
                                     </td>
+                                    <td>{{$u->nama}}</td>
                                     <td>{{$u->username}}</td>
                                     <td>{{$u->created_at}}</td>
                                     <td>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input class="form-control" type="text" name="password" id="username" placeholder="Password">
+                        <input class="form-control" type="password" name="password" id="username" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label for="">Masukan foto</label>

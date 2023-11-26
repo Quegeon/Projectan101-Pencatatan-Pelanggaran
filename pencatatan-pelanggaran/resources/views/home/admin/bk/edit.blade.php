@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Password</label>
-                                <input class="form-control" type="text" name="password" value="{{$bk->password}}" id="username" placeholder="Password">
+                                <input class="form-control" type="password" name="password" value="{{$bk->password}}" id="username" placeholder="Password">
                             </div>
                             <div class="form-group">
                                 <label for="">Masukan foto</label>
