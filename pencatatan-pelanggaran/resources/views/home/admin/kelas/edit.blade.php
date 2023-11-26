@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title', 'User')
+@section('title', 'Kelas')
 @section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Data Users</h4>
+        <h4 class="page-title">Edit Data Kelas</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -23,12 +23,18 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('kelas.update', $kelas->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="">Nama Petugas</label>
-                                <input class="form-control" type="text" name="nama" id="nama" value="{{  }}" placeholder="Nama Petugas">
+                                <label for="">Nama Kelas</label>
+                                <input class="form-control" type="text" name="nama_kelas" value="{{$kelas->nama_kelas}}" id="nama"  placeholder="Nama Petugas">
                             </div>
+                            <div class="form-group">
+                                <label for="">Jurusan</label>
+                                <input class="form-control" type="text" name="jurusan" value="{{$kelas->jurusan}}" id="nama" placeholder="Nama Petugas">
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a href="/admin/kelas" class="btn btn-light">Cancel</a>
                         </form>
                     </div>
                 </div>

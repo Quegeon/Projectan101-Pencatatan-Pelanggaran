@@ -29,7 +29,7 @@
 		<div class="container container-login animated fadeIn">
 			<h3 class="text-center">Sign In To Admin</h3>
 			<div class="login-form">
-			<form action="/login/petugas" method="POST">
+			<form action="{{ route('postlogin.user') }}" method="POST">
 				{{ csrf_field()}}
 				<div class="form-group form-floating-label">
 					<input id="username" name="username" type="text" class="form-control input-border-bottom" required>
