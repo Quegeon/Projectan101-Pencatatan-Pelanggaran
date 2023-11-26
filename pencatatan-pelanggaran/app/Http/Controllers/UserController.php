@@ -39,7 +39,7 @@ class UserController extends Controller
         }
 
         User::create($validated);
-        return redirect('/user')->with('success', 'Data Created Successfully!');
+        return redirect('/user')->with('success', 'Data Successfully Created!');
     }
     
 
@@ -71,13 +71,13 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Data Successfully Updated!');
     }
 
     public function destroy(string $id)
     {
         $user = User::find($id);
         $user->delete();
-        return redirect('/user')->with('success', 'Data Deleted Successfully!');
+        return redirect('/user')->with('success', 'Data Successfully Deleted!');
     }
 }

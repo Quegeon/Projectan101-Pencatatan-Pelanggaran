@@ -50,7 +50,7 @@
                                     <td>{{$u->created_at}}</td>
                                     <td>
                                         <a href="{{ route('user.edit', $u->id) }}" class="btn btn-link"><i class="fa fa-edit fa-lg"></i></a>
-                                        <a href="{{ route('user.destroy', $u->id) }}" class="btn btn-link" data-confirm-delete="true"><i class="fa fa-trash text-danger fa-lg"></i></a>
+                                        <a class="btn btn-link" onclick="confirmDel('{{ route('user.destroy', $u->id) }}')"><i class="fa fa-trash text-danger fa-lg"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
