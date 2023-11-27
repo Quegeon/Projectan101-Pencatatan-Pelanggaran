@@ -108,7 +108,7 @@
 		</div>
 
 		<!-- Sidebar -->
-		@include('layouts.sidebar')
+		@include('layouts.sidebar-petugas')
 		<!-- End Sidebar -->
 
 		<div class="main-panel">

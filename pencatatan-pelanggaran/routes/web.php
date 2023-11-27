@@ -36,7 +36,7 @@ Route::group(["husen ganteng"],function () {
         });
     });
     Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() { // FOR ADMIN PETUGAS
-        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
+     Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas'); 
     });
 });
 
