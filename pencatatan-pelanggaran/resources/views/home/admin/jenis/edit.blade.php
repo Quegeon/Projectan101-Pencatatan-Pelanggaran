@@ -28,10 +28,16 @@
                             <div class="form-group">
                                 <label>Nama Jenis</label>
                                 <input class="form-control" type="text" name="nama_jenis" value="{{ $jenis->nama_jenis }}" placeholder="{{ $jenis->nama_jenis }}">
+                                @if($errors->first('nama_jenis'))
+                                    <p class="text-danger">* {{ $errors->first('nama_jenis') }}</p>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
                                 <input class="form-control" type="text" name="keterangan" value="{{ $jenis->keterangan }}" placeholder="{{ $jenis->keterangan }}">
+                                @if($errors->first('keterangan'))
+                                    <p class="text-danger">* {{ $errors->first('keterangan') }}</p>
+                                @endif
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                             <a href="{{ route('jenis.index') }}" class="btn btn-secondary">Batal</a>

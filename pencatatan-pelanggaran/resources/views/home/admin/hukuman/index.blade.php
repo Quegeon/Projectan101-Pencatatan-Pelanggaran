@@ -72,6 +72,9 @@
                     <div class="form-group">
                         <label>Hukuman</label>
                         <input class="form-control" type="text" name="hukuman" placeholder="Masukkan Hukuman">
+                        @if ($errors->first('hukuman'))
+                            <p class="text-danger">* {{ $errors->first('hukuman') }}</p>
+                        @endif
                     </div>
             </div>
             <div class="modal-footer">

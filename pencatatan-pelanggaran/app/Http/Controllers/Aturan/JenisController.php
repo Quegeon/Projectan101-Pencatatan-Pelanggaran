@@ -18,40 +18,101 @@ class JenisController extends Controller
 
     public function store(Request $request)
     {
-        $id = Str::orderedUuid()->toString();
-
-        Jenis::create([
-            'id' => $id,
-            'nama_jenis' => $request->nama_jenis,
-            'keterangan' => $request->keterangan,
-            $request->except(['_token'])
+        $request->validate([
+            'nama_jenis' => 'required',
+            'keterangan' => 'required'
         ]);
 
-        return redirect()->route('jenis.index')->with('success','Data Berhasil Dibuat');
+        try {
+            $id = Str::orderedUuid()->toString();
+    
+            Jenis::create([
+                'id' => $id,
+                'nama_jenis' => $request->nama_jenis,
+                'keterangan' => $request->keterangan,
+                $request->except(['_token'])
+            ]);
+    
+            return redirect()
+                ->route('jenis.index')
+                ->with('success','Data Berhasil Dibuat');
+            
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('jenis.index')
+                ->with('error','Error Store Data');
+        }
+
     }
 
     public function edit(string $id)
     {
         $jenis = Jenis::find($id);
 
-        return view('home.admin.jenis.edit', compact(['jenis']));
+        if ($jenis === null) {
+            return redirect()
+                ->route('jenis.index')
+                ->with('error','Invalid Target Data');
+
+        } else {
+            return view('home.admin.jenis.edit', compact(['jenis']));
+        }
     }
     
     public function update(Request $request, string $id)
     {
         $jenis = Jenis::find($id);
 
-        $jenis->update($request->except(['_token']));
+        if ($jenis === null) {
+            return redirect()
+                ->route('jenis.index')
+                ->with('error','Invalid Target Data');
 
-        return redirect()->route('jenis.index')->with('success','Data Berhasil Diubah');
+        } else {
+            $request->validate([
+                'nama_jenis' => 'required',
+                'keterangan' => 'required'
+            ]);
+
+            try {
+                $jenis->update($request->except(['_token']));
+        
+                return redirect()
+                    ->route('jenis.index')
+                    ->with('success','Data Berhasil Diubah');
+                
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('jenis.index')
+                    ->with('error','Error Update Data');
+            }
+        }
+
     }
 
     public function destroy(string $id)
     {
         $jenis = Jenis::find($id);
 
-        $jenis->delete();
+        if ($jenis === null) {
+            return redirect()
+                ->route('jenis.index')
+                ->with('error','Invalid Target Data');
 
-        return redirect()->route('jenis.index')->with('success','Data Berhasil Dihapus');
+        } else {
+            try {
+                $jenis->delete();
+        
+                return redirect()
+                    ->route('jenis.index')
+                    ->with('success','Data Berhasil Dihapus');
+                
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('jenis.index')
+                    ->with('error','Error Destroy Data');
+            }
+        }
+
     }
 }

@@ -86,10 +86,16 @@
                     <div class="form-group">
                         <label>Nama Aturan</label>
                         <input type="text" name="nama_aturan" class="form-control" placeholder="Masukkan Nama Aturan">
+                        @if ($errors->first('nama_aturan'))
+                            <p class="text-danger">* {{ $errors->first('nama_aturan') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label>Poin</label>
                         <input type="text" name="poin" class="form-control" placeholder="Masukkan Poin Aturan">
+                        @if ($errors->first('poin'))
+                            <p class="text-danger">* {{ $errors->first('poin') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         {{-- TODO: jangan tampilkan id --}}
@@ -100,6 +106,9 @@
                                 <option value="{{ $h->id }}">{{ $h->hukuman }}</option>
                             @endforeach
                         </datalist>
+                        @if ($errors->first('id_hukuman'))
+                            <p class="text-danger">* {{ $errors->first('id_hukuman') }}</p>
+                        @endif
                     </div>
             </div>
             <div class="modal-footer">

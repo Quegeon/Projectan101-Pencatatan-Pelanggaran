@@ -28,6 +28,9 @@
                             <div class="form-group">
                                 <label>Hukuman</label>
                                 <input class="form-control" type="text" name="hukuman" value="{{ $hukuman->hukuman }}" placeholder="{{ $hukuman->hukuman }}">
+                                @if ($errors->first('hukuman'))
+                                    <p class="text-danger">* {{ $errors->first('hukuman') }}</p>
+                                @endif
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                             <a href="{{ route('hukuman.index') }}" class="btn btn-secondary">Batal</a>

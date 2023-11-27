@@ -37,19 +37,28 @@
                             <div class="form-group">
                                 <label>Nama Aturan</label>
                                 <input type="text" name="nama_aturan" class="form-control" value="{{ $aturan->nama_aturan }}" placeholder="{{ $aturan->nama_aturan }}">
+                                @if ($errors->first('nama_aturan'))
+                                    <p class="text-danger">* {{ $errors->first('nama_aturan') }}</p>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Poin</label>
                                 <input type="text" name="poin" class="form-control" value="{{ $aturan->poin }}" placeholder="{{ $aturan->poin }}">
+                                @if ($errors->first('poin'))
+                                    <p class="text-danger">* {{ $errors->first('poin') }}</p>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Hukuman</label>
-                                <input list="hukuman" name="id_hukuman" value="{{ $aturan->id_hukuman }}" placeholder="{{ $aturan->Hukuman->hukuman }}">
+                                <input list="hukuman" name="id_hukuman" class="form-control" value="{{ $aturan->id_hukuman }}" placeholder="{{ $aturan->Hukuman->hukuman }}">
                                 <datalist id="hukuman">
                                     @foreach ($hukuman as $h)
                                         <option value="{{ $h->id }}">{{ $h->hukuman }}</option>
                                     @endforeach
                                 </datalist>
+                                @if ($errors->first('id_hukuman'))
+                                    <p class="text-danger">* {{ $errors->first('id_hukuman') }}</p>
+                                @endif
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                             <a href="{{ route('hukuman.index') }}" class="btn btn-secondary">Batal</a>
