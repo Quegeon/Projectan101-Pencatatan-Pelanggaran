@@ -27,14 +27,14 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="">Nama Kelas</label>
-                                <input class="form-control" type="text" name="nama_kelas" value="{{$kelas->nama_kelas}}" id="nama"  placeholder="Nama Petugas">
+                                <input class="form-control" type="text" name="nama_kelas" value="{{$kelas->nama_kelas}}" id="nama"  placeholder="Nama Kelas">
                             </div>
                             <div class="form-group">
                                 <label for="">Jurusan</label>
-                                <input class="form-control" type="text" name="jurusan" value="{{$kelas->jurusan}}" id="nama" placeholder="Nama Petugas">
+                                <input class="form-control" type="text" name="jurusan" value="{{$kelas->jurusan}}" id="nama" placeholder="Jurusan">
                             </div>
-                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                        <a href="/admin/kelas" class="btn btn-light">Cancel</a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </form>
                     </div>
                 </div>

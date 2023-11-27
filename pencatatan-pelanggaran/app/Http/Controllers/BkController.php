@@ -26,7 +26,7 @@ class BkController extends Controller
         'nama' => $request->nama,
         'username' => $request->username,
         'password' => bcrypt($request->password),
-        $request-except(['_token']),
+        $request->except(['_token']),
      ]);
      return redirect('/bk');
     }
@@ -44,7 +44,7 @@ class BkController extends Controller
         'foto' => $request->foto,
         'nama' => $request->nama,
         'username' => $request->username,
-        $request-except(['_token']),  
+        $request->except(['_token']),  
      ]);
      return redirect('/bk');
     }
