@@ -21,36 +21,33 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 // Login
+
 Route::view('/login/user', 'home.login.auth-user');
 Route::view('/login/bk', 'home.login.auth-bk');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 
-Route::get('/', [DashboardPetugas::class, 'index']);
-
-// TODO: LOGIN ADMIN, BK
-Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
-    Route::get('/', 'index')->name('user.index');
-    Route::get('/create', 'create')->name('user.create');
-    Route::post('/store', 'store')->name('user.store');
-    Route::get('/{id}/edit', 'edit')->name('user.edit');
-    Route::post('/{id}/update', 'update')->name('user.update');
-    Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
-});
-
-Route::prefix('bk')->controller(KelolaBk::class)->group(function() {
-    Route::get('/', 'index')->name('bk.index');
-    Route::get('/create', 'create')->name('bk.create');
-    Route::post('/store', 'store')->name('bk.store');
-    Route::get('/{id}/edit', 'edit')->name('bk.edit');
-    Route::post('/{id}/update', 'update')->name('bk.update');
-    Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
-});
-
 Route::group(['husen ganteng'],function () {
     Route::get('dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
     Route::group(['middleware' => ['auth', 'level:admin']], function() { // FOR ADMIN
         
+        Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
+            Route::get('/', 'index')->name('user.index');
+            Route::get('/create', 'create')->name('user.create');
+            Route::post('/store', 'store')->name('user.store');
+            Route::get('/{id}/edit', 'edit')->name('user.edit');
+            Route::post('/{id}/update', 'update')->name('user.update');
+            Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+        });
+
+        Route::prefix('bk')->controller(KelolaBk::class)->group(function() {
+            Route::get('/', 'index')->name('bk.index');
+            Route::get('/create', 'create')->name('bk.create');
+            Route::post('/store', 'store')->name('bk.store');
+            Route::get('/{id}/edit', 'edit')->name('bk.edit');
+            Route::post('/{id}/update', 'update')->name('bk.update');
+            Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
+        });
       
         Route::prefix('kelas')->controller(KelolaKelas::class)->group(function() {
             Route::get('/', 'index')->name('kelas.index');
