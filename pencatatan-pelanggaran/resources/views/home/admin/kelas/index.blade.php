@@ -39,9 +39,10 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$k->nama_kelas}}</td>
                                     <td>{{$k->jurusan}}</td>
-                                    <td>
-                                        <a href="{{ route('kelas.edit', $k->id) }}" class="fa fa-edit"></a>
-                                        <a href="/kelas/destroy/{{$k->id}}" class="btn btn-link" class="fa fa-delete"></a>
+                                    <td align="center" colspan="3">
+                                        <a href="{{ route('kelas.edit', (string) $k->id) }}" class="fa fa-edit" style="margin-right: 20%;"></a>
+                                        <a href="{{ route('kelas.destroy', (string) $k->id ) }}" class="fa fa-trash"></a>
+                                        {{-- <a href="/kelas/destroy/{{$k->id}}" class="fa fa-delete"></a> --}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -65,7 +66,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="kelas/simpan" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('kelas.store')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">Nama Kelas</label>

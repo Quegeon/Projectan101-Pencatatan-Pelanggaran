@@ -11,4 +11,9 @@ class Kelas extends Model
     protected $fillable = ['id','nama_kelas','jurusan'];
     protected $table = 'kelas';
     protected $primary = 'id';
+    public $incrementing = 'false';
+    protected $keyType = 'string';
+    public function Kelas() {
+        return $this->hasMany(Kelas::class,'id_kelas','id');
+    }
 }
