@@ -18,7 +18,7 @@ class JenisController extends Controller
 
     public function store(Request $request)
     {
-        $id = Str::orderedUuid();
+        $id = Str::orderedUuid()->toString();
 
         Jenis::create([
             'id' => $id,
@@ -27,10 +27,10 @@ class JenisController extends Controller
             $request->except(['_token'])
         ]);
 
-        return redirect('/jenis');
+        return redirect()->route('jenis.index')->with('success','Data Berhasil Dibuat');
     }
 
-    public function show(string $id)
+    public function edit(string $id)
     {
         $jenis = Jenis::find($id);
 
@@ -43,7 +43,7 @@ class JenisController extends Controller
 
         $jenis->update($request->except(['_token']));
 
-        return redirect('/jenis');
+        return redirect()->route('jenis.index')->with('success','Data Berhasil Diubah');
     }
 
     public function destroy(string $id)
@@ -52,6 +52,6 @@ class JenisController extends Controller
 
         $jenis->delete();
 
-        return redirect('/jenis');
+        return redirect()->route('jenis.index')->with('success','Data Berhasil Dihapus');
     }
 }

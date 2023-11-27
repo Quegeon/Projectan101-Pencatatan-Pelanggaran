@@ -28,29 +28,24 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    {{-- tambahkan foto --}}
-                                    <th>Foto</th>
-                                    <th>Nama Petugas</th>
-                                    <th>Username</th>
-                                    <th>Level</th>
-                                    <th>Tanggal Dibuat</th>
+                                    <th>Nama Jenis</th>
+                                    <th>Keterngan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user as $u)
+                                @foreach ($jenis as $j)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $j->nama_jenis }}</td>
+                                    <td>{{ $j->keterangan }}</td>
                                     <td>
-                                        <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
-                                    </td>
-                                    <td>{{$u->nama}}</td>
-                                    <td>{{$u->username}}</td>
-                                    <td>{{$u->level}}</td>
-                                    <td>{{$u->created_at}}</td>
-                                    <td>
-                                        <a href="{{ route('user.edit', $u->id) }}" class="btn btn-link"><i class="fa fa-edit fa-lg"></i></a>
-                                        <a class="btn btn-link" onclick="confirmDel('{{ route('user.destroy', $u->id) }}')"><i class="fa fa-trash text-danger fa-lg"></i></a>
+                                        <a href="{{ route('jenis.edit', $j->id) }}" class="btn btn-link">
+                                            <i class="fa fa-edit fa-lg"></i>
+                                        </a>
+                                        <a class="btn btn-link" onclick="confirmDel('{{ route('jenis.destroy', $j->id) }}')">
+                                            <i class="fa fa-trash text-danger fa-lg"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -74,37 +69,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('jenis.store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="">Nama Petugas</label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Isi Nama Petugas">
+                        <label>Nama Jenis</label>
+                        <input class="form-control" type="text" name="nama_jenis" placeholder="Masukkan Nama Jenis">
                     </div>
                     <div class="form-group">
-                        <label for="">Username</label>
-                        <input class="form-control" type="text" name="username" id="username" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Password</label>
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-                    </div> {{-- type na password --}}
-                    <div class="form-group">
-                        <label for="">Level</label>
-                        <select name="level" id='level' class="form-control">
-                            <option value="" hidden>-- Level Petugas --</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Petugas">Petugas</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Masukan foto</label>
-                        <input type="file" class="form-control" name="foto">
+                        <label>Keterangan</label>
+                        <input class="form-control" type="text" name="keterangan" placeholder="Masukkan Keterangan">
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </form>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
             </div>
         </div>
     </div>
