@@ -21,6 +21,7 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('../assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('../assets/css/azzara.min.css') }}">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
@@ -149,6 +150,41 @@
 		<!-- End Custom template -->
 	</div>
 </div>
+
+<script>
+	function confirmDel(url) {
+		Swal.fire({
+			title: "Yakin?",
+			text: "Bakalan Ngehapus Data!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#716aca",
+			cancelButtonColor: "#f3545d",
+			confirmButtonText: "Ya, Hapus!"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location = url;
+			}
+		});
+	}
+
+	@if(session('error'))
+		Swal.fire({
+			title: "Error!",
+			text: "{{ session('error') }}",
+			icon: "error"
+		});
+	@endif
+
+	@if(session('success'))
+		Swal.fire({
+			title: "Success!",
+			text: "{{ session('success') }}",
+			icon: "success"
+		});
+	@endif
+</script>
+
 <!--   Core JS Files   -->
 <script src="{{ asset('../assets/js/core/jquery.3.2.1.min.js') }}"></script>
 <script src="{{ asset('../assets/js/core/popper.min.js') }}"></script>

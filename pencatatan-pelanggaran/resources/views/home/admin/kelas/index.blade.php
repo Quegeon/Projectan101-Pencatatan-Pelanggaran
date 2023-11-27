@@ -39,9 +39,9 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$k->nama_kelas}}</td>
                                     <td>{{$k->jurusan}}</td>
-                                    <td>
-                                        <a href="{{ route('kelas.edit', $k->id) }}" class="fa fa-edit"></a>
-                                        <a href="/kelas/destroy/{{$k->id}}" class="btn btn-link" class="fa fa-delete"></a>
+                                    <td align="center" colspan="3">
+                                        <a href="{{ route('kelas.edit', (string) $k->id) }}" class="fa fa-edit" style="margin-right: 20%;"></a>
+                                        <a href="{{ route('kelas.destroy', (string) $k->id ) }}" class="fa fa-trash text-danger"></a>
                                     </td>
                                 </tr>
                                 @endforeach

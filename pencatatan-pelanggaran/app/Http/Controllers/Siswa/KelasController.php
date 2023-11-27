@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kelas;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use illuminate\Support\str;
 
@@ -18,44 +19,53 @@ class KelasController extends Controller
 
     public function create()
     {
-      return view('');
+      return view('kelas.create');
     }
 
     public function store(Request $request)
     {
 
+        $request->validate([
+            'nama_kelas' => 'required',
+            'jurusan' => 'required',
+        ]);
+
         Kelas::create([
             'id' => Str::orderedUuid(),
             'nama_kelas'=>$request->nama_kelas,
             'jurusan'=>$request->jurusan,
-            $request->except(['_token']),
+            // $request->except(['_token']),
         ]);
         return redirect('kelas');
     }
 
     public function show(string $id)
     {
-        $kelas = Kelas::where('id', $id)->get();
-        dd($kelas);
-        // return view('home.admin.kelas.edit',compact('kelas'));
+        $kelas = Kelas::where('id', $id)->first();
+        return view('home.admin.kelas.edit', compact('kelas'));
     }
 
     public function update(Request $request, string $id)
     {
         $kelas = Kelas::find($id);
-        $kelas->update([
-            // 'id'=>$request->id,
-            'nama_kelas'=>$request->nama_kelas,
-            'jurusan'=>$request->jurusan,
-            $request->except(['_token']),
-        ]);
+        if (!$kelas) {
+            return redirect()->back()->with('error', 'Kelas not found');
+        }
+        $kelas->update($request->except('_token'));
+    
         return redirect('kelas');
     }
 
     public function destroy(string $id)
     {
         $kelas = Kelas::find($id);
+
+        if (!$kelas) {
+            return redirect('kelas')->with('error', 'Data not found.');
+        }
+          
         $kelas->delete();
+        Siswa::where('id_kelas', $id)->delete();
         return redirect('kelas');
     }
 }

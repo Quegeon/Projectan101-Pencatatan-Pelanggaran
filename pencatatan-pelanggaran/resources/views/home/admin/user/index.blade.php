@@ -22,32 +22,35 @@
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
-                    <a href="" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
+                    <a href="/admin/user/create" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     {{-- tambahkan foto --}}
+                                    <th>Foto</th>
                                     <th>Nama Petugas</th>
                                     <th>Username</th>
                                     <th>Level</th>
                                     <th>Tanggal Dibuat</th>
-                                    <th>Opsi</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($user as $u)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    {{-- tambahkan foto --}}
+                                    <td>
+                                        <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
+                                    </td>
                                     <td>{{$u->nama}}</td>
                                     <td>{{$u->username}}</td>
                                     <td>{{$u->level}}</td>
                                     <td>{{$u->created_at}}</td>
                                     <td>
-                                        <a href="" class="btn btn-link" class="fa fa-edit"></a>
-                                        <a href="" class="btn btn-link" class="fa fa-delete"></a>
+                                        <a href="{{ route('user.edit', $u->id) }}" class="btn btn-link"><i class="fa fa-edit fa-lg"></i></a>
+                                        <a class="btn btn-link" onclick="confirmDel('{{ route('user.destroy', $u->id) }}')"><i class="fa fa-trash text-danger fa-lg"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -71,7 +74,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">Nama Petugas</label>
@@ -83,17 +86,20 @@
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input class="form-control" type="text" name="password" id="username" placeholder="Password">
-                    </div>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                    </div> {{-- type na password --}}
                     <div class="form-group">
                         <label for="">Level</label>
-                        <input class="form-control" type="text" name="level" id="username" placeholder="Level">
+                        <select name="level" id='level' class="form-control">
+                            <option value="" hidden>-- Level Petugas --</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Petugas">Petugas</option>
+                        </select>
                     </div>
-                    {{--foto belum ditambahkan 
-                        <div class="form-group">
-                        <label for="">Level</label>
-                        <input class="form-control" type="text" name="level" id="username" placeholder="Nama Petugas">
-                    </div> --}}
+                    <div class="form-group">
+                        <label for="">Masukan foto</label>
+                        <input type="file" class="form-control" name="foto">
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
