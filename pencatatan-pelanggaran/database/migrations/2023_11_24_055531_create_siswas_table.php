@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('no_telp',15);
             $table->string('alamat');
-            $table->integer('poin');
+            $table->integer('poin')->default(0);
             $table->string('status',100);
             $table->timestamps();
             // $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade');

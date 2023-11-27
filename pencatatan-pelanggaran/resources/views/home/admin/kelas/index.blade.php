@@ -41,7 +41,7 @@
                                     <td>{{$k->jurusan}}</td>
                                     <td align="center" colspan="3">
                                         <a href="{{ route('kelas.edit', (string) $k->id) }}" class="fa fa-edit" style="margin-right: 20%;"></a>
-                                        <a href="{{ route('kelas.destroy', (string) $k->id ) }}" class="fa fa-trash text-danger"></a>
+                                        <a onclick="confirmDel('{{ route('kelas.destroy', $k->id) }}')" class="fa fa-trash text-danger"></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -65,15 +65,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="kelas/simpan" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('kelas.store')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">Nama Kelas</label>
                         <input class="form-control" type="text" name="nama_kelas" id="nama" placeholder="Nama Kelas">
+                        @error('nama_kelas')
+                        <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Jurusan</label>
                         <input class="form-control" type="text" name="jurusan" id="nama" placeholder="Jurusan">
+                        @error('jurusan')
+                        <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
+                        @enderror
                     </div>
             </div>
             <div class="modal-footer">

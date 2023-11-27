@@ -28,10 +28,16 @@
                             <div class="form-group">
                                 <label for="">Nama Kelas</label>
                                 <input class="form-control" type="text" name="nama_kelas" value="{{$kelas->nama_kelas}}" id="nama"  placeholder="Nama Kelas">
+                                @error('nama_kelas')
+                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Jurusan</label>
                                 <input class="form-control" type="text" name="jurusan" value="{{$kelas->jurusan}}" id="nama" placeholder="Jurusan">
+                                @error('jurusan')
+                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
+                                @enderror
                             </div>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>

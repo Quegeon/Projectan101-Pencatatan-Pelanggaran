@@ -25,7 +25,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+       $validate = $request->validate([
             'nama_kelas' => 'required',
             'jurusan' => 'required',
         ]);
@@ -36,7 +36,7 @@ class KelasController extends Controller
             'jurusan'=>$request->jurusan,
             // $request->except(['_token']),
         ]);
-        return redirect('kelas');
+        return redirect('kelas')->with($validate) ->with('success', 'Data Successfully Created!');
     }
 
     public function show(string $id)
@@ -53,7 +53,7 @@ class KelasController extends Controller
         }
         $kelas->update($request->except('_token'));
     
-        return redirect('kelas');
+        return redirect('kelas')->with('success', 'Data Successfully Updated!');
     }
 
     public function destroy(string $id)
@@ -66,6 +66,6 @@ class KelasController extends Controller
           
         $kelas->delete();
         Siswa::where('id_kelas', $id)->delete();
-        return redirect('kelas');
+        return redirect('kelas')->with('success', 'Data Successfully Deleted!');
     }
 }
