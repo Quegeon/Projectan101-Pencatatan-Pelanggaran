@@ -25,13 +25,15 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
      $validate = $request->validate([
-        'nis' => 'required|numeric',
+        'nis' => 'required|numeric|unique:siswas,nis',
         'id_kelas' => 'required|exists:kelas,id',
         'nama' => 'required|string|max:255',
         'no_telp' => 'required|numeric|digits_between:9,15',
         'alamat' => 'required|string|max:500',
-        'poin' => 'required|numeric|between:0,100',
+        // 'poin' => 'required|numeric|between:0,100',
         ]);
+
+        $poin = $request->has('poin') ? $request->poin : 0;
 
         $poin = $request->poin;
 
@@ -53,11 +55,11 @@ class SiswaController extends Controller
             'nama'=>$request->nama,
             'no_telp'=>$request->no_telp,
             'alamat'=>$request->alamat,
-            'poin'=>$poin,
+            'poin' => $poin ?? 0,
             'status'=>$status,
         
         ]);
-        return back()->with($validate);
+        return back()->with($validate)->with('success', 'Data Successfully Created!');
         
     }
 
@@ -71,7 +73,6 @@ class SiswaController extends Controller
     public function update(Request $request, string $nis)
     {
         $validate = $request->validate([
-            'nis' => 'required|numeric',
             'id_kelas' => 'required|exists:kelas,id',
             'nama' => 'required|string|max:255',
             'no_telp' => 'required|numeric|digits_between:9,15',
@@ -95,7 +96,6 @@ class SiswaController extends Controller
         
         $siswa = Siswa::find($nis);
         $siswa->update([
-            'nis'=>$request->nis,
             'id_kelas'=>$request->id_kelas,
             'nama'=>$request->nama,
             'no_telp'=>$request->no_telp,
@@ -103,13 +103,13 @@ class SiswaController extends Controller
             'poin'=>$poin,
             'status'=>$status,
         ]);
-        return redirect('siswa')->with($validate);
+        return redirect('siswa')->with($validate)->with('success', 'Data Successfully Updated!');
     }
 
     public function destroy(string $nis)
     {
         $siswa = Siswa::find($nis);
         $siswa->delete();
-        return redirect('siswa');
+        return redirect('siswa')->with('success', 'Data Successfully Deleted!');
     }
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 // Login
+
 Route::view('/login/user', 'home.login.auth-user');
 Route::view('/login/bk', 'home.login.auth-bk');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
@@ -27,6 +28,7 @@ Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('post
 
 Route::group(["husen ganteng"],function () {
     Route::group(['middleware' => ['auth', 'level:Admin']], function() { // FOR ADMIN
+
         Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
             Route::get('/', 'index')->name('user.index');
             Route::get('/create', 'create')->name('user.create');
@@ -35,7 +37,7 @@ Route::group(["husen ganteng"],function () {
             Route::post('/{id}/update', 'update')->name('user.update');
             Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
         });
-      
+
         Route::prefix('kelas')->controller(KelolaKelas::class)->group(function() {
             Route::get('/', 'index')->name('kelas.index');
             Route::get('/create', 'create')->name('kelas.create');
