@@ -29,7 +29,8 @@
 		<div class="container container-login animated fadeIn">
 			<h3 class="text-center">Sign In To Admin</h3>
 			<div class="login-form">
-				<form action="/login" method="POST">
+			<form action="{{ route('postlogin.bk') }}" method="POST">
+				{{ csrf_field()}}
 				<div class="form-group form-floating-label">
 					<input id="username" name="username" type="text" class="form-control input-border-bottom" required>
 					<label for="username" class="placeholder">Username</label>
@@ -50,7 +51,7 @@
 					<a href="#" class="link float-right">Forget Password ?</a>
 				</div>
 				<div class="form-action mb-3">
-					<a href="#" class="btn btn-primary btn-rounded btn-login">Sign In</a>
+					<button type="submit" class="btn btn-primary btn-rounded btn-login">Login</button>
 				</div>
 				<div class="login-account">
 					<span class="msg">Don't have an account yet ?</span>
