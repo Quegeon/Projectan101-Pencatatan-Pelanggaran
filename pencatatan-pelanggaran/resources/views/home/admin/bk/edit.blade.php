@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title', 'User')
+@section('title', 'Bk')
 @section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Data Users</h4>
+        <h4 class="page-title">Data BK</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -23,36 +23,29 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('bk.update', $bk->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="">Nama Petugas</label>
-                                <input class="form-control" type="text" name="nama" value="{{$user->nama}}" id="nama" placeholder="Isi Nama Petugas">
+                                <label for="">Nama</label>
+                                <input class="form-control" type="text" name="nama" value="{{$bk->nama}}" id="nama" placeholder="Isi Nama">
                             </div>
                             <div class="form-group">
                                 <label for="">Username</label>
-                                <input class="form-control" type="text" name="username" value="{{$user->username}}" id="username" placeholder="Username">
+                                <input class="form-control" type="text" name="username" value="{{$bk->username}}" id="username" placeholder="Username">
                             </div>
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="">Password</label>
-                                <input class="form-control" type="text" name="password" value="{{$user->password}}" id="password" placeholder="Password">
-                            </div> --}}
-                            <div class="form-group">
-                                <label for="">Level</label>
-                                <select name="level" id='level' class="form-control">
-                                    <option value="Admin">Admin</option>
-                                    <option value="Petugas">Petugas</option>
-                                </select>
+                                <input class="form-control" type="password" name="password" value="{{$bk->password}}" id="username" placeholder="Password">
                             </div>
-                            <div class="form-group">
+                            <<div class="form-group">
                                 <label for="">Masukan foto</label>
                                 <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
                             </div>
                             <center>
-                                <img src="{{asset('fotopetugas/'.$user->foto)}}" class="img-preview img-fluid "  height="200" width="200px">
+                                <img src="{{asset('fotopetugas/'.$bk->foto)}}" class="img-preview img-fluid "  height="200" width="200px">
                             </center>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                            <a href="{{ route('user.index') }}" class="btn btn-light">Cancel</a>
+                            <a href="/admin/user" class="btn btn-light">Cancel</a>
                         </form>
                     </div>
                 </div>
