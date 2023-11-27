@@ -18,7 +18,7 @@ class HukumanController extends Controller
 
     public function store(Request $request)
     {
-        $id = Str::orderedUuid();
+        $id = Str::orderedUuid()->toString();
 
         Hukuman::create([
             'id' => $id,
@@ -26,14 +26,14 @@ class HukumanController extends Controller
             $request->except(['_token'])
         ]);
 
-        return redirect('/hukuman');
+        return redirect()->route('hukuman.index')->with('success','Data Berhasil Dibuat');
     }
 
-    public function show(string $id)
+    public function edit(string $id)
     {
         $hukuman = Hukuman::find($id);
 
-        return view('home.admin.hukuman.edit', compact(['Hukuman']));
+        return view('home.admin.hukuman.edit', compact(['hukuman']));
     }
 
     public function update(Request $request, string $id)
@@ -42,7 +42,7 @@ class HukumanController extends Controller
 
         $hukuman->update($request->except(['_token']));
 
-        return redirect('/hukuman');
+        return redirect()->route('hukuman.index')->with('success','Data Berhasil Diubah');
     }
 
     public function destroy(string $id)
@@ -51,6 +51,6 @@ class HukumanController extends Controller
 
         $hukuman->delete();
 
-        return redirect('/hukuman');
+        return redirect()->route('hukuman.index')->with('success','Data Berhasil Dihapus');
     }
 }
