@@ -28,6 +28,8 @@ class BkController extends Controller
          'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
      ]);
      $validated['id'] = Str::orderedUuid();
+     $validated['password'] = bcrypt($validated['password']);
+
 
      if($request->hasFile('foto')){
       $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
