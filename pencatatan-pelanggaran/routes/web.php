@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login\LoginController as LoginController;
+
 use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use App\Http\Controllers\Siswa\SiswaController as KelolaSiswa;
 use App\Http\Controllers\UserController as KelolaPetugas;
+use App\Http\Controllers\PelanggaranController as KelolaPelanggaran;
+
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
@@ -18,6 +21,15 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
+    Route::get('/', 'index')->name('pelanggaran.index');
+    Route::get('/create', 'create')->name('pelanggaran.create');
+    Route::post('/store', 'store')->name('pelanggaran.store');
+    Route::get('/{id}/edit', 'show')->name('pelanggaran.edit');
+    Route::post('/{id}/update', 'update')->name('pelanggaran.update');
+    Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
+});
 
 // Login
 Route::view('/login/user', 'home.login.auth-user');
