@@ -23,7 +23,7 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="">Nama Petugas</label>
@@ -33,19 +33,23 @@
                                 <label for="">Username</label>
                                 <input class="form-control" type="text" name="username" value="{{$user->username}}" id="username" placeholder="Username">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="">Password</label>
                                 <input class="form-control" type="text" name="password" value="{{$user->password}}" id="password" placeholder="Password">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="">Level</label>
-                                <input class="form-control" type="text" name="level" value="{{$user->level}}" id="level" placeholder="Level">
+                                <select name="level" id='level' class="form-control">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Petugas">Petugas</option>
+                                </select>
                             </div>
-                            {{--foto belum ditambahkan 
-                                <div class="form-group">
-                                <label for="">Level</label>
-                                <input class="form-control" type="text" name="level" id="username" placeholder="Nama Petugas">
-                            </div> --}}
+                            <div class="form-group">
+                                <label for="">Masukan foto</label>
+                                <input type="file" class="form-control" name="foto">
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a href="{{ route('user.index') }}" class="btn btn-light">Cancel</a>
                         </form>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="{{ route('kelas.update', ['id' => $kelas->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('kelas.update', $kelas->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="">Nama Kelas</label>
