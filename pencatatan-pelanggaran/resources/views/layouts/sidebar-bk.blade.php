@@ -5,7 +5,7 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                    <img src="{{asset('../assets/img/profile.jpg')}}" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -40,7 +40,7 @@
             </div>
             <ul class="nav">
                 <li class="nav-item active">
-                    <a href="index.html">
+                    <a href="{{ route('dashboard.bk') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                         <span class="badge badge-count">5</span>
@@ -50,7 +50,7 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
-                    <h4 class="text-section">Components</h4>
+                    <h4 class="text-section">Pilihan</h4>
                 </li>
                 <li class="nav-item active">
                     <a href="">
@@ -67,10 +67,10 @@
                     </a>
                     <div class="collapse" id="logout">
                         <ul class="nav nav-treeview">
-                       <li class="nav-item">
-                        <a href="/logout" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i> 
-                        <p>Logout</p>
+                            <li class="nav-item">
+                                <a href="{{ route('logout') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i> 
+                            <p>Logout</p>
                             </li>
                         </ul>
                     </div>
