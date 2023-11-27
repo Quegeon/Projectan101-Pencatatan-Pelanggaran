@@ -37,10 +37,13 @@
                                 <label for="">Password</label>
                                 <input class="form-control" type="password" name="password" value="{{$bk->password}}" id="username" placeholder="Password">
                             </div>
-                            <div class="form-group">
+                            <<div class="form-group">
                                 <label for="">Masukan foto</label>
-                                <input type="file" class="form-control" name="foto">
+                                <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
                             </div>
+                            <center>
+                                <img src="{{asset('fotopetugas/'.$bk->foto)}}" class="img-preview img-fluid "  height="200" width="200px">
+                            </center>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             <a href="/admin/user" class="btn btn-light">Cancel</a>
                         </form>

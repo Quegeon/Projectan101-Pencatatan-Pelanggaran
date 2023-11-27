@@ -98,8 +98,11 @@
                     </div>
                     <div class="form-group">
                         <label for="">Masukan foto</label>
-                        <input type="file" class="form-control" name="foto">
+                        <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
                     </div>
+                    <center>
+                        <img class="img-preview img-fluid " style="display: none; justify:center" height="200" width="200px">
+                    </center>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

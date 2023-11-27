@@ -25,6 +25,11 @@ class User extends Authenticatable
         'username',
         'password',
     ];
+    public function User()
+    {
+        return $this->hasMany(User::class, 'id_user','id');
+    }
+
 
     public $incrementing = false;
     protected $keyType = 'string';
