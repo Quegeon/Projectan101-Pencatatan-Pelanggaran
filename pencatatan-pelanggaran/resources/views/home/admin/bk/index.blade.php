@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title', 'Petugas')
+@section('title', 'Bk')
 @section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Data Petugas</h4>
+        <h4 class="page-title">Data Bk</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -22,35 +22,32 @@
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
-                    <a href="/admin/user/create" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
+                    <a href="/admin/bk/create" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    {{-- tambahkan foto --}}
                                     <th>Foto</th>
-                                    <th>Nama Petugas</th>
+                                    <th>Nama</th>
                                     <th>Username</th>
-                                    <th>Level</th>
                                     <th>Tanggal Dibuat</th>
-                                    <th>Aksi</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user as $u)
+                                @foreach ($bk as $u)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>
-                                        <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
+                                        <img src="{{asset('fotobk/'.$u->foto)}}" alt="" style="width:60px; height:80px;">
                                     </td>
                                     <td>{{$u->nama}}</td>
                                     <td>{{$u->username}}</td>
-                                    <td>{{$u->level}}</td>
                                     <td>{{$u->created_at}}</td>
                                     <td>
-                                        <a href="{{ route('user.edit', $u->id) }}" class="btn btn-link"><i class="fa fa-edit fa-lg"></i></a>
-                                        <a class="btn btn-link" onclick="confirmDel('{{ route('user.destroy', $u->id) }}')"><i class="fa fa-trash text-danger fa-lg"></i></a>
+                                        <a href="{{ route('bk.edit', $u->id) }}" class="btn btn-link"><i class="fa fa-edit" style="font-size: 25px"></i> </a>
+                                        <a href="/bk/{{$u->id}}/destroy" class="btn btn-link"><i class="fa fa-trash text-danger" style="font-size: 25px"></i> </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -74,11 +71,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="/bk/store" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="">Nama Petugas</label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Isi Nama Petugas">
+                        <label for="">Nama</label>
+                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Isi Nama">
                     </div>
                     <div class="form-group">
                         <label for="">Username</label>
@@ -86,16 +83,9 @@
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-                    </div> {{-- type na password --}}
-                    <div class="form-group">
-                        <label for="">Level</label>
-                        <select name="level" id='level' class="form-control">
-                            <option value="" hidden>-- Level Petugas --</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Petugas">Petugas</option>
-                        </select>
+                        <input class="form-control" type="password" name="password" id="username" placeholder="Password">
                     </div>
+                    
                     <div class="form-group">
                         <label for="">Masukan foto</label>
                         <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
