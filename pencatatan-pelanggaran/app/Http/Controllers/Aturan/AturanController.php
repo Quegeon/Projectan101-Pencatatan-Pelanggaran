@@ -22,7 +22,7 @@ class AturanController extends Controller
 
     public function store(Request $request)
     {
-        $id = Str::orderedUuid();
+        $id = Str::orderedUuid()->toString();
 
         Aturan::create([
             'id' => $id,
@@ -30,7 +30,6 @@ class AturanController extends Controller
             'id_hukuman' => $request->id_hukuman,
             'nama_aturan' => $request->nama_aturan,
             'poin' => $request->poin,
-            'keterangan' => $request->keterangan,
             $request->except(['_token'])
         ]);
 

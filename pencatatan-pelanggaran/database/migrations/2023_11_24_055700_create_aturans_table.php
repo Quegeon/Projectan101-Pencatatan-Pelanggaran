@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('id_jenis',100);
             $table->string('id_hukuman',100);
             $table->string('nama_aturan',255);
-            $table->string('poin',255);
-            $table->string('keterangan',255);
+            $table->integer('poin');
             $table->timestamps();
         });
     }
