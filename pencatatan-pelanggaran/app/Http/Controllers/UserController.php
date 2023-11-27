@@ -56,7 +56,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'nama' => 'required', 
             'username' => 'required',
-            'password' => 'required',
+            // 'password' => 'required',
             'level' => 'required',
             'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
         ]);

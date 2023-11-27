@@ -92,6 +92,7 @@
                         <label for="">Level</label>
                         <select name="level" id='level' class="form-control">
                             <option value="" hidden>-- Level Petugas --</option>
+                            <option value="Admin">Admin</option>
                             <option value="Petugas">Petugas</option>
                         </select>
                     </div>
