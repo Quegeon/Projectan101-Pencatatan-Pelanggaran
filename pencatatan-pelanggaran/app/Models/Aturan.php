@@ -11,6 +11,8 @@ class Aturan extends Model
 
     protected $primaryKey = 'id';
 
+    protected $keyType = 'string';
+    
     protected $fillable = [
         'id',
         'id_jenis',
@@ -20,6 +22,8 @@ class Aturan extends Model
         'keterangan'
     ];
 
+    public $incrementing = false;
+    
     public function Jenis ()
     {
         return $this->belongsTo(Jenis::class, 'id_jenis', 'id');

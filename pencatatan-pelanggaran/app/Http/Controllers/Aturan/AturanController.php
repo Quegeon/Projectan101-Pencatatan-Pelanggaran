@@ -17,50 +17,122 @@ class AturanController extends Controller
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
 
-        return view('home.admin.aturan.index', compact(['aturan', 'jenis', 'hukuman']));
+        if ($aturan->first() === null || $jenis->first() === null || $hukuman->first() === null){
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Reference Data Error');
+
+        } else {
+            return view('home.admin.aturan.index', compact(['aturan', 'jenis', 'hukuman']));
+        }
     }
 
     public function store(Request $request)
     {
-        $id = Str::orderedUuid();
-
-        Aturan::create([
-            'id' => $id,
-            'id_jenis' => $request->id_jenis,
-            'id_hukuman' => $request->id_hukuman,
-            'nama_aturan' => $request->nama_aturan,
-            'poin' => $request->poin,
-            'keterangan' => $request->keterangan,
-            $request->except(['_token'])
+        $request->validate([
+            'id_jenis' => 'required',
+            'id_hukuman' => 'required',
+            'nama_aturan' => 'required',
+            'poin' => 'required|numeric|max:100'
         ]);
 
-        return redirect('/aturan');
+        try {
+            $id = Str::orderedUuid()->toString();
+
+            Aturan::create([
+                'id' => $id,
+                'id_jenis' => $request->id_jenis,
+                'id_hukuman' => $request->id_hukuman,
+                'nama_aturan' => $request->nama_aturan,
+                'poin' => $request->poin,
+                $request->except(['_token'])
+            ]);
+    
+            return redirect()
+                ->route('aturan.index')
+                ->with('success','Data Berhasil Dibuat');
+            
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Error Store Data');
+        }
     }
 
-    public function show(string $id)
+    public function edit(string $id)
     {
         $aturan = Aturan::find($id);
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
 
-        return view('/aturan', compact(['aturan','jenis','hukuman']));
+        if ($aturan->first() === null || $jenis->first() === null || $hukuman->first() === null){
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Reference Data Error');
+
+        } else {
+            return view('home.admin.aturan.edit', compact(['aturan','jenis','hukuman']));
+        }
+
     }
 
     public function update(Request $request, string $id)
     {
         $aturan = Aturan::find($id);
 
-        $aturan->update($request->except(['_token']));
+        if ($aturan === null){
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Invalid Target Data');
 
-        return redirect('/aturan');
+        } else {
+            $request->validate([
+                'id_jenis' => 'required',
+                'id_hukuman' => 'required',
+                'nama_aturan' => 'required',
+                'poin' => 'required|numeric|max:100'
+            ]);
+
+            try {
+                $aturan->update($request->except(['_token']));
+                
+                return redirect()
+                    ->route('aturan.index')
+                    ->with('success','Data Berhasil Diubah');
+
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('aturan.index')
+                    ->with('error','Error Update Data');
+            }
+        }
+
+
     }
 
     public function destroy(string $id)
     {
         $aturan = Aturan::find($id);
 
-        $aturan->delete();
+        if ($aturan === null){
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Invalid Target Data');
 
-        return redirect('/aturan');
+        } else {
+            try {
+                $aturan->delete();
+        
+                return redirect()
+                    ->route('aturan.index')
+                    ->with('success','Data Berhasil Dihapus');
+                
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('aturan.index')
+                    ->with('error','Error Destroy Data');        
+            }
+        }
+
     }
 }
