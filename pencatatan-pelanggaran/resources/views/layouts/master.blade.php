@@ -276,5 +276,19 @@
 		});
 	});
 </script>
+<script>
+	function imagePreview(){
+		const image= document.querySelector('#image');
+		const imgPreview= document.querySelector('.img-preview');
+
+		imgPreview.style.display= "block";
+
+		fileReader = new FileReader();		
+		fileReader.readAsDataURL(image.files[0]);		
+		fileReader.onload = function(e){
+			imgPreview.src=e.target.result
+		}		
+	}
+</script>
 </body>
 </html>
