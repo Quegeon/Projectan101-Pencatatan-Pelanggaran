@@ -46,8 +46,8 @@
                                     <td>{{$u->username}}</td>
                                     <td>{{$u->created_at}}</td>
                                     <td>
-                                        <a href="{{ route('bk.edit', $u->id) }}" class="btn btn-link" class="fa fa-edit">Edit</a>
-                                        <a href="/bk/{{$u->id}}/destroy" class="btn btn-link" class="fa fa-delete">Hapus</a>
+                                        <a href="{{ route('bk.edit', $u->id) }}" class="btn btn-link"><i class="fa fa-edit" style="font-size: 25px"></i> </a>
+                                        <a href="/bk/{{$u->id}}/destroy" class="btn btn-link"><i class="fa fa-trash text-danger" style="font-size: 25px"></i> </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -85,10 +85,14 @@
                         <label for="">Password</label>
                         <input class="form-control" type="password" name="password" id="username" placeholder="Password">
                     </div>
+                    
                     <div class="form-group">
                         <label for="">Masukan foto</label>
-                        <input type="file" class="form-control" name="foto">
+                        <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
                     </div>
+                    <center>
+                        <img class="img-preview img-fluid " style="display: none; justify:center" height="200" width="200px">
+                    </center>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
