@@ -27,11 +27,6 @@ Route::view('/login/bk', 'home.login.auth-bk');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 
-Route::get('/', [DashboardPetugas::class, 'index']);
-
-// TODO: LOGIN ADMIN, BK
-
-
 Route::group(['husen ganteng'],function () {
     Route::get('dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
     Route::group(['middleware' => ['auth', 'level:admin']], function() { // FOR ADMIN
