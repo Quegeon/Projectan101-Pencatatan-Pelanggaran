@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pelanggarans', function (Blueprint $table) {
-            $table->uuid()->primary();
+            $table->uuid('id')->primary();
             $table->string('nis', 15);
-            $table->string('id_aturan')->nullable();
-            $table->string('id_bk')->nullable();
+            $table->string('id_aturan');
+            $table->string('id_bk');
             $table->string('id_user');
             $table->date('tgl_pelanggaran');
             $table->string('keterangan');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Pelanggaran;
 use App\Models\Aturan;
 use App\Models\Hukuman;
@@ -31,22 +33,30 @@ class PelanggaranController extends Controller
     {
         $validated = $request->validate([
             'nis' => 'required', 
-            'id_aturan' => 'required',
+            'id_aturan' => 'required|uuid',
+            'id_bk' => 'required|uuid',
             'keterangan' => 'required',
-            'poin' => 'required',
+            'total_poin' => 'required',
             'status' => 'required',
         ]);        
-        $validated['id'] = Str::orderedUuid();
+        $validated['id'] = Str::orderedUuid()->toString();
         $validated['id_user'] = Auth::user()->id;
+        $validated['tgl_pelanggaran'] = $request->tgl_pelanggaran;
+        // dd($validated);
 
         Pelanggaran::create($validated);
         return redirect('/pelanggaran')->with('success', 'Data Successfully Created!');
     }
     
-    public function edit(string $id)
+    public function show(string $id)
     {
-        $pelanggaran = Pelanggaran::find($id);
-        return view('home.admin.pelanggaran.edit', compact(['pelanggaran']));
+        $data = array(
+            'pelanggaran' => Pelanggaran::find($id),
+            'siswa' => Siswa::all(),
+            'bk' => Bk::all(),
+            'aturan' => Aturan::all(),
+        );
+        return view('home.admin.pelanggaran.edit', $data);
     }
     
     public function update(Request $request, string $id)
@@ -56,7 +66,7 @@ class PelanggaranController extends Controller
             'nis' => 'required', 
             'id_aturan' => 'required',
             'keterangan' => 'required',
-            'poin' => 'required',
+            'total_poin' => 'required',
             'status' => 'required',
         ]);  
 

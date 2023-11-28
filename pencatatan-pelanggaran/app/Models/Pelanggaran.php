@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pelanggaran extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = [
+        'id',
         'nis',
         'id_aturan',
         'id_user',
@@ -21,22 +23,22 @@ class Pelanggaran extends Model
         'total_poin',
     ];
 
-    public function Aturan(): BelongsTo
+    public function Aturan()
     {
         return $this->belongsTo(Aturan::class, 'id_aturan', 'id');
     }
 
-    public function User(): BelongsTo
+    public function User()
     {
         return $this->belongsTo(User::class, 'id_user', 'id');
     }
     
-    public function Bk(): BelongsTo
+    public function Bk()
     {
         return $this->belongsTo(Bk::class, 'id_bk', 'id');
     }
     
-    public function Siswa(): BelongsTo
+    public function Siswa()
     {
         return $this->belongsTo(Siswa::class, 'nis', 'nis');
     }

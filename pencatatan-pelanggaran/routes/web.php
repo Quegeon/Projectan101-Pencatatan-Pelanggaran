@@ -37,10 +37,12 @@ Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(functi
 
 // Login
 
-Route::view('/login/user', 'home.login.auth-user');
-Route::view('/login/bk', 'home.login.auth-bk');
+Route::view('/login/user', 'home.login.auth-user')->name('login.user');
+Route::view('/login/bk', 'home.login.auth-bk')->name('login');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
+Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logout.user');
+Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout.bk');
 
 
 Route::group(["husen ganteng"],function () {

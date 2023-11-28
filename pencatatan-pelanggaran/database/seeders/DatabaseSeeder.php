@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            AturanSeeder::class,
             HukumanSeeder::class,
             JenisSeeder::class,
+            AturanSeeder::class,
         ]);
     }
 }

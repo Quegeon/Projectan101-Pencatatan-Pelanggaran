@@ -126,6 +126,9 @@
 
                         </div>
                     </div>
+                    <div class="form-group">
+                        <input type="hidden" name="tgl_pelanggaran" value="{{ date('Y-m-d') }}">
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban"></i> Close</button>
@@ -140,8 +143,6 @@
 		for(let a of arr[0]) {
 			if(a.id == arr[1].value) {
 				$('#poin').val(a.poin);
-            } else {
-				$('#poin').val(0);
             }
 		}
 	}
