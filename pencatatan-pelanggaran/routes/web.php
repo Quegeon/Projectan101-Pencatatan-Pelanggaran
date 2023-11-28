@@ -26,15 +26,6 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 |
 */
 
-Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
-    Route::get('/', 'index')->name('pelanggaran.index');
-    Route::get('/create', 'create')->name('pelanggaran.create');
-    Route::post('/store', 'store')->name('pelanggaran.store');
-    Route::get('/{id}/edit', 'show')->name('pelanggaran.edit');
-    Route::post('/{id}/update', 'update')->name('pelanggaran.update');
-    Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
-});
-
 // Login
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
@@ -68,7 +59,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/', 'index')->name('kelas.index');
             Route::get('/create', 'create')->name('kelas.create');
             Route::post('/store', 'store')->name('kelas.store');
-            Route::get('/{id}/edit', 'show')->name('kelas.edit');
+            Route::get('/{id}/edit', 'edit')->name('kelas.edit');
             Route::post('/{id}/update', 'update')->name('kelas.update');
             Route::get('/{id}/destroy', 'destroy')->name('kelas.destroy');
         });
@@ -77,7 +68,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/', 'index')->name('siswa.index');
             Route::get('/create', 'create')->name('siswa.create');
             Route::post('/store', 'store')->name('siswa.store');
-            Route::get('/{nis}/edit', 'show')->name('siswa.edit');
+            Route::get('/{nis}/edit', 'edit')->name('siswa.edit');
             Route::post('/{nis}/update', 'update')->name('siswa.update');
             Route::get('/{nis}/destroy', 'destroy')->name('siswa.destroy');
         });
@@ -104,6 +95,15 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/edit', 'edit')->name('aturan.edit');
             Route::post('/{id}/update', 'update')->name('aturan.update');
             Route::get('/{id}/destroy', 'destroy')->name('aturan.destroy');
+        });
+
+        Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
+            Route::get('/', 'index')->name('pelanggaran.index');
+            Route::get('/create', 'create')->name('pelanggaran.create');
+            Route::post('/store', 'store')->name('pelanggaran.store');
+            Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');
+            Route::post('/{id}/update', 'update')->name('pelanggaran.update');
+            Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
         });
     });
 

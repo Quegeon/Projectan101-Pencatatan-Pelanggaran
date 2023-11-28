@@ -21,34 +21,47 @@ class PelanggaranController extends Controller
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
         );
-        return view('home.admin.pelanggaran.index', $data);
-    }
 
-    public function create()
-    {
-        return view('home.admin.pelanggaran.create');
+        if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
+            return route('pelanggaran.index')
+                ->with('error', 'Reference Data Error');
+        }
+
+        return view('home.admin.pelanggaran.index', $data);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'nis' => 'required', 
-            'id_aturan' => 'required|uuid',
-            'id_bk' => 'required|uuid',
+            'id_aturan' => 'required',
+            'id_bk' => 'required',
             'keterangan' => 'required',
-            'total_poin' => 'required',
+            'total_poin' => 'required|numeric|max:100',
             'status' => 'required',
         ]);        
-        $validated['id'] = Str::orderedUuid()->toString();
-        $validated['id_user'] = Auth::user()->id;
-        $validated['tgl_pelanggaran'] = $request->tgl_pelanggaran;
-        // dd($validated);
+        
+        try {
+            $validated['id'] = Str::orderedUuid()->toString();
+            $validated['id_user'] = Auth::user()->id;
+            $validated['tgl_pelanggaran'] = $request->tgl_pelanggaran;
 
-        Pelanggaran::create($validated);
-        return redirect('/pelanggaran')->with('success', 'Data Successfully Created!');
+            Pelanggaran::create($validated);
+
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('success', 'Data Successfully Created!');
+
+        } catch(\Throwable $th) {
+            dd($th);
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('error', 'Error Store Data');
+        }
+
     }
     
-    public function show(string $id)
+    public function edit(string $id)
     {
         $data = array(
             'pelanggaran' => Pelanggaran::find($id),
@@ -56,28 +69,69 @@ class PelanggaranController extends Controller
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
         );
+
+        if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('error', 'Reference Data Error');
+        }
+
         return view('home.admin.pelanggaran.edit', $data);
     }
     
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
+
+        if($pelanggaran === null) {
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('error', 'Invalid Target Data');
+        }
+
         $validated = $request->validate([
             'nis' => 'required', 
             'id_aturan' => 'required',
+            'id_bk' => 'required',
             'keterangan' => 'required',
-            'total_poin' => 'required',
+            'total_poin' => 'required|numeric|max:100',
             'status' => 'required',
         ]);  
 
-        $pelanggaran->update($validated);
-        return redirect('/pelanggaran')->with('success', 'Data Successfully Updated!');
+        try {
+            
+            $pelanggaran->update($validated);
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('success', 'Data Successfully Updated!');
+            
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('error', 'Error Update Data');   
+        }
+
     }
 
     public function destroy(string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
-        $pelanggaran->delete();
-        return redirect('/pelanggaran')->with('success', 'Data Successfully Deleted!');
+
+        if($pelanggaran === null) {
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('error', 'Invalid Target Data');
+        }
+
+        try {
+            $pelanggaran->delete();
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('success', 'Data Successfully Deleted!');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('error','Error Destroy Data'); 
+        }
     }
 }

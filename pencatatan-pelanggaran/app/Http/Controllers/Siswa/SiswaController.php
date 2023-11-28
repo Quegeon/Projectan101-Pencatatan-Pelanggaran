@@ -63,7 +63,7 @@ class SiswaController extends Controller
         
     }
 
-    public function show(string $nis)
+    public function edit(string $nis)
     {
         $kelas = Kelas::all();
         $siswa = Siswa::find($nis);
