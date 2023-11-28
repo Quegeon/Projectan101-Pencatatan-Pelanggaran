@@ -108,7 +108,11 @@
 		</div>
 
 		<!-- Sidebar -->
-		@include('layouts.sidebar')
+		@if(Auth()->User()->level == 'Petugas' || Auth()->User()->level == 'Admin')
+			@include('layouts.sidebar-petugas')
+		@else
+			@include('layouts.sidebar-bk')
+		@endif
 		<!-- End Sidebar -->
 
 		<div class="main-panel">
