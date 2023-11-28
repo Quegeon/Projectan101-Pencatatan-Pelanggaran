@@ -20,7 +20,11 @@ class LoginController extends Controller
 
     public function postlogin_bk(Request $request)
     {
-        //
+        if(Auth::guard('bk')->Attempt($request->only('username','password'))){
+            return redirect()->route('dashboard.bk');
+        }else{
+            return back()->with('error', 'Maaf Username dan Password yang Anda Masukan salah!');
+        }
     }
 
     public function signup()

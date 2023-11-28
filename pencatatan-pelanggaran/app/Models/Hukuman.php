@@ -11,10 +11,14 @@ class Hukuman extends Model
 
     protected $primaryKey = 'id';
 
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'hukuman'
     ];
+
+    public $incrementing = false;
 
     public function Hukuman ()
     {

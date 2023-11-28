@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
-                    <a href="/admin/user/create" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
+                    <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
