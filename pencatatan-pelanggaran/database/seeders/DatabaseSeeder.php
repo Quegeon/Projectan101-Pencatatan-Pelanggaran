@@ -23,5 +23,11 @@ class DatabaseSeeder extends Seeder
             'level' => 'Admin',
             'foto' => 'kosong',
         ]);
+
+        $this->call([
+            HukumanSeeder::class,
+            JenisSeeder::class,
+            AturanSeeder::class,
+        ]);
     }
 }

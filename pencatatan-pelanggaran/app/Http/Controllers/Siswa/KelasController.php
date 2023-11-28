@@ -39,7 +39,7 @@ class KelasController extends Controller
         return redirect('kelas')->with($validate) ->with('success', 'Data Successfully Created!');
     }
 
-    public function show(string $id)
+    public function edit(string $id)
     {
         $kelas = Kelas::where('id', $id)->first();
         return view('home.admin.kelas.edit', compact('kelas'));
