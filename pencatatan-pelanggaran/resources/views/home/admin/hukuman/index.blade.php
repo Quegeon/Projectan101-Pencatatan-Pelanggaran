@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title', 'Kelas')
+@section('title', 'Kelola Hukuman')
 @section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Data Kelas</h4>
+        <h4 class="page-title">Kelola Data Hukuman</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -22,26 +22,28 @@
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
-                    <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
+                    <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Kelas</th>
-                                    <th>Jurusan</th>
+                                    <th>Hukuman</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kelas as $k)
+                                @foreach ($hukuman as $h)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$k->nama_kelas}}</td>
-                                    <td>{{$k->jurusan}}</td>
-                                    <td align="center" colspan="3">
-                                        <a href="{{ route('kelas.edit', (string) $k->id) }}" class="fa fa-edit" style="margin-right: 20%;"></a>
-                                        <a onclick="confirmDel('{{ route('kelas.destroy', $k->id) }}')" class="fa fa-trash text-danger"></a>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $h->hukuman }}</td>
+                                    <td>
+                                        <a href="{{ route('hukuman.edit', $h->id) }}" class="btn btn-link">
+                                            <i class="fa fa-edit fa-lg"></i>
+                                        </a>
+                                        <a class="btn btn-link" onclick="confirmDel('{{ route('hukuman.destroy', $h->id) }}')">
+                                            <i class="fa fa-trash text-danger fa-lg"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -65,27 +67,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('kelas.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('hukuman.store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="">Nama Kelas</label>
-                        <input class="form-control" type="text" name="nama_kelas" id="nama" placeholder="Nama Kelas">
-                        @error('nama_kelas')
-                        <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="">Jurusan</label>
-                        <input class="form-control" type="text" name="jurusan" id="nama" placeholder="Jurusan">
-                        @error('jurusan')
-                        <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
-                        @enderror
+                        <label>Hukuman</label>
+                        <input class="form-control" type="text" name="hukuman" placeholder="Masukkan Hukuman">
+                        @if ($errors->first('hukuman'))
+                            <p class="text-danger">* {{ $errors->first('hukuman') }}</p>
+                        @endif
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </form>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
             </div>
         </div>
     </div>

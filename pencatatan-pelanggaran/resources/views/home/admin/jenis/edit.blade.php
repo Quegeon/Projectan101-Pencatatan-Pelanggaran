@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title', 'Kelas')
+@section('title', 'Edit Jenis')
 @section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Edit Data Kelas</h4>
+        <h4 class="page-title">Halaman Edit Jenis</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -23,24 +23,24 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="{{ route('kelas.update', $kelas->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('jenis.update', $jenis->id) }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="">Nama Kelas</label>
-                                <input class="form-control" type="text" name="nama_kelas" value="{{$kelas->nama_kelas}}" id="nama"  placeholder="Nama Kelas">
-                                @error('nama_kelas')
-                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
-                                @enderror
+                                <label>Nama Jenis</label>
+                                <input class="form-control" type="text" name="nama_jenis" value="{{ $jenis->nama_jenis }}" placeholder="{{ $jenis->nama_jenis }}">
+                                @if($errors->first('nama_jenis'))
+                                    <p class="text-danger">* {{ $errors->first('nama_jenis') }}</p>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <label for="">Jurusan</label>
-                                <input class="form-control" type="text" name="jurusan" value="{{$kelas->jurusan}}" id="nama" placeholder="Jurusan">
-                                @error('jurusan')
-                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
-                                @enderror
+                                <label>Keterangan</label>
+                                <input class="form-control" type="text" name="keterangan" value="{{ $jenis->keterangan }}" placeholder="{{ $jenis->keterangan }}">
+                                @if($errors->first('keterangan'))
+                                    <p class="text-danger">* {{ $errors->first('keterangan') }}</p>
+                                @endif
                             </div>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                            <a href="{{ route('jenis.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
                     </div>
                 </div>
