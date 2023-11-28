@@ -32,18 +32,17 @@ class PelanggaranController extends Controller
         $validated = $request->validate([
             'nis' => 'required', 
             'id_aturan' => 'required',
-            'id_bk' => 'required',
             'keterangan' => 'required',
             'poin' => 'required',
             'status' => 'required',
         ]);        
         $validated['id'] = Str::orderedUuid();
+        $validated['id_user'] = Auth::user()->id;
 
         Pelanggaran::create($validated);
         return redirect('/pelanggaran')->with('success', 'Data Successfully Created!');
     }
     
-
     public function edit(string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
@@ -56,7 +55,6 @@ class PelanggaranController extends Controller
         $validated = $request->validate([
             'nis' => 'required', 
             'id_aturan' => 'required',
-            'id_bk' => 'required',
             'keterangan' => 'required',
             'poin' => 'required',
             'status' => 'required',
