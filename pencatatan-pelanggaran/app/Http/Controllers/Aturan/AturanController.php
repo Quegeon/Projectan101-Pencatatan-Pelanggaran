@@ -17,7 +17,7 @@ class AturanController extends Controller
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
 
-        if ($aturan->first() === null || $jenis->first() === null || $hukuman->first() === null){
+        if ($jenis->first() === null || $hukuman->first() === null){
             return redirect()
                 ->route('aturan.index')
                 ->with('error','Reference Data Error');
