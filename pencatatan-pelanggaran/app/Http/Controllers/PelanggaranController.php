@@ -53,7 +53,6 @@ class PelanggaranController extends Controller
                 ->with('success', 'Data Successfully Created!');
 
         } catch(\Throwable $th) {
-            dd($th);
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Error Store Data');
@@ -69,6 +68,12 @@ class PelanggaranController extends Controller
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
         );
+
+        if($data['pelanggaran'] === null) {
+            return redirect()
+                ->route('pelanggaran.index')
+                ->with('error', 'Invalid Target Data');
+        }
 
         if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
             return redirect()
