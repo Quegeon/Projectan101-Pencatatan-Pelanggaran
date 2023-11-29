@@ -50,7 +50,6 @@
                                     <td align="center" colspan="3">
                                         <a href="{{ route('siswa.edit', (string) $s->nis) }}" class="fa fa-edit" style="margin-right: 20%;"></a>
                                         <a onclick="confirmDel('{{ route('siswa.destroy', $s->nis) }}')" class="fa fa-trash text-danger"></a>
-                                        {{-- <a href="/kelas/destroy/{{$k->id}}" class="fa fa-delete"></a> --}}
                                     </td>
                                 </tr>
                                 @endforeach
