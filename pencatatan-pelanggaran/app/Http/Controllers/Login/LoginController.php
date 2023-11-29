@@ -34,10 +34,10 @@ class LoginController extends Controller
         //
     }
 
-    public function signup_user()
-    {
-        //
-    }
+    // public function signup_bk()
+    // {
+      
+    // }
 
     public function logout_user() {
         Auth::logout();

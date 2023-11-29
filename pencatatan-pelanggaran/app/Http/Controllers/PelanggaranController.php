@@ -23,8 +23,7 @@ class PelanggaranController extends Controller
         );
 
         if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
-            return route('pelanggaran.index')
-                ->with('error', 'Reference Data Error');
+            return redirect()->route('pelanggaran.index')->with('error', 'Reference Data Error');
         }
 
         return view('home.admin.pelanggaran.index', $data);
