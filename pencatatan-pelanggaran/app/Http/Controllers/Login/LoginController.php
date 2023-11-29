@@ -26,26 +26,14 @@ class LoginController extends Controller
             return back()->with('error', 'Maaf Username dan Password yang Anda Masukan salah!');
         }
     }
-
-    // TODO: sign up
     
-    public function signup_user()
-    {
-        //
-    }
-
-    // public function signup_bk()
-    // {
-      
-    // }
-
     public function logout_user() {
         Auth::logout();
-        return redirect('/login/user');
+        return redirect()->route('login.user');
     }
 
     public function logout_bk() {
         Auth::logout();
-        return redirect('/login/bk');
+        return redirect()->route('login.bk');
     }
 }
