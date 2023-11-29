@@ -92,7 +92,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('pelanggaran.index') }}">
+                                <a href="#">
                                     <span class="sub-item">Kelola Data Pelanggaran</span>
                                 </a>
                             </li>
@@ -116,7 +116,7 @@
                     <div class="collapse" id="logout">
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('logout') }}" class="nav-link">
+                                <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i> 
                                 <p>Logout</p>
                             </li>
