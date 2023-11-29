@@ -27,7 +27,7 @@
 <body class="login">
 	<div class="wrapper wrapper-login">
 		<div class="container container-login animated fadeIn">
-			<h3 class="text-center">Sign In To Admin</h3>
+			<h3 class="text-center">Masuk Sebagai Petugas</h3>
 			<div class="login-form">
 			<form action="{{ route('postlogin.user') }}" method="POST">
 				{{ csrf_field()}}
@@ -42,14 +42,14 @@
 						<i class="flaticon-interface"></i>
 					</div>
 				</div>
-				<div class="row form-sub m-0">
+				{{-- <div class="row form-sub m-0">
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input" id="rememberme">
 						<label class="custom-control-label" for="rememberme">Remember Me</label>
 					</div>
 					
 					<a href="#" class="link float-right">Forget Password ?</a>
-				</div>
+				</div> --}}
 				<div class="form-action mb-3">
 					<button type="submit" class="btn btn-primary btn-rounded btn-login">Login</button>
 				</div>

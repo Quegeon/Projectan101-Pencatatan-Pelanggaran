@@ -27,7 +27,14 @@ class LoginController extends Controller
         }
     }
 
-    public function signup()
+    // TODO: sign up
+    
+    public function signup_user()
+    {
+        //
+    }
+
+    public function signup_user()
     {
         //
     }
