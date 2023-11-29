@@ -43,7 +43,6 @@
                     <a href="{{ route('dashboard.bk') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
-                        <span class="badge badge-count">5</span>
                     </a>
                 </li>
                 <li class="nav-section">
@@ -55,7 +54,7 @@
                 <li class="nav-item">
                     <a href="">
                         <i class="fas fa-file-signature"></i>
-                        <p>Pelanggaran</p>
+                        <p>Tambah Pelanggaran</p>
                     </a>
                 </li>
                 <li class="nav-item">

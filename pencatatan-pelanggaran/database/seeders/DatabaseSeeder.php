@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             HukumanSeeder::class,
             JenisSeeder::class,
             AturanSeeder::class,
+            KelasSeeder::class,
         ]);
     }
 }

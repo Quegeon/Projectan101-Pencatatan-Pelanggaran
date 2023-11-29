@@ -34,11 +34,6 @@ class LoginController extends Controller
         //
     }
 
-    public function signup_user()
-    {
-        //
-    }
-
     public function logout_user() {
         Auth::logout();
         return redirect('/login/user');
