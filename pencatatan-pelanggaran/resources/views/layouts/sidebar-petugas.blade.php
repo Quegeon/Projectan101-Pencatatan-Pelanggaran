@@ -5,13 +5,13 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                    <img src="{{ asset('fotopetugas/'.Auth()->User()->foto) }}" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Husen
-                            <span class="user-level">Petugas</span>
+                            {{ Auth()->User()->nama }}
+                            <span class="user-level">{{ Auth()->User()->level }}</span>
                             <span class="caret"></span>
                         </span>
                     </a>
@@ -43,7 +43,6 @@
                     <a href="/dashboard">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
-                        <span class="badge badge-count">5</span>
                     </a>
                 </li>
                 <li class="nav-section">
@@ -64,6 +63,11 @@
                             <li>
                                 <a href="{{ route('user.index') }}">
                                     <span class="sub-item">Kelola Data Petugas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('bk.index') }}">
+                                    <span class="sub-item">Kelola Data Bk</span>
                                 </a>
                             </li>
                             <li>
@@ -102,15 +106,14 @@
                 @endif
                 <li class="nav-item">
                     <a href="#">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-file-signature"></i>
                         <p>Tambah Pelanggaran</p>
-                        <span class="badge badge-count">5</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="#logout">
-                        <i class="fas fa-bars"></i>
-                        <p>Setting</p>
+                    <a data-toggle="collapse" href="#settings">
+                        <i class="fas fa-cog"></i>
+                        <p>Pengaturan</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="logout">

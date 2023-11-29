@@ -27,8 +27,22 @@ class LoginController extends Controller
         }
     }
 
-    public function signup()
+    // TODO: sign up
+    
+    public function signup_user()
     {
         //
+    }
+
+   
+
+    public function logout_user() {
+        Auth::logout();
+        return redirect('/login/user');
+    }
+
+    public function logout_bk() {
+        Auth::logout();
+        return redirect('/login/bk');
     }
 }

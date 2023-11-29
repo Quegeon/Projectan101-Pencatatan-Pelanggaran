@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/fotopetugas
+/public/fotobk
 /storage/*.key
 /vendor
 .env
