@@ -53,7 +53,7 @@
                     <h4 class="text-section">Pilihan</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{ route('pelanggaran.index')}}">
                         <i class="fas fa-file-signature"></i>
                         <p>Pelanggaran</p>
                     </a>

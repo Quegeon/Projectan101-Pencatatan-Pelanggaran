@@ -96,7 +96,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('pelanggaran.index') }}">
+                                <a href="#">
                                     <span class="sub-item">Kelola Data Pelanggaran</span>
                                 </a>
                             </li>

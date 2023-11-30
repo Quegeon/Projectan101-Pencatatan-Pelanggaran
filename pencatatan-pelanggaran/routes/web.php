@@ -13,6 +13,7 @@ use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
+
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
@@ -107,7 +108,7 @@ Route::group(["husen ganteng"],function () {
         });
     });
 
-    Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() { // FOR ADMIN PETUGAS
+    Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() {
         Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
         Route::prefix('laporan')->controller(LaporanController::class)->group(function() {
             Route::get('/create', 'create')->name('laporan.create');
@@ -119,6 +120,14 @@ Route::group(["husen ganteng"],function () {
     });
 });
 
-Route::prefix('bk')->middleware(['auth:bk'])->group(function () { // FOR BK
+Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
+    Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
+        Route::get('/', 'index')->name('pelanggaran.index');
+        Route::get('/create', 'create')->name('pelanggaran.create');
+        Route::post('/store', 'store')->name('pelanggaran.store');
+        Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');
+        Route::post('/{id}/update', 'update')->name('pelanggaran.update');
+        Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
+    });
 });

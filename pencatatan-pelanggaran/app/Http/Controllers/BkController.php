@@ -22,24 +22,24 @@ class BkController extends Controller
             'password' => 'required',
             'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
         ]);
-        
+      
         try {
             $validated['id'] = Str::orderedUuid();
             $validated['password'] = bcrypt($validated['password']);
-    
+          
             if($request->hasFile('foto')){
-                $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
+                $imgName = Str::orderedUuid().'.'.$request->foto->extension();
                 $request->file('foto')->move('fotobk/',$imgName);
                 $validated['foto'] = $imgName;
             } else {
                 $validated['foto'] = 'kosong';
             }
-    
+            
             Bk::create($validated);
             return redirect()
                 ->route('bk.index')
                 ->with('success', 'Data Successfully Created!');
-
+          
         } catch (\Throwable $th) {
             return redirect()
                 ->route('bk.index')
