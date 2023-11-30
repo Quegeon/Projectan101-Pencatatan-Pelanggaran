@@ -19,11 +19,11 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 
-Route::get('/', [DashboardPetugas::class, 'index']);
+Route::view('/', 'layouts.landing-page');
 
 // TODO: LOGIN ADMIN, BK
 
-Route::group(function () {
+Route::group(["husen ganteng"],function () {
     Route::get('dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
     Route::group(['middleware' => ['auth', 'level:admin']], function() { // FOR ADMIN
         Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
