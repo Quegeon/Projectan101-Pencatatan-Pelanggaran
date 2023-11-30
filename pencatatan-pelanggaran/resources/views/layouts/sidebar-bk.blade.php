@@ -54,7 +54,7 @@
                 <li class="nav-item">
                     <a href="">
                         <i class="fas fa-file-signature"></i>
-                        <p>Tambah Pelanggaran</p>
+                        <p>Lihat Semua Pelanggaran</p>
                     </a>
                 </li>
                 <li class="nav-item">

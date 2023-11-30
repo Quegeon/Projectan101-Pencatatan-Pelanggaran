@@ -174,6 +174,28 @@
 		});
 	}
 
+	// function confirmDel(url) {
+	// 	Swal.fire({
+	// 		title: "Yakin",
+	// 		text: "Sepertinya siswa baru 1x melakukan pelanggaran, apakah ingin memberikan peringatan saja?",
+	// 		icon: "warning",
+	// 		showCancelButton: true,
+	// 		confirmButtonColor: "#716aca",
+	// 		cancelButtonColor: "#f3545d",
+	// 		confirmButtonText: "Ya, Hapus!"
+	// 	}).then((result) => {
+	// 		if (result.isConfirmed) {
+	// 			window.location = url;
+	// 		} else if ( result.dismiss === Swal.DismissReason.cancel) {
+	// 			Swal.fire({
+	// 				title: "Cancelled",
+	// 				text: "Your imaginary file is safe :)",
+	// 				icon: "error"
+    // 			});
+	// 		}
+	// 	});
+	// }
+
 	@if(session('error'))
 		Swal.fire({
 			title: "Error!",
