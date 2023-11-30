@@ -6,7 +6,7 @@
     <div class="main-panel">
         <div class="content">
             <div class="page-inner">
-                <h4 class="page-title">User Profile</h4>
+                <h4 class="page-title">{{ Auth::user()->username }} Profile</h4>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card card-with-nav">
@@ -20,9 +20,12 @@
                             <div class="card-body">
                                 <div class="row mt-3">
                                     <div class="col-md-12">
+                                        <form action="{{ isset($user) ? route('update.user', $user->id) : '#' }}" method="POST" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                        
                                         <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control" value="{{ Auth()->User()->nama}}" disabled>
+                                            <label>Nama</label>
+                                            <input type="text" class="form-control" value="{{ Auth()->User()->nama}}" >
                                         </div>
                                     </div>
                                 </div>
@@ -30,22 +33,37 @@
                                     <div class="col-md-12">
                                         <div class="form-group ">
                                             <label>Username</label>
-                                            <input type="text" class="form-control" value="{{ Auth()->User()->username}}" disabled>
+                                            <input type="text" class="form-control" value="{{ Auth()->User()->username}}" >
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="row mt-3 mb-1">
                                     <div class="col-md-12">
+                                        <div class="form-group ">
+                                            <label>Foto</label>
+                                            <input type="file" id="image" class="form-control" value="{{ Auth()->User()->level}}" onchange="imagePreview()">
+                                        </div>
+                                        <center>
+                                            <img class="img-preview img-fluid " style="display: none; justify:center" height="200" width="200px">
+                                        </center>
+                                    </div>
+                                </div>
+                              
 
+                                <div class="row mt-3 mb-1">
+                                    <div class="col-md-12">
                                         <div class="form-group ">
                                             <label>Level</label>
-                                            <input type="text" class="form-control" value="{{ Auth()->User()->level}}" disabled>
+                                            <input type="text" class="form-control" value="{{ Auth()->User()->level}}" >
                                         </div>
                                     </div>
                                 </div>
+                              
                                 <button class="btn btn-secondary ">Ubah Profile</button>
-                                <button class="btn btn-secondary ">Kembali</button>
+                                <a href="{{route('dashboard.petugas')}}" class="btn btn-secondary ">Kembali</a>
                             </div>
+                        </form>
                         </div>
                     </div>
                     <div class="col-md-4">

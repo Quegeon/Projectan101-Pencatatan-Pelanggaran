@@ -38,11 +38,13 @@ Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
     Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
 });
 
-Route::prefix('user')->controller(ProfileController::class)->group(function() {
-    Route::get('/', 'index')->name('user.index');
-});
+// Route::prefix('user')->controller(ProfileController::class)->group(function() {
+//     Route::get('/', 'index')->name('user.index');
+// });
 
-Route::view('/user/profile', 'home.admin.user.profile')->name('profile.user');
+Route::get('/user/profile', [ProfileController::class, 'index'])->name('profile.index');
+// Route::view('/user/profile', 'home.admin.user.profile')->name('profile.user');
+Route::post('/user/update/{id}',[ProfileController::class,'update'])->name('update.user');
 Route::view('/user/password', 'home.admin.user.gantipassword')->name('password.user');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');

@@ -30,7 +30,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group ">
                                             <label>Pasword Baru</label>
-                                            <input type="text" class="form-control" disabled>
+                                            <input type="text" name="" class="form-control" disabled>
                                         </div>
                                     </div>
                                 </div>

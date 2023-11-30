@@ -20,7 +20,7 @@
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="/user/profile('profile.user')">
+                                <a href="{{ route('profile.index') }}">
                                     <span class="link-collapse">My Profile</span>
                                 </a>
                             </li>
@@ -113,12 +113,6 @@
                     </a>
                     <div class="collapse" id="settings">
                         <ul class="nav nav-collapse">
-                            <li>
-                                {{-- TODO: add profile --}}
-                                <a href="#profile">
-                                    <span class="sub-item">Profile</span>
-                                </a>
-                            </li>
                             <li>
                                 <a href="{{ route('logout.user') }}">
                                     <span class="sub-item">Logout</span>
