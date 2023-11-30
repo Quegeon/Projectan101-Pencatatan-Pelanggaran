@@ -83,8 +83,7 @@
                                 <input type="hidden" name="tgl_pelanggaran" value="{{ $pelanggaran->tgl_pelanggaran }}">
                             </div>
                             <a href="{{ route('pelanggaran.edit', (string) $pelanggaran->id) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ route('pelanggaran.destroy', (string) $pelanggaran->id) }}" class="btn btn-danger">Hapus</a>
-                            
+                            <a href="{{ route('pelanggaran.destroy', (string) $pelanggaran->id) }}" class="btn btn-danger">Hapus</a>                            
                         </form>
                     </div>
                 </div>

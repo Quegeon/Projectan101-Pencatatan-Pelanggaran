@@ -140,7 +140,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pelanggaran as $k)
+                            @foreach ($pelanggaran_admin as $k)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$k->Siswa->nama}}</td>
@@ -246,7 +246,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pelanggaran as $k)
+                            @foreach ($pelanggaran_petugas as $k)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$k->Siswa->nama}}</td>
