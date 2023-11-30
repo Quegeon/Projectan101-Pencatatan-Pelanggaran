@@ -149,8 +149,7 @@
                                 <td>{{$k->keterangan}}</td>
                                 <td>{{$k->status}}</td>
                                 <td align="center" colspan="3">
-                                    <a href="{{ route('pelanggaran.edit', (string) $k->id) }}" class="fa fa-edit" style="margin-right: 20%;"></a>
-                                    <a href="{{ route('pelanggaran.destroy', (string) $k->id ) }}" class="fa fa-trash text-danger"></a>
+                                    <a href="{{ route('dashboard.detail', (string) $k->id) }}" class="btn btn-info">Detail</a>
                                 </td>
                             </tr>
                             @endforeach

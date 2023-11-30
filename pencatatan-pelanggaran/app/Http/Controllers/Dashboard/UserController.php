@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aturan;
+use App\Models\Bk;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,8 +32,15 @@ class UserController extends Controller
         ->whereBetWeen('tgl_pelanggaran',[$start , $today])->first();
     
         return view('home.dashboard.dashboard-petugas',compact('jumlah_kelas','jumlah_siswa','jumlah_aturan','pelanggaran','total_minggu')); 
-       
-        // return view('home.dashboard.dashboard-petugas');
+    }
+
+    public function detail($id) {
+        $pelanggaran = Pelanggaran::find($id);
+        $user = User::all();
+        $bk = Bk::all();
+        $aturan = Aturan::all();
+        $siswa = Siswa::all();
+        return view('home.dashboard.detail-petugas',compact('pelanggaran','siswa','bk','user','aturan'));
     }
 
 }
