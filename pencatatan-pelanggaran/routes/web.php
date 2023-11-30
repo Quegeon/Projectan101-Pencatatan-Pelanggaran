@@ -110,6 +110,7 @@ Route::group(["husen ganteng"],function () {
 
     Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() {
         Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
+        Route::get('/dashboard/detail-petugas/{id}', [DashboardPetugas::class, 'detail'])->name('dashboard.detail');
         Route::prefix('laporan')->controller(LaporanController::class)->group(function() {
             Route::get('/create', 'create')->name('laporan.create');
             Route::post('/store', 'store')->name('laporan.store');
