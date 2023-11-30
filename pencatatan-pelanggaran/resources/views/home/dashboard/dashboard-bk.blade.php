@@ -30,8 +30,7 @@
                         </div>
                         <div class="col col-stats ml-3 ml-sm-0">
                             <div class="numbers">
-                                <p class="card-category">Visitors</p>
-                                <h4 class="card-title">1,294</h4>
+                                <p class="card-category">Siswa</p>
                             </div>
                         </div>
                     </div>
@@ -48,9 +47,8 @@
                             </div>
                         </div>
                         <div class="col col-stats ml-3 ml-sm-0">
-                            <div class="numbers">
-                                <p class="card-category">Subscribers</p>
-                                <h4 class="card-title">1303</h4>
+                            <div class="numbers"
+                                <p class="card-category">Kelas</p>
                             </div>
                         </div>
                     </div>
@@ -68,8 +66,7 @@
                         </div>
                         <div class="col col-stats ml-3 ml-sm-0">
                             <div class="numbers">
-                                <p class="card-category">Sales</p>
-                                <h4 class="card-title">$ 1,345</h4>
+                                <p class="card-category">Aturan</p>
                             </div>
                         </div>
                     </div>
@@ -87,8 +84,8 @@
                         </div>
                         <div class="col col-stats ml-3 ml-sm-0">
                             <div class="numbers">
-                                <p class="card-category">Order</p>
-                                <h4 class="card-title">576</h4>
+                                <p class="card-category">Jumlah Pelanggaran Yang DI Tangani</p>
+                                <h4 class="card-title">{{$total_minggu}}</h4>
                             </div>
                         </div>
                     </div>
@@ -97,7 +94,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-8"
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
@@ -118,6 +115,42 @@
                         </div>
                     </div>
                 </div>
+            <div class="card-body">
+                <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i> Tambah Data</a>
+                    <div class="table-responsive">
+                        <table id="basic-datatables" class="display table table-striped table-hover" >
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Siswa</th>
+                                    <th>Petugas</th>
+                                    <th>Aturan</th>
+                                    <th>Keterangan</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pelanggaran as $k)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$k->Siswa->nama}}</td>
+                                    <td>{{$k->User->nama}}</td>
+                                    <td>{{$k->Aturan->nama_aturan}}</td>
+                                    <td>{{$k->keterangan}}</td>
+                                    <td>{{$k->status}}</td>
+                                    <td align="center" colspan="3">
+                                        <a href="{{ route('pelanggaran.edit', (string) $k->id) }}" class="btn btn-primary" style="margin-right: 20%;">Detail</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
+            </div>
+        </div
+    </div>
                 <div class="card-body">
                     <div class="chart-container" style="min-height: 375px">
                         <canvas id="statisticsChart"></canvas>

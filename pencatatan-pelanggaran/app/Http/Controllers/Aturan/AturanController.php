@@ -53,9 +53,10 @@ class AturanController extends Controller
                 ->with('success','Data Berhasil Dibuat');
             
         } catch (\Throwable $th) {
-            return redirect()
-                ->route('aturan.index')
-                ->with('error','Error Store Data');
+            dd($th);
+            // return redirect()
+                // ->route('aturan.index')
+                // ->with('error','Error Store Data');
         }
     }
 
