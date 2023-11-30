@@ -20,18 +20,13 @@
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#profile">
+                                <a href="/user/profile('profile.user')">
                                     <span class="link-collapse">My Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#edit">
-                                    <span class="link-collapse">Edit Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#settings">
-                                    <span class="link-collapse">Settings</span>
+                                <a href="{{route('password.user')}}">
+                                    <span class="link-collapse">Password</span>
                                 </a>
                             </li>
                         </ul>

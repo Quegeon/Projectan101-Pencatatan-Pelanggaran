@@ -13,6 +13,7 @@ use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
+use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
@@ -37,6 +38,12 @@ Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
     Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
 });
 
+Route::prefix('user')->controller(ProfileController::class)->group(function() {
+    Route::get('/', 'index')->name('user.index');
+});
+
+Route::view('/user/profile', 'home.admin.user.profile')->name('profile.user');
+Route::view('/user/password', 'home.admin.user.gantipassword')->name('password.user');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
@@ -122,12 +129,12 @@ Route::group(["husen ganteng"],function () {
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
-        Route::get('/', 'index')->name('pelanggaran.index');
-        Route::get('/create', 'create')->name('pelanggaran.create');
-        Route::post('/store', 'store')->name('pelanggaran.store');
-        Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');
-        Route::post('/{id}/update', 'update')->name('pelanggaran.update');
-        Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
-    });
+    // Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
+    //     Route::get('/', 'index')->name('pelanggaran.index');
+    //     Route::get('/create', 'create')->name('pelanggaran.create');
+    //     Route::post('/store', 'store')->name('pelanggaran.store');
+    //     Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');
+    //     Route::post('/{id}/update', 'update')->name('pelanggaran.update');
+    //     Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
+    // });
 });
