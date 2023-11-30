@@ -21,8 +21,6 @@ class BkController extends Controller
         $jumlah_aturan = Aturan::count();
 
         $pelanggaran = Pelanggaran::Select()->where('status','Belum')->get();
-
-       
         $total_minggu = Pelanggaran::where('status', 'Belum')->count();
 
         return view('home.dashboard.dashboard-bk', compact(['pelanggaran','jumlah_siswa','jumlah_kelas','jumlah_aturan',

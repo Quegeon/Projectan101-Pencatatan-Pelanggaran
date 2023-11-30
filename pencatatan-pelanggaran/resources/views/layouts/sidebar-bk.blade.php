@@ -52,7 +52,7 @@
                     <h4 class="text-section">Pilihan</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('pelanggaran.index')}}">
+                    <a href="{{ route('review.index')}}">
                         <i class="fas fa-file-signature"></i>
                         <p>Lihat Semua Pelanggaran</p>
                     </a>
