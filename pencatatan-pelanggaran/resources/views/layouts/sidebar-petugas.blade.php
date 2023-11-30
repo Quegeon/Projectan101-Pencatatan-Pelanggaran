@@ -116,12 +116,18 @@
                         <p>Pengaturan</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="logout">
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i> 
-                                <p>Logout</p>
+                    <div class="collapse" id="settings">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                {{-- TODO: add profile --}}
+                                <a href="#profile">
+                                    <span class="sub-item">Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout.user') }}">
+                                    <span class="sub-item">Logout</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
