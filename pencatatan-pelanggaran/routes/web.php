@@ -29,24 +29,23 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 // Login
-Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
-    Route::get('/', 'index')->name('user.index');
-    Route::post('/store', 'store')->name('user.store');
-    Route::get('/{id}/edit', 'edit')->name('user.edit');
-    Route::post('/{id}/update', 'update')->name('user.update');
-    Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
-});
-
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
-Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
+Route::view('/login/bk', 'home.login.auth-bk')->name('login');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logout.user');
-Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout.bk');
+Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout');
 
 Route::group(["husen ganteng"],function () {
     Route::group(['middleware' => ['auth', 'level:Admin']], function() { // FOR ADMIN
+        Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
+            Route::get('/', 'index')->name('user.index');
+            Route::post('/store', 'store')->name('user.store');
+            Route::get('/{id}/edit', 'edit')->name('user.edit');
+            Route::post('/{id}/update', 'update')->name('user.update');
+            Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+        });
    
         Route::prefix('bk')->controller(KelolaBk::class)->group(function() {
             Route::get('/', 'index')->name('bk.index');
@@ -123,8 +122,9 @@ Route::group(["husen ganteng"],function () {
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::group(['controller' => [ReviewController::class]], function() {
+    Route::group(['controller' => ReviewController::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
+        Route::get('/inbox', 'inbox')->name('review.inbox');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit');
