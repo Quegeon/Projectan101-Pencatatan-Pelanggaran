@@ -40,7 +40,7 @@
     <nav class="fixed w-full p-4 top-0 mt-0 z-10 bg-white shadow md:flex md:items-center md:justify-between">
         <div class="flex justify-between items-center">
             <span class="text-2xl font-[Poppins]">
-                MATA
+                <img src="{{asset('/foto/mata.png')}}" alt="" class="w-18 h-12">
             </span>
             <span class="text-3xl cursor-pointer md:hidden block" id="menuIcon">
                 <ion-icon name="menu-outline"></ion-icon>
@@ -65,9 +65,9 @@
             </button>
         </ul>
     </nav>
-    <div class="hero mx-auto px-5 py-24 lg:flex bg-sky-900">
+    <div class="hero mx-auto px-5 py-24 lg:flex bg-sky-900 bg-cover bg-center relative" style="background-image: url('{{asset('/foto/g.jpg')}}');">
       <!-- Tampilan PC -->
-      <div class="hidden lg:flex lg:items-center lg:w-1/2">
+      <div class="sm:hidden hidden lg:flex lg:items-center lg:w-1/2 bg-opacity-75">
         <div class="hero-title lg:ml-10 lg:mr-20">
           <h1 class="text-3xl text-left mt-5 lg:w-96 delay-[300ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0 " data-taos-offset="400">APLIKASI PENCATATAN PELANGGARAN SISWA</h1>
           <p class="text-md text-justify mt-4 w-96 delay-[300ms] duration-[600ms] taos:translate-y-[200px] taos:opacity-0" data-taos-offset="300"">Aplikasi ini dibuat untuk membantu guru piket dan petugas osis untuk mencatat dan memberi point kepada para siswa yang melanggar, agar catatan tersebut tersimpan ke dalam data dan tidak hilang</p>
@@ -79,16 +79,13 @@
       <div class="hero-image w-full">
         <img src="{{asset('/foto/Rectangle 5.png')}}" alt="" class="rounded-lg w-96 delay-[300ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0 " data-taos-offset="400"">
       </div>
-      <div class="hero-image w-full rounded-full z-[-1]">
-        <img src="{{asset('/foto/g.jpg')}}" alt="" class="rounded-full w-96 delay-[300ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0 " data-taos-offset="400"">
-      </div>
       <!-- Tampilan Mobile -->
       <div class="lg:hidden">
         <div class="hero-image mb-5 delay-[300ms]">
           <img src="{{asset('/foto/Rectangle 5.png')}}" alt="" class="rounded-lg duration-[600ms] taos:translate-x-[200px] taos:opacity-0" data-taos-offset="400">
         </div>
         <div class="hero-title">
-          <h1 class="text-3xl text-left mt-5">APLIKASI PENCATATAN PELANGGARAN SISWA</h1>
+          <h1 class="text-3xl text-left mt-5 font-bold  ">APLIKASI PENCATATAN PELANGGARAN SISWA</h1>
           <p class="text-md text-justify mt-4">Aplikasi ini dibuat untuk membantu guru piket dan petugas osis untuk mencatat dan memberi point kepada para siswa yang melanggar, agar catatan tersebut tersimpan ke dalam data dan tidak hilang</p>
           <div class="mt-3">
             <a class="block py-2 px-5 border-2 border-blue-300 rounded-sm hover:bg-blue-300 hover:text-white ease-in-out duration-300 text-center" href="">Demo Aplikasi <i class="fas fa-play-circle"></i></a>
@@ -97,60 +94,61 @@
       </div>
     </div>
     
-        <div class="card mt-24">
-        <div class="ml-10 hidden sm:block">
-          <button class="prev-btn bg-blue-500 text-white px-4 py-2 rounded" id="prevBtn"><</button>
-          <button class="next-btn bg-blue-500 text-white px-4 py-2 rounded ml-2" id="nextBtn">></button>
-        </div>
-        <div class="owl-carousel owl-theme p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+        <div class="owl-carousel owl-theme p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 bg-blue-300">
             <!--Card 1-->
-            <div class="item rounded overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">Mountain</div>
                 <p class="text-gray-700 text-base">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
                 </p>
               </div>
-              <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+            </div>
+            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+              <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Mountain</div>
+                <p class="text-gray-700 text-base">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                </p>
+              </div>
+            </div>
+            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+              <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Mountain</div>
+                <p class="text-gray-700 text-base">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                </p>
+              </div>
+            </div>
+            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+              <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Mountain</div>
+                <p class="text-gray-700 text-base">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                </p>
+              </div>
+            </div>
+            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+              <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Mountain</div>
+                <p class="text-gray-700 text-base">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                </p>
               </div>
             </div>
             <!--Card 2-->
-            <div class="item rounded overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full" src="{{asset('/foto/Rectangle 5.png')}}" alt="River">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">River</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-              </div>
-              <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#summer</span>
-              </div>
-            </div>
-            <!--Card 3-->
-            <div class="item rounded overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full" src="{{asset('/foto/Rectangle 5.png')}}" alt="Forest">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">Forest</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-              </div>
-              <div class="px-6 pt-4 pb-2">
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#fall</span>
-              </div>
-            </div>
-          </div>
-        </div>    
+                
       </div>
+      <div class="card mt-9">
+        <div class="ml-10 hidden sm:block">
+          <button class="prev-btn bg-blue-500 text-white px-4 py-2 rounded" id="prevBtn"><</button>
+          <button class="next-btn bg-blue-500 text-white px-4 py-2 rounded ml-2" id="nextBtn">></button>
+        </div>
       {{-- for mobile --}}
       <div class="cards">
         <h1 class="text-4xl ml-10">Perancang Aplikasi</h1>
