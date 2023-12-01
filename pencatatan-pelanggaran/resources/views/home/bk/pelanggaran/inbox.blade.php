@@ -110,14 +110,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <div class="form-group">
+                    <label for="">Siswa</label>
+                    <input type="text" class="form-control" name="nis" value="{{ $p->Siswa->nama }}" readonly>
+                </div>
+                {{-- <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Siswa</label>
-                            <input type="text" class="form-control" name="nis" value="{{ $p->Siswa->nama }}" readonly>
-                        </div>
                     </div>
-                    <div class="col-md-6">
+                </div> --}}
+                    {{-- <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Aturan</label>
                             <input list="aturan" type="text" class="form-control" name="id_aturan" onchange="anjay({{ $aturan }}, this)" value="{{ ($p->id_aturan) ? $p->Aturan->nama_aturan : '--' }}" readonly>
@@ -127,26 +128,25 @@
                                 @endforeach
                             </datalist>
                         </div>
-                    </div>
-                </div>
+                    </div> --}}
                 <div class="form-group">
                     <label for="">Keterangan</label>
                     <input type="text" name="keterangan" class="form-control" value="{{ $p->keterangan }}" readonly>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Poin</label>
-                            <input type="text" name="total_poin" id="poin" class="form-control" value="{{ $p->total_poin }}" readonly>
-                        </div>
+                {{-- <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Poin</label>
+                        <input type="text" name="total_poin" id="poin" class="form-control" value="{{ $p->total_poin }}" readonly>
                     </div>
+                </div> --}}
+                {{-- <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Status</label>
-                            <input type="text" value="{{ $p->status }}" class="form-control" readonly>
-                        </div>
-
+                        
                     </div>
+                </div> --}}
+                <div class="form-group">
+                    <label for="">Status</label>
+                    <input type="text" value="{{ $p->status }}" class="form-control" readonly>
                 </div>
             </div>
             <div class="modal-footer">
