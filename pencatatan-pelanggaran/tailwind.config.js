@@ -8,7 +8,14 @@ export default {
     "./resources/**/*.vue",],
   },
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        'birutua': '#011d2a',
+        'biru': '#055b82',
+      },
+    },
   },
   plugins: [ require('taos/plugin')
 ],

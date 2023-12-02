@@ -19,6 +19,36 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 <!-- Tambahkan jQuery -->
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+  }
+
+  .modal-content {
+    position: relative;
+    margin: auto;
+    width: 50%;
+    max-width: 700px;
+  }
+
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+</style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- Tambahkan Owl Carousel JS -->
@@ -37,7 +67,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="">
-    <nav class="fixed w-full p-4 top-0 mt-0 z-10 bg-white shadow md:flex md:items-center md:justify-between">
+    <nav class="fixed w-full px-6 py-2 top-0 mt-0 z-10 bg-white shadow md:flex md:items-center md:justify-between">
         <div class="flex justify-between items-center">
             <span class="text-2xl font-[Poppins]">
                 <img src="{{asset('/foto/mata.png')}}" alt="" class="w-18 h-12">
@@ -60,44 +90,45 @@
                 <a href="#" class="text-xl hover:text-blue-500 duration-300">SUPPORT</a>
             </li>
     
-            <button class="bg-blue-300 text-white duration-300 px-6 py-2 mx-4 hover:bg-blue-500 rounded">
+            <button class="bg-biru text-white duration-300 px-6 py-2 mx-4 hover:bg-birutua rounded">
                 Login
             </button>
         </ul>
     </nav>
-    <div class="hero mx-auto px-5 py-24 lg:flex bg-sky-900 bg-cover bg-center relative" style="background-image: url('{{asset('/foto/g.jpg')}}');">
+    <div class="hero mx-auto px-5 py-24 lg:flex bg-gradient-to-r from-birutua to-biru relative">
       <!-- Tampilan PC -->
-      <div class="sm:hidden hidden lg:flex lg:items-center lg:w-1/2 bg-opacity-75">
+      <div class="sm:hidden hidden lg:flex lg:items-center lg:w-1/2 relative">
         <div class="hero-title lg:ml-10 lg:mr-20">
-          <h1 class="text-3xl text-left mt-5 lg:w-96 delay-[300ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0 " data-taos-offset="400">APLIKASI PENCATATAN PELANGGARAN SISWA</h1>
-          <p class="text-md text-justify mt-4 w-96 delay-[300ms] duration-[600ms] taos:translate-y-[200px] taos:opacity-0" data-taos-offset="300"">Aplikasi ini dibuat untuk membantu guru piket dan petugas osis untuk mencatat dan memberi point kepada para siswa yang melanggar, agar catatan tersebut tersimpan ke dalam data dan tidak hilang</p>
-          <div class="mt-9">
-            <a class="py-2 px-5 border-2 border-blue-300 rounded-sm hover:bg-blue-300 hover:text-white ease-in-out duration-300" href="">Demo Aplikasi <i class="fas fa-play-circle"></i></a>
-          </div>
+            <div class="delay-[300ms] duration-[600ms] taos:translate-x-[-200px] taos:opacity-0" data-taos-offset="400">
+                <h1 class="text-3xl text-left mt-5 w-96 text-white">APLIKASI PENCATATAN PELANGGARAN SISWA</h1>
+                <p class="text-md text-justify mt-4 w-96 text-white" >Aplikasi ini dibuat untuk membantu guru piket dan petugas osis untuk mencatat dan memberi point kepada para siswa yang melanggar, agar catatan tersebut tersimpan ke dalam data dan tidak hilang</p>
+            </div>
+            <div class="mt-9">
+                <a class="py-2 px-5 border-2 border-blue-300 rounded-sm hover:bg-blue-300 hover:text-white ease-in-out duration-100 delay-[500ms] duration-[400ms] taos:scale-[0.6] taos:opacity-0" data-taos-offset="200" href="">Demo Aplikasi <i class="fas fa-play-circle"></i></a>
+            </div>
         </div>
-      </div>
-      <div class="hero-image w-full">
-        <img src="{{asset('/foto/Rectangle 5.png')}}" alt="" class="rounded-lg w-96 delay-[300ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0 " data-taos-offset="400"">
-      </div>
-      <!-- Tampilan Mobile -->
-      <div class="lg:hidden">
-        <div class="hero-image mb-5 delay-[300ms]">
-          <img src="{{asset('/foto/Rectangle 5.png')}}" alt="" class="rounded-lg duration-[600ms] taos:translate-x-[200px] taos:opacity-0" data-taos-offset="400">
-        </div>
-        <div class="hero-title">
-          <h1 class="text-3xl text-left mt-5 font-bold  ">APLIKASI PENCATATAN PELANGGARAN SISWA</h1>
-          <p class="text-md text-justify mt-4">Aplikasi ini dibuat untuk membantu guru piket dan petugas osis untuk mencatat dan memberi point kepada para siswa yang melanggar, agar catatan tersebut tersimpan ke dalam data dan tidak hilang</p>
-          <div class="mt-3">
-            <a class="block py-2 px-5 border-2 border-blue-300 rounded-sm hover:bg-blue-300 hover:text-white ease-in-out duration-300 text-center" href="">Demo Aplikasi <i class="fas fa-play-circle"></i></a>
-          </div>
-        </div>
-      </div>
+        <img src="{{asset('/foto/Rectangle 5.png')}}" alt="" class="ml-[300px] mt-12 rounded-lg w-[400px] h-[400px] rounded-[20px] delay-[200ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0 " data-taos-offset="200">
+        <img src="{{asset('/foto/g.jpg')}}" alt="" class="absolute left-[600px] mt-10 inset-0 w-96 h-96 object-cover" data-taos-offset="200">
     </div>
     
-        <div class="owl-carousel owl-theme p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 bg-blue-300">
+    
+      <div class="hero-image w-full lg:hidden">
+          <img src="{{asset('/foto/Rectangle 5.png')}}" alt="" class="rounded-lg w-96 delay-[300ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0 " data-taos-offset="400">
+          <!-- Konten untuk tampilan mobile -->
+          <div class="hero-title text-white">
+              <h1 class="text-3xl text-left mt-5 font-bold">APLIKASI PENCATATAN PELANGGARAN SISWA</h1>
+              <p class="text-md text-justify mt-4">Aplikasi ini dibuat untuk membantu guru piket dan petugas osis untuk mencatat dan memberi point kepada para siswa yang melanggar, agar catatan tersebut tersimpan ke dalam data dan tidak hilang</p>
+              <div class="mt-3">
+                  <a class="block py-2 px-5 border-2 border-white rounded-sm hover:bg-white hover:text-blue-500 ease-in-out duration-300 text-center" href="">Demo Aplikasi <i class="fas fa-play-circle"></i></a>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+        <div class="owl-carousel  owl-theme p-12 z-[-3] grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 bg-white">
             <!--Card 1-->
-            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-blue-200 lg:shadow-2xl">
+              <img class="w-full p-5" src="{{asset('/foto/ss.png')}}" alt="Mountain">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">Mountain</div>
                 <p class="text-gray-700 text-base">
@@ -105,8 +136,8 @@
                 </p>
               </div>
             </div>
-            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">Mountain</div>
                 <p class="text-gray-700 text-base">
@@ -114,8 +145,8 @@
                 </p>
               </div>
             </div>
-            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">Mountain</div>
                 <p class="text-gray-700 text-base">
@@ -123,8 +154,8 @@
                 </p>
               </div>
             </div>
-            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">Mountain</div>
                 <p class="text-gray-700 text-base">
@@ -132,8 +163,8 @@
                 </p>
               </div>
             </div>
-            <div class="item rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/Rectangle 5.png')}}" alt="Mountain">
+            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
+              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">Mountain</div>
                 <p class="text-gray-700 text-base">
@@ -141,14 +172,33 @@
                 </p>
               </div>
             </div>
+            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-blue-200 lg:shadow-2xl">
+              <img class="w-full p-5" src="{{asset('/foto/ss.png')}}" alt="Mountain">
+              <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Mountain</div>
+                <p class="text-gray-700 text-base">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                </p>
+                <!-- Add the button to open the modal -->
+                <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openModal('modal1')">View Image</button>
+              </div>
+            </div>
+        </div>
+        <div id="modal1" class="modal z-10">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal('modal1')">&times;</span>
+          <img class="w-full" src="{{asset('/foto/ss.png')}}" alt="Mountain">
+        </div>
+      </div>
             <!--Card 2-->
                 
       </div>
-      <div class="card mt-9">
-        <div class="ml-10 hidden sm:block">
-          <button class="prev-btn bg-blue-500 text-white px-4 py-2 rounded" id="prevBtn"><</button>
-          <button class="next-btn bg-blue-500 text-white px-4 py-2 rounded ml-2" id="nextBtn">></button>
-        </div>
+      <div class="absolute z-2 top-[1000px] transform -translate-y-1/2 left-12 hidden sm:block">
+        <button class="prev-btn bg-gray-400 text-white px-4 py-2 rounded" id="prevBtn"><</button>
+    </div>
+    <div class="absolute z-2 top-[1000px] transform -translate-y-1/2 right-12 hidden sm:block">
+        <button class="next-btn bg-gray-400 text-white px-4 py-2 rounded ml-2" id="nextBtn">></button>
+    </div>
       {{-- for mobile --}}
       <div class="cards">
         <h1 class="text-4xl ml-10">Perancang Aplikasi</h1>
@@ -468,5 +518,30 @@
       });
     </script>
     <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
+    <script>
+      // Fungsi untuk membuka modal
+      function bukaModal(idModal) {
+        var modal = document.getElementById(idModal);
+        modal.style.display = "block";
+      }
+    
+      // Fungsi untuk menutup modal
+      function tutupModal(idModal) {
+        var modal = document.getElementById(idModal);
+        modal.style.display = "none";
+      }
+    
+      // Tutup modal jika pengguna mengklik di luar modal
+      window.onclick = function(event) {
+        var modals = document.getElementsByClassName('modal');
+        for (var i = 0; i < modals.length; i++) {
+          var modal = modals[i];
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      }
+    </script>
+    
 </body>
 </html>
