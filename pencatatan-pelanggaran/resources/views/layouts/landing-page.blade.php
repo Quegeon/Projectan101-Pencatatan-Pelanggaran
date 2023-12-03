@@ -36,18 +36,10 @@
     position: relative;
     margin: auto;
     width: 50%;
-    max-width: 700px;
+    margin-top: 50px ;
+    width: 700px;
   }
 
-  .close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-  }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -95,7 +87,7 @@
             </button>
         </ul>
     </nav>
-    <div class="hero mx-auto px-5 py-24 lg:flex bg-gradient-to-r from-birutua to-biru relative">
+    <div class="hero mx-auto px-5 py-24 lg:flex bg-gradient-to-b from-birutua to-biru relative">
       <!-- Tampilan PC -->
       <div class="sm:hidden hidden lg:flex lg:items-center lg:w-1/2 relative">
         <div class="hero-title lg:ml-10 lg:mr-20">
@@ -125,54 +117,10 @@
       </div>
   </div>
   
-        <div class="owl-carousel  owl-theme p-12 z-[-3] grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 bg-white">
+        <div class="owl-carousel  owl-theme p-12 z-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 bg-gray-200 relative">
             <!--Card 1-->
-            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-blue-200 lg:shadow-2xl">
-              <img class="w-full p-5" src="{{asset('/foto/ss.png')}}" alt="Mountain">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">Mountain</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-              </div>
-            </div>
-            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">Mountain</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-              </div>
-            </div>
-            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">Mountain</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-              </div>
-            </div>
-            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">Mountain</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-              </div>
-            </div>
-            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-green-300">
-              <img class="w-full mx-2 my-2" src="{{asset('/foto/ss.png')}}" alt="Mountain">
-              <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">Mountain</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                </p>
-              </div>
-            </div>
-            <div class="item mx-7 rounded-md overflow-hidden shadow-lg bg-red-300 lg:bg-blue-200 lg:shadow-2xl">
+            
+            <div class="item mx-7 rounded-md overflow-hidden shadow-2xl bg-white relative ">
               <img class="w-full p-5" src="{{asset('/foto/ss.png')}}" alt="Mountain">
               <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2">Mountain</div>
@@ -180,24 +128,34 @@
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
                 </p>
                 <!-- Add the button to open the modal -->
-                <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openModal('modal1')">View Image</button>
+                <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openModal('{{asset('/foto/ss.png')}}')">View Image</button>
+              </div>
+            </div>
+            <div class="item mx-7 rounded-md overflow-hidden shadow-2xl bg-white">
+              <img class="w-full p-5" src="{{asset('/foto/g.jpg')}}" alt="Mountain">
+              <div class="px-6 py-4">
+                <div class="font-bold text-xl mb-2">Mountain</div>
+                <p class="text-gray-700 text-base">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                </p>
+                <!-- Add the button to open the modal -->
+                <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openModal('{{asset('/foto/g.jpg')}}')">View Image</button>
               </div>
             </div>
         </div>
-        <div id="modal1" class="modal z-10">
-      <div class="modal-content">
-          <span class="close" onclick="closeModal('modal1')">&times;</span>
-          <img class="w-full" src="{{asset('/foto/ss.png')}}" alt="Mountain">
+        <div id="myModal" class="modal z-20">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <img class="modal-content" id="modalImg">
         </div>
-      </div>
+        
             <!--Card 2-->
                 
       </div>
       <div class="absolute z-2 top-[1000px] transform -translate-y-1/2 left-12 hidden sm:block">
-        <button class="prev-btn bg-gray-400 text-white px-4 py-2 rounded" id="prevBtn"><</button>
+        <button class="prev-btn shadow-2xl bg-slate-950 text-black px-4 py-2 rounded-full " id="prevBtn"><</button>
     </div>
     <div class="absolute z-2 top-[1000px] transform -translate-y-1/2 right-12 hidden sm:block">
-        <button class="next-btn bg-gray-400 text-white px-4 py-2 rounded ml-2" id="nextBtn">></button>
+        <button class="next-btn shadow-2xl bg-birutua text-black px-4 py-2 rounded-full " id="nextBtn">></button>
     </div>
       {{-- for mobile --}}
       <div class="cards">
@@ -519,29 +477,26 @@
     </script>
     <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
     <script>
-      // Fungsi untuk membuka modal
-      function bukaModal(idModal) {
-        var modal = document.getElementById(idModal);
+      function openModal(imgSrc) {
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("modalImg");
+    
         modal.style.display = "block";
+        modalImg.src = imgSrc;
       }
     
-      // Fungsi untuk menutup modal
-      function tutupModal(idModal) {
-        var modal = document.getElementById(idModal);
+      function closeModal() {
+        var modal = document.getElementById("myModal");
         modal.style.display = "none";
       }
     
-      // Tutup modal jika pengguna mengklik di luar modal
+      // Optional: Close the modal when clicking outside the image
       window.onclick = function(event) {
-        var modals = document.getElementsByClassName('modal');
-        for (var i = 0; i < modals.length; i++) {
-          var modal = modals[i];
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
+        var modal = document.getElementById("myModal");
+        if (event.target === modal) {
+          closeModal();
         }
-      }
+      };
     </script>
-    
 </body>
 </html>
