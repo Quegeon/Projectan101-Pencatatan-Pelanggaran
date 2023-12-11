@@ -14,6 +14,7 @@ export default {
         current: 'currentColor',
         'birutua': '#011d2a',
         'biru': '#055b82',
+        'ins':'linear-gradient(to left, rgb(217, 70, 239), rgb(220, 38, 38), rgb(251, 146, 60))',
       },
     },
   },
