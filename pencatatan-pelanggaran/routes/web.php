@@ -14,6 +14,8 @@ use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
 
+use App\Http\Controllers\Profile\BkController as ProfileBk;
+
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
@@ -29,13 +31,6 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 // Login
-Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
-    Route::get('/', 'index')->name('user.index');
-    Route::post('/store', 'store')->name('user.store');
-    Route::get('/{id}/edit', 'edit')->name('user.edit');
-    Route::post('/{id}/update', 'update')->name('user.update');
-    Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
-});
 
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
@@ -47,7 +42,14 @@ Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout.bk
 
 Route::group(["husen ganteng"],function () {
     Route::group(['middleware' => ['auth', 'level:Admin']], function() { // FOR ADMIN
-   
+        Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
+            Route::get('/', 'index')->name('user.index');
+            Route::post('/store', 'store')->name('user.store');
+            Route::get('/{id}/edit', 'edit')->name('user.edit');
+            Route::post('/{id}/update', 'update')->name('user.update');
+            Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+        });
+        
         Route::prefix('bk')->controller(KelolaBk::class)->group(function() {
             Route::get('/', 'index')->name('bk.index');
             Route::get('/create', 'create')->name('bk.create');
@@ -123,12 +125,16 @@ Route::group(["husen ganteng"],function () {
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::group(['controller' => [ReviewController::class]], function() {
+    Route::group(['controller' => ReviewController::class], function() {
         Route::get('/', 'index')->name('review.index');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit');
         Route::post('/{id}/update', 'update')->name('review.update');
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
+    });
+    Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
+        Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
+        Route::post('/update', 'update_profile');
     });
 });
