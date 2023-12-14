@@ -73,7 +73,8 @@
 							</a>
 						</li>
 						
-						<li class="nav-item dropdown hidden-caret">
+						{{-- ! UDH GA KEPAKE COY --}}
+						{{-- <li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
 									<img src="../../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
@@ -100,7 +101,7 @@
 									<a class="dropdown-item" href="#">Logout</a>
 								</li>
 							</ul>
-						</li>
+						</li> --}}
 					</ul>
 				</div>
 			</nav>

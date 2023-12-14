@@ -24,8 +24,7 @@ class PelanggaranController extends Controller
         );
 
         if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
-            return redirect()
-                ->route('review.index')
+            return view('home.bk.pelanggaran.inbox', $data)
                 ->with('error', 'Reference Data Error');
         }
 

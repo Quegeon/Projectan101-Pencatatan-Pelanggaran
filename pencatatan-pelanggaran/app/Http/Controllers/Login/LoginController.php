@@ -34,6 +34,6 @@ class LoginController extends Controller
   
     public function logout_bk() {
         Auth::logout();
-        return redirect()->route('login.bk');
+        return redirect()->route('login');
     }
 }
