@@ -60,11 +60,11 @@
                                     <span class="sub-item">Kelola Data Petugas</span>
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('bk.index') }}">
                                     <span class="sub-item">Kelola Data Bk</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('siswa.index') }}">
                                     <span class="sub-item">Kelola Data Siswa</span>
