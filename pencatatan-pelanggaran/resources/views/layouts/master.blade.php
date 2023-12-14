@@ -21,8 +21,11 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('../../assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('../../assets/css/azzara.min.css') }}">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN --}}
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -32,7 +35,7 @@
 		<div class="main-header" data-background-color="purple">
 			<!-- Logo Header -->
 			<div class="logo-header">
-				
+
 				<a href="index.html" class="logo">
 					<img src="../../assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
 				</a>
@@ -52,7 +55,7 @@
 
 			<!-- Navbar Header -->
 			<nav class="navbar navbar-header navbar-expand-lg">
-				
+
 				<div class="container-fluid">
 					<div class="collapse" id="search-nav">
 						<form class="navbar-left navbar-form nav-search mr-md-3">
@@ -72,7 +75,7 @@
 								<i class="fa fa-search"></i>
 							</a>
 						</li>
-						
+
 						{{-- ! UDH GA KEPAKE COY --}}
 						{{-- <li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -121,7 +124,7 @@
 				@yield('content')
 			</div>
 		</div>
-		
+
 		<!-- Custom template | don't include it in your project! -->
 		<div class="custom-template">
 			<div class="title">Settings</div>
@@ -198,7 +201,6 @@
 <script src="{{ asset('../../assets/js/core/bootstrap.min.js') }}"></script>
 
 <script>
-
 	$('.simphan').on('click', function(e) {
 		e.preventDefault();
 		const swalWithBootstrapButtons = Swal.mixin({
@@ -265,10 +267,23 @@
 <!-- Azzara JS -->
 <script src="{{ asset('../../assets/js/ready.min.js') }}"></script>
 
-<script >
+{{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select-search').select2({
+            dropdownParent: $('.modal'),
+            theme: 'bootstrap4',
+        });
+    })
+</script>
+
+<script>
 	$(document).ready(function() {
-		$('#basic-datatables').DataTable({
-		});
+		$('#basic-datatables').DataTable();
 
 		$('#multi-filter-select').DataTable( {
 			"pageLength": 5,

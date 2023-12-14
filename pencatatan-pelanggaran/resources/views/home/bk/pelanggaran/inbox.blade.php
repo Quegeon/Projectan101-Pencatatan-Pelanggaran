@@ -71,13 +71,13 @@
                 <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="">Siswa</label>
-                        <input list="siswa" type="text" name="nis" class="form-control" placeholder="Masukkan Nama Siswa">
-                        <datalist id="siswa">
+                        <label for="siswa">Siswa</label>
+                        <select class="select-search" name="nis" id="siswa">
                             @foreach ($siswa as $s)
                                 <option value="{{ $s->nis }}">{{ $s->nama }} | {{ $s->Kelas->nama_kelas }}</option>
                             @endforeach
-                        </datalist>
+                        </select>
+                        {{-- <input list="siswa" type="text" name="nis" class="form-control" placeholder="Masukkan Nama Siswa"> --}}
                         @error('nis')
                             <p class="text-danger">* {{ $errors->first('nis') }}</p>
                         @enderror
@@ -141,7 +141,7 @@
                 </div> --}}
                 {{-- <div class="row">
                     <div class="col-md-6">
-                        
+
                     </div>
                 </div> --}}
                 <div class="form-group">
