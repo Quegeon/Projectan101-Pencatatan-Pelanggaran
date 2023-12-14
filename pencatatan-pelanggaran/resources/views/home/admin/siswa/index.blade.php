@@ -84,7 +84,7 @@
                                 <div class="alert alert-danger alert-dismisible fade show" role="alert">{{ $message }}</div>
                                 @enderror
                             </div>
-                
+
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama siswa">
@@ -93,12 +93,11 @@
                                 @enderror
                             </div>
                         </div>
-                
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="kelas">Kelas</label>
-                                <select name="id_kelas" id="kelas" class="form-control">
-                                    <option value="">-- Pilih Satu --</option>
+                                <select name="id_kelas" id="kelas" class="select-search">
                                     @foreach ($kelas as $k)
                                         <option value="{{ $k->id }}">{{ $k->nama_kelas }} | {{ $k->jurusan }}</option>
                                     @endforeach
@@ -107,7 +106,7 @@
                                 <div class="alert alert-danger alert-dismisible fade show" role="alert">{{ $message }}</div>
                                 @enderror
                             </div>
-                
+
                             <div class="form-group">
                                 <label for="no_telp">No Telp</label>
                                 <input class="form-control" type="text" name="no_telp" id="no_telp" placeholder="No Telp Siswa">
@@ -116,7 +115,7 @@
                                 @enderror
                             </div>
                         </div>
-                
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
@@ -127,13 +126,13 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
-                                                                         
+
             </div>
         </div>
     </div>

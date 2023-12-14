@@ -1,5 +1,5 @@
 <div class="sidebar">
-			
+
     <div class="sidebar-background"></div>
     <div class="sidebar-wrapper scrollbar-inner">
         <div class="sidebar-content">
@@ -96,7 +96,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('pelanggaran.index') }}">
                                     <span class="sub-item">Kelola Data Pelanggaran</span>
                                 </a>
                             </li>

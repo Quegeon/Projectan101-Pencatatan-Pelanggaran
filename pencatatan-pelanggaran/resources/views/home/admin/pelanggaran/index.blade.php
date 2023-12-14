@@ -77,7 +77,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Siswa</label>
-                                <select name="nis" class="form-control" id="">
+                                <select name="nis" class="select-search" id="">
                                     @foreach ($siswa as $s)
                                         <option value="{{ $s->nis }}">{{ $s->nama }}</option>
                                     @endforeach
@@ -87,8 +87,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Aturan</label>
-                                <select name="id_aturan" onclick="anjay({{ $aturan }}, this)" class="form-control" id="">
-                                    <option value="" hidden>-- Aturan --</option>
+                                <select name="id_aturan" onclick="anjay({{ $aturan }}, this)" class="select-search" id="">
                                     @foreach ($aturan as $s)
                                         <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
                                     @endforeach
@@ -98,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Bk</label>
-                        <select class="form-control" name="id_bk" id="">
+                        <select class="select-search" name="id_bk" id="">
                             @foreach ($bk as $b)
                                 <option value="{{ $b->id }}">{{ $b->nama }}</option>
                             @endforeach
