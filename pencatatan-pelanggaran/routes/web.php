@@ -135,6 +135,7 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     });
     Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
-        Route::post('/update', 'update_profile');
+        Route::post('/update', 'update_profile')->name('profile.bk.update');
+        Route::post('/change_password', 'change_profile')->name('profile.bk.change_password');
     });
 });
