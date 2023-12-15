@@ -248,7 +248,6 @@
                                     @else
                                     {{$total_minggu->total_pelanggaran}}
                                     @endif
-
                                 </h4>
                             </div>
                         </div>

@@ -110,14 +110,14 @@
                             <label>Nama</label>
                             <input type="text" name="nama" class="form-control" value="{{ Auth::user()->nama }}" placeholder="{{ Auth::user()->nama }}">
                             @error('nama')
-                                <p class="text-danger">* {{ $message }}</p>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Username</label>
                             <input type="text" name="username" class="form-control" value="{{ Auth::user()->username }}" placeholder="{{ Auth::user()->username }}">
                             @error('username')
-                                <p class="text-danger">* {{ $message }}</p>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -125,7 +125,7 @@
                             <input type="file" name="foto" class="form-control">
                             @if ($errors->first('foto'))
                                 @error('foto')
-                                    <p class="text-danger">* {{ $message }}</p>
+                                    <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             @else
                                 <p class="text-muted">* Optional</p>
@@ -158,14 +158,14 @@
                             <label>Password Baru</label>
                             <input type="text" name="new_password" class="form-control" placeholder="Masukkan Password Baru">
                             @error('new_password')
-                                <p class="text-danger">* {{ $message }}</p>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Konfirmasi Password</label>
                             <input type="text" name="confirm_password" class="form-control" placeholder="Masukkan Kembali Password">
                             @error('confirm_password')
-                                <p class="text-danger">* {{ $message }}</p>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
 
