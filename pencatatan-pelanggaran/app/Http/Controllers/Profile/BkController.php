@@ -34,7 +34,7 @@ class BkController extends Controller
 
                 return redirect()
                     ->route('profile.bk')
-                    ->with('sucess','Profil Berhasil Diubah');
+                    ->with('success','Profil Berhasil Diubah');
     
             } catch (\Throwable $th) {
                 return redirect()
@@ -48,7 +48,7 @@ class BkController extends Controller
 
                 return redirect()
                     ->route('profile.bk')
-                    ->with('sucess','Profil Berhasil Diubah');
+                    ->with('success','Profil Berhasil Diubah');
 
             } catch (\Throwable $th) {
                 return redirect()
@@ -108,5 +108,35 @@ class BkController extends Controller
         //             ->with('error','Error Update Profile');
         //     }
         // }
+    }
+
+    public function change_password(Request $request)
+    {
+        $request->validate([
+            'new_password' => 'required',
+            'confirm_password' => 'required'
+        ]);
+
+        $bk = Bk::find(Auth::user()->id);
+
+        if ($request->new_password === $request->confirm_password) {
+            try {
+                $bk->update(['password' => bcrypt($request->new_password)]);
+
+                return redirect()
+                    ->route('profile.bk')
+                    ->with('success','Password Berhasil Diperbaharui');
+
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('profile.bk')
+                    ->with('error','Error Update Password');
+            }
+
+        } else {
+            return redirect()
+                ->route('profile.bk')
+                ->with('error','Konfirmasi Password Tidak Sesuai');
+        }
     }
 }

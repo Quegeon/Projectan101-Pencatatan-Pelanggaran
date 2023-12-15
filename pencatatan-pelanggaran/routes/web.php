@@ -50,7 +50,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
         });
         
-        Route::prefix('bk')->controller(KelolaBk::class)->group(function() {
+        Route::prefix('kelola_bk')->controller(KelolaBk::class)->group(function() {
             Route::get('/', 'index')->name('bk.index');
             Route::get('/create', 'create')->name('bk.create');
             Route::post('/store', 'store')->name('bk.store');
@@ -122,10 +122,10 @@ Route::group(["husen ganteng"],function () {
         });
     });
 });
-
+ 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::group(['controller' => ReviewController::class], function() {
+    Route::prefix('review')->controller(ReviewController::class)->group(function(){
         Route::get('/', 'index')->name('review.index');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
@@ -136,6 +136,6 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
         Route::post('/update', 'update_profile')->name('profile.bk.update');
-        Route::post('/change_password', 'change_profile')->name('profile.bk.change_password');
+        Route::post('/change_password', 'change_password')->name('profile.bk.change_password');
     });
 });

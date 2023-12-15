@@ -37,8 +37,8 @@
                             </div>
                         </div>
                         <div class="text-right mt-3 mb-3">
-                            {{-- TODO: ADD MODAL UPDATE AND CHANGE PASSWORD --}}
-                            <a href="" class="btn"></a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalUpdate">Ubah Profil</a>
+                            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#modalChangePassword">Ubah Password</a>
                         </div>
                     </div>
                 </div>
@@ -105,19 +105,31 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('profile.bk.update') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
-                            <label></label>
-                            <input type="text" name="nama" class="form-control" value="{{ Auth::user()-> }}" placeholder="{{ Auth::user()-> }}">
+                            <label>Nama</label>
+                            <input type="text" name="nama" class="form-control" value="{{ Auth::user()->nama }}" placeholder="{{ Auth::user()->nama }}">
                             @error('nama')
-                                <p class="text-danger">* {{ $errors->first('nama') }}</p>
+                                <p class="text-danger">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label></label>
-                            <input type="text" name="username" class="form-control" value="{{ Auth::user()-> }}" placeholder="{{ Auth::user()-> }}">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" value="{{ Auth::user()->username }}" placeholder="{{ Auth::user()->username }}">
                             @error('username')
-                                <p class="text-danger">* {{ $errors->first('username') }}</p>
+                                <p class="text-danger">* {{ $message }}</p>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Foto</label>
+                            <input type="file" name="foto" class="form-control">
+                            @if ($errors->first('foto'))
+                                @error('foto')
+                                    <p class="text-danger">* {{ $message }}</p>
+                                @enderror
+                            @else
+                                <p class="text-muted">* Optional</p>
+                            @endif
                         </div>
 
                         <div class="modal-footer">
@@ -141,18 +153,19 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('profile.bk.change_password') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                             <label>Password Baru</label>
                             <input type="text" name="new_password" class="form-control" placeholder="Masukkan Password Baru">
                             @error('new_password')
-                                <p class="text-danger">* {{ $errors->first('new_password') }}</p>
+                                <p class="text-danger">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label>Konfirmasi Password</label>
                             <input type="text" name="confirm_password" class="form-control" placeholder="Masukkan Kembali Password">
                             @error('confirm_password')
-                                <p class="text-danger">* {{ $errors->first('confirm_password') }}</p>
+                                <p class="text-danger">* {{ $message }}</p>
                             @enderror
                         </div>
 
