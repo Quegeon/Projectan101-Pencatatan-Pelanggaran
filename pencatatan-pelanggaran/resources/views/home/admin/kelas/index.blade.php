@@ -71,14 +71,14 @@
                         <label for="">Nama Kelas</label>
                         <input class="form-control" type="text" name="nama_kelas" id="nama" placeholder="Nama Kelas">
                         @error('nama_kelas')
-                        <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
+                        <p class="text-danger timeout">* {{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Jurusan</label>
                         <input class="form-control" type="text" name="jurusan" id="nama" placeholder="Jurusan">
                         @error('jurusan')
-                        <div class="alert alert-danger alert-dismisible fade show" role="alert" data-dismiss="alert">{{$message}}</div>
+                        <p class="text-danger timeout">* {{ $message }}</p>
                         @enderror
                     </div>
             </div>
@@ -90,4 +90,22 @@
         </div>
     </div>
 </div>
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all elements with the 'timeout' class
+        let timeoutErrors = document.querySelectorAll('.timeout');
+
+        // Check if the elements exist
+        if (timeoutErrors) {
+            // Set a timeout to remove the elements after 3 seconds (3000 milliseconds)
+            setTimeout(function () {
+                timeoutErrors.forEach(function (error) {
+                    error.remove(); // Remove each element
+                });
+            }, 3000);
+        }
+    });
+</script>
+
 @endsection
