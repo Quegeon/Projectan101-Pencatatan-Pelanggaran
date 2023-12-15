@@ -33,4 +33,8 @@ class Aturan extends Model
     {
         return $this->belongsTo(Hukuman::class, 'id_hukuman', 'id');
     }
+    public function Aturan()
+    {
+        return $this->hasMany(Aturan::class, 'id_aturan', 'id');
+    }
 }
