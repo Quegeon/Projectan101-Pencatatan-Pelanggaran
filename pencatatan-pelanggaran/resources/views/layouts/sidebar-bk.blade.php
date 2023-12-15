@@ -12,30 +12,9 @@
                         <span>
                             {{ Auth()->User()->nama }}
                             <span class="user-level">{{ Auth()->User()->level }}</span>
-                            <span class="caret"></span>
                         </span>
                     </a>
                     <div class="clearfix"></div>
-
-                    <div class="collapse in" id="collapseExample">
-                        <ul class="nav">
-                            <li>
-                                <a href="#profile">
-                                    <span class="link-collapse">My Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#edit">
-                                    <span class="link-collapse">Edit Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#settings">
-                                    <span class="link-collapse">Settings</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <ul class="nav">
@@ -92,8 +71,7 @@
                     <div class="collapse" id="settings">
                         <ul class="nav nav-collapse">
                             <li>
-                                {{-- TODO: add profile --}}
-                                <a href="#profile">
+                                <a href="{{ route('profile.bk') }}">
                                     <span class="sub-item">Profile</span>
                                 </a>
                             </li>
