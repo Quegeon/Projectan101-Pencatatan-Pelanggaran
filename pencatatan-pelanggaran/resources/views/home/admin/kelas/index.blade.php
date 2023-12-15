@@ -78,7 +78,7 @@
                         <label for="">Jurusan</label>
                         <input class="form-control" type="text" name="jurusan" id="nama" placeholder="Jurusan">
                         @error('jurusan')
-                        <div class="alert alert-danger alert-dismisible fade show" role="alert">{{$message}}</div>
+                        <div class="alert alert-danger alert-dismisible fade show" role="alert" data-dismiss="alert">{{$message}}</div>
                         @enderror
                     </div>
             </div>

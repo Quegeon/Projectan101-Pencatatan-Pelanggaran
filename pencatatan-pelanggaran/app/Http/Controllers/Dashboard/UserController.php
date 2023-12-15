@@ -30,7 +30,7 @@ class UserController extends Controller
             ->orderBy('tgl_pelanggaran','desc')
             ->limit(5)
             ->get();
-    
+
         $today = Carbon::today();
         $start = Carbon::today()->subDays(7);
         $total_minggu = Pelanggaran::Select(Pelanggaran::raw('COUNT(*) as total_pelanggaran'))
