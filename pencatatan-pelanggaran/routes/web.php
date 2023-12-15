@@ -123,12 +123,12 @@ Route::group(["husen ganteng"],function () {
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::group(['controller' => [ReviewController::class]], function() {
-        Route::get('/', 'index')->name('review.index');
-        Route::get('/create', 'create')->name('review.create');
-        Route::post('/store', 'store')->name('review.store');
-        Route::get('/{id}/edit', 'edit')->name('review.edit');
-        Route::post('/{id}/update', 'update')->name('review.update');
-        Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
-    });
+    // Route::group(['controller' => [ReviewController::class]], function() {
+    //     Route::get('/', 'index')->name('review.index');
+    //     Route::get('/create', 'create')->name('review.create');
+    //     Route::post('/store', 'store')->name('review.store');
+    //     Route::get('/{id}/edit', 'edit')->name('review.edit');
+    //     Route::post('/{id}/update', 'update')->name('review.update');
+    //     Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
+    // });
 });
