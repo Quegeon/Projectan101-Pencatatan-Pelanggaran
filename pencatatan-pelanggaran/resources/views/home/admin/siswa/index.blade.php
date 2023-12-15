@@ -81,7 +81,7 @@
                                 <label for="nis">NIS</label>
                                 <input class="form-control" type="text" name="nis" id="nis" placeholder="NIS">
                                 @error('nis')
-                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{ $message }}</div>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             </div>
                 
@@ -89,7 +89,7 @@
                                 <label for="nama">Nama</label>
                                 <input class="form-control" type="text" name="nama" id="nama" placeholder="Nama siswa">
                                 @error('nama')
-                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{ $message }}</div>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                     @endforeach
                                 </select>
                                 @error('id_kelas')
-                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{ $message }}</div>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             </div>
                 
@@ -112,7 +112,7 @@
                                 <label for="no_telp">No Telp</label>
                                 <input class="form-control" type="text" name="no_telp" id="no_telp" placeholder="No Telp Siswa">
                                 @error('no_telp')
-                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{ $message }}</div>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                 <label for="alamat">Alamat</label>
                                 <textarea class="form-control" name="alamat" id="alamat" placeholder="Alamat Siswa" rows="4"></textarea>
                                 @error('alamat')
-                                <div class="alert alert-danger alert-dismisible fade show" role="alert">{{ $message }}</div>
+                                <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             </div>
                         </div>

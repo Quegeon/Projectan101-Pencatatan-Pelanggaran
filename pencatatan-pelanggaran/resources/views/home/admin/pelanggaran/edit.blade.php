@@ -41,11 +41,12 @@
                                     <div class="form-group">
                                         <label for="">Aturan</label>
                                         <select name="id_aturan" onclick="anjay({{ $aturan }}, this)" class="form-control" id="">
-                                            <option value="{{ $pelanggaran->id_aturan }}">default | {{ $pelanggaran->Aturan->nama_aturan }}</option>
+                                            <option value="{{ $pelanggaran->id_aturan }}">default | {{ optional($pelanggaran->Aturan)->nama_aturan ?? "Kosong" }}</option>
                                             @foreach ($aturan as $s)
                                                 <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
                                             @endforeach
                                         </select>
+                                        
                                     </div>
                                 </div>
                             </div>
