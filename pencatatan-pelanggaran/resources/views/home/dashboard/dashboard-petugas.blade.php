@@ -285,23 +285,30 @@
                             <tr>
                                 <th>No</th>
                                 <th>Siswa</th>
-                                <th>Petugas/Bk</th>
                                 <th>Aturan</th>
+                                <th>Bk</th>
+                                <th>Petugas</th>
+                                <th>Tanggal</th>
                                 <th>Keterangan</th>
                                 <th>Status</th>
+                                <th>Poin</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pelanggaran_admin as $k)
                             <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{ optional($k->Siswa)->nama }}</td>
-                                <td>{{ optional($k->Bk)->nama }}</td>
-                                <td>{{ optional($k->Aturan)->nama_aturan }}</td>
-                                <td>{{$k->keterangan}}</td>
-                                <td>{{$k->status}}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ optional($k->Siswa)->nama ?? "Kosong" }}</td>
+                                <td>{{ optional($k->Aturan)->nama_aturan ?? "Kosong" }}</td>
+                                <td>{{ optional($k->Bk)->nama ?? "Kosong" }}</td>
+                                <td>{{ optional($k->User)->nama ?? "Kosong" }}</td>
+                                <td>{{ $k->tgl_pelanggaran }}</td>
+                                <td>{{ $k->keterangan }}</td>
+                                <td>{{ $k->status }}</td>
+                                <td>{{ optional($k)->total_poin ?? "Kosong" }}</td>
                             </tr>
                         @endforeach
+                        
                         
                         </tbody>
                     </table>
