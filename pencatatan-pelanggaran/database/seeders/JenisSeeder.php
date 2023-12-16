@@ -41,7 +41,7 @@ class JenisSeeder extends Seeder
         ],
         [
             'id' => Str::orderedUuid(),
-            'nama_jenis' => 'Pelanggaran terhadap Guru, Kepala Sekolah, Wakasek, Kepala Program dan Karyawa',
+            'nama_jenis' => 'Pelanggaran terhadap Guru, Kepala Sekolah, Wakasek, Kepala Program dan Karyawan',
             'keterangan' => 'Ketertiban mencakup perilaku siswa yang dapat mempengaruhi keamanan dan ketentraman di lingkungan sekolah.'
         ],
     );
