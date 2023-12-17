@@ -1,0 +1,121 @@
+header{
+    position: relative;
+    padding: 0.2rem;
+}
+.nav{
+    width: 100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav .links{
+    display: flex;
+    gap: 2rem;
+}
+.nav .toggle-btn{
+    color: black;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+.btn-login{
+    background-color: blue;
+    color: aliceblue;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline:none;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-login:hover{
+    scale: 1.05;
+    color: aliceblue;
+}
+.btn-login:active{
+    scale: 0.95;
+}
+.dropdown-menu{
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    width: 300px;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.open{
+    height:240px;
+}
+.dropdown-menu li{
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dropdown-menu .btn-login{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+/* responsive */
+@media(max-width:992px){
+    .nav .links,
+    .nav .btn-login{
+        display: none;
+    }
+    .nav .toggle-btn{
+        display: block;
+    }
+    .dropdown-menu{
+        display: block;
+    }
+}
+@media(max-width:576px){
+    .dropdown-menu{
+        left: 2rem;
+        width: unset;
+    }
+}
+/* background */
+ .trapezium {
+      height: 0;
+      width: 65%;
+      border-bottom: 500px solid green;
+      /* border-left: 100px solid transparent; */
+      border-right: 300px solid transparent;
+}
+/* slider */
+.image img{
+    width: 800px;
+    height: 500px;
+}
+@media(max-width:992px){
+    .trapezium{
+        height: 0;
+        width: 100%;
+        border-bottom: 800px solid green;
+        border-right: 0;
+        z-index: -1;
+    }
+    .image img{
+        padding: 50px;
+        margin-top:30px;
+    }
+}
+.fade {
+    animation-name: fade;
+    animation-duration: 2s;
+  }
+  @keyframes fade {
+    from {opacity: .5}
+    to {opacity: 1}
+  }
