@@ -12,35 +12,14 @@
                         <span>
                             {{ Auth()->User()->nama }}
                             <span class="user-level">{{ Auth()->User()->level }}</span>
-                            <span class="caret"></span>
                         </span>
                     </a>
                     <div class="clearfix"></div>
-
-                    <div class="collapse in" id="collapseExample">
-                        <ul class="nav">
-                            <li>
-                                <a href="#profile">
-                                    <span class="link-collapse">My Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#edit">
-                                    <span class="link-collapse">Edit Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#settings">
-                                    <span class="link-collapse">Settings</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <ul class="nav">
                 <li class="nav-item active">
-                    <a href="/dashboard">
+                    <a href="{{ route('dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -61,7 +40,7 @@
                     <div class="collapse" id="submenu">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="{{ route('user.index') }}">
+                                <a href="{{ route('petugas.index') }}">
                                     <span class="sub-item">Kelola Data Petugas</span>
                                 </a>
                             </li>

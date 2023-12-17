@@ -34,7 +34,7 @@
 			<div class="logo-header">
 				
 				<a href="index.html" class="logo">
-					<img src="../assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
+					<img src="{{ asset('../assets/img/logoazzara.svg') }}" alt="navbar brand" class="navbar-brand">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -160,13 +160,14 @@
 <script>
 	function confirmDel(url) {
 		Swal.fire({
-			title: "Yakin?",
-			text: "Bakalan Ngehapus Data!",
+			title: "Konfirmasi Hapus Data",
+			text: "Data Akan Dihapus",
 			icon: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#716aca",
 			cancelButtonColor: "#f3545d",
-			confirmButtonText: "Ya, Hapus!"
+			confirmButtonText: "Ya, Hapus!",
+			cancelButtonText: "Batal"
 		}).then((result) => {
 			if (result.isConfirmed) {
 				window.location = url;
@@ -184,7 +185,7 @@
 
 	@if(session('success'))
 		Swal.fire({
-			title: "Success!",
+			title: "Sukses!",
 			text: "{{ session('success') }}",
 			icon: "success"
 		});

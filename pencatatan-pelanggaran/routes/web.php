@@ -41,13 +41,13 @@ Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logou
 Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout.bk');
 
 Route::group(["husen ganteng"],function () {
-    Route::group(['middleware' => ['auth', 'level:Admin']], function() { // FOR ADMIN
-        Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
-            Route::get('/', 'index')->name('user.index');
-            Route::post('/store', 'store')->name('user.store');
-            Route::get('/{id}/edit', 'edit')->name('user.edit');
-            Route::post('/{id}/update', 'update')->name('user.update');
-            Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+    Route::group(['middleware' => ['auth', 'level:Admin']], function() {
+        Route::prefix('kelola_petugas')->controller(KelolaPetugas::class)->group(function() {
+            Route::get('/', 'index')->name('petugas.index');
+            Route::post('/store', 'store')->name('petugas.store');
+            Route::get('/{id}/edit', 'edit')->name('petugas.edit');
+            Route::post('/{id}/update', 'update')->name('petugas.update');
+            Route::get('/{id}/destroy', 'destroy')->name('petugas.destroy');
         });
         
         Route::prefix('kelola_bk')->controller(KelolaBk::class)->group(function() {
@@ -111,7 +111,7 @@ Route::group(["husen ganteng"],function () {
     });
 
     Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() {
-        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
+        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard');
         Route::get('/dashboard/detail-petugas/{id}', [DashboardPetugas::class, 'detail'])->name('dashboard.detail');
         Route::prefix('laporan')->controller(LaporanController::class)->group(function() {
             Route::get('/create', 'create')->name('laporan.create');
@@ -125,7 +125,7 @@ Route::group(["husen ganteng"],function () {
  
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::prefix('review')->controller(ReviewController::class)->group(function(){
+    Route::prefix('review')->controller(ReviewController::class)->group(function() {
         Route::get('/', 'index')->name('review.index');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');

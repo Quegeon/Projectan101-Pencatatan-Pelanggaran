@@ -27,18 +27,16 @@ class UserController extends Controller
         try {
             $validated['id'] = Str::orderedUuid();
     
-            if($request->hasFile('foto')){
-                $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
-                $request->file('foto')->move('fotopetugas/',$imgName);
-                $validated['foto'] = $imgName;
-            } else {
-                $validated['foto'] = 'kosong';
-            }
+            $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
+            $request->file('foto')->move('fotopetugas/',$imgName);
+            
+            $validated['foto'] = $imgName;
     
             User::create($validated);
+
             return redirect()
                 ->route('user.index')
-                ->with('success', 'Data Successfully Created!');
+                ->with('success', 'Data Berhasil Dibuat');
 
         } catch (\Throwable $th) {
             return redirect()
@@ -51,7 +49,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($user === null) {
+        if ($user === null) {
             return redirect()
                 ->route('user.index')
                 ->with('error', 'Invalid Target Data');
@@ -64,7 +62,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($user === null) {
+        if ($user === null) {
             return redirect()
                 ->route('user.index')
                 ->with('error', 'Invalid Target Data');
@@ -74,46 +72,59 @@ class UserController extends Controller
             'nama' => 'required', 
             'username' => 'required',
             'level' => 'required',
-            'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
+            'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
 
-        try {
-            if($request->hasFile('foto')){
+        if ($request->hasFile('foto')){
+            try {
                 $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
                 $request->file('foto')->move('fotopetugas/',$imgName);
+
                 $validated['foto'] = $imgName;
-            } else {
-                $validated['foto'] = 'kosong';
+
+                $user->update($validated);
+                
+                return redirect()
+                    ->route('user.index')
+                    ->with('success', 'Data Berhasil Diubah');
+
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('user.index')
+                    ->with('error', 'Error Update Data');
             }
-    
+
+        }
+        
+        try {
             $user->update($validated);
-    
+            
             return redirect()
                 ->route('user.index')
-                ->with('success', 'Data Successfully Updated!');
-            
+                ->with('success', 'Data Berhasil Diubah');
+                
         } catch (\Throwable $th) {
             return redirect()
                 ->route('user.index')
                 ->with('error', 'Error Update Data');
         }
-
     }
 
     public function destroy(string $id)
     {
         $user = User::find($id);
 
-        if($user === null) {
+        if ($user === null) {
             return redirect()
                 ->route('user.index')
                 ->with('error', 'Invalid Target Data');
         }
+
         try {
             $user->delete();
             return redirect()
                 ->route('user.index')
-                ->with('success', 'Data Successfully Deleted!');
+                ->with('success', 'Data Berhasil Dihapus');
             
         } catch (\Throwable $th) {
             return redirect()
