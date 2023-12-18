@@ -18,9 +18,25 @@
             </div>
         </div>
     </div>
+    <style>
+        .card-link:hover {
+        text-decoration: none;
+        }
+        .card-round:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+    
+        /* Pilihan tambahan: Efek bayangan saat hover */
+        .card-round:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
     <div class="row">
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
+            <a href="#" class="card-link"> 
                 <div class="card-body ">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -36,10 +52,12 @@
                         </div>
                     </div>
                 </div>
+            </a>
             </div>
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
+            <a href="#" class="card-link"> 
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -55,10 +73,12 @@
                         </div>
                     </div>
                 </div>
+            </a>
             </div>
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
+            <a href="#" class="card-link"> 
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -79,10 +99,12 @@
                         </div>
                     </div>
                 </div>
+            </a>
             </div>
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
+
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -98,6 +120,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
