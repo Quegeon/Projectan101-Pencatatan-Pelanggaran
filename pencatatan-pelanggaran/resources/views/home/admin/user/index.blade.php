@@ -85,7 +85,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Username</label>
-                            <input class="form-control" type="text" name="username" placeholder="MAsukkan Username">
+                            <input class="form-control" type="text" name="username" placeholder="Masukkan Username">
                             @error('username')
                                 <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror

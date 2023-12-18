@@ -25,13 +25,13 @@ class UserController extends Controller
         ]);
         
         try {
-            $validated['id'] = Str::orderedUuid();
-    
-            $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
-            $request->file('foto')->move('fotopetugas/',$imgName);
+            $imgName = Str::orderedUuid() . '.' . $request->foto->extension();
+            $request->file('foto')->move('fotopetugas/' ,$imgName);
             
+            $validated['id'] = Str::orderedUuid();
+            $validated['password'] = bcrypt($request->password);
             $validated['foto'] = $imgName;
-    
+            
             User::create($validated);
 
             return redirect()
@@ -77,8 +77,8 @@ class UserController extends Controller
 
         if ($request->hasFile('foto')){
             try {
-                $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
-                $request->file('foto')->move('fotopetugas/',$imgName);
+                $imgName = Str::orderedUuid() . '.' . $request->foto->extension(); // jadina nama si file teh ngacak
+                $request->file('foto')->move('fotopetugas/', $imgName);
 
                 $validated['foto'] = $imgName;
 
@@ -93,7 +93,6 @@ class UserController extends Controller
                     ->route('user.index')
                     ->with('error', 'Error Update Data');
             }
-
         }
         
         try {
@@ -122,6 +121,7 @@ class UserController extends Controller
 
         try {
             $user->delete();
+            
             return redirect()
                 ->route('user.index')
                 ->with('success', 'Data Berhasil Dihapus');
