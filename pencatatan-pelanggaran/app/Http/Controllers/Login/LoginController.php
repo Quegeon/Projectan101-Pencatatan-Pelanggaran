@@ -11,6 +11,7 @@ class LoginController extends Controller
 {  
     public function postlogin_user(Request $request)
     {
+        
         if(Auth::attempt($request->only('username','password'))){
             return redirect()->route('dashboard');
         }else{
@@ -20,6 +21,8 @@ class LoginController extends Controller
 
     public function postlogin_bk(Request $request)
     {
+       
+
         if(Auth::guard('bk')->Attempt($request->only('username','password'))){
             return redirect()->route('dashboard.bk');
         }else{
