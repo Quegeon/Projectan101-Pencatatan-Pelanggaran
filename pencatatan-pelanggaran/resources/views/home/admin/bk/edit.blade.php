@@ -42,7 +42,7 @@
                                 <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
                             </div>
                             <center>
-                                <img src="{{asset('fotopetugas/'.$bk->foto)}}" class="img-preview img-fluid "  height="200" width="200px">
+                                <img src="{{asset('fotobk/'.$bk->foto)}}" class="img-preview img-fluid "  height="200" width="200px">
                             </center>
                             <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             <a href="/admin/user" class="btn btn-light">Cancel</a>
