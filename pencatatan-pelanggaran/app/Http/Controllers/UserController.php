@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('home.admin.user.index', compact('user'));
+        return view('home.admin.user.index', compact('petugas'));
     }
 
     public function store(Request $request)
@@ -35,12 +35,12 @@ class UserController extends Controller
             User::create($validated);
 
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('success', 'Data Berhasil Dibuat');
 
         } catch (\Throwable $th) {
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('error', 'Error Store Data');
         }
     }
@@ -64,7 +64,7 @@ class UserController extends Controller
 
         if ($user === null) {
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('error', 'Invalid Target Data');
         }
 
@@ -85,12 +85,12 @@ class UserController extends Controller
                 $user->update($validated);
                 
                 return redirect()
-                    ->route('user.index')
+                    ->route('petugas.index')
                     ->with('success', 'Data Berhasil Diubah');
 
             } catch (\Throwable $th) {
                 return redirect()
-                    ->route('user.index')
+                    ->route('petugas.index')
                     ->with('error', 'Error Update Data');
             }
         }
@@ -99,12 +99,12 @@ class UserController extends Controller
             $user->update($validated);
             
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('success', 'Data Berhasil Diubah');
                 
         } catch (\Throwable $th) {
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('error', 'Error Update Data');
         }
     }
@@ -115,7 +115,7 @@ class UserController extends Controller
 
         if ($user === null) {
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('error', 'Invalid Target Data');
         }
 
@@ -123,12 +123,12 @@ class UserController extends Controller
             $user->delete();
             
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('success', 'Data Berhasil Dihapus');
             
         } catch (\Throwable $th) {
             return redirect()
-                ->route('user.index')
+                ->route('petugas.index')
                 ->with('error', 'Error Destroy Data');
         }
     }
