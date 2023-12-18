@@ -60,6 +60,30 @@
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
                 <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-icon">
+                            <div class="icon-big text-center icon-success bubble-shadow-small">
+                                <i class="far fa-chart-bar"></i>
+                            </div>
+                        </div>
+                        <div class="col col-stats ml-3 ml-sm-0">
+                            <div class="numbers">
+                                <p class="card-category">
+                                    Inbox
+                                    @if ($count_inbox !== null)
+                                        <span class="badge badge-count badge-danger ml-1">{{ $count_inbox }}</span>
+                                    @endif
+                                </p>
+                                <h4 class="card-title"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-round">
+                <div class="card-body">
                     <div class="row">
                 </div> align-items-center">
                         <div class="col-icon">
@@ -81,7 +105,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
                 <div class="card-body">
@@ -140,7 +164,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pelanggaran as $k)
+                                @foreach ($history as $k)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$k->Siswa->nama}}</td>
@@ -162,13 +186,13 @@
     </div>      
 </div>
 
-<!-- Modal Pelanggaran -->
-@foreach ($pelanggaran as $p)
+<!-- Modal history -->
+@foreach ($history as $p)
 <div class="modal fade" id="{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Preview Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -201,7 +225,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('review.proses', $p->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Proses</a>
                 <a href="{{ route('review.edit', $p->id) }}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
                 <a onclick="confirmDel(`{{ route('review.destroy', $p->id) }}`)" class="btn btn-secondary text-white"><i class="fa fa-trash"></i></a>
             </div>

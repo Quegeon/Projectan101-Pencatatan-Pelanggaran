@@ -10,7 +10,7 @@
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
                             {{ Auth()->User()->nama }}
-                            <span class="user-level">{{ Auth()->User()->level }}</span>
+                            <span class="user-level">Guru BK</span>
                         </span>
                     </a>
                     <div class="clearfix"></div>

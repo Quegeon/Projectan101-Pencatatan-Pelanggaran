@@ -125,7 +125,7 @@ Route::group(["husen ganteng"],function () {
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::group(['controller' => ReviewController::class, 'prefix' => 'pelanggaran'], function() {
+    Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
         Route::get('/inbox', 'inbox')->name('review.inbox');
         Route::get('/create', 'create')->name('review.create');

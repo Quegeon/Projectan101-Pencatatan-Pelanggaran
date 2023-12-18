@@ -79,8 +79,7 @@ class PelanggaranController extends Controller
 
             Pelanggaran::create($validated);
 
-            return redirect()
-                ->route('dashboard.bk')
+            return redirect(url()->previous())
                 ->with('success','Data Berhasil Dibuat');
 
         // } catch (\Throwable $th) {
@@ -171,21 +170,18 @@ class PelanggaranController extends Controller
         $pelanggaran = Pelanggaran::find($id);
 
         if ($pelanggaran === null) {
-            return redirect()
-                ->route('dashboard.bk')
+            return redirect(url()->previous())
                 ->with('error','Invalid Target Data');
 
         } else {
             try {
                 $pelanggaran->delete();
 
-                return redirect()
-                    ->route('dashboard.bk')
+                return redirect(url()->previous())
                     ->with('success','Data Berhasil Dihapus');
 
             } catch (\Throwable $th) {
-                return redirect()
-                    ->route('dashboard.bk')
+                return redirect(url()->previous())
                     ->with('error','Error Destroy Data');
             }
         }

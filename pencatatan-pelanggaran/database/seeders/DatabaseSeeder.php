@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'Admin',
             'password' => bcrypt('123'),
             'level' => 'Admin',
-            'foto' => 'default.jpg',
+            'foto' => 'default.png',
         ]);
 
         \App\Models\Bk::create([
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Bk Cenah',
             'username' => 'bk',
             'password' => bcrypt('321'),
-            'foto' => 'default.jpg',
+            'foto' => 'default.png',
         ]);
 
         $this->call([
