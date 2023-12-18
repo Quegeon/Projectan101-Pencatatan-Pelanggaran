@@ -23,14 +23,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
 <!-- Include Tailwind CSS styles -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"/>
 <link rel="stylesheet" href="{{asset('../../assets/vendor/aos/dist/aos.css')}}">
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 <link rel="stylesheet" href="{{asset('style.css')}}">
 <title>Aplikasi Pelanggaran</title>
 @vite('resources/css/app.css')
@@ -38,27 +37,30 @@
 
 <body class="bg-blue-400 ">
 	<div class="background flex">
-		<div class="image-slideshow absolute inset-y-0 right-0">
+		<div class="image-slideshow absolute  inset-y-0 right-0">
 		  	
 			<div class="image fade">
-				<img src="https://iili.io/HWdl3Al.md.jpg" alt="Mountain Top">
+				<img src="/foto/1.jpg" alt="Mountain Top">
 				</div>
 				  
 				<div class="image fade">
-				<img src="https://iili.io/HWdlRDB.md.jpg" alt="Palm Trees">
+				<img src="/foto/2.jpg" alt="Palm Trees">
 				</div>
 				  
 				<div class="image fade">
-				<img src="https://iili.io/HWdlWDN.md.jpg" alt="Neon Sign">
+				<img src="/foto/3.jpg" alt="Neon Sign">
 				</div>
 			  </div>
+		</div>
+		<div class="photo">
+			<img src="/foto/laptop.png" alt="" class="">
 		</div>
 		<div class="trapezium absolute"></div>
 	</div>
 	<header>
 		<div class="nav">
 			<span>
-				<img src="/foto/mata.png" class="w-24 h-14" alt="">
+				<img src="/foto/mataw.png" class="w-30 h-28" alt="">
 			</span>
 			<ul class="links">
 				<li><a class="hover:text-blu" href="">home</a></li>
@@ -79,21 +81,31 @@
 			<li><a href="">support</a></li>
 			<li><a href="" class="btn-login">Login</a></li>
 		</div>
+		<div class="hero">
+			<div class="hero-body">
+				<h1>APLIKASI PELANGGARAN SISWA</h1>
+				<p>aplikasi ini dibuat untuk memudahkan petugas atau guru piket mencatat siswa yang melanggar</p>
+				<div class="btn-hero">
+					<a href=""><i class="fas fa-solid fa-circle-play"></i> Lihat Video </a>
+				</div>
+			</div>
+		</div>
 	</header>
 	<script>
-		 const toggleBtn = document.querySelector('.toggle-btn');
-    const toggleBtnIcon = document.querySelector('.toggle-btn i');
-    const dropDownMenu = document.querySelector('.dropdown-menu');
-
-    toggleBtn.onclick = function () {
-        dropDownMenu.classList.toggle('open');
-        const isOpen = dropDownMenu.classList.contains('open');
-
-        toggleBtnIcon.className = isOpen
-            ? 'fas fa-times'
-            : 'fas fa-bars';
-    };
+		const toggleBtn = document.querySelector('.toggle-btn');
+		const toggleBtnIcon = document.querySelector('.toggle-btn i');
+		const dropDownMenu = document.querySelector('.dropdown-menu');
+	
+		toggleBtn.onclick = function () {
+			dropDownMenu.classList.toggle('open');
+			const isOpen = dropDownMenu.classList.contains('open');
+	
+			toggleBtnIcon.className = isOpen
+				? 'fas fa-times'
+				: 'fas fa-bars';
+		};
 	</script>
+	
 	<script>
 	let index = 0;
 displayImages();

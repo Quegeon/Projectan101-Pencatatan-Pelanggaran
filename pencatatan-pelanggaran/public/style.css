@@ -1,3 +1,6 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
 header{
     position: relative;
     padding: 0.2rem;
@@ -16,28 +19,30 @@ header{
     gap: 2rem;
 }
 .nav .toggle-btn{
-    color: black;
+    color: white;
     font-size: 1.5rem;
     cursor: pointer;
     display: none;
 }
 .btn-login{
-    background-color: blue;
+    background-color: #141E61; 
     color: aliceblue;
     padding: 0.5rem 1rem;
     border: none;
     outline:none;
-    border-radius: 20px;
+    border-radius: 5px;
     font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
 }
 .btn-login:hover{
-    scale: 1.05;
     color: aliceblue;
+    background-color: #0F044C;
+    transition: 1.5s ease-in-out;
 }
-.btn-login:active{
-    scale: 0.95;
+
+.links li{
+    color: #eeee;
 }
 .dropdown-menu{
     display: none;
@@ -88,10 +93,10 @@ header{
 /* background */
  .trapezium {
       height: 0;
-      width: 65%;
-      border-bottom: 500px solid green;
+      width: 70%;
+      border-top: 500px solid #0F044C;
       /* border-left: 100px solid transparent; */
-      border-right: 300px solid transparent;
+      border-right: 350px solid transparent;
 }
 /* slider */
 .image img{
@@ -102,13 +107,36 @@ header{
     .trapezium{
         height: 0;
         width: 100%;
-        border-bottom: 800px solid green;
+        border-bottom: 800px solid #0F044C;
         border-right: 0;
         z-index: -1;
     }
     .image img{
-        padding: 50px;
         margin-top:30px;
+        width: 380px; 
+        height: 220px;
+        justify-content: center;
+        margin-right: 143px;
+        margin-top: 110px;
+    }
+}
+.photo img{
+    display: none;
+}
+@media(max-width:576px){
+    .image img{
+        margin-left: 100px;
+        width: 250px;
+        height: 150px;
+        margin-top: 80px;
+    }
+}
+@media(max-width: 992px){
+    .photo img{
+        position: absolute;
+        display: block;
+        width: 1500px;
+        height: auto;
     }
 }
 .fade {
@@ -119,3 +147,30 @@ header{
     from {opacity: .5}
     to {opacity: 1}
   }
+.hero{
+    width: 50%;
+}
+.hero-body{
+    margin-left:15%;
+    margin-top: 30px;
+}
+.hero-body h1{
+    font-size: 48px;
+    color: #eeee;
+}
+.hero-body p{
+    font-size: 18px;
+    color: #eeee;
+}
+.btn-hero{
+    margin-top: 15px;
+}
+.btn-hero a{
+    border: 2px solid #eeee;
+    padding:5px 15px;
+    border-radius: 3px;
+    color: #eeee;
+}
+.btn-hero i{
+    color: #eeee;
+}
