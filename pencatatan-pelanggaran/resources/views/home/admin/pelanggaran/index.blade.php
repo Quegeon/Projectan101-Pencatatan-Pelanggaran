@@ -42,7 +42,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$k->Siswa->nama}}</td>
                                     <td>{{$k->User->nama}}</td>
-                                    <td>{{$k->Aturan->nama_aturan}}</td>
+                                    <td>{{ optional($k->Aturan)->nama_aturan }}</td>
                                     <td>{{$k->keterangan}}</td>
                                     <td>{{$k->status}}</td>
                                     <td align="center" colspan="3">

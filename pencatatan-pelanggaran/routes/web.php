@@ -15,6 +15,8 @@ use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
 
+use App\Http\Controllers\Profile\BkController as ProfileBk;
+
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
@@ -39,24 +41,24 @@ Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logou
 Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout');
 
 Route::group(["husen ganteng"],function () {
-    Route::group(['middleware' => ['auth', 'level:Admin']], function() { // FOR ADMIN
-        Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
-            Route::get('/', 'index')->name('user.index');
-            Route::post('/store', 'store')->name('user.store');
-            Route::get('/{id}/edit', 'edit')->name('user.edit');
-            Route::post('/{id}/update', 'update')->name('user.update');
-            Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+    Route::group(['middleware' => ['auth', 'level:Admin']], function() {
+        Route::prefix('kelola_petugas')->controller(KelolaPetugas::class)->group(function() {
+            Route::get('/', 'index')->name('petugas.index');
+            Route::post('/store', 'store')->name('petugas.store');
+            Route::get('/{id}/edit', 'edit')->name('petugas.edit');
+            Route::post('/{id}/update', 'update')->name('petugas.update');
+            Route::get('/{id}/destroy', 'destroy')->name('petugas.destroy');
         });
-   
-        Route::prefix('bk')->controller(KelolaBk::class)->group(function() {
+
+        Route::prefix('kelola_bk')->controller(KelolaBk::class)->group(function() {
             Route::get('/', 'index')->name('bk.index');
             Route::get('/create', 'create')->name('bk.create');
             Route::post('/store', 'store')->name('bk.store');
             Route::get('/{id}/edit', 'edit')->name('bk.edit');
             Route::post('/{id}/update', 'update')->name('bk.update');
             Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
-        });        
-      
+        });
+
         Route::prefix('kelas')->controller(KelolaKelas::class)->group(function() {
             Route::get('/', 'index')->name('kelas.index');
             Route::get('/create', 'create')->name('kelas.create');
@@ -109,7 +111,7 @@ Route::group(["husen ganteng"],function () {
     });
 
     Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() {
-        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
+        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard');
         Route::get('/dashboard/detail-petugas/{id}', [DashboardPetugas::class, 'detail'])->name('dashboard.detail');
         Route::prefix('laporan')->controller(LaporanController::class)->group(function() {
             Route::get('/create', 'create')->name('laporan.create');
@@ -131,5 +133,10 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::get('/{id}/edit', 'edit')->name('review.edit');
         Route::post('/{id}/update', 'update')->name('review.update');
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
+    });
+    Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
+        Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
+        Route::post('/update', 'update_profile')->name('profile.bk.update');
+        Route::post('/change_password', 'change_password')->name('profile.bk.change_password');
     });
 });
