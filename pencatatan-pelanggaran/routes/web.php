@@ -49,7 +49,7 @@ Route::group(["husen ganteng"],function () {
             Route::post('/{id}/update', 'update')->name('petugas.update');
             Route::get('/{id}/destroy', 'destroy')->name('petugas.destroy');
         });
-        
+
         Route::prefix('kelola_bk')->controller(KelolaBk::class)->group(function() {
             Route::get('/', 'index')->name('bk.index');
             Route::get('/create', 'create')->name('bk.create');
@@ -57,8 +57,8 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/edit', 'edit')->name('bk.edit');
             Route::post('/{id}/update', 'update')->name('bk.update');
             Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
-        });        
-      
+        });
+
         Route::prefix('kelas')->controller(KelolaKelas::class)->group(function() {
             Route::get('/', 'index')->name('kelas.index');
             Route::get('/create', 'create')->name('kelas.create');
@@ -122,7 +122,7 @@ Route::group(["husen ganteng"],function () {
         });
     });
 });
- 
+
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
     Route::prefix('review')->controller(ReviewController::class)->group(function() {
