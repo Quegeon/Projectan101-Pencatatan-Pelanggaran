@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('home.admin.user.index', compact('petugas'));
+        return view('home.admin.user.index', compact('user'));
     }
 
     public function store(Request $request)
@@ -26,7 +26,7 @@ class UserController extends Controller
         
         try {
             $imgName = Str::orderedUuid() . '.' . $request->foto->extension();
-            $request->file('foto')->move('fotopetugas/' ,$imgName);
+            $request->file('foto')->move('fotopetugas/', $imgName);
             
             $validated['id'] = Str::orderedUuid();
             $validated['password'] = bcrypt($request->password);
