@@ -19,8 +19,9 @@
 	</script>
 
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="{{ asset('../../assets/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('../../assets/css/azzara.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/css/azzara.css') }}">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN --}}
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -32,7 +33,7 @@
 		<!--
 			Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
 		-->
-		<div class="main-header" data-background-color="purple">
+		<div class="main-header" data-background-color="navy">
 			<!-- Logo Header -->
 			<div class="logo-header">
 
@@ -124,38 +125,7 @@
 				@yield('content')
 			</div>
 		</div>
-
-		<!-- Custom template | don't include it in your project! -->
-		<div class="custom-template">
-			<div class="title">Settings</div>
-			<div class="custom-content">
-				<div class="switcher">
-					<div class="switch-block">
-						<h4>Topbar</h4>
-						<div class="btnSwitch">
-							<button type="button" class="changeMainHeaderColor" data-color="blue"></button>
-							<button type="button" class="selected changeMainHeaderColor" data-color="purple"></button>
-							<button type="button" class="changeMainHeaderColor" data-color="light-blue"></button>
-							<button type="button" class="changeMainHeaderColor" data-color="green"></button>
-							<button type="button" class="changeMainHeaderColor" data-color="orange"></button>
-							<button type="button" class="changeMainHeaderColor" data-color="red"></button>
-						</div>
-					</div>
-					<div class="switch-block">
-						<h4>Background</h4>
-						<div class="btnSwitch">
-							<button type="button" class="changeBackgroundColor" data-color="bg2"></button>
-							<button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
-							<button type="button" class="changeBackgroundColor" data-color="bg3"></button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="custom-toggle">
-				<i class="flaticon-settings"></i>
-			</div>
-		</div>
-		<!-- End Custom template -->
+	
 	</div>
 </div>
 
@@ -177,6 +147,28 @@
 			}
 		});
 	}
+
+	// function confirmDel(url) {
+	// 	Swal.fire({
+	// 		title: "Yakin",
+	// 		text: "Sepertinya siswa baru 1x melakukan pelanggaran, apakah ingin memberikan peringatan saja?",
+	// 		icon: "warning",
+	// 		showCancelButton: true,
+	// 		confirmButtonColor: "#716aca",
+	// 		cancelButtonColor: "#f3545d",
+	// 		confirmButtonText: "Ya, Hapus!"
+	// 	}).then((result) => {
+	// 		if (result.isConfirmed) {
+	// 			window.location = url;
+	// 		} else if ( result.dismiss === Swal.DismissReason.cancel) {
+	// 			Swal.fire({
+	// 				title: "Cancelled",
+	// 				text: "Your imaginary file is safe :)",
+	// 				icon: "error"
+    // 			});
+	// 		}
+	// 	});
+	// }
 
 	@if(session('error'))
 		Swal.fire({

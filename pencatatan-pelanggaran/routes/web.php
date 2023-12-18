@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login\LoginController as LoginController;
 
+use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelanggaran;
+use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
+use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewPelanggaran;
+
 use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use App\Http\Controllers\Siswa\SiswaController as KelolaSiswa;
 use App\Http\Controllers\UserController as KelolaPetugas;
-use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelanggaran;
-use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
-use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewController;
 use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
