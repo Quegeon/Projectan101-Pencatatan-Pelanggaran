@@ -14,7 +14,7 @@ class HukumanSeeder extends Seeder
      */
     public function run(): void
     {
-        Hukuman::create(
+        $data = array(
             [
                 'id' => Str::orderedUuid(),
                 'hukuman' => 'Peringatan lisan, Baca alquran dan shalat dhuha'
@@ -90,7 +90,8 @@ class HukumanSeeder extends Seeder
             [
                 'id' => Str::orderedUuid(),
                 'hukuman' => 'Surat peringatan, Pemanggilan orang tua dikembalikan ke orang tua'
-            ],
+            ]
         );
+        Hukuman::insert($data);
     }
 }

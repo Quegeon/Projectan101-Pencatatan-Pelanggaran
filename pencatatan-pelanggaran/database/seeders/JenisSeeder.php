@@ -14,36 +14,39 @@ class JenisSeeder extends Seeder
      */
     public function run(): void
     {
-        Jenis::create([
-            'id' => Str::orderedUuid(),
-            'nama_jenis' => 'Keterlambatan',
-            'keterangan' => 'Keterlambatan siswa pada saat masuk sekolah',
-        ],
-        [
-            'id' => Str::orderedUuid(),
-            'nama_jenis' => 'Kepribadian',
-            'keterangan' => 'Kepribadian mencakup aspek perilaku dan sikap siswa yang mencerminkan karakter pribadi dan moralitas.'
-        ],
-        [
-            'id' => Str::orderedUuid(),
-            'nama_jenis' => 'Kerajinan',
-            'keterangan' => 'Kerajinan mencakup perilaku siswa yang dapat mempengaruhi keteraturan dan keberlangsungan kegiatan di sekolah.'
-        ],
-        [
-            'id' => Str::orderedUuid(),
-            'nama_jenis' => 'Kerapihan',
-            'keterangan' => 'Kerapihan mencakup aspek-aspek penampilan dan perilaku siswa yang mencerminkan norma-norma kesopanan dan tata krama di lingkungan sekolah.'
-        ],
-        [
-            'id' => Str::orderedUuid(),
-            'nama_jenis' => 'Ketertiban',
-            'keterangan' => 'Ketertiban mencakup perilaku siswa yang dapat mempengaruhi keamanan dan ketentraman di lingkungan sekolah.'
-        ],
-        [
-            'id' => Str::orderedUuid(),
-            'nama_jenis' => 'Pelanggaran terhadap Guru, Kepala Sekolah, Wakasek, Kepala Program dan Karyawan',
-            'keterangan' => 'Ketertiban mencakup perilaku siswa yang dapat mempengaruhi keamanan dan ketentraman di lingkungan sekolah.'
-        ],
-    );
+        Jenis::insert(
+            [
+                [
+                    'id' => Str::orderedUuid(),
+                    'nama_jenis' => 'Keterlambatan',
+                    'keterangan' => 'Keterlambatan siswa pada saat masuk sekolah',
+                ],
+                [
+                    'id' => Str::orderedUuid(),
+                    'nama_jenis' => 'Kepribadian',
+                    'keterangan' => 'Kepribadian mencakup aspek perilaku dan sikap siswa yang mencerminkan karakter pribadi dan moralitas.'
+                ],
+                [
+                    'id' => Str::orderedUuid(),
+                    'nama_jenis' => 'Kerajinan',
+                    'keterangan' => 'Kerajinan mencakup perilaku siswa yang dapat mempengaruhi keteraturan dan keberlangsungan kegiatan di sekolah.'
+                ],
+                [
+                    'id' => Str::orderedUuid(),
+                    'nama_jenis' => 'Kerapihan',
+                    'keterangan' => 'Kerapihan mencakup aspek-aspek penampilan dan perilaku siswa yang mencerminkan norma-norma kesopanan dan tata krama di lingkungan sekolah.'
+                ],
+                [
+                    'id' => Str::orderedUuid(),
+                    'nama_jenis' => 'Ketertiban',
+                    'keterangan' => 'Ketertiban mencakup perilaku siswa yang dapat mempengaruhi keamanan dan ketentraman di lingkungan sekolah.'
+                ],
+                [
+                    'id' => Str::orderedUuid(),
+                    'nama_jenis' => 'Pelanggaran terhadap Guru, Kepala Sekolah, Wakasek, Kepala Program dan Karyawan',
+                    'keterangan' => 'Ketertiban mencakup perilaku siswa yang dapat mempengaruhi keamanan dan ketentraman di lingkungan sekolah.'
+                ],
+            ]
+        );
     }
 }
