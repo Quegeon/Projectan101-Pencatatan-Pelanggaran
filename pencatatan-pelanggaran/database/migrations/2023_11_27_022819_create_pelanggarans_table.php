@@ -18,6 +18,7 @@ return new class extends Migration
                 ->nullable();
             $table->string('id_bk')
                 ->nullable();
+            $table->string('nis');
             $table->string('id_user');
             $table->date('tgl_pelanggaran');
             $table->string('keterangan');

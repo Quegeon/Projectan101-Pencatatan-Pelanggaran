@@ -1,5 +1,4 @@
 <div class="sidebar">
-			
     <div class="sidebar-background"></div>
     <div class="sidebar-wrapper scrollbar-inner">
         <div class="sidebar-content">
@@ -11,7 +10,7 @@
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
                             {{ Auth()->User()->nama }}
-                            <span class="user-level">{{ Auth()->User()->level }}</span>
+                            <span class="user-level">Guru BK</span>
                         </span>
                     </a>
                     <div class="clearfix"></div>
@@ -19,7 +18,7 @@
             </div>
             <ul class="nav">
                 <li class="nav-item active">
-                    <a href="/dashboard">
+                    <a href="{{ route('dashboard.bk') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -49,7 +48,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('review.inbox') }}">
                                     <span class="sub-item">Inbox</span>
                                 </a>
                             </li>
@@ -76,7 +75,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('logout.bk') }}"> 
+                                <a href="{{ route('logout') }}"> 
                                     <span class="sub-item">Logout</span>
                                 </a>
                             </li>

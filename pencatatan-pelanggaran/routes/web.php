@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login\LoginController as LoginController;
 
+use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelanggaran;
+use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
+use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewPelanggaran;
+
 use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use App\Http\Controllers\Siswa\SiswaController as KelolaSiswa;
 use App\Http\Controllers\UserController as KelolaPetugas;
-use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelanggaran;
-use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
-use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewController;
 use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
@@ -32,13 +33,12 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
 // Login
 
-
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
-Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
+Route::view('/login/bk', 'home.login.auth-bk')->name('login');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logout.user');
-Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout.bk');
+Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout');
 
 Route::group(["husen ganteng"],function () {
     Route::group(['middleware' => ['auth', 'level:Admin']], function() {
@@ -125,8 +125,9 @@ Route::group(["husen ganteng"],function () {
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::prefix('review')->controller(ReviewController::class)->group(function() {
+    Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
+        Route::get('/inbox', 'inbox')->name('review.inbox');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit');
