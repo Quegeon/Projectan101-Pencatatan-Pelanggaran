@@ -15,6 +15,7 @@ use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\ProfileController as ProfilePetugas;
 use App\Http\Controllers\Profile\BkController as ProfileBk;
 
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
@@ -128,6 +129,11 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/edit', 'edit')->name('laporan.edit');
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
+        });
+        Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
+            Route::view('/', 'home.admin.user.profile')->name('profile.user');
+            Route::post('/update', 'update')->name('profile.user.update');
+            Route::post('/change_password', 'change_password')->name('profile.user.change_password');
         });
     });
 });

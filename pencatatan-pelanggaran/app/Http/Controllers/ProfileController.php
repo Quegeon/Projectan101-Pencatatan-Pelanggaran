@@ -8,16 +8,9 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function index()
-{
-    $user = Auth()->user(); // Mendapatkan informasi user yang sedang login
-
-    return view('home.admin.user.profile', compact('user'));
-}
-
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $user = User::find($id);
+        $user = User::find(Auth::user()->id);
     
         if($user === null) {
             return redirect()
@@ -53,5 +46,24 @@ class ProfileController extends Controller
                 ->with('error', 'Error Update Data');
         }
     }
-    
+    public function change_password(Request $request)
+    {
+        $validated = $request->validate([
+            'password_baru' => 'required',
+            'konfirmasi_password' => 'required'
+        ]);
+
+        $bk = User::find( Auth::user()->id);
+
+        if ($request->pasword_baru === $request->konfirmasi_password) {
+            try {
+                
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        } else {
+          
+        }
+    }
+
 }

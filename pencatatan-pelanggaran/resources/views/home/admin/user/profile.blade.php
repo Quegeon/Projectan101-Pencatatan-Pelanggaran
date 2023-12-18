@@ -85,19 +85,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('aturan.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('profile.user.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name="username" class="form-control" placeholder="Masukkan Username" value="{{Auth::user()->username}}">
-                    </div>
                     <div class="form-group">
                         <label>Nama</label>
                         <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama" value="{{Auth::user()->nama}}">
+                        @error('nama')
+                            <p class="text-danger timeout">* {{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Masukkan Username" value="{{Auth::user()->username}}">
+                        @error('username')
+                            <p class="text-danger timeout">*{{ $message }}</p> 
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
                         <input type="file" name="nama" class="form-control" placeholder="Masukkan Nama" value="{{Auth::user()->nama}}">
+                        @if ($errors->first('foto'))
+                        @error('foto')
+                            <p class="text-danger timeout">* {{ $message }}</p>
+                        @enderror
+                        @else
+                            <p class="text-muted">* Optional</p>
+                        @endif
                     </div>
             </div>
             <div class="modal-footer">
@@ -119,15 +132,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('aturan.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('profile.user.change_password', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Password Baru</label>
                         <input type="text" name="password_baru" class="form-control" placeholder="Masukkan Password Baru">
+                        @error('password_baru')
+                            <p class="text-danger timeout">* {{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Konfirmasi Password</label>
                         <input type="text" name="konfirmasi_password" class="form-control" placeholder="Konfirmasi Password">
+                        @error('konfirmasi_password')
+                            <p class="text-danger timeout">* {{ $message }}</p>
+                        @enderror
                     </div>
             </div>
             <div class="modal-footer">

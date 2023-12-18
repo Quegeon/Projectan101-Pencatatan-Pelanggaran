@@ -15,21 +15,6 @@
                         </span>
                     </a>
                     <div class="clearfix"></div>
-
-                    <div class="collapse in" id="collapseExample">
-                        <ul class="nav">
-                            <li>
-                                <a href="{{ route('profile.index') }}">
-                                    <span class="link-collapse">My Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('password.user')}}">
-                                    <span class="link-collapse">Password</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <ul class="nav">
@@ -112,6 +97,11 @@
                     </a>
                     <div class="collapse" id="settings">
                         <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('profile.index') }}">
+                                    <span class="sub-item">Profile</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ route('logout.user') }}">
                                     <span class="sub-item">Logout</span>
