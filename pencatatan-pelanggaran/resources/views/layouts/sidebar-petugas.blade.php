@@ -12,7 +12,6 @@
                         <span>
                             {{ Auth()->User()->nama }}
                             <span class="user-level">{{ Auth()->User()->level }}</span>
-                            <span class="caret"></span>
                         </span>
                     </a>
                     <div class="clearfix"></div>
@@ -35,7 +34,7 @@
             </div>
             <ul class="nav">
                 <li class="nav-item active">
-                    <a href="/dashboard">
+                    <a href="{{ route('dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -56,7 +55,7 @@
                     <div class="collapse" id="submenu">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="{{ route('user.index') }}">
+                                <a href="{{ route('petugas.index') }}">
                                     <span class="sub-item">Kelola Data Petugas</span>
                                 </a>
                             </li>
