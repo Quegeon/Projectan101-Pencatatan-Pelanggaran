@@ -47,7 +47,7 @@
                                     @enderror
                                 </div>
                                 <center>
-                                    <img src="{{ asset('fotopetugas/'.$bk->foto) }}" class="img-preview img-fluid" height="200" width="200px">
+                                    <img src="{{ asset('fotobk/' . $bk->foto) }}" class="img-preview img-fluid" height="200" width="200px">
                                 </center>
                                 <a href="{{ route('bk.index') }}" class="btn btn-light">Kembali</a>
                                 <button type="submit" class="btn btn-primary mr-2">Simpan</button>
