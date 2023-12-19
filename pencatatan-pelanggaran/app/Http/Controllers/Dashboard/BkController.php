@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Pelanggaran;
 use App\Models\Aturan;
+use App\Models\Jenis;
+use App\Models\Hukuman;
 use App\Models\Siswa;
 use Carbon\Carbon;
 
@@ -30,5 +32,18 @@ class BkController extends Controller
         );
 
         return view('home.dashboard.dashboard-bk', $data);
+    }
+    public function view_siswa()
+    {
+        $siswa = Siswa::all();
+        return view('home.bk.pelanggaran.siswa', compact('siswa'));
+    }
+
+    public function view_aturan()
+    {
+        $aturan = Aturan::all();
+        $jenis = Jenis::all();
+        $hukuman = Hukuman::all();
+        return view('home.bk.pelanggaran.aturan', compact('aturan','jenis','hukuman'));
     }
 }
