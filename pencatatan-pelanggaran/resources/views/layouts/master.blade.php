@@ -4,14 +4,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Pelanggaran | @yield('title')</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="{{asset('assets/img/icon.ico')}}" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Open+Sans:300,400,600,700"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['{{ asset("assets/css/fonts.css")}}']},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ["{{ asset('assets/css/fonts.css')}}"]},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -38,7 +38,7 @@
 			<div class="logo-header">
 
 				<a href="index.html" class="logo">
-					<img src="{{ asset('../assets/img/logoazzara.svg') }}" alt="navbar brand" class="navbar-brand">
+					<img src="{{ asset('assets/img/logoazzara.svg') }}" alt="navbar brand" class="navbar-brand">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
