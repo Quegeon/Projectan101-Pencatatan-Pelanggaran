@@ -11,19 +11,22 @@ class LoginController extends Controller
 {  
     public function postlogin_user(Request $request)
     {
+        
         if(Auth::attempt($request->only('username','password'))){
-            return redirect()->route('dashboard.petugas');
+            return redirect()->route('dashboard');
         }else{
-            return back()->with('error', 'Maaf Username dan Password yang Anda Masukan salah!');
+            return back()->with('error', 'Username atau Password Invalid');
         }
     }
 
     public function postlogin_bk(Request $request)
     {
+       
+
         if(Auth::guard('bk')->Attempt($request->only('username','password'))){
             return redirect()->route('dashboard.bk');
         }else{
-            return back()->with('error', 'Maaf Username dan Password yang Anda Masukan salah!');
+            return back()->with('error', 'Username atau Password Invalid');
         }
     }
     
@@ -34,6 +37,6 @@ class LoginController extends Controller
   
     public function logout_bk() {
         Auth::logout();
-        return redirect()->route('login.bk');
+        return redirect()->route('login');
     }
 }

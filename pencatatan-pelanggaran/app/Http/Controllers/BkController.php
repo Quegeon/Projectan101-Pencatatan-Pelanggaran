@@ -24,21 +24,18 @@ class BkController extends Controller
         ]);
       
         try {
+            $imgName = Str::orderedUuid() . '.' . $request->foto->extension();
+            $request->file('foto')->move('fotobk/', $imgName);
+            
             $validated['id'] = Str::orderedUuid();
             $validated['password'] = bcrypt($validated['password']);
-          
-            if($request->hasFile('foto')){
-                $imgName = Str::orderedUuid().'.'.$request->foto->extension();
-                $request->file('foto')->move('fotobk/',$imgName);
-                $validated['foto'] = $imgName;
-            } else {
-                $validated['foto'] = 'kosong';
-            }
+            $validated['foto'] = $imgName;
             
             Bk::create($validated);
+
             return redirect()
                 ->route('bk.index')
-                ->with('success', 'Data Successfully Created!');
+                ->with('success', 'Data Berhasil Dibuat');
           
         } catch (\Throwable $th) {
             return redirect()
@@ -51,7 +48,7 @@ class BkController extends Controller
     {
         $bk = Bk::find($id);
 
-        if($bk === null) {
+        if ($bk === null) {
             return redirect()
                 ->route('bk.index')
                 ->with('error', 'Invalid Target Data');
@@ -64,7 +61,7 @@ class BkController extends Controller
     {
         $bk = Bk::find($id);
 
-        if($bk === null) {
+        if ($bk === null) {
             return redirect()
                 ->route('bk.index')
                 ->with('error', 'Invalid Target Data');
@@ -76,43 +73,54 @@ class BkController extends Controller
             'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
 
-        try {
-            if($request->hasFile('foto')){
-                $imgName = Str::orderedUuid().'.'.$request->foto->extension(); // jadina nama si file teh ngacak
-                $request->file('foto')->move('fotobk/',$imgName);
+        if ($request->hasFile('foto')){
+            try {
+                $imgName = Str::orderedUuid() . '.' . $request->foto->extension(); // jadina nama si file teh ngacak
+                $request->file('foto')->move('fotobk/', $imgName);
+                
                 $validated['foto'] = $imgName;
-            } else {
-                $validated['foto'] = $bk->foto;
+
+                return redirect()
+                    ->route('bk.index')
+                    ->with('success', 'Data Berhasil Diubah');
+
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('bk.index')
+                    ->with('error', 'Error Update Data');
             }
-    
+        }
+
+        try {
             $bk->update($validated);
     
             return redirect()
                 ->route('bk.index')
-                ->with('success', 'Data Successfully Updated!');
+                ->with('success', 'Data Berhasil Diubah');
             
         } catch (\Throwable $th) {
             return redirect()
                 ->route('bk.index')
                 ->with('error', 'Error Update Data');
         }
-
     }
 
     public function destroy(string $id)
     {
         $bk = Bk::find($id);
 
-        if($bk === null) {
+        if ($bk === null) {
             return redirect()
                 ->route('bk.index')
                 ->with('error', 'Invalid Target Data');
         }
+
         try {
             $bk->delete();
+
             return redirect()
                 ->route('bk.index')
-                ->with('success', 'Data Successfully Deleted!');
+                ->with('success', 'Data Berhasil Dihapus');
             
         } catch (\Throwable $th) {
             return redirect()
@@ -120,5 +128,4 @@ class BkController extends Controller
                 ->with('error', 'Error Destroy Data');
         }
     }
-    
 }

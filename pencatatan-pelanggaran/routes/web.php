@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login\LoginController as LoginController;
 
+use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelanggaran;
+use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
+use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewPelanggaran;
+
 use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use App\Http\Controllers\Siswa\SiswaController as KelolaSiswa;
 use App\Http\Controllers\UserController as KelolaPetugas;
-use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelanggaran;
-use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
-use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewController;
 use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
@@ -32,24 +33,23 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
 // Login
 
-
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
-Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
+Route::view('/login/bk', 'home.login.auth-bk')->name('login');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logout.user');
-Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout.bk');
+Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout');
 
 Route::group(["husen ganteng"],function () {
-    Route::group(['middleware' => ['auth', 'level:Admin']], function() { // FOR ADMIN
-        Route::prefix('user')->controller(KelolaPetugas::class)->group(function() {
-            Route::get('/', 'index')->name('user.index');
-            Route::post('/store', 'store')->name('user.store');
-            Route::get('/{id}/edit', 'edit')->name('user.edit');
-            Route::post('/{id}/update', 'update')->name('user.update');
-            Route::get('/{id}/destroy', 'destroy')->name('user.destroy');
+    Route::group(['middleware' => ['auth', 'level:Admin']], function() {
+        Route::prefix('kelola_petugas')->controller(KelolaPetugas::class)->group(function() {
+            Route::get('/', 'index')->name('petugas.index');
+            Route::post('/store', 'store')->name('petugas.store');
+            Route::get('/{id}/edit', 'edit')->name('petugas.edit');
+            Route::post('/{id}/update', 'update')->name('petugas.update');
+            Route::get('/{id}/destroy', 'destroy')->name('petugas.destroy');
         });
-        
+
         Route::prefix('kelola_bk')->controller(KelolaBk::class)->group(function() {
             Route::get('/', 'index')->name('bk.index');
             Route::get('/create', 'create')->name('bk.create');
@@ -57,8 +57,8 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/edit', 'edit')->name('bk.edit');
             Route::post('/{id}/update', 'update')->name('bk.update');
             Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
-        });        
-      
+        });
+
         Route::prefix('kelas')->controller(KelolaKelas::class)->group(function() {
             Route::get('/', 'index')->name('kelas.index');
             Route::get('/create', 'create')->name('kelas.create');
@@ -111,7 +111,7 @@ Route::group(["husen ganteng"],function () {
     });
 
     Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() {
-        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard.petugas');
+        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard');
         Route::get('/dashboard/detail-petugas/{id}', [DashboardPetugas::class, 'detail'])->name('dashboard.detail');
         Route::prefix('laporan')->controller(LaporanController::class)->group(function() {
             Route::get('/create', 'create')->name('laporan.create');
@@ -122,11 +122,12 @@ Route::group(["husen ganteng"],function () {
         });
     });
 });
- 
+
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
-    Route::prefix('review')->controller(ReviewController::class)->group(function(){
+    Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
+        Route::get('/inbox', 'inbox')->name('review.inbox');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit');

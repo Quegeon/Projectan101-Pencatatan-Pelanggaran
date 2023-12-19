@@ -77,7 +77,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Jenis</label>
-                        <select name="id_jenis" class="form-control">
+                        <select name="id_jenis" class="select-search">
                             @foreach ($jenis as $j)
                                 <option value="{{ $j->id }}">{{ $j->nama_jenis }}</option>
                             @endforeach
@@ -100,12 +100,11 @@
                     <div class="form-group">
                         {{-- TODO: jangan tampilkan id --}}
                         <label>Hukuman</label>
-                        <input list="hukuman" name="id_hukuman" class="form-control">
-                        <datalist id="hukuman">
+                        <select class="select-search" name="id_hukuman" id="hukuman">
                             @foreach ($hukuman as $h)
                                 <option value="{{ $h->id }}">{{ $h->hukuman }}</option>
                             @endforeach
-                        </datalist>
+                        </select>
                         @if ($errors->first('id_hukuman'))
                             <p class="text-danger">* {{ $errors->first('id_hukuman') }}</p>
                         @endif

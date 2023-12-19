@@ -21,13 +21,19 @@ class DatabaseSeeder extends Seeder
             'username' => 'Admin',
             'password' => bcrypt('123'),
             'level' => 'Admin',
-            'foto' => 'kosong',
+            'foto' => 'default.png',
+        ]);
+
+        \App\Models\Bk::create([
+            'id' => Str::orderedUuid(),
+            'nama' => 'Bk Cenah',
+            'username' => 'bk',
+            'password' => bcrypt('321'),
+            'foto' => 'default.png',
         ]);
 
         $this->call([
-            HukumanSeeder::class,
-            JenisSeeder::class,
-            AturanSeeder::class,
+            DummySeeder::class
         ]);
     }
 }

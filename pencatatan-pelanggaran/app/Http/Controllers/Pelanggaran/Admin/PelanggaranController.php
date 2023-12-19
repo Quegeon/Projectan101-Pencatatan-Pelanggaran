@@ -54,6 +54,7 @@ class PelanggaranController extends Controller
                 ->with('success', 'Data Successfully Created!');
 
         } catch(\Throwable $th) {
+            dd($th);
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Error Store Data');
