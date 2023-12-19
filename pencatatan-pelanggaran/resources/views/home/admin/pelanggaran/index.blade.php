@@ -87,7 +87,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Aturan</label>
-                                <select name="id_aturan" onclick="anjay({{ $aturan }}, this)" class="select-search" id="">
+                                <select name="id_aturan" onchange="anjay({{ $aturan }}, this)" class="select-search" id="">
                                     @foreach ($aturan as $s)
                                         <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
                                     @endforeach
@@ -122,7 +122,6 @@
                                     <option value="Beres">Sudah di proses</option>
                                 </select>
                             </div>
-
                         </div>
                     </div>
                     <div class="form-group">
