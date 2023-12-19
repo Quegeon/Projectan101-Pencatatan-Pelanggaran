@@ -38,14 +38,7 @@ class UserController extends Controller
       
         return view('home.dashboard.dashboard-petugas',compact('jumlah_kelas','jumlah_siswa','jumlah_aturan','pelanggaran_admin','pelanggaran_petugas','total_minggu')); 
     }
-
-    public function detail($id) {
-        $pelanggaran = Pelanggaran::find($id);
-        $user = User::all();
-        $bk = Bk::all();
-        $aturan = Aturan::all();
-        $siswa = Siswa::all();
-        return view('home.dashboard.detail-petugas',compact('pelanggaran','siswa','bk','user','aturan'));
-    }
+    
+    
 
 }

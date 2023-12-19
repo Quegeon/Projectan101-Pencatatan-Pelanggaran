@@ -57,10 +57,10 @@
 				<div class="form-action mb-3">
 					<button type="submit" class="btn btn-primary btn-rounded btn-login">Login</button>
 				</div>
-				<div class="login-account">
+				{{-- <div class="login-account">
 					<span class="msg">Login Sebagai BK </span>
 					<a href="{{ route('login.bk') }}" id="" class="link">Login BK</a>
-				</div>
+				</div> --}}
 				</form>
 			</div>
 		</div>

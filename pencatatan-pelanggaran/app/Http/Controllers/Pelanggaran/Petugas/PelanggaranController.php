@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Pelanggaran\Petugas;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aturan;
+use App\Models\Bk;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -128,4 +131,16 @@ class PelanggaranController extends Controller
             }
         }
     }
+
+    public function print()
+    {
+        $pelanggaran = Pelanggaran::all();
+        $user = User::all();
+        $bk = Bk::all();
+        $aturan = Aturan::all();
+        $siswa = Siswa::all();
+
+        return view('home.dashboard.print', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
+    }
+
 }

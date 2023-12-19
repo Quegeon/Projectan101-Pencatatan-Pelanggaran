@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('title', 'Dashboard')
+@section('title', 'Dashboard Petugas')
 @section('content')
 @if (Auth()->User()->level == "Petugas")
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Dashboard</h4>
+        <h4 class="page-title">Dashboard Petugas</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -51,7 +51,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Histori Pelanggaran Yang Terjadi 7 Hari</div>
+                        <div class="card-title">Histori Pelanggaran Selama 7 Hari</div>
                         <div class="card-tools">
                             <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
                                 <span class="btn-label">
@@ -153,10 +153,13 @@
 
 @endforeach
 
+@endsection
 @else
+@section('title', 'Dashboard Admin')
+@section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Dashboard</h4>
+        <h4 class="page-title">Dashboard Admin</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -285,7 +288,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Histori Pelanggaran Yang Terjadi 7 Hari</div>
+                        <div class="card-title">Histori Pelanggaran Selama 7 Hari</div>
                         <div class="card-tools">
                             <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
                                 <span class="btn-label">
@@ -293,7 +296,7 @@
                                 </span>
                                 Export
                             </a>
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                            <a href="{{ route('laporan.print') }}" target="_blank" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">
                                     <i class="fa fa-print"></i>
                                 </span>
@@ -345,8 +348,10 @@
         </div>
     </div>
 </div>
-@endif
 @endsection
+@endif
+
+
 
 
 

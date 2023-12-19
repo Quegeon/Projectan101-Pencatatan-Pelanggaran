@@ -111,16 +111,17 @@ Route::group(["husen ganteng"],function () {
     });
 
     Route::group(['middleware' => ['auth', 'level:Admin,Petugas']], function() {
-        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard');
-        Route::get('/dashboard/detail-petugas/{id}', [DashboardPetugas::class, 'detail'])->name('dashboard.detail');
+        Route::get('/dashboard', [DashboardPetugas::class, 'index'])->name('dashboard');      
         Route::prefix('laporan')->controller(LaporanController::class)->group(function() {
             Route::get('/create', 'create')->name('laporan.create');
             Route::post('/store', 'store')->name('laporan.store');
             Route::get('/{id}/edit', 'edit')->name('laporan.edit');
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
+            Route::get('/print', 'print')->name('laporan.print');
         });
     });
+    
 });
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
@@ -133,6 +134,8 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::get('/{id}/edit', 'edit')->name('review.edit');
         Route::post('/{id}/update', 'update')->name('review.update');
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
+        Route::get('/printbk', 'printbk')->name('printbk');
+        Route::get('/{id}/receipt', 'receipt')->name('receipt');
     });
     Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
