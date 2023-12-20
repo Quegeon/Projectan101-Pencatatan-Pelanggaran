@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bk;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -128,4 +129,6 @@ class BkController extends Controller
                 ->with('error', 'Error Destroy Data');
         }
     }
+
+   
 }

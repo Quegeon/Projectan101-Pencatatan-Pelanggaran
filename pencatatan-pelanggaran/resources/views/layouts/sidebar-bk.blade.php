@@ -38,12 +38,12 @@
                     <div class="collapse" id="submenu">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="#">
+                                <a href="{{ route('view_siswa') }}">
                                     <span class="sub-item">Data Siswa</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('view_aturan') }}">
                                     <span class="sub-item">Data Aturan</span>
                                 </a>
                             </li>

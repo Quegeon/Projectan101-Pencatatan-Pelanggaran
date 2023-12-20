@@ -36,7 +36,8 @@ class DatabaseSeeder extends Seeder
             HukumanSeeder::class,
             JenisSeeder::class,
             AturanSeeder::class,
-            // DummySeeder::class
+            KelasSeeder::class,
+            DummySeeder::class
         ]);
     }
 }
