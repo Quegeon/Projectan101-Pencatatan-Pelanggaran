@@ -73,7 +73,7 @@
                         <label>Hukuman</label>
                         <input class="form-control" type="text" name="hukuman" placeholder="Masukkan Hukuman">
                         @if ($errors->first('hukuman'))
-                            <p class="text-danger">* {{ $errors->first('hukuman') }}</p>
+                            <p class="text-danger timeout">* {{ $errors->first('hukuman') }}</p>
                         @endif
                     </div>
             </div>

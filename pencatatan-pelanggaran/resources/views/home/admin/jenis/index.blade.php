@@ -75,14 +75,14 @@
                         <label>Nama Jenis</label>
                         <input class="form-control" type="text" name="nama_jenis" placeholder="Masukkan Nama Jenis">
                         @if($errors->first('nama_jenis'))
-                            <p class="text-danger">* {{ $errors->first('nama_jenis') }}</p>
+                            <p class="text-danger timeout">* {{ $errors->first('nama_jenis') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
                         <label>Keterangan</label>
                         <input class="form-control" type="text" name="keterangan" placeholder="Masukkan Keterangan">
                         @if($errors->first('keterangan'))
-                            <p class="text-danger">* {{ $errors->first('keterangan') }}</p>
+                            <p class="text-danger timeout">* {{ $errors->first('keterangan') }}</p>
                         @endif
                     </div>
             </div>

@@ -197,7 +197,7 @@
                                     <td>{{$k->status}}</td>
                                     <td align="center" colspan="3">
                                         <a class="btn btn-primary text-white" data-target="#{{ $k->id }}" data-toggle="modal"><i class="fa fa-circle-info"></i> Detail</a>
-                                        <a href="{{ route('receipt', ['id' => $k->id]) }}"><i class="fa fa-print"></i></a>
+                                        <a class="btn btn-info" href="{{ route('receipt', ['id' => $k->id]) }}"><i class="fa fa-print"></i>TES</a>
                                     </td>
                                 </tr>
                                 @endforeach
