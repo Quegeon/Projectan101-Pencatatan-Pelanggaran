@@ -103,7 +103,7 @@
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="nama" class="form-control" placeholder="Masukkan Nama" value="{{Auth::user()->nama}}">
+                        <input type="file" name="foto" class="form-control" placeholder="Masukkan Nama" value="{{Auth::user()->nama}}">
                         @if ($errors->first('foto'))
                         @error('foto')
                             <p class="text-danger timeout">* {{ $message }}</p>

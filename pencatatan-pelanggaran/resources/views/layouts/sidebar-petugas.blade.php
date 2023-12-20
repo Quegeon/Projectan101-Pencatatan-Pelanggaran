@@ -98,7 +98,7 @@
                     <div class="collapse" id="settings">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="{{ route('profile.index') }}">
+                                <a href="{{ route('profile.user') }}">
                                     <span class="sub-item">Profile</span>
                                 </a>
                             </li>
