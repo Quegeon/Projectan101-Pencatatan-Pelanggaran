@@ -49,8 +49,10 @@
                                 <center>
                                     <img src="{{ asset('fotobk/' . $bk->foto) }}" class="img-preview img-fluid" height="200" width="200px">
                                 </center>
-                                <a href="{{ route('bk.index') }}" class="btn btn-light">Kembali</a>
-                                <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                                <div class="modal-footer">
+                                    <a href="{{ route('bk.index') }}" class="btn btn-secondary">Kembali</a>
+                                    <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                                </div>
                             </form>
                         </div>
                     </div>

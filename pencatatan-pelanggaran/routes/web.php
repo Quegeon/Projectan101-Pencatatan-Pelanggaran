@@ -68,7 +68,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('kelas.destroy');
         });
 
-        Route::prefix('siswa')->controller(KelolaSiswa::class)->group(function() {
+        Route::prefix('kelola_siswa')->controller(KelolaSiswa::class)->group(function() {
             Route::get('/', 'index')->name('siswa.index');
             Route::get('/create', 'create')->name('siswa.create');
             Route::post('/store', 'store')->name('siswa.store');

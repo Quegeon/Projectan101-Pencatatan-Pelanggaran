@@ -17,11 +17,30 @@ class BkController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required', 
-            'username' => 'required',
+            'nama' => 'required|string|max:100', 
+            'username' => 'required|string|unique:bks,username',
             'password' => 'required',
-            'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
+            'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
+
+        if ($request->foto === null) {
+            try {
+                $validated['id'] = Str::orderedUuid();
+                $validated['password'] = bcrypt($validated['password']);
+                $validated['foto'] = 'default.png';
+                
+                Bk::create($validated);
+    
+                return redirect()
+                    ->route('bk.index')
+                    ->with('success', 'Data Berhasil Dibuat');
+    
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('bk.index')
+                    ->with('error', 'Error Store Data');
+            }
+        }
       
         try {
             $imgName = Str::orderedUuid() . '.' . $request->foto->extension();
