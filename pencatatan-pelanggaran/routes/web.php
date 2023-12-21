@@ -59,7 +59,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
         });
 
-        Route::prefix('kelas')->controller(KelolaKelas::class)->group(function() {
+        Route::prefix('kelola_kelas')->controller(KelolaKelas::class)->group(function() {
             Route::get('/', 'index')->name('kelas.index');
             Route::get('/create', 'create')->name('kelas.create');
             Route::post('/store', 'store')->name('kelas.store');

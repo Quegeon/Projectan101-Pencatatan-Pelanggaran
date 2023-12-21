@@ -19,7 +19,7 @@ class BkController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:100', 
             'username' => 'required|string|unique:bks,username',
-            'password' => 'required',
+            'password' => 'required|string|max:20',
             'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
 

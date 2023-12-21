@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kelas;
-use App\Models\Siswa;
 use Illuminate\Http\Request;
 use illuminate\Support\str;
 
@@ -13,23 +12,25 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelas::all();
+
         return view('home.admin.kelas.index', compact('kelas'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_kelas' => 'required',
-            'jurusan' => 'required',
+            'nama_kelas' => 'required|string|max:15',
+            'jurusan' => 'required|string|max:50',
         ]);
         
         try {
             $validated['id'] = Str::orderedUuid();
 
             Kelas::create($validated);
+
             return redirect()
                 ->route('kelas.index')
-                ->with('success', 'Data Successfully Created!');
+                ->with('success', 'Data Berhasil Dibuat');
 
         } catch (\Throwable $th) {
             return redirect()
@@ -62,8 +63,8 @@ class KelasController extends Controller
         }
 
         $validated = $request->validate([
-            'nama_kelas' => 'required',
-            'jurusan' => 'required',
+            'nama_kelas' => 'required|string|max:15',
+            'jurusan' => 'required|string|max:50',
         ]);
 
         try {
@@ -71,7 +72,7 @@ class KelasController extends Controller
     
             return redirect()
                 ->route('kelas.index')
-                ->with('success', 'Data Successfully Updated!');
+                ->with('success', 'Data Berhasil Diubah');
             
         } catch (\Throwable $th) {
             return redirect()
@@ -94,7 +95,7 @@ class KelasController extends Controller
             $kelas->delete();
             return redirect()
                 ->route('kelas.index')
-                ->with('success', 'Data Successfully Deleted!');
+                ->with('success', 'Data Berhasil Dihapus');
             
         } catch (\Throwable $th) {
             return redirect()
