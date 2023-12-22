@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bk;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,11 +18,30 @@ class BkController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required', 
-            'username' => 'required',
-            'password' => 'required',
-            'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
+            'nama' => 'required|string|max:100', 
+            'username' => 'required|string|unique:bks,username',
+            'password' => 'required|string|max:20',
+            'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
+
+        if ($request->foto === null) {
+            try {
+                $validated['id'] = Str::orderedUuid();
+                $validated['password'] = bcrypt($validated['password']);
+                $validated['foto'] = 'default.png';
+                
+                Bk::create($validated);
+    
+                return redirect()
+                    ->route('bk.index')
+                    ->with('success', 'Data Berhasil Dibuat');
+    
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('bk.index')
+                    ->with('error', 'Error Store Data');
+            }
+        }
       
         try {
             $imgName = Str::orderedUuid() . '.' . $request->foto->extension();
@@ -128,4 +148,6 @@ class BkController extends Controller
                 ->with('error', 'Error Destroy Data');
         }
     }
+
+   
 }

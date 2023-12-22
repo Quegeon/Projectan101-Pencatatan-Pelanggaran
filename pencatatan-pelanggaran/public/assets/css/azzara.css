@@ -1061,6 +1061,11 @@ body {
   .main-header[data-background-color="red"] .navbar-header {
     background: #f3545d !important; }
 
+.main-header[data-background-color="navy"] {
+  background: #01405d !important; }
+  .main-header[data-background-color="navy"] .navbar-header {
+    background: #01405d !important; }
+
 .avatar {
   position: relative;
   display: inline-block; }
