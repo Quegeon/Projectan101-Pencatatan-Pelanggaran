@@ -14,7 +14,9 @@ use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
+use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\ProfileController as ProfilePetugas;
 use App\Http\Controllers\Profile\BkController as ProfileBk;
 
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
@@ -32,6 +34,15 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 // Login
+
+// Route::prefix('user')->controller(ProfileController::class)->group(function() {
+//     Route::get('/', 'index')->name('user.index');
+// });
+
+Route::get('/user/profile', [ProfileController::class, 'index'])->name('profile.index');
+// Route::view('/user/profile', 'home.admin.user.profile')->name('profile.user');
+Route::post('/user/update/{id}',[ProfileController::class,'update'])->name('update.user');
+Route::view('/user/password', 'home.admin.user.gantipassword')->name('password.user');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
@@ -119,6 +130,11 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/edit', 'edit')->name('laporan.edit');
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
+        });
+        Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
+            Route::view('/', 'home.admin.user.profile')->name('profile.user');
+            Route::post('/update', 'update')->name('profile.user.update');
+            Route::post('/change_password', 'change_password')->name('profile.user.change_password');
         });
     });
 });

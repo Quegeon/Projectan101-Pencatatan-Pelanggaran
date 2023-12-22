@@ -44,11 +44,11 @@
                                     <span class="sub-item">Kelola Data Petugas</span>
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('bk.index') }}">
                                     <span class="sub-item">Kelola Data Bk</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('siswa.index') }}">
                                     <span class="sub-item">Kelola Data Siswa</span>
@@ -98,8 +98,7 @@
                     <div class="collapse" id="settings">
                         <ul class="nav nav-collapse">
                             <li>
-                                {{-- TODO: add profile --}}
-                                <a href="#profile">
+                                <a href="{{ route('profile.user') }}">
                                     <span class="sub-item">Profile</span>
                                 </a>
                             </li>
