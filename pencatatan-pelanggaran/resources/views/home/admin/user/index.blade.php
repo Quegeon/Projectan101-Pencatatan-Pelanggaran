@@ -38,14 +38,14 @@
                                 <tbody>
                                     @foreach ($user as $u)
                                         <tr>
-                                            <td>{{$loop->iteration}}</td>
-                                            <td>
-                                                <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="{{ $u->foto }}" style="width:60px; height:80px;">
+                                            <td align="center">{{$loop->iteration}}</td>
+                                            <td align="center">
+                                                <img src="{{asset('fotopetugas/'.$u->foto)}}" alt="{{ $u->foto }}" style="width:80px; height:80px;">
                                             </td>
                                             <td>{{$u->nama}}</td>
                                             <td>{{$u->username}}</td>
                                             <td>{{$u->level}}</td>
-                                            <td>
+                                            <td align="center" colspan="3">
                                                 <a href="{{ route('petugas.edit', $u->id) }}" class="btn btn-link">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
@@ -77,36 +77,43 @@
                     <form action="{{ route('petugas.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="">Nama Petugas</label>
+                            <label>Nama Petugas</label>
                             <input class="form-control" type="text" name="nama" placeholder="Masukkan Nama Petugas">
                             @error('nama')
                                 <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Username</label>
+                            <label>Username</label>
                             <input class="form-control" type="text" name="username" placeholder="Masukkan Username">
                             @error('username')
                                 <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Password</label>
+                            <label>Password</label>
                             <input class="form-control" type="password" name="password" placeholder="Masukkan Password">
                             @error('password')
                                 <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Level</label>
+                            <label>Level</label>
                             <select name="level" class="form-control">
                                 <option value="Admin">Admin</option>
                                 <option value="Petugas">Petugas</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Masukan foto</label>
+                            <label>Foto</label>
                             <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
+                            @if ($errors->first('foto'))
+                                @error('foto')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
+                            @else
+                                <p class="text-mute">* Optional</p>
+                            @endif
                         </div>
                         <center>
                             <img class="img-preview img-fluid" style="display: none; justify:center" height="200" width="200px">
@@ -115,8 +122,8 @@
                 <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
                 </div>
+                    </form>
             </div>
         </div>
     </div>

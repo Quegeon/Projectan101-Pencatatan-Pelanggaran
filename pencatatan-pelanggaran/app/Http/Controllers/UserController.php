@@ -17,12 +17,31 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required', 
-            'username' => 'required',
-            'password' => 'required',
+            'nama' => 'required|string|max:100', 
+            'username' => 'required|string|unique:users,username',
+            'password' => 'required|string|max:20',
             'level' => 'required',
-            'foto' => 'required|image|mimes:png,jpg,svg,pdf,gif',
+            'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
+
+        if ($request->foto === null) {
+            try {
+                $validated['id'] = Str::orderedUuid();
+                $validated['password'] = bcrypt($request->password);
+                $validated['foto'] = 'default.png';
+
+                User::create($validated);
+
+                return redirect()
+                    ->route('petugas.index')
+                    ->with('success', 'Data Berhasil Dibuat');
+
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('petugas.index')
+                    ->with('error', 'Error Store Data');
+            }
+        }
         
         try {
             $imgName = Str::orderedUuid() . '.' . $request->foto->extension();

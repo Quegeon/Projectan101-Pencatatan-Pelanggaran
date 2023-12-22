@@ -21,12 +21,9 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.css') }}">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    {{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN --}}
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+	<script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('sweetalert2/css/sweetalert2.min.css') }}">
 </head>
 <body>
 	<div class="wrapper">
@@ -260,17 +257,19 @@
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>
 
-{{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN  --}}
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
+<script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
 
 <script>
     $(document).ready(function() {
         $('.select-search').select2({
             dropdownParent: $('.modal'),
             theme: 'bootstrap4',
+			width: 'auto'
         });
         $('.select-search-no-modal').select2({
             theme: 'bootstrap4',
+			width: 'auto'
         });
     })
 </script>
@@ -345,7 +344,7 @@
     // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function () {
         // Select all elements with the 'timeout' class
-        let timeoutErrors = document.querySelectorAll('.timeout');
+        const timeoutErrors = document.querySelectorAll('.timeout');
 
         // Check if the elements exist
         if (timeoutErrors) {
@@ -354,7 +353,7 @@
                 timeoutErrors.forEach(function (error) {
                     error.remove(); // Remove each element
                 });
-            }, 3000);
+            }, 5000);
         }
     });
 </script>
