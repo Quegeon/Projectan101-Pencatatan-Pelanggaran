@@ -77,35 +77,35 @@
                     <form action="{{ route('petugas.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="">Nama Petugas</label>
+                            <label>Nama Petugas</label>
                             <input class="form-control" type="text" name="nama" placeholder="Masukkan Nama Petugas">
                             @error('nama')
                                 <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Username</label>
+                            <label>Username</label>
                             <input class="form-control" type="text" name="username" placeholder="Masukkan Username">
                             @error('username')
                                 <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Password</label>
+                            <label>Password</label>
                             <input class="form-control" type="password" name="password" placeholder="Masukkan Password">
                             @error('password')
                                 <p class="text-danger timeout">* {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Level</label>
+                            <label>Level</label>
                             <select name="level" class="form-control">
                                 <option value="Admin">Admin</option>
                                 <option value="Petugas">Petugas</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Foto</label>
+                            <label>Foto</label>
                             <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
                             @if ($errors->first('foto'))
                                 @error('foto')

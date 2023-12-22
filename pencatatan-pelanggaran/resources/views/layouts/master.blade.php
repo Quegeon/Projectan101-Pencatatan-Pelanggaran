@@ -21,12 +21,9 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.css') }}">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    {{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN --}}
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-	<link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css') }}">
+	<script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('sweetalert2/css/sweetalert2.min.css') }}">
 </head>
 <body>
 	<div class="wrapper">
@@ -260,13 +257,15 @@
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>
 
-<script src="{{ asset('assets/select2/js/select2.full.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
+<script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
 
 <script>
     $(document).ready(function() {
         $('.select-search').select2({
             dropdownParent: $('.modal'),
             theme: 'bootstrap4',
+			width: 'auto'
         });
         $('.select-search-no-modal').select2({
             theme: 'bootstrap4',

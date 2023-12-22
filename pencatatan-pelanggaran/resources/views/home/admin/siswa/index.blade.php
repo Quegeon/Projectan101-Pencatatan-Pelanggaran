@@ -110,7 +110,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="kelas">Kelas</label>
+                                    <label>Kelas</label>
                                     <select name="id_kelas" class="select-search">
                                         @foreach ($kelas as $k)
                                             <option value="{{ $k->id }}">{{ $k->nama_kelas }} | {{ $k->jurusan }}</option>
@@ -121,7 +121,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="alamat">Alamat</label>
+                                    <label>Alamat</label>
                                     <textarea class="form-control" name="alamat" id="alamat" placeholder="Masukkan Alamat" rows="4"></textarea>
                                     @if ($errors->first('alamat'))
                                         @error('alamat')

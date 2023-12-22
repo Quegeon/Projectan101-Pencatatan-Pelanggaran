@@ -28,14 +28,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="nama">Nama</label>
+                                            <label>Nama</label>
                                             <input class="form-control" type="text" value="{{ $siswa->nama }}" name="nama" placeholder="{{ $siswa->nama }}">
                                             @error('nama')
                                                 <p class="text-danger timeout">* {{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="kelas">Kelas</label>
+                                            <label>Kelas</label>
                                             <select name="id_kelas" class="select-search-no-modal">
                                                 <option value="{{ $siswa->id_kelas }}">Default: {{ $siswa->Kelas->nama_kelas }} | {{ $siswa->Kelas->jurusan }}</option>
                                                 @foreach ($kelas as $k)
@@ -50,14 +50,14 @@
                             
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="no_telp">No Telp</label>
+                                            <label>No Telp</label>
                                             <input class="form-control" type="text" value="{{ $siswa->no_telp }}" name="no_telp" placeholder="{{ $siswa->no_telp }}">
                                             @error('no_telp')
                                                 <p class="text-danger timeout">* {{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="poin">Poin</label>
+                                            <label>Poin</label>
                                             <input readonly class="form-control" type="text" value="{{ $siswa->poin }}" name="poin">
                                             @error('poin')
                                                 <p class="text-danger timeout">* {{ $message }}</p>
@@ -67,7 +67,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="alamat">Alamat</label>
+                                            <label>Alamat</label>
                                             <textarea class="form-control" name="alamat" placeholder="{{ $siswa->alamat }}" rows="6" cols="100%">{{ $siswa->alamat }}</textarea>
                                             @error('alamat')
                                                 <p class="text-danger timeout">* {{ $message }}</p>
