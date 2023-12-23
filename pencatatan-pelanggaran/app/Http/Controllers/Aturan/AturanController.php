@@ -29,52 +29,49 @@ class AturanController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'id_jenis' => 'required',
             'id_hukuman' => 'required',
-            'nama_aturan' => 'required',
+            'nama_aturan' => 'required|string|max:100',
             'poin' => 'required|numeric|max:100'
         ]);
 
         try {
-            $id = Str::orderedUuid()->toString();
+            $validated['id'] = Str::orderedUuid();
 
-            Aturan::create([
-                'id' => $id,
-                'id_jenis' => $request->id_jenis,
-                'id_hukuman' => $request->id_hukuman,
-                'nama_aturan' => $request->nama_aturan,
-                'poin' => $request->poin,
-                $request->except(['_token'])
-            ]);
+            Aturan::create($validated);
     
             return redirect()
                 ->route('aturan.index')
                 ->with('success','Data Berhasil Dibuat');
             
         } catch (\Throwable $th) {
-            dd($th);
-            // return redirect()
-                // ->route('aturan.index')
-                // ->with('error','Error Store Data');
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Error Store Data');
         }
     }
 
     public function edit(string $id)
     {
         $aturan = Aturan::find($id);
+        
+        if ($aturan->first() === null){
+            return redirect()
+            ->route('aturan.index')
+                ->with('error','Invalid Target Data');            
+        }
+
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
-
-        if ($aturan->first() === null || $jenis->first() === null || $hukuman->first() === null){
+            
+        if ($jenis->first() === null || $hukuman->first() === null){
             return redirect()
                 ->route('aturan.index')
                 ->with('error','Reference Data Error');
-
-        } else {
-            return view('home.admin.aturan.edit', compact(['aturan','jenis','hukuman']));
         }
-
+        
+        return view('home.admin.aturan.edit', compact(['aturan','jenis','hukuman']));
     }
 
     public function update(Request $request, string $id)
@@ -84,31 +81,28 @@ class AturanController extends Controller
         if ($aturan === null){
             return redirect()
                 ->route('aturan.index')
-                ->with('error','Invalid Target Data');
-
-        } else {
-            $request->validate([
-                'id_jenis' => 'required',
-                'id_hukuman' => 'required',
-                'nama_aturan' => 'required',
-                'poin' => 'required|numeric|max:100'
-            ]);
-
-            try {
-                $aturan->update($request->except(['_token']));
-                
-                return redirect()
-                    ->route('aturan.index')
-                    ->with('success','Data Berhasil Diubah');
-
-            } catch (\Throwable $th) {
-                return redirect()
-                    ->route('aturan.index')
-                    ->with('error','Error Update Data');
-            }
+                ->with('error','Invalid Target Data');        
         }
 
+        $validated = $request->validate([
+            'id_jenis' => 'required',
+            'id_hukuman' => 'required',
+            'nama_aturan' => 'required|string|max:100',
+            'poin' => 'required|numeric|max:100'
+        ]);
 
+        try {
+            $aturan->update($validated);
+            
+            return redirect()
+                ->route('aturan.index')
+                ->with('success','Data Berhasil Diubah');
+
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Error Update Data');
+        }
     }
 
     public function destroy(string $id)
@@ -120,20 +114,19 @@ class AturanController extends Controller
                 ->route('aturan.index')
                 ->with('error','Invalid Target Data');
 
-        } else {
-            try {
-                $aturan->delete();
-        
-                return redirect()
-                    ->route('aturan.index')
-                    ->with('success','Data Berhasil Dihapus');
-                
-            } catch (\Throwable $th) {
-                return redirect()
-                    ->route('aturan.index')
-                    ->with('error','Error Destroy Data');        
-            }
         }
 
+        try {
+            $aturan->delete();
+    
+            return redirect()
+                ->route('aturan.index')
+                ->with('success','Data Berhasil Dihapus');
+                
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('aturan.index')
+                ->with('error','Error Destroy Data');        
+        }
     }
 }
