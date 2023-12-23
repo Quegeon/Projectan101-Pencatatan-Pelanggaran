@@ -19,7 +19,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_kelas' => 'required|string|max:15',
+            'nama_kelas' => 'required|string|unique:kelas,nama_kelas|max:15',
             'jurusan' => 'required|string|max:50',
         ]);
         
@@ -63,7 +63,7 @@ class KelasController extends Controller
         }
 
         $validated = $request->validate([
-            'nama_kelas' => 'required|string|max:15',
+            'nama_kelas' => 'required|string|unique:kelas,nama_kelas|max:15',
             'jurusan' => 'required|string|max:50',
         ]);
 

@@ -88,8 +88,8 @@ class BkController extends Controller
         }
 
         $validated = $request->validate([
-            'nama' => 'required', 
-            'username' => 'required',
+            'nama' => 'required|string|max:100', 
+            'username' => 'required|string|unique:bks,username',
             'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
 

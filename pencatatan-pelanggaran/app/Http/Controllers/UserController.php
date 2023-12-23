@@ -88,8 +88,8 @@ class UserController extends Controller
         }
 
         $validated = $request->validate([
-            'nama' => 'required', 
-            'username' => 'required',
+            'nama' => 'required|string|max:100', 
+            'username' => 'required|string|unique:users,username',
             'level' => 'required',
             'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
