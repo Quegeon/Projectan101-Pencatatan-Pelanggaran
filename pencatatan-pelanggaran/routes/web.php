@@ -104,7 +104,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('hukuman.destroy');
         });
 
-        Route::prefix('aturan')->controller(KelolaAturan::class)->group(function() {
+        Route::prefix('kelola_aturan')->controller(KelolaAturan::class)->group(function() {
             Route::get('/', 'index')->name('aturan.index');
             Route::post('/store', 'store')->name('aturan.store');
             Route::get('/{id}/edit', 'edit')->name('aturan.edit');
