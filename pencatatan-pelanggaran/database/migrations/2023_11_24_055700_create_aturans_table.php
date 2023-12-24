@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('id_jenis');
             $table->string('id_hukuman');
-            $table->string('nama_aturan',100);
+            $table->string('nama_aturan',150);
             $table->integer('poin');
             $table->timestamps();
         });
