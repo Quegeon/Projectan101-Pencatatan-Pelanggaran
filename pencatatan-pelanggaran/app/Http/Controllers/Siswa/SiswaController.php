@@ -14,17 +14,17 @@ class SiswaController extends Controller
         $siswa = Siswa::all();
         $kelas = Kelas::all();
 
-        return view("home.admin.siswa.index", compact("siswa", "kelas"));
+        return view("home.admin.siswa.index", compact(['siswa','kelas']));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            "nis" => "required|numeric|unique:siswas,nis",
+            "nis" => "required|numeric|unique:siswas,nis|digits_between:10,15",
             "id_kelas" => "required|exists:kelas,id",
-            "nama" => "required|string|max:255",
-            "no_telp" => "required|numeric|digits_between:9,15",
-            "alamat" => "required|string|max:500",
+            "nama" => "required|string|max:100",
+            "no_telp" => "required|numeric|digits_between:12,13",
+            "alamat" => "max:255",
         ]);
 
         try {
@@ -32,14 +32,20 @@ class SiswaController extends Controller
             
             if ($poin >= 0 && $poin <= 25) {
                 $status = "Baik";
+
             } elseif ($poin > 25 && $poin <= 50) {
                 $status = "Kurang Baik";
+
             } elseif ($poin > 50 && $poin <= 75) {
                 $status = "Buruk";
+
             } elseif ($poin > 75 && $poin <= 100) {
                 $status = "Sangat Buruk";
+
             } else {
-                $status = "Undefined Status";
+                return redirect()
+                    ->route('siswa.index')
+                    ->with('error','Invalid Poin');
             }
 
             $validated['poin'] = $poin;
@@ -49,7 +55,7 @@ class SiswaController extends Controller
 
             return redirect()
                 ->route('siswa.index')
-                ->with("success", "Data Successfully Created!");
+                ->with("success", "Data Berhasil Dibuat");
             
         } catch (\Throwable $th) {
             return redirect()
@@ -60,28 +66,34 @@ class SiswaController extends Controller
 
     public function edit(string $nis)
     {
-        $kelas = Kelas::all();
         $siswa = Siswa::find($nis);
+        $kelas = Kelas::all();
 
-        if($siswa === null) {
+        if ($siswa === null) {
             return redirect()
                 ->route('siswa.index')
                 ->with('error', 'Invalid Target Data');
         }
 
-        return view("home.admin.siswa.edit", compact("siswa", "kelas"));
+        return view("home.admin.siswa.edit", compact(['siswa','kelas']));
     }
 
     public function update(Request $request, string $nis)
     {
         $siswa = Siswa::find($nis);
 
+        if ($siswa === null) {
+            return redirect()
+                ->route('siswa.index')
+                ->with('error', 'Invalid Target Data');
+        }
+
         $validated = $request->validate([
             "id_kelas" => "required|exists:kelas,id",
-            "nama" => "required|string|max:255",
-            "no_telp" => "required|numeric|digits_between:9,15",
-            "alamat" => "required|string|max:500",
+            "nama" => "required|string|max:100",
+            "no_telp" => "required|numeric|digits_between:12,13",
             "poin" => "required|numeric|between:0,100",
+            "alamat" => "max:255",
         ]);
 
         try {
@@ -89,14 +101,20 @@ class SiswaController extends Controller
     
             if ($poin >= 0 && $poin <= 25) {
                 $status = "Baik";
+
             } elseif ($poin > 25 && $poin <= 50) {
                 $status = "Kurang Baik";
+
             } elseif ($poin > 50 && $poin <= 75) {
                 $status = "Buruk";
+
             } elseif ($poin > 75 && $poin <= 100) {
                 $status = "Sangat Buruk";
+
             } else {
-                $status = "Undefined Status";
+                return redirect()
+                    ->route('siswa.index')
+                    ->with('error','Invalid Poin');
             }
    
             $validated['status'] = $status;
@@ -105,13 +123,12 @@ class SiswaController extends Controller
 
             return redirect()
                 ->route('siswa.index')
-                ->with("success", "Data Successfully Updated!");   
+                ->with("success", "Data Berhasil Diubah");   
+
         } catch (\Throwable $th) {
-            if($siswa === null) {
-                return redirect()
-                    ->route('siswa.index')
-                    ->with('error', 'Invalid Target Data');
-            }
+            return redirect()
+                ->route('siswa.index')
+                ->with('error', 'Error Update Data');
         }
     }
 
@@ -119,7 +136,7 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::find($nis);
 
-        if($siswa === null) {
+        if ($siswa === null) {
             return redirect()
                 ->route('siswa.index')
                 ->with('error', 'Invalid Target Data');
@@ -129,7 +146,7 @@ class SiswaController extends Controller
             $siswa->delete();
             return redirect()
                 ->route('siswa.index')
-                ->with("success", "Data Successfully Deleted!");
+                ->with("success", "Data Berhasil Dihapus");
             
         } catch (\Throwable $th) {
             return redirect()

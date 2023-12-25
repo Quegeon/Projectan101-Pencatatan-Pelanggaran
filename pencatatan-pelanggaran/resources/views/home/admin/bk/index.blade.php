@@ -37,13 +37,13 @@
                                 <tbody>
                                     @foreach ($bk as $b)
                                         <tr>
-                                            <td>{{$loop->iteration}}</td>
-                                            <td>
-                                                <img src="{{asset('fotobk/'.$b->foto)}}" alt="{{ $b->foto }}" style="width:60px; height:80px;">
+                                            <td align="center">{{$loop->iteration}}</td>
+                                            <td align="center">
+                                                <img src="{{asset('fotobk/'.$b->foto)}}" alt="{{ $b->foto }}" style="width:80px; height:80px;">
                                             </td>
                                             <td>{{$b->nama}}</td>
                                             <td>{{$b->username}}</td>
-                                            <td>
+                                            <td align="center" colspan="3">
                                                 <a href="{{ route('bk.edit', $b->id) }}" class="btn btn-link">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
@@ -98,9 +98,13 @@
                         <div class="form-group">
                             <label>Foto</label>
                             <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
-                            @error('foto')
-                                <p class="text-danger timeout">* {{ $message }}</p>
-                            @enderror
+                            @if ($errors->first('foto'))
+                                @error('foto')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
+                            @else
+                                <p class="text-mute">* Optional</p>
+                            @endif
                         </div>
                         <center>
                             <img class="img-preview img-fluid " style="display: none; justify:center" height="200" width="200px">
@@ -109,8 +113,8 @@
                 <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
                 </div>
+                    </form>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Aturan</label>
-                            <select name="id_aturan" onclick="anjay({{ $aturan }}, this)" class="form-control" id="">
+                            <select name="id_aturan" onchange="anjay({{ $aturan }}, this)" class="form-control select-search-no-modal" id="">
                                 <option value="" hidden>-- Pilih Aturan --</option>
                                 @foreach ($aturan as $s)
                                     <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>

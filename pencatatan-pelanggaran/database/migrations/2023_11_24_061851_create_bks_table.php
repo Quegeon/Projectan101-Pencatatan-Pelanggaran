@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bks', function (Blueprint $table) {
-            $table->uuid('id',100)->primary();
-            $table->string('foto');
-            $table->string('nama');
-            $table->string('username');
+            $table->uuid('id')->primary();
+            $table->string('nama',100);
+            $table->string('username',20);
             $table->string('password');
+            $table->string('foto');
             $table->timestamps();
         });
     }

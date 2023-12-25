@@ -14,7 +14,9 @@ use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
+use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\ProfileController as ProfilePetugas;
 use App\Http\Controllers\Profile\BkController as ProfileBk;
 
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
@@ -33,8 +35,17 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
 // Login
 
+// Route::prefix('user')->controller(ProfileController::class)->group(function() {
+//     Route::get('/', 'index')->name('user.index');
+// });
+
+Route::get('/user/profile', [ProfileController::class, 'index'])->name('profile.index');
+// Route::view('/user/profile', 'home.admin.user.profile')->name('profile.user');
+Route::post('/user/update/{id}',[ProfileController::class,'update'])->name('update.user');
+Route::view('/user/password', 'home.admin.user.gantipassword')->name('password.user');
+
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
-Route::view('/login/bk', 'home.login.auth-bk')->name('login');
+Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logout.user');
@@ -59,7 +70,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('bk.destroy');
         });
 
-        Route::prefix('kelas')->controller(KelolaKelas::class)->group(function() {
+        Route::prefix('kelola_kelas')->controller(KelolaKelas::class)->group(function() {
             Route::get('/', 'index')->name('kelas.index');
             Route::get('/create', 'create')->name('kelas.create');
             Route::post('/store', 'store')->name('kelas.store');
@@ -68,7 +79,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('kelas.destroy');
         });
 
-        Route::prefix('siswa')->controller(KelolaSiswa::class)->group(function() {
+        Route::prefix('kelola_siswa')->controller(KelolaSiswa::class)->group(function() {
             Route::get('/', 'index')->name('siswa.index');
             Route::get('/create', 'create')->name('siswa.create');
             Route::post('/store', 'store')->name('siswa.store');
@@ -93,7 +104,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('hukuman.destroy');
         });
 
-        Route::prefix('aturan')->controller(KelolaAturan::class)->group(function() {
+        Route::prefix('kelola_aturan')->controller(KelolaAturan::class)->group(function() {
             Route::get('/', 'index')->name('aturan.index');
             Route::post('/store', 'store')->name('aturan.store');
             Route::get('/{id}/edit', 'edit')->name('aturan.edit');
@@ -120,12 +131,19 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
             Route::get('/print', 'print')->name('laporan.print');
         });
+        Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
+            Route::view('/', 'home.admin.user.profile')->name('profile.user');
+            Route::post('/update', 'update')->name('profile.user.update');
+            Route::post('/change_password', 'change_password')->name('profile.user.change_password');
+        });
     });
     
 });
 
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
+    Route::get('siswa', [DashboardBk::class, 'view_siswa'])->name('view_siswa');
+    Route::get('aturan', [DashboardBk::class, 'view_aturan'])->name('view_aturan');
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
         Route::get('/inbox', 'inbox')->name('review.inbox');

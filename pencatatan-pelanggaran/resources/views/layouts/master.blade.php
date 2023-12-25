@@ -11,7 +11,7 @@
 	<script>
 		WebFont.load({
 			google: {"families":["Open+Sans:300,400,600,700"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['assets/css/fonts.css']},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['../../assets/css/fonts.css']},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -19,8 +19,8 @@
 	</script>
 
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('assets/css/azzara.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/css/azzara.css') }}">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN --}}
@@ -260,14 +260,18 @@
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>
 
-{{-- TODO: DIDOWNLOAD TRUS SIMPEN DI LOCAL, JADI GAPAKE CDN  --}}
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
 
 <script>
     $(document).ready(function() {
         $('.select-search').select2({
             dropdownParent: $('.modal'),
             theme: 'bootstrap4',
+			width: 'auto'
+        });
+        $('.select-search-no-modal').select2({
+            theme: 'bootstrap4',
+			width: 'auto'
         });
     })
 </script>
@@ -320,12 +324,29 @@
 	});
 </script>
 
+<script>
+    function previewImage(){
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(image.files[0]);
+
+        fileReader.onload = function(oFREvent){
+            imgPreview.src = oFREvent.target.result;
+        }
+    
+    }
+</script>
+
 {{-- error time out --}}
 <script>
     // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function () {
         // Select all elements with the 'timeout' class
-        let timeoutErrors = document.querySelectorAll('.timeout');
+        const timeoutErrors = document.querySelectorAll('.timeout');
 
         // Check if the elements exist
         if (timeoutErrors) {
@@ -334,7 +355,7 @@
                 timeoutErrors.forEach(function (error) {
                     error.remove(); // Remove each element
                 });
-            }, 3000);
+            }, 5000);
         }
     });
 </script>
