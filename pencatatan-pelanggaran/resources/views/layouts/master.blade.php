@@ -22,8 +22,11 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.css') }}">
 
-	<script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
 	<link rel="stylesheet" href="{{ asset('sweetalert2/css/sweetalert2.min.css') }}">
+	<script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
+
+	{{-- TODO: Select2 Display Not Working --}}
+	<link href="{{ asset('select2/css/select2.min.css') }}" rel="stylesheet">
 </head>
 <body>
 	<div class="wrapper">
@@ -257,19 +260,32 @@
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>
 
-<link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
-<script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('select2/js/select2.min.js') }}"></script>
+
+<script>
+    function displayPoint(...arr) {
+        for(let a of arr[0]) {
+            if(a.id == arr[1].value) {
+                $('#poin').val(a.poin);
+            }
+        }
+    }
+</script>
 
 <script>
     $(document).ready(function() {
         $('.select-search').select2({
             dropdownParent: $('.modal'),
             theme: 'bootstrap4',
-			width: 'auto'
+			width: 'auto',
+			allowClear: true,
+			placeholder: 'Pilih Seleksi Data'
         });
         $('.select-search-no-modal').select2({
             theme: 'bootstrap4',
-			width: 'auto'
+			width: 'auto',
+			allowClear: true,
+			placeholder: 'Pilih Seleksi Data'
         });
     })
 </script>

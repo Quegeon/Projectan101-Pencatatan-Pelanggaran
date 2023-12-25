@@ -62,10 +62,20 @@ class KelasController extends Controller
                 ->with('error', 'Invalid Target Data');
         }
 
-        $validated = $request->validate([
-            'nama_kelas' => 'required|string|unique:kelas,nama_kelas|max:15',
-            'jurusan' => 'required|string|max:50',
-        ]);
+        // TODO: Refactor This
+
+        if ($request->nama_kelas === $kelas->nama_kelas) {
+            $validated = $request->validate([
+                'nama_kelas' => 'required|string|max:15',
+                'jurusan' => 'required|string|max:50',
+            ]);
+
+        } else {
+            $validated = $request->validate([
+                'nama_kelas' => 'required|string|unique:kelas,nama_kelas|max:15',
+                'jurusan' => 'required|string|max:50',
+            ]);
+        }
 
         try {
             $kelas->update($validated);

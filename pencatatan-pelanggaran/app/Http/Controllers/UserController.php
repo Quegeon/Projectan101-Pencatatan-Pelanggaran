@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:100', 
-            'username' => 'required|string|unique:users,username',
+            'username' => 'required|string|max:20|unique:users,username',
             'password' => 'required|string|max:20',
             'level' => 'required',
             'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
@@ -87,12 +87,25 @@ class UserController extends Controller
                 ->with('error', 'Invalid Target Data');
         }
 
-        $validated = $request->validate([
-            'nama' => 'required|string|max:100', 
-            'username' => 'required|string|unique:users,username',
-            'level' => 'required',
-            'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
-        ]);
+        // TODO: Refactor This
+
+        if ($request->username === $user->username) {
+            $validated = $request->validate([
+                'nama' => 'required|string|max:100',
+                'username' => 'required|string|max:20',
+                'level' => 'required',
+                'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
+            ]);
+
+        } else {
+            $validated = $request->validate([
+                'nama' => 'required|string|max:100', 
+                'username' => 'required|string|max:20|unique:users,username',
+                'level' => 'required',
+                'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
+            ]);
+        }
+
 
         if ($request->hasFile('foto')){
             try {

@@ -112,7 +112,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('aturan.destroy');
         });
 
-        Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
+        Route::prefix('kelola_pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
             Route::get('/', 'index')->name('pelanggaran.index');
             Route::post('/store', 'store')->name('pelanggaran.store');
             Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');

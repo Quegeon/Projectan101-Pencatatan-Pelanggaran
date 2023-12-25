@@ -19,7 +19,7 @@ class BkController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:100', 
-            'username' => 'required|string|unique:bks,username',
+            'username' => 'required|string|max:20|unique:bks,username',
             'password' => 'required|string|max:20',
             'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
         ]);
@@ -87,11 +87,22 @@ class BkController extends Controller
                 ->with('error', 'Invalid Target Data');
         }
 
-        $validated = $request->validate([
-            'nama' => 'required|string|max:100', 
-            'username' => 'required|string|unique:bks,username',
-            'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
-        ]);
+        // TODO: Refactor This
+
+        if ($request->username === $bk->username) {
+            $validated = $request->validate([
+                'nama' => 'required|string|max:100', 
+                'username' => 'required|string|max:20',
+                'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
+            ]);
+
+        } else {
+            $validated = $request->validate([
+                'nama' => 'required|string|max:100', 
+                'username' => 'required|string|max:20|unique:bks,username',
+                'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
+            ]);
+        }
 
         if ($request->hasFile('foto')){
             try {
