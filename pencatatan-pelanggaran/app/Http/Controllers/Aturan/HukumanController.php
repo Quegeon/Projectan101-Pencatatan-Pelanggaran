@@ -18,18 +18,14 @@ class HukumanController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'hukuman' => 'required'
+        $validated = $request->validate([
+            'hukuman' => 'required|string|max:100'
         ]);
         
         try {
-            $id = Str::orderedUuid()->toString();
+            $validated['id'] = Str::orderedUuid();
     
-            Hukuman::create([
-                'id' => $id,
-                'hukuman' => $request->hukuman,
-                $request->except(['_token'])
-            ]);
+            Hukuman::create($validated);
     
             return redirect()
                 ->route('hukuman.index')
@@ -65,25 +61,24 @@ class HukumanController extends Controller
                 ->route('hukuman.index')
                 ->with('error','Invalid Target Data');
                 
-        } else {
-            $request->validate([
-                'hukuman' => 'required'
-            ]);
-
-            try {
-                $hukuman->update($request->except(['_token']));
-
-                return redirect()
-                    ->route('hukuman.index')
-                    ->with('success','Data Berhasil Diubah');
-    
-            } catch (\Throwable $th) {
-                return redirect()
-                    ->route('hukuman.index')
-                    ->with('error','Error Update Data');
-            }
         }
-        
+
+        $validated = $request->validate([
+            'hukuman' => 'required|string|max:100'
+        ]);
+
+        try {
+            $hukuman->update($validated);
+
+            return redirect()
+                ->route('hukuman.index')
+                ->with('success','Data Berhasil Diubah');
+    
+         } catch (\Throwable $th) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('error','Error Update Data');
+        }
     }
 
     public function destroy(string $id)
@@ -95,19 +90,19 @@ class HukumanController extends Controller
                 ->route('hukuman.index')
                 ->with('error','Invalid Target Data');
                 
-        } else {
-            try {
-                $hukuman->delete();
+        }
         
-                return redirect()
-                    ->route('hukuman.index')
-                    ->with('success','Data Berhasil Dihapus');
+        try {
+            $hukuman->delete();
+    
+            return redirect()
+                ->route('hukuman.index')
+                ->with('success','Data Berhasil Dihapus');
             
-            } catch (\Throwable $th) {
-                return redirect()
-                    ->route('hukuman.index')
-                    ->with('error','Error Store Data');
-            }
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('error','Error Store Data');
         }
     }
 }

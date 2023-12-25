@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Pelanggaran | @yield('title')</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="{{ asset('assets/img/icon.ico') }}" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -21,9 +21,12 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.css') }}">
-
-	<script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
+  
+  <!-- SweetAlert2 -->
 	<link rel="stylesheet" href="{{ asset('sweetalert2/css/sweetalert2.min.css') }}">
+  <script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
+  
+  <!-- Select2 -->
 	<link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('select2/css/theme.min.css') }}">
 </head>
@@ -259,18 +262,33 @@
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>
 
+<!-- Select2 -->
 <script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
+
+<script>
+    function displayPoint(...arr) {
+        for(let a of arr[0]) {
+            if(a.id == arr[1].value) {
+                $('#poin').val(a.poin);
+            }
+        }
+    }
+</script>
 
 <script>
     $(document).ready(function() {
         $('.select-search').select2({
             dropdownParent: $('.modal'),
             theme: 'bootstrap4',
-			width: 'auto'
+			width: 'auto',
+			allowClear: true,
+			placeholder: 'Pilih Seleksi Data'
         });
         $('.select-search-no-modal').select2({
             theme: 'bootstrap4',
-			width: 'auto'
+			width: 'auto',
+			allowClear: true,
+			placeholder: 'Pilih Seleksi Data'
         });
     })
 </script>
