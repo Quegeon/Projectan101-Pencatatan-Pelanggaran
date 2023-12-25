@@ -21,12 +21,14 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.css') }}">
-
+  
+  <!-- SweetAlert2 -->
 	<link rel="stylesheet" href="{{ asset('sweetalert2/css/sweetalert2.min.css') }}">
-	<script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
-
-	{{-- TODO: Select2 Display Not Working --}}
-	<link href="{{ asset('select2/css/select2.min.css') }}" rel="stylesheet">
+  <script src="{{ asset('sweetalert2/js/sweetalert2.all.min.js') }}"></script>
+  
+  <!-- Select2 -->
+	<link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('select2/css/theme.min.css') }}">
 </head>
 <body>
 	<div class="wrapper">
@@ -260,7 +262,8 @@
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>
 
-<script src="{{ asset('select2/js/select2.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
 
 <script>
     function displayPoint(...arr) {
