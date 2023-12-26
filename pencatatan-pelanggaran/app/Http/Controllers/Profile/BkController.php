@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -14,11 +14,20 @@ class BkController extends Controller
 {
     public function update_profile(Request $request)
     {
-        $validated = $request->validate([
-            'nama' => 'required', 
-            'username' => 'required',
-            'foto' => 'image|mimes:png,jpg,svg,pdf,gif',
-        ]);
+        if ($request->username === Auth::user()->username) {
+            $validated = $request->validate([
+                'nama' => 'required|string|max:100', 
+                'username' => 'required|string|max:20',
+                'foto' => 'image|mimes:png,jpg,svg,gif',
+            ]);
+            
+        } else {
+            $validated = $request->validate([
+                'nama' => 'required|string|max:100', 
+                'username' => 'required|string|max:20|unique:bks,username',
+                'foto' => 'image|mimes:png,jpg,svg,gif',
+            ]);
+        }
 
         $bk = Bk::find(Auth::user()->id);
 
@@ -27,34 +36,32 @@ class BkController extends Controller
                 $img_name = Str::orderedUuid() . '.' . $request->foto->extension();
                 $request->file('foto')->move('fotobk', $img_name);    
     
-                Storage::delete(Auth::user()->foto);
+                if (Auth::user()->foto !== 'default.png') {
+                    File::delete(public_path('fotopetugas/' . Auth::user()->foto));
+                }
 
                 $validated['foto'] = $img_name;
+
                 $bk->update($validated);
 
-                return redirect()
-                    ->route('profile.bk')
+                return back()
                     ->with('success','Profil Berhasil Diubah');
     
             } catch (\Throwable $th) {
-                return redirect()
-                    ->route('profile.bk')
+                return back()
                     ->with('error','Error Update Profile');
             }
+        }
 
-        } else {
-            try {
-                $bk->update($validated);
+        try {
+            $bk->update($validated);
 
-                return redirect()
-                    ->route('profile.bk')
-                    ->with('success','Profil Berhasil Diubah');
+            return back()
+                ->with('success','Profil Berhasil Diubah');
 
-            } catch (\Throwable $th) {
-                return redirect()
-                    ->route('profile.bk')
-                    ->with('error','Error Update Profile');
-            }
+        } catch (\Throwable $th) {
+            return back()
+                ->with('error','Error Update Profile');
         }
 
         // if ($request->hasFile('foto')) {
@@ -113,30 +120,26 @@ class BkController extends Controller
     public function change_password(Request $request)
     {
         $request->validate([
-            'new_password' => 'required',
-            'confirm_password' => 'required'
+            'new_password' => 'required|string|max:20',
+            'confirm_password' => 'required|string|max:20'
         ]);
-
-        $bk = Bk::find(Auth::user()->id);
 
         if ($request->new_password === $request->confirm_password) {
             try {
+                $bk = Bk::find(Auth::user()->id);
+
                 $bk->update(['password' => bcrypt($request->new_password)]);
 
-                return redirect()
-                    ->route('profile.bk')
-                    ->with('success','Password Berhasil Diperbaharui');
+                return back()
+                    ->with('success','Password Berhasil Dirubah');
 
             } catch (\Throwable $th) {
-                return redirect()
-                    ->route('profile.bk')
+                return back()
                     ->with('error','Error Update Password');
             }
-
-        } else {
-            return redirect()
-                ->route('profile.bk')
-                ->with('error','Konfirmasi Password Tidak Sesuai');
         }
+        
+        return back()
+            ->with('error','Konfirmasi Password Tidak Sesuai');
     }
 }
