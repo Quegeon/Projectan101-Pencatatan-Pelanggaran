@@ -40,8 +40,8 @@
                                     @enderror
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="{{ route('kelas.index') }}" class="btn btn-secondary" data-dismiss="modal">Kembali</a>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>    
+                                    <a href="{{ route('kelas.index') }}" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>    
                                 </div>
                             </form>
                         </div>

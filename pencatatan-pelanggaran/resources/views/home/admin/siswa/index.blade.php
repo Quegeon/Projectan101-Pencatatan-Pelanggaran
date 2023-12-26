@@ -22,7 +22,7 @@
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
                     <div class="card-body">
-                        <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
+                        <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus mr-2"></i>Tambah Data</a>
                         <div class="table-responsive">
                             <table id="basic-datatables" class="display table table-striped table-hover" >
                                 <thead>
@@ -100,7 +100,9 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Nama</label>
@@ -109,9 +111,15 @@
                                         <p class="text-danger timeout">* {{ $message }}</p>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Kelas</label>
                                     <select name="id_kelas" class="select-search">
+                                        <option></option>
                                         @foreach ($kelas as $k)
                                             <option value="{{ $k->id }}">{{ $k->nama_kelas }} | {{ $k->jurusan }}</option>
                                         @endforeach
@@ -120,6 +128,11 @@
                                         <p class="text-danger timeout">* {{ $message }}</p>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Alamat</label>
                                     <textarea class="form-control" name="alamat" id="alamat" placeholder="Masukkan Alamat" rows="4"></textarea>
@@ -135,8 +148,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
                 </div>
                     </form>
             </div>

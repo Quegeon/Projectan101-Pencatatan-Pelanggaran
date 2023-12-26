@@ -39,7 +39,7 @@
                                         <p class="text-danger timeout">* {{ $message }}</p>
                                     @enderror
                                 </div>
-                                <<div class="form-group">
+                                <div class="form-group">
                                     <label>Foto</label>
                                     <input type="file" id="image" class="form-control" name="foto" onchange="imagePreview()">
                                     @error('foto')
@@ -50,8 +50,8 @@
                                     <img src="{{ asset('fotobk/' . $bk->foto) }}" class="img-preview img-fluid" height="200" width="200px">
                                 </center>
                                 <div class="modal-footer">
-                                    <a href="{{ route('bk.index') }}" class="btn btn-secondary">Kembali</a>
-                                    <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                                    <a href="{{ route('bk.index') }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
                                 </div>
                             </form>
                         </div>
