@@ -89,7 +89,6 @@ class HukumanController extends Controller
             return redirect()
                 ->route('hukuman.index')
                 ->with('error','Invalid Target Data');
-                
         }
         
         try {
