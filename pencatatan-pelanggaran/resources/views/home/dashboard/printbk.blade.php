@@ -41,10 +41,10 @@
                                         <td>{{ optional($p->bk)->nama ?? "Kosong" }}</td>
                                         <td>{{ optional($p->siswa)->nama ?? "Kosong" }}</td>
                                         <td>{{ optional($p->aturan)->nama_aturan ?? "Kosong" }}</td>
-                                        <td>{{ $p->tgl_pelanggaran}}</td> 
+                                        <td>{{ $p->tgl_pelanggaran }}</td>
                                         <td>{{ $p->keterangan }}</td>
                                         <td>{{ $p->status }}</td>
-                                        <td>{{ $p->total_poin}}</td>
+                                        <td>{{ optional($p)->total_poin ?? "Kosong" }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
