@@ -88,7 +88,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{nis}/destroy', 'destroy')->name('siswa.destroy');
         });
 
-        Route::prefix('jenis')->controller(KelolaJenis::class)->group(function() {
+        Route::prefix('kelola_jenis')->controller(KelolaJenis::class)->group(function() {
             Route::get('/', 'index')->name('jenis.index');
             Route::post('/store', 'store')->name('jenis.store');
             Route::get('/{id}/edit', 'edit')->name('jenis.edit');
@@ -96,7 +96,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('jenis.destroy');
         });
 
-        Route::prefix('hukuman')->controller(KelolaHukuman::class)->group(function() {
+        Route::prefix('kelola_hukuman')->controller(KelolaHukuman::class)->group(function() {
             Route::get('/', 'index')->name('hukuman.index');
             Route::post('/store', 'store')->name('hukuman.store');
             Route::get('/{id}/edit', 'edit')->name('hukuman.edit');
@@ -112,7 +112,7 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('aturan.destroy');
         });
 
-        Route::prefix('pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
+        Route::prefix('kelola_pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
             Route::get('/', 'index')->name('pelanggaran.index');
             Route::post('/store', 'store')->name('pelanggaran.store');
             Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');

@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title', 'Pelanggaran')
+@section('title', 'Kelola Data Pelanggaran')
 @section('content')
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Data Pelanggaran</h4>
+        <h4 class="page-title">Kelola Data Pelanggaran</h4>
         <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
-                    <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i> Tambah Data</a>
+                    <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus mr-2"></i> Tambah Data</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
@@ -38,18 +38,22 @@
                             </thead>
                             <tbody>
                                 @foreach ($pelanggaran as $k)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$k->Siswa->nama}}</td>
-                                    <td>{{$k->User->nama}}</td>
-                                    <td>{{ optional($k->Aturan)->nama_aturan }}</td>
-                                    <td>{{$k->keterangan}}</td>
-                                    <td>{{$k->status}}</td>
-                                    <td align="center" colspan="3">
-                                        <a href="{{ route('pelanggaran.edit', (string) $k->id) }}" class="fa fa-edit" style="margin-right: 20%;"></a>
-                                        <a href="{{ route('pelanggaran.destroy', (string) $k->id ) }}" class="fa fa-trash text-danger"></a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td align="center">{{$loop->iteration}}</td>
+                                        <td>{{$k->Siswa->nama}}</td>
+                                        <td>{{$k->User->nama}}</td>
+                                        <td>{{ optional($k->Aturan)->nama_aturan ?? 'Kosong' }}</td>
+                                        <td>{{$k->keterangan}}</td>
+                                        <td>{{$k->status}}</td>
+                                        <td align="center" colspan="3">
+                                            <a href="{{ route('pelanggaran.edit', (string) $k->id) }}" class="btn btn-link">
+                                                <i class="fa fa-edit fa-lg"></i>
+                                            </a>
+                                            <a href="{{ route('pelanggaran.destroy', (string) $k->id ) }}" class="btn btn-link">
+                                                <i class="fa fa-trash text-danger fa-lg"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -60,7 +64,6 @@
     </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -72,77 +75,92 @@
             </div>
             <div class="modal-body">
                 <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Siswa</label>
-                                <select name="nis" class="select-search" id="">
+                                <label>Siswa</label>
+                                <select name="nis" class="select-search">
+                                    <option></option>
                                     @foreach ($siswa as $s)
                                         <option value="{{ $s->nis }}">{{ $s->nama }}</option>
                                     @endforeach
                                 </select>
+                                @error('nis')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Aturan</label>
-                                <select name="id_aturan" onchange="anjay({{ $aturan }}, this)" class="select-search" id="">
+                                <label>BK</label>
+                                <select class="select-search" name="id_bk">
+                                    <option></option>
+                                    @foreach ($bk as $b)
+                                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('id_bk')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Aturan</label>
+                                <select name="id_aturan" onchange="displayPoint({{ $aturan }}, this)" class="select-search">
+                                    <option></option>
                                     @foreach ($aturan as $s)
                                         <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
                                     @endforeach
                                 </select>
+                                @error('id_aturan')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Bk</label>
-                        <select class="select-search" name="id_bk" id="">
-                            @foreach ($bk as $b)
-                                <option value="{{ $b->id }}">{{ $b->nama }}</option>
-                            @endforeach
-                        </select>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <input type="text" name="keterangan" class="form-control" placeholder="Masukkan Keterangan">
+                                @error('keterangan')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Keterangan</label>
-                        <input type="text" name="keterangan" class="form-control">
-                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Poin</label>
+                                <label>Poin</label>
                                 <input type="text" name="total_poin" id="poin" class="form-control" value="" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Status</label>
-                                <select class="form-control" name="status" id="">
+                                <label>Status</label>
+                                <select class="form-control" name="status">
                                     <option value="Belum">Belum di proses</option>
                                     <option value="Beres">Sudah di proses</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="hidden" name="tgl_pelanggaran" value="{{ date('Y-m-d') }}">
-                    </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban"></i> Close</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save changes</button>
-            </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<script>
-	function anjay(...arr) {
-		for(let a of arr[0]) {
-			if(a.id == arr[1].value) {
-				$('#poin').val(a.poin);
-            }
-		}
-	}
-</script>
 @endsection
+

@@ -10,6 +10,7 @@ use App\Models\Pelanggaran;
 use App\Models\Aturan;
 use App\Models\Siswa;
 use App\Models\Bk;
+use Carbon\Carbon;
 
 class PelanggaranController extends Controller
 {
@@ -22,7 +23,7 @@ class PelanggaranController extends Controller
             'aturan' => Aturan::all(),
         );
 
-        if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
+        if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Reference Data Error');
@@ -37,24 +38,23 @@ class PelanggaranController extends Controller
             'nis' => 'required', 
             'id_aturan' => 'required',
             'id_bk' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'required|string|max:255',
             'total_poin' => 'required|numeric|max:100',
             'status' => 'required',
         ]);        
         
         try {
-            $validated['id'] = Str::orderedUuid()->toString();
+            $validated['id'] = Str::orderedUuid();
             $validated['id_user'] = Auth::user()->id;
-            $validated['tgl_pelanggaran'] = $request->tgl_pelanggaran;
+            $validated['tgl_pelanggaran'] = Carbon::today();
 
             Pelanggaran::create($validated);
 
             return redirect()
                 ->route('pelanggaran.index')
-                ->with('success', 'Data Successfully Created!');
+                ->with('success', 'Data Berhasil Dibuat');
 
         } catch(\Throwable $th) {
-            dd($th);
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Error Store Data');
@@ -71,13 +71,13 @@ class PelanggaranController extends Controller
             'aturan' => Aturan::all(),
         );
 
-        if($data['pelanggaran'] === null) {
+        if ($data['pelanggaran'] === null) {
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Invalid Target Data');
         }
 
-        if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
+        if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Reference Data Error');
@@ -90,7 +90,7 @@ class PelanggaranController extends Controller
     {
         $pelanggaran = Pelanggaran::find($id);
 
-        if($pelanggaran === null) {
+        if ($pelanggaran === null) {
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Invalid Target Data');
@@ -100,17 +100,18 @@ class PelanggaranController extends Controller
             'nis' => 'required', 
             'id_aturan' => 'required',
             'id_bk' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'required|string|max:255',
             'total_poin' => 'required|numeric|max:100',
+            'tgl_pelanggaran' => 'required|date',
             'status' => 'required',
         ]);  
 
         try {
-            
             $pelanggaran->update($validated);
+
             return redirect()
                 ->route('pelanggaran.index')
-                ->with('success', 'Data Successfully Updated!');
+                ->with('success', 'Data Berhasil Diubah');
             
         } catch (\Throwable $th) {
             return redirect()
@@ -124,7 +125,7 @@ class PelanggaranController extends Controller
     {
         $pelanggaran = Pelanggaran::find($id);
 
-        if($pelanggaran === null) {
+        if ($pelanggaran === null) {
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Invalid Target Data');
@@ -132,9 +133,11 @@ class PelanggaranController extends Controller
 
         try {
             $pelanggaran->delete();
+
             return redirect()
                 ->route('pelanggaran.index')
-                ->with('success', 'Data Successfully Deleted!');
+                ->with('success', 'Data Berhasil Dihapus');
+
         } catch (\Throwable $th) {
             return redirect()
                 ->route('pelanggaran.index')

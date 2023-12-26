@@ -15,7 +15,8 @@ use App\Models\Bk;
 
 class PelanggaranController extends Controller
 {
-    public function inbox() {
+    public function inbox()
+    {
         $data = array(
             'pelanggaran' => Pelanggaran::where('status', 'Belum')->get(),
             'siswa' => Siswa::all(),
@@ -23,7 +24,7 @@ class PelanggaranController extends Controller
             'aturan' => Aturan::all(),
         );
 
-        if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
+        if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
             return view('home.bk.pelanggaran.inbox', $data)
                 ->with('error', 'Reference Data Error');
         }
@@ -42,7 +43,7 @@ class PelanggaranController extends Controller
             'aturan' => Aturan::all(),
         );
 
-        if($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
+        if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
             return redirect()
                 ->route('review.index')
                 ->with('error', 'Reference Data Error');
@@ -58,8 +59,7 @@ class PelanggaranController extends Controller
         if ($siswa->first() === null) {
             return redirect()
                 ->route('dashboard.petugas')
-                ->with('error','Reference Data Error');
-
+                ->with('error', 'Reference Data Error');
         } else {
             return view('home.admin.user.create-laporan', compact(['siswa']));
         }
@@ -73,14 +73,14 @@ class PelanggaranController extends Controller
         ]);
 
         // try {
-            $validated['id'] = Str::orderedUuid()->toString();
-            $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
-            $validated['tgl_pelanggaran'] = Carbon::today();
+        $validated['id'] = Str::orderedUuid()->toString();
+        $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
+        $validated['tgl_pelanggaran'] = Carbon::today();
 
-            Pelanggaran::create($validated);
+        Pelanggaran::create($validated);
 
-            return redirect(url()->previous())
-                ->with('success','Data Berhasil Dibuat');
+        return redirect(url()->previous())
+            ->with('success', 'Data Berhasil Dibuat');
 
         // } catch (\Throwable $th) {
         //     return redirect()
@@ -97,17 +97,16 @@ class PelanggaranController extends Controller
             'siswa' => Siswa::all(),
             'bk' => Bk::all()
         );
-        
+
         if ($data['pelanggaran'] === null) {
             return redirect(url()->previous())
-                ->with('error','Invalid Target Data');
+                ->with('error', 'Invalid Target Data');
         }
 
 
         if ($data['siswa']->first() === null) {
             return redirect(url()->previous())
-                ->with('error','Reference Data Error');
-
+                ->with('error', 'Reference Data Error');
         } else {
             return view('home.bk.pelanggaran.review', $data);
         }
@@ -120,8 +119,7 @@ class PelanggaranController extends Controller
         if ($pelanggaran === null) {
             return redirect()
                 ->route('dashboard.petugas')
-                ->with('error','Invalid Target Data');
-
+                ->with('error', 'Invalid Target Data');
         } else {
             $validated = $request->validate([
                 'nis' => 'required|max:99999999999|numeric',
@@ -138,7 +136,7 @@ class PelanggaranController extends Controller
 
                 $poin = $siswa->poin + $validated['total_poin'];
                 $status = '';
-                
+
                 if ($poin >= 0 && $poin <= 25) {
                     $status = "Baik";
                 } elseif ($poin > 25 && $poin <= 50) {
@@ -150,17 +148,16 @@ class PelanggaranController extends Controller
                 } else {
                     $status = "Undefined Status";
                 }
-                
+
                 $siswa->update(['poin' => $poin, 'status' => $status]);
-                
+
                 return redirect()
                     ->route('dashboard.bk')
-                    ->with('success','Data Berhasil Diubah');
-
+                    ->with('success', 'Data Berhasil Diubah');
             } catch (\Throwable $th) {
                 return redirect()
                     ->route('dashboard.bk')
-                    ->with('error','Error Update Data');
+                    ->with('error', 'Error Update Data');
             }
         }
     }
@@ -171,18 +168,16 @@ class PelanggaranController extends Controller
 
         if ($pelanggaran === null) {
             return redirect(url()->previous())
-                ->with('error','Invalid Target Data');
-
+                ->with('error', 'Invalid Target Data');
         } else {
             try {
                 $pelanggaran->delete();
 
                 return redirect(url()->previous())
-                    ->with('success','Data Berhasil Dihapus');
-
+                    ->with('success', 'Data Berhasil Dihapus');
             } catch (\Throwable $th) {
                 return redirect(url()->previous())
-                    ->with('error','Error Destroy Data');
+                    ->with('error', 'Error Destroy Data');
             }
         }
     }
