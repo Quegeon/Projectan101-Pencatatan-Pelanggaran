@@ -22,7 +22,7 @@
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate">Tambah Data</a>
+                        <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus mr-2"></i>Tambah Data</a>
                         <div class="table-responsive">
                             <table id="basic-datatables" class="display table table-striped table-hover" >
                                 <thead>
@@ -84,18 +84,26 @@
                         <div class="form-group">
                             <label>Jenis</label>
                             <select name="id_jenis" class="select-search">
+                                <option></option>
                                 @foreach ($jenis as $j)
                                     <option value="{{ $j->id }}">{{ $j->nama_jenis }}</option>
                                 @endforeach
                             </select>
+                            @error('id_jenis')
+                                <p class="text-danger timeout">* {{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Hukuman</label>
                             <select class="select-search" name="id_hukuman">
+                                <option></option>
                                 @foreach ($hukuman as $h)
-                                <option value="{{ $h->id }}">{{ $h->hukuman }}</option>
+                                    <option value="{{ $h->id }}">{{ $h->hukuman }}</option>
                                 @endforeach
                             </select>
+                            @error('id_jenis')
+                                <p class="text-danger timeout">* {{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Poin</label>
@@ -106,8 +114,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
                     </form>
                 </div>
             </div>

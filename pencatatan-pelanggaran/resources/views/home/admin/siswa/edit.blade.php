@@ -34,20 +34,24 @@
                                                 <p class="text-danger timeout">* {{ $message }}</p>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Kelas</label>
                                             <select name="id_kelas" class="select-search-no-modal">
-                                                <option value="{{ $siswa->id_kelas }}">Default: {{ $siswa->Kelas->nama_kelas }} | {{ $siswa->Kelas->jurusan }}</option>
+                                                <option value="{{ $siswa->id_kelas }}" selected>Default: {{ $siswa->Kelas->nama_kelas }} | {{ $siswa->Kelas->jurusan }}</option>
                                                 @foreach ($kelas as $k)
                                                     <option value="{{ $k->id }}">{{ $k->nama_kelas }} | {{ $k->jurusan }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('kelas')
-                                                <p class="text-danger timeout">{{ $message }}</p>
+                                            @error('id_kelas')
+                                                <p class="text-danger timeout">* {{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
-                            
+                                </div>
+                                
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>No Telp</label>
@@ -56,6 +60,8 @@
                                                 <p class="text-danger timeout">* {{ $message }}</p>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Poin</label>
                                             <input readonly class="form-control" type="text" value="{{ $siswa->poin }}" name="poin">
@@ -64,20 +70,26 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Alamat</label>
                                             <textarea class="form-control" name="alamat" placeholder="{{ $siswa->alamat }}" rows="6" cols="100%">{{ $siswa->alamat }}</textarea>
-                                            @error('alamat')
-                                                <p class="text-danger timeout">* {{ $message }}</p>
-                                            @enderror
+                                            @if ($errors->first('alamat'))
+                                                @error('alamat')
+                                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                                @enderror
+                                            @else
+                                                <p class="text-mute">* Optional</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="{{ route('siswa.index') }}" class="btn btn-secondary">Kembali</a>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <a href="{{ route('siswa.index') }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
                                 </div>
                             </form>
                         </div>
