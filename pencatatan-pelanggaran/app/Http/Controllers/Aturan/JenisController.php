@@ -18,20 +18,15 @@ class JenisController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_jenis' => 'required',
-            'keterangan' => 'required'
+        $validated = $request->validate([
+            'nama_jenis' => 'required|string|max:255',
+            'keterangan' => 'required|string|max:255'
         ]);
 
         try {
-            $id = Str::orderedUuid()->toString();
+            $validated['id'] = Str::orderedUuid();
     
-            Jenis::create([
-                'id' => $id,
-                'nama_jenis' => $request->nama_jenis,
-                'keterangan' => $request->keterangan,
-                $request->except(['_token'])
-            ]);
+            Jenis::create($validated);
     
             return redirect()
                 ->route('jenis.index')
@@ -69,13 +64,13 @@ class JenisController extends Controller
                 ->with('error','Invalid Target Data');
 
         } else {
-            $request->validate([
-                'nama_jenis' => 'required',
-                'keterangan' => 'required'
+            $validated = $request->validate([
+                'nama_jenis' => 'required|string|max:255',
+                'keterangan' => 'required|string|max:255'
             ]);
 
             try {
-                $jenis->update($request->except(['_token']));
+                $jenis->update($validated);
         
                 return redirect()
                     ->route('jenis.index')
