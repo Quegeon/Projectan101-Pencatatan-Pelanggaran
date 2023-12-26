@@ -37,7 +37,7 @@
                     </a>
                     <div class="collapse" id="submenu">
                         <ul class="nav nav-collapse">
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('view_siswa') }}">
                                     <span class="sub-item">Data Siswa</span>
                                 </a>
@@ -46,7 +46,7 @@
                                 <a href="{{ route('view_aturan') }}">
                                     <span class="sub-item">Data Aturan</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('review.inbox') }}">
                                     <span class="sub-item">Inbox</span>

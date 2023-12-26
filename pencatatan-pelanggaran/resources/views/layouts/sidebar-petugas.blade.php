@@ -97,11 +97,11 @@
                     </a>
                     <div class="collapse" id="settings">
                         <ul class="nav nav-collapse">
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('profile.user') }}">
                                     <span class="sub-item">Profile</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('logout.user') }}">
                                     <span class="sub-item">Logout</span>
