@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::create([
             'id' => Str::orderedUuid(),
-            'nama' => 'Admin Cuk1',
+            'nama' => 'SuperAdmin',
             'username' => 'Admin',
             'password' => bcrypt('123'),
             'level' => 'Admin',
@@ -26,9 +26,18 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Bk::create([
             'id' => Str::orderedUuid(),
-            'nama' => 'Bk Cenah',
-            'username' => 'bk',
+            'nama' => 'Test BK',
+            'username' => 'BK1',
             'password' => bcrypt('321'),
+            'foto' => 'default.png',
+        ]);
+
+        \App\Models\User::create([
+            'id' => Str::orderedUuid(),
+            'nama' => 'Test Petugas',
+            'username' => 'Petugas1',
+            'password' => bcrypt('123'),
+            'level' => 'Petugas',
             'foto' => 'default.png',
         ]);
 
@@ -37,7 +46,7 @@ class DatabaseSeeder extends Seeder
             JenisSeeder::class,
             AturanSeeder::class,
             KelasSeeder::class,
-            DummySeeder::class
+            // DummySeeder::class
         ]);
     }
 }
