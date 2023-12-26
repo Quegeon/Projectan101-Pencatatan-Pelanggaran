@@ -14,9 +14,8 @@ use App\Http\Controllers\BkController as KelolaBk;
 use App\Http\Controllers\Aturan\JenisController as KelolaJenis;
 use App\Http\Controllers\Aturan\HukumanController as KelolaHukuman;
 use App\Http\Controllers\Aturan\AturanController as KelolaAturan;
-use App\Http\Controllers\ProfileController;
 
-use App\Http\Controllers\ProfileController as ProfilePetugas;
+use App\Http\Controllers\Profile\UserController as ProfilePetugas;
 use App\Http\Controllers\Profile\BkController as ProfileBk;
 
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
@@ -32,17 +31,6 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Login
-
-// Route::prefix('user')->controller(ProfileController::class)->group(function() {
-//     Route::get('/', 'index')->name('user.index');
-// });
-
-Route::get('/user/profile', [ProfileController::class, 'index'])->name('profile.index');
-// Route::view('/user/profile', 'home.admin.user.profile')->name('profile.user');
-Route::post('/user/update/{id}',[ProfileController::class,'update'])->name('update.user');
-Route::view('/user/password', 'home.admin.user.gantipassword')->name('password.user');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
