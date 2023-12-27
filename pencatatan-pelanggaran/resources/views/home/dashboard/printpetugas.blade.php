@@ -36,7 +36,7 @@
                             <tbody>
                                 @foreach ($pelanggaran as $p)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td align="center">{{ $loop->iteration }}</td>
                                         <td>{{ optional($p->siswa)->nama ?? "Kosong" }}</td>
                                         <td>{{ optional($p->aturan)->nama_aturan ?? "Kosong" }}</td>
                                         <td>{{ optional($p->bk)->nama ?? "Kosong" }}</td>

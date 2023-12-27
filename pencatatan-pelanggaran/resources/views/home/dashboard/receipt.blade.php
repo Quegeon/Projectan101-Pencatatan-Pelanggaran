@@ -21,7 +21,11 @@
             font-weight: bold;
         }
         .spacer {
-            height: 15px; /* Adjust spacing height as needed */
+            height: 15px; 
+        }
+        .siswa-title, .pelanggaran-title {
+            font-weight: bold;
+            font-size: 1.2em;
         }
         .signature-table {
             width: 50%;
@@ -47,10 +51,10 @@
     </tr>
     <table>
      
-        <tr class="spacer"></tr> <!-- Spacer row -->
+        <tr class="spacer"></tr> 
 
         <tr>
-            <td>Siswa :</td>
+            <td class="siswa-title">Siswa :</td>
             <td></td>
             <td></td>
         </tr>
@@ -73,10 +77,10 @@
             <td></td>
         </tr>
 
-        <tr class="spacer"></tr> <!-- Spacer row -->
+        <tr class="spacer"></tr>
 
         <tr>
-            <td>Pelanggaran :</td>
+            <td class="pelanggaran-title">Pelanggaran :</td>
             <td></td>
             <td></td>
         </tr>
@@ -106,8 +110,7 @@
         </tr>
     </table>
     <hr>
-    
-    <!-- Signature Column -->
+
     <table class="signature-table">
         <tr>
             <th colspan="3">Tanda tangan:</th>
