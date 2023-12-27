@@ -31,12 +31,15 @@ class UserController extends Controller
             ->limit(5)
             ->get();
 
-        $today = Carbon::today();
-        $start = Carbon::today()->subDays(7);
-        $total_minggu = Pelanggaran::Select(Pelanggaran::raw('COUNT(*) as total_pelanggaran'))
-        ->whereBetWeen('tgl_pelanggaran',[$start , $today])->first();
+            $start = Carbon::today()->firstOfMonth();
+            $dupe_month = Carbon::today()->firstOfMonth();
+            $daysInMonth = Carbon::today()->daysInMonth;
+            $end = $dupe_month->addDays($daysInMonth -1);
+            $total_bulan = Pelanggaran::Select(Pelanggaran::raw('COUNT(*) as total_pelanggaran'))
+            ->whereBetWeen('tgl_pelanggaran',[$start , $end])->first();
+            
       
-        return view('home.dashboard.dashboard-petugas',compact('jumlah_kelas','jumlah_siswa','jumlah_aturan','pelanggaran_admin','pelanggaran_petugas','total_minggu')); 
+        return view('home.dashboard.dashboard-petugas',compact('jumlah_kelas','jumlah_siswa','jumlah_aturan','pelanggaran_admin','pelanggaran_petugas','total_bulan')); 
     }
 
     public function detail($id) {

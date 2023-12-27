@@ -189,15 +189,15 @@
                             <tbody>
                                 @foreach ($history as $k)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <td align="center">{{$loop->iteration}}</td>
                                     <td>{{$k->Siswa->nama}}</td>
                                     <td>{{$k->User->nama}}</td>
                                     <td>{{$k->Aturan->nama_aturan}}</td>
                                     <td>{{$k->keterangan}}</td>
                                     <td>{{$k->status}}</td>
                                     <td align="center" colspan="3">
-                                        <a class="btn btn-primary text-white" data-target="#{{ $k->id }}" data-toggle="modal"><i class="fa fa-circle-info"></i> Detail</a>
-                                        <a target="_blank" class="btn btn-info" href="{{ route('receipt', ['id' => $k->id]) }}"><i class="fa fa-print"></i></a>
+                                        <a class="btn btn-primary text-white" data-target="#{{ $k->id }}" data-toggle="modal"><i class="fas fa-info-circle mr-2"></i> Detail</a>
+                                        <a target="_blank" class="btn btn-success" href="{{ route('receipt', ['id' => $k->id]) }}"><i class="fa fa-print"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

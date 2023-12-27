@@ -33,10 +33,10 @@
                             <div class="numbers">
                                 <p class="card-category">Jumlah Pelanggaran</p>
                                 <h4 class="card-title">
-                                    @if ($total_minggu->total_pelanggaran == null)
+                                    @if ($total_bulan->total_pelanggaran == null)
                                     0 
                                     @else
-                                    {{$total_minggu->total_pelanggaran}}
+                                    {{$total_bulan->total_pelanggaran}}
                                     @endif
                                 </h4>
                             </div>
@@ -82,7 +82,7 @@
                         <tbody>
                             @foreach ($pelanggaran_petugas as $k)
                             <tr>
-                                <td>{{$loop->iteration}}</td>
+                                <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$k->Siswa->nama}}</td>
                                 <td>{{$k->User->nama}}</td>
                                 <td>{{$k->status}}</td>
@@ -266,10 +266,10 @@
                             <div class="numbers">
                                 <p class="card-category">Jumlah Pelanggaran</p>
                                 <h4 class="card-title">
-                                    @if ($total_minggu->total_pelanggaran == null)
+                                    @if ($total_bulan->total_pelanggaran == null)
                                     0 
                                     @else
-                                    {{$total_minggu->total_pelanggaran}}
+                                    {{$total_bulan->total_pelanggaran}}
                                     @endif
                                 </h4>
                             </div>
@@ -320,7 +320,7 @@
                         <tbody>
                             @foreach ($pelanggaran_admin as $k)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td align="center">{{ $loop->iteration }}</td>
                                 <td>{{ optional($k->Siswa)->nama ?? "Kosong" }}</td>
                                 <td>{{ optional($k->Aturan)->nama_aturan ?? "Kosong" }}</td>
                                 <td>{{ optional($k->Bk)->nama ?? "Kosong" }}</td>
