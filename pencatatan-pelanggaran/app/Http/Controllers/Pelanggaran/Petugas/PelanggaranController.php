@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Pelanggaran\Petugas;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aturan;
+use App\Models\Bk;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,12 +18,11 @@ class PelanggaranController extends Controller
     public function create()
     {
         $siswa = Siswa::all();
-
+    
         if ($siswa->first() === null) {
             return redirect()
-                ->route('dashboard.petugas')
-                ->with('error','Reference Data Error');
-
+                ->route('dashboard')
+                ->with('error', 'Reference Data Error');
         } else {
             return view('home.admin.user.create-laporan', compact(['siswa']));
         }
@@ -41,7 +43,7 @@ class PelanggaranController extends Controller
             Pelanggaran::create($validated);
 
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard')
                 ->with('success','Data Berhasil Dibuat');
 
         // } catch (\Throwable $th) {
@@ -57,7 +59,7 @@ class PelanggaranController extends Controller
         
         if ($pelanggaran === null) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard')
                 ->with('error','Invalid Target Data');
         }
 
@@ -65,7 +67,7 @@ class PelanggaranController extends Controller
 
         if ($siswa->first() === null) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard')
                 ->with('error','Reference Data Error');
 
         } else {
@@ -79,7 +81,7 @@ class PelanggaranController extends Controller
 
         if ($pelanggaran === null) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard')
                 ->with('error','Invalid Target Data');
 
         } else {
@@ -93,12 +95,12 @@ class PelanggaranController extends Controller
                 $pelanggaran->update($validated);
 
                 return redirect()
-                    ->route('dashboard.petugas')
+                    ->route('dashboard')
                     ->with('success','Data Berhasil Diubah');
 
             } catch (\Throwable $th) {
                 return redirect()
-                    ->route('dashboard.petugas')
+                    ->route('dashboard')
                     ->with('error','Error Update Data');
             }
         }
@@ -110,7 +112,7 @@ class PelanggaranController extends Controller
 
         if ($pelanggaran === null) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard')
                 ->with('error','Invalid Target Data');
 
         } else {
@@ -118,14 +120,25 @@ class PelanggaranController extends Controller
                 $pelanggaran->delete();
 
                 return redirect()
-                    ->route('dashboard.petugas')
+                    ->route('dashboard')
                     ->with('success','Data Berhasil Dihapus');
 
             } catch (\Throwable $th) {
                 return redirect()
-                    ->route('dashboard.petugas')
+                    ->route('dashboard')
                     ->with('error','Error Destroy Data');
             }
         }
+    }
+
+    public function print()
+    {
+        $pelanggaran = Pelanggaran::all();
+        $user = User::all();
+        $bk = Bk::all();
+        $aturan = Aturan::all();
+        $siswa = Siswa::all();
+
+        return view('home.dashboard.printpetugas', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
     }
 }

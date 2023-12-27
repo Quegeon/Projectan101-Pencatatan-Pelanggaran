@@ -181,4 +181,27 @@ class PelanggaranController extends Controller
             }
         }
     }
+
+    public function printbk()
+    {
+        $pelanggaran = Pelanggaran::all();
+        $user = User::all();
+        $bk = Bk::all();
+        $aturan = Aturan::all();
+        $siswa = Siswa::all();
+
+        return view('home.dashboard.printbk', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
+    }
+
+    public function receipt($id)
+    {
+        $pelanggaran = Pelanggaran::find($id);
+        $user = User::all();
+        $bk = Bk::all();
+        $aturan = Aturan::all();
+        $siswa = Siswa::all();
+
+        return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
+    }
+
 }

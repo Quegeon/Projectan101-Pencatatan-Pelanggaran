@@ -162,7 +162,7 @@
                                 </span>
                                 Export
                             </a>
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                            <a href="{{ route('printbk') }}" target="_blank" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">
                                     <i class="fa fa-print"></i>
                                 </span>
@@ -197,6 +197,7 @@
                                     <td>{{$k->status}}</td>
                                     <td align="center" colspan="3">
                                         <a class="btn btn-primary text-white" data-target="#{{ $k->id }}" data-toggle="modal"><i class="fa fa-circle-info"></i> Detail</a>
+                                        <a target="_blank" class="btn btn-info" href="{{ route('receipt', ['id' => $k->id]) }}"><i class="fa fa-print"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

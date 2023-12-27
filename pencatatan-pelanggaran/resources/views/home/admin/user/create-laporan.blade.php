@@ -45,7 +45,7 @@
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Simpan</button>
-                            <a href="{{ route('dashboard.petugas') }}" class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('dashboard') }}" class="btn btn-secondary">Batal</a>
                         </form>
                     </div>
                 </div>

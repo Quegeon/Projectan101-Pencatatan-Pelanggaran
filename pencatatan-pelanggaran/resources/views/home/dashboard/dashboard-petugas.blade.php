@@ -144,8 +144,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('laporan.edit', (string) $p->id) }}" class="btn btn-warning">Edit</a>
-                <a class="btn btn-danger text-white" onclick="confirmDel('{{ route('laporan.destroy',  (string) $p->id) }}')">Hapus</a>
+                <a href="{{ route('laporan.edit', (string) $p->id) }}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
+                <a  onclick="confirmDel('{{ route('laporan.destroy',  (string) $p->id) }}')" class="btn btn-secondary text-white"><i class="fa fa-trash"></i></a>
             </div>
         </div>
     </div>
@@ -293,7 +293,7 @@
                                 </span>
                                 Export
                             </a>
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                            <a href="{{ route('laporan.print') }}" target="_blank" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">
                                     <i class="fa fa-print"></i>
                                 </span>
