@@ -233,7 +233,13 @@ class PelanggaranController extends Controller
             'id_aturan' => 'required'
         ]);
         $validated['no_pelanggaran'] = $request->no_pelanggaran;
-        TempAturan::create([])
+        TempAturan::create($validated);
+        return back()->with('success', 'Data berhasil dibuat');
+    }
+    
+    public function temp_destroy($id) {
+        TempAturan::find($id)->delete();
+        return back()->with('success', 'Data berhasil dihapus');
     }
 
 }
