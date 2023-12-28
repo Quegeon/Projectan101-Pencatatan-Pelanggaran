@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="#" class="card-link"> 
+            <a href="{{ route('view_siswa') }}" class="card-link"> 
                 <div class="card-body ">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -57,7 +57,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="#" class="card-link"> 
+            <a href="{{ route('view_aturan') }}" class="card-link"> 
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i> Tambah Data</a>
+                    {{-- <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i> Tambah Data</a> --}}
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
@@ -248,9 +248,12 @@
                     <input type="hidden" name="tgl_pelanggaran" value="{{ date('Y-m-d') }}">
                 </div>
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <a href="{{ route('review.edit', $p->id) }}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
                 <a onclick="confirmDel(`{{ route('review.destroy', $p->id) }}`)" class="btn btn-secondary text-white"><i class="fa fa-trash"></i></a>
+            </div> --}}
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-secondary"><i class="fas fa-undo-alt mr-2"></i> Tutup</button>
             </div>
         </div>
     </div>

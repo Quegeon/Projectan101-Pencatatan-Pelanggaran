@@ -68,28 +68,46 @@ class PelanggaranController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nis' => 'required|max:99999999999|numeric',
-            'keterangan' => 'required|max:255'
+            'keterangan' => 'required|max:255',
+            'nis' => 'required'
         ]);
+        try {
+            $validated['id'] = Str::orderedUuid()->toString();
+            $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
+            $validated['tgl_pelanggaran'] = Carbon::today();
 
-        // try {
-        $validated['id'] = Str::orderedUuid()->toString();
-        $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
-        $validated['tgl_pelanggaran'] = Carbon::today();
+            Pelanggaran::create($validated);
 
-        Pelanggaran::create($validated);
-
-        return redirect(url()->previous())
-            ->with('success', 'Data Berhasil Dibuat');
-
-        // } catch (\Throwable $th) {
-        //     return redirect()
-        //         ->route('dashboard.petugas')
-        //         ->with('error','Error Store Data');
-        // }
+            return redirect(url()->previous())
+                ->with('success', 'Data Berhasil Dibuat');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error Store Data');
+        }
     }
 
     public function edit(string $id)
+    {
+        $data = array(
+            'pelanggaran' => Pelanggaran::find($id)
+        );
+
+        if ($data['pelanggaran'] === null) {
+            return redirect(url()->previous())
+                ->with('error', 'Invalid Target Data');
+        }
+
+
+        if ($data['siswa']->first() === null) {
+            return redirect(url()->previous())
+                ->with('error', 'Reference Data Error');
+        } else {
+            return view('home.bk.pelanggaran.edit', $data);
+        }
+    }
+
+    public function review(string $id)
     {
         $data = array(
             'pelanggaran' => Pelanggaran::find($id),
@@ -112,7 +130,7 @@ class PelanggaranController extends Controller
         }
     }
 
-    public function update(Request $request, string $id)
+    public function proses(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
 
@@ -122,10 +140,8 @@ class PelanggaranController extends Controller
                 ->with('error', 'Invalid Target Data');
         } else {
             $validated = $request->validate([
-                'nis' => 'required|max:99999999999|numeric',
                 'keterangan' => 'required|max:255',
                 'id_aturan' => 'required',
-                'total_poin' => 'required'
             ]);
             $siswa = Siswa::find($validated['nis']);
 
@@ -150,6 +166,34 @@ class PelanggaranController extends Controller
                 }
 
                 $siswa->update(['poin' => $poin, 'status' => $status]);
+
+                return redirect()
+                    ->route('dashboard.bk')
+                    ->with('success', 'Data Berhasil Diproses');
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->route('dashboard.bk')
+                    ->with('error', 'Error Update Data');
+            }
+        }
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $pelanggaran = Pelanggaran::find($id);
+
+        if ($pelanggaran === null) {
+            return redirect()
+                ->route('dashboard.petugas')
+                ->with('error', 'Invalid Target Data');
+        } else {
+            $validated = $request->validate([
+                'keterangan' => 'required|max:255',
+                'nis' => 'required'
+            ]);
+
+            try {
+                $pelanggaran->update($validated);
 
                 return redirect()
                     ->route('dashboard.bk')
@@ -203,5 +247,4 @@ class PelanggaranController extends Controller
 
         return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
     }
-
 }

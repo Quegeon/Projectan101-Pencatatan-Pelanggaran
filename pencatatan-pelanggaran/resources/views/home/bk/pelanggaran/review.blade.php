@@ -56,9 +56,9 @@
                             <div class="form-group">
                                 <input type="hidden" name="tgl_pelanggaran" value="{{ $pelanggaran->tgl_pelanggaran }}">
                             </div>
-                            <a href="{{ route('review.inbox') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('review.inbox') }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i> Kembali</a>
                             <button type="submit"
-                                class="btn btn-primary {{ $pelanggaran->Siswa->poin === 0 ? 'simphan' : '' }}">Simpan</button>
+                                class="btn btn-primary {{ $pelanggaran->Siswa->poin === 0 ? 'simphan' : '' }}"><i class="fa fa-save mr-2"></i> Proses</button>
                         </form>
                     </div>
                 </div>
