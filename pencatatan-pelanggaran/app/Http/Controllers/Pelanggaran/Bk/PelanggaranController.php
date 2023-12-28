@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Aturan;
+use App\Models\TempAturan;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
 use App\Models\User;
@@ -225,6 +226,14 @@ class PelanggaranController extends Controller
         $siswa = Siswa::all();
 
         return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
+    }
+
+    public function temp_store(Request $request) {
+        $validated = $request->validate([
+            'id_aturan' => 'required'
+        ]);
+        $validated['no_pelanggaran'] = $request->no_pelanggaran;
+        TempAturan::create([])
     }
 
 }

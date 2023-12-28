@@ -31,6 +31,7 @@
                                     <th>Aturan</th>
                                     <th>Hukuman</th>
                                     <th>Poin</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,6 +40,13 @@
                                     <td>TIdak boleh telat</td>
                                     <td>Membersihkan lingkungan sekolah</td>
                                     <td class="text-center">6</td>
+                                    <td>
+                                        <form action="{{ route('temp.destroy', 'id')}}" method="POST" class="d-inline">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -84,6 +92,7 @@
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
                             @enderror
                         </div>
+                        <input type="hidden" name="no_pelanggaran" value=""> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban"></i> Close</button>
