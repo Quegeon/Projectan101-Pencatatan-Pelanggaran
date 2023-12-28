@@ -112,6 +112,29 @@ class PelanggaranController extends Controller
         }
     }
 
+    public function detail(string $id)
+    {
+        $data = array(
+            'pelanggaran' => Pelanggaran::find($id),
+            'aturan' => Aturan::all(),
+            'siswa' => Siswa::all(),
+            'bk' => Bk::all()
+        );
+
+        if ($data['pelanggaran'] === null) {
+            return redirect(url()->previous())
+                ->with('error', 'Invalid Target Data');
+        }
+
+
+        if ($data['siswa']->first() === null) {
+            return redirect(url()->previous())
+                ->with('error', 'Reference Data Error');
+        } else {
+            return view('home.bk.pelanggaran.detail', $data);
+        }
+    }
+
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);

@@ -138,6 +138,7 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit');
+        Route::get('/{id}/detail', 'detail')->name('review.detail');
         Route::post('/{id}/update', 'update')->name('review.update');
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
         Route::get('/printbk', 'printbk')->name('printbk');
@@ -147,5 +148,9 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
         Route::post('/update', 'update_profile')->name('profile.bk.update');
         Route::post('/change_password', 'change_password')->name('profile.bk.change_password');
+    });
+    Route::prefix('temp')->controller(ReviewPelanggaran::class)->group(function() {
+        Route::post('/store', 'temp_store')->name('temp.store');
+        Route::delete('/{id}/destroy', 'temp_destroy')->name('temp.destroy');
     });
 });

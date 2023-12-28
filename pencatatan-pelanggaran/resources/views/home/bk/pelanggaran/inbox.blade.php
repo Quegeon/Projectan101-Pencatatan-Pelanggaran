@@ -44,7 +44,7 @@
                                     <td>{{$h->keterangan}}</td>
                                     <td>{{$h->status}}</td>
                                     <td>
-                                        <a data-toggle="modal" data-target="#{{ $h->id }}" class="btn btn-primary text-white"><i class="fas fa-info-circle"></i> Detail</a>
+                                        <a href="{{route('review.detail', $h->id)}}" class="btn btn-primary text-white"><i class="fas fa-info-circle"></i> Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach

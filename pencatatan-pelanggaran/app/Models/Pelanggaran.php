@@ -17,6 +17,7 @@ class Pelanggaran extends Model
         'id_aturan',
         'id_user',
         'id_bk',
+        'no_pelanggaran',
         'tgl_pelanggaran',
         'keterangan',
         'status',
