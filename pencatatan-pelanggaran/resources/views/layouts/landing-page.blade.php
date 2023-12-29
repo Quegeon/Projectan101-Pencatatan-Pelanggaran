@@ -61,10 +61,10 @@
 				<img id=navbarImage src="/foto/mataw.png" class="sm:w-30 h-28" alt="">
 			</span>
 			<ul class="links">
-				<li><a href="">home</a></li>
-				<li><a href ="">about us</a></li>
-				<li><a href ="">contact</a></li>
-				<li><a href ="">support</a></li>
+				<li><a href="#">Home</a></li>
+				<li><a href ="#card-profile">About us</a></li>
+				<li><a href ="#support">Support</a></li>
+				<li><a href ="#contact">Contact</a></li>
 			</ul>
 			<a href="" class="btn-login ">Login</a>
 			<div class="toggle-btn ">
@@ -73,10 +73,10 @@
 		</div>
 
 		<div class="dropdown-menu">
-			<li><a href="">home</a></li>
-			<li><a href="">about us</a></li>
-			<li><a href="">contact</a></li>
-			<li><a href="">support</a></li>
+			<li><a href="#">Home</a></li>
+			<li><a href="#card-profile">About us</a></li>
+			<li><a href="#support">Support</a></li>
+			<li><a href="#contact">Contact</a></li>
 			<li><a href="" class="btn-login">Login</a></li>
 		</div>
 	</header>
@@ -101,7 +101,7 @@
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/dashboard-bk-versi-2.png" onclick="openModal('/foto/dashboard-bk-versi-2.png','lorem ipsum100')">
+			<img class="mySlides" src="/foto/dashboard-bk-versi-2.png" onclick="openModal('/foto/dashboard-bk-versi-2.png','lorem')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 			
 		</div>
@@ -151,7 +151,7 @@
 		<div class="modal-description" id="modalDescription"></div>
 		<div class="detail-text" id="modalDetailText"></div>
 	</div>
-	<div class="card-profile">
+	<div class="card-profile" id="card-profile">
 		<div class="tittle-profiles">
 			<h2>Core Team MATA Group</h2>
 		</div>
@@ -210,7 +210,7 @@
 				</div>
 			</div>
 	</div>
-	<div class="support">
+	<div class="support" id="support">
 		<div class="support-content">
 			<h1>Thank's To</h1>
 			<div class="support-image">
@@ -219,7 +219,7 @@
 			</div>
 		</div>
 	</div>
-	<footer class="fo">
+	<footer class="fo" id="contact">
 	<div class="footer-content">
 			<div class="footer-image">
 				<img src="/foto/mataw1.png" alt="">
