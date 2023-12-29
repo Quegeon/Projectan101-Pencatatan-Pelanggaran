@@ -146,7 +146,7 @@
                             <i class="far fa-file-alt mr-2"></i>
                             Review
                         </a>
-                        <a class="btn btn-secondary text-white" href="{{ route('aturan.edit', $p->id) }}">
+                        <a class="btn btn-secondary text-white" href="{{ route('review.edit', $p->id) }}">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a onclick="confirmDel(`{{ route('review.destroy', $p->id) }}`)" class="btn btn-secondary text-white">

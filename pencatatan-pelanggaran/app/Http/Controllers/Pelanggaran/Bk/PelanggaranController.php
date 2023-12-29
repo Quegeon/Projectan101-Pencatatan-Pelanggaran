@@ -90,7 +90,8 @@ class PelanggaranController extends Controller
     public function edit(string $id)
     {
         $data = array(
-            'pelanggaran' => Pelanggaran::find($id)
+            'pelanggaran' => Pelanggaran::find($id),
+            'siswa' => Siswa::all()
         );
 
         if ($data['pelanggaran'] === null) {
@@ -99,11 +100,11 @@ class PelanggaranController extends Controller
         }
 
 
+        return view('home.bk.pelanggaran.edit', $data);
         if ($data['siswa']->first() === null) {
             return redirect(url()->previous())
                 ->with('error', 'Reference Data Error');
         } else {
-            return view('home.bk.pelanggaran.edit', $data);
         }
     }
 
@@ -196,11 +197,11 @@ class PelanggaranController extends Controller
                 $pelanggaran->update($validated);
 
                 return redirect()
-                    ->route('dashboard.bk')
+                    ->route('review.inbox')
                     ->with('success', 'Data Berhasil Diubah');
             } catch (\Throwable $th) {
                 return redirect()
-                    ->route('dashboard.bk')
+                    ->route('review.inbox')
                     ->with('error', 'Error Update Data');
             }
         }

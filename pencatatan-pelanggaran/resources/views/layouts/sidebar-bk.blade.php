@@ -1,3 +1,8 @@
+@php
+    $currentRoute = Route::currentRouteName();
+    $activeRoutes = ['review.inbox', 'review.review', 'review.edit', 'view_siswa', 'view_aturan'];
+    $kelola = in_array($currentRoute, $activeRoutes) ? 'active' : '';
+@endphp
 <div class="sidebar">
     <div class="sidebar-background"></div>
     <div class="sidebar-wrapper scrollbar-inner">
@@ -17,7 +22,7 @@
                 </div>
             </div>
             <ul class="nav">
-                <li class="nav-item active">
+                <li class="nav-item {{ ($currentRoute === 'dashboard.bk') ? 'active' : '' }}">
                     <a href="{{ route('dashboard.bk') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
@@ -29,7 +34,7 @@
                     </span>
                     <h4 class="text-section">Pilihan</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ $kelola }}">
                     <a data-toggle="collapse" href="#submenu">
                         <i class="fas fa-table"></i>
                         <p>Kelola Data</p>

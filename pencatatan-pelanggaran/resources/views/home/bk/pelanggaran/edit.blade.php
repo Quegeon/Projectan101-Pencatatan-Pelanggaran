@@ -23,37 +23,14 @@
             <div class="card card-stats card-round">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="{{ route('pelanggaran.update', $pelanggaran->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('review.update', $pelanggaran->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Siswa</label>
-                                        <select name="nis" class="form-control" id="">
-                                            <option value="{{ $pelanggaran->nis }}">default | {{ $pelanggaran->Siswa->nama }}</option>
-                                            @foreach ($siswa as $s)
-                                                <option value="{{ $s->nis }}">{{ $s->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Aturan</label>
-                                        <select name="id_aturan" onclick="anjay({{ $aturan }}, this)" class="form-control" id="">
-                                            <option value="{{ $pelanggaran->id_aturan }}">default | {{ $pelanggaran->Aturan->nama_aturan }}</option>
-                                            @foreach ($aturan as $s)
-                                                <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <label for="">Bk</label>
-                                <select class="form-control" name="id_bk" id="">
-                                    @foreach ($bk as $b)
-                                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                <label for="">Siswa</label>
+                                <select name="nis" class="select-search-no-modal" id="">
+                                    <option value="{{ $pelanggaran->nis }}">default | {{ $pelanggaran->Siswa->nama }}</option>
+                                    @foreach ($siswa as $s)
+                                        <option value="{{ $s->nis }}">{{ $s->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,29 +38,11 @@
                                 <label for="">Keterangan</label>
                                 <input type="text" name="keterangan" value="{{ $pelanggaran->keterangan }}" class="form-control">
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Poin</label>
-                                        <input type="text" name="total_poin" value="{{ $pelanggaran->total_poin }}" id="poin" class="form-control" value="" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Status</label>
-                                        <select class="form-control" name="status" id="">
-                                            <option value="Belum">Belum di proses</option>
-                                            <option value="Beres">Sudah di proses</option>
-                                        </select>
-                                    </div>
-        
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <input type="hidden" name="tgl_pelanggaran" value="{{ $pelanggaran->tgl_pelanggaran }}">
                             </div>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <a href="{{ route('review.inbox') }}" type="button" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan Perubahan</button>
                         </form>
                     </div>
                 </div>
