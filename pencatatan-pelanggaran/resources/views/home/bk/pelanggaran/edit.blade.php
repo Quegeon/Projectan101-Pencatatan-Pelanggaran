@@ -33,10 +33,16 @@
                                         <option value="{{ $s->nis }}">{{ $s->nama }}</option>
                                     @endforeach
                                 </select>
+                                @error('nis')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Keterangan</label>
                                 <input type="text" name="keterangan" value="{{ $pelanggaran->keterangan }}" class="form-control">
+                                @error('keterangan')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <input type="hidden" name="tgl_pelanggaran" value="{{ $pelanggaran->tgl_pelanggaran }}">
