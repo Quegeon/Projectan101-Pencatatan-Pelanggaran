@@ -12,4 +12,8 @@ class TempAturan extends Model
         'no_pelanggaran',
         'id_aturan'
     ];
+
+    public function Aturan() {
+        return $this->belongsTo(Aturan::class, 'id_aturan', 'id');
+    }
 }

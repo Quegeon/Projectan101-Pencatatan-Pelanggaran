@@ -44,15 +44,16 @@
                                         <form action="{{ route('temp.destroy', 'id')}}" method="POST" class="d-inline">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                            <button type="submit" class="btn btn-danger text-center">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="3" class="text-center">Total poin</th>
-                                    <td class="text-center">6</td>
+                                    <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
+                                    <td colspan="2" class="text-center bg-warning text-white">6</td>
+                                    {{-- <td class="bg-info"></td> --}}
                                 </tr>
                             </tfoot>
                         </table>

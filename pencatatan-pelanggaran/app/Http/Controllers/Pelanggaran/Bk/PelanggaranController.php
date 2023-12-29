@@ -55,15 +55,22 @@ class PelanggaranController extends Controller
 
     public function create()
     {
-        $siswa = Siswa::all();
+        $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP');
+        $data = array(
+            'no_pelanggaran' => $no_pelanggaran,
+            'siswa' => Siswa::all(),
+            'bk' => Bk::all(),
+            'aturan' => Aturan::all(),
+            'tempaturan' => TempAturan::where('no_pelanggaran', $no_pelanggaran)->get()
+        );
 
-        if ($siswa->first() === null) {
+        if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('review.inbox')
                 ->with('error', 'Reference Data Error');
-        } else {
-            return view('home.admin.user.create-laporan', compact(['siswa']));
         }
+
+        return view('home.bk.pelanggaran.create', $data);
     }
 
     public function store(Request $request)
