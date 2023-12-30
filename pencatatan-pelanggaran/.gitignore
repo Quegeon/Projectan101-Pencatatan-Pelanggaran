@@ -3,6 +3,10 @@
 /public/build
 /public/hot
 /public/storage
+/public/fotopetugas/*
+/public/fotobk/*
+!public/fotobk/default.png
+!public/fotopetugas/default.png
 /storage/*.key
 /vendor
 .env

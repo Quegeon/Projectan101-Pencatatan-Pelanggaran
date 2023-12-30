@@ -18,39 +18,90 @@ class HukumanController extends Controller
 
     public function store(Request $request)
     {
-        $id = Str::orderedUuid();
-
-        Hukuman::create([
-            'id' => $id,
-            'hukuman' => $request->hukuman,
-            $request->except(['_token'])
+        $validated = $request->validate([
+            'hukuman' => 'required|string|max:100'
         ]);
-
-        return redirect('/hukuman');
+        
+        try {
+            $validated['id'] = Str::orderedUuid();
+    
+            Hukuman::create($validated);
+    
+            return redirect()
+                ->route('hukuman.index')
+                ->with('success','Data Berhasil Dibuat');
+            
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('error','Error Store Data');
+        }
     }
 
-    public function show(string $id)
+    public function edit(string $id)
     {
         $hukuman = Hukuman::find($id);
 
-        return view('home.admin.hukuman.edit', compact(['Hukuman']));
+        if ($hukuman === null) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('success','Invalid Target Data');
+
+        } else {
+            return view('home.admin.hukuman.edit', compact(['hukuman']));
+        }
     }
 
     public function update(Request $request, string $id)
     {
         $hukuman = Hukuman::find($id);
 
-        $hukuman->update($request->except(['_token']));
+        if ($hukuman === null) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('error','Invalid Target Data');
+                
+        }
 
-        return redirect('/hukuman');
+        $validated = $request->validate([
+            'hukuman' => 'required|string|max:100'
+        ]);
+
+        try {
+            $hukuman->update($validated);
+
+            return redirect()
+                ->route('hukuman.index')
+                ->with('success','Data Berhasil Diubah');
+    
+         } catch (\Throwable $th) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('error','Error Update Data');
+        }
     }
 
     public function destroy(string $id)
     {
         $hukuman = Hukuman::find($id);
-
-        $hukuman->delete();
-
-        return redirect('/hukuman');
+        
+        if ($hukuman === null) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('error','Invalid Target Data');
+        }
+        
+        try {
+            $hukuman->delete();
+    
+            return redirect()
+                ->route('hukuman.index')
+                ->with('success','Data Berhasil Dihapus');
+            
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('hukuman.index')
+                ->with('error','Error Store Data');
+        }
     }
 }
