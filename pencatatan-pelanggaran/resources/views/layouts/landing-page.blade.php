@@ -64,7 +64,7 @@
 				<li><a href ="#support">Support</a></li>
 				<li><a href ="#contact">Contact</a></li>
 			</ul>
-			<a href="{{route('login.user')}}" class="btn-login ">Login</a>
+			<a href="/login/user" class="btn-login ">Login</a>
 			<div class="toggle-btn ">
 				<i class="fas fa-solid fa-bars"></i>
 			</div>
@@ -75,7 +75,7 @@
 			<li><a href="#card-profile">About us</a></li>
 			<li><a href="#support">Support</a></li>
 			<li><a href="#contact">Contact</a></li>
-			<li><a href="{{route('login.user')}}" class="btn-login">Login</a></li>
+			<li><a href="/login/user" class="btn-login">Login</a></li>
 		</div>
 	</header>
 	<div class="hero" data-aos="fade-right">
