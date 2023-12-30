@@ -21,11 +21,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
 <!-- Include Tailwind CSS styles -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"/>
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 <link rel="stylesheet" href="{{asset('style.css')}}">
 <title>Aplikasi Pelanggaran</title>
@@ -66,7 +64,7 @@
 				<li><a href ="#support">Support</a></li>
 				<li><a href ="#contact">Contact</a></li>
 			</ul>
-			<a href="" class="btn-login ">Login</a>
+			<a href="{{route('login.user')}}" class="btn-login ">Login</a>
 			<div class="toggle-btn ">
 				<i class="fas fa-solid fa-bars"></i>
 			</div>
@@ -77,7 +75,7 @@
 			<li><a href="#card-profile">About us</a></li>
 			<li><a href="#support">Support</a></li>
 			<li><a href="#contact">Contact</a></li>
-			<li><a href="" class="btn-login">Login</a></li>
+			<li><a href="{{route('login.user')}}" class="btn-login">Login</a></li>
 		</div>
 	</header>
 	<div class="hero" data-aos="fade-right">

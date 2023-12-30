@@ -1,5 +1,11 @@
 * {
     font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    overflow: ;
 }
 header {
     position: sticky;
@@ -170,11 +176,10 @@ header.scrolled .nav .toggle-btn {
 
 .dropdown-menu li a {
     text-decoration: none;
-    color: inherit;
     position: relative;
 }
 
-.dropdown-menu li a::after {
+.dropdown-menu li ::after {
     content: "";
     position: absolute;
     height: 2px;
@@ -185,8 +190,8 @@ header.scrolled .nav .toggle-btn {
     transition: width 0.4s ease-in-out;
 }
 
-.dropdown-menu li a:hover::after,
-.dropdown-menu li a:active::after {
+.dropdown-menu li :hover::after,
+.dropdown-menu li :active::after {
     width: 100%;
 }
 
@@ -505,6 +510,7 @@ header.scrolled .nav .toggle-btn {
     padding: 0 10%;
     position: relative;
     margin-top: 600px;
+    overflow: hidden;
 }
 
 .w3-container h2 {
@@ -810,6 +816,16 @@ footer {
         margin-top: 3%;
         width: 25%;
         height: 25%;
+    }
+    .footer-social {
+        flex-direction: column;
+    }
+
+    .owner-footer {
+        margin-top: 20px;
+    }
+    .owner-footer a {
+        text-align: center;
     }
 }
 @media only screen and (max-width: 993px) {
