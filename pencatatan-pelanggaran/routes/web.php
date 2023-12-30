@@ -135,6 +135,8 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
         Route::get('/inbox', 'inbox')->name('review.inbox');
+        // 4
+        Route::get('/cancel/{opt}/{atr}', 'cancel')->name('review.cancel');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit');

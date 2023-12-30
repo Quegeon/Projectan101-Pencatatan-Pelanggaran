@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TempAturan extends Model
+class DetailAturan extends Model
 {
     use HasFactory;
+    // 10
     protected $fillable = [
-        'id',
-        'no_pelanggaran',
-        'id_aturan'
+        'id_aturan',
+        'no_pelanggaran'
     ];
 
     public function Aturan() {

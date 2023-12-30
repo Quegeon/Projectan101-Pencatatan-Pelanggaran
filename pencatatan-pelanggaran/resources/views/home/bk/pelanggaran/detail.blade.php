@@ -1,9 +1,11 @@
 @extends('layouts.master')
 @section('title', 'Pelanggaran')
 @section('content')
+
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Detail Data Pelanggaran</h4>
+            {{-- 17 --}}
+            <h4 class="page-title">Detail Data Pelanggaran - {{ $pelanggaran->Siswa->nama }}</h4>
             <div class="btn-group btn-group-page-header ml-auto">
                 <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,7 +25,8 @@
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
                     <div class="card-body">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan">Tambah Aturan</button>
+                        {{-- 14 --}}
+                        {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan">Tambah Aturan</button> --}}
                         <table class="mt-4 table table-bordered">
                             <thead>
                                 <tr>
@@ -35,11 +38,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- 18 --}}
+                                @foreach ($detailaturan as $a)
                                 <tr>
-                                    <td class="text-center">1</td>
-                                    <td>TIdak boleh telat</td>
-                                    <td>Membersihkan lingkungan sekolah</td>
-                                    <td class="text-center">6</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $a->Aturan->nama_aturan }}</td>
+                                    <td>{{ $a->Aturan->Hukuman->hukuman }}</td>
+                                    <td class="text-center">{{ $a->Aturan->poin }}</td>
                                     <td>
                                         <form action="{{ route('temp.destroy', 'id')}}" method="POST" class="d-inline">
                                             @csrf
@@ -48,11 +53,12 @@
                                         </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
-                                    <td colspan="2" class="text-center bg-warning text-white">6</td>
+                                    <td colspan="2" class="text-center bg-warning text-white">{{ $a->total_poin }}</td>
                                     {{-- <td class="bg-info"></td> --}}
                                 </tr>
                             </tfoot>
@@ -69,7 +75,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalAturan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- 15 --}}
+    {{-- <div class="modal fade" id="modalAturan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,7 +95,6 @@
                                     <option value="{{ $s->id }}">{{ $s->poin }} | {{ $s->nama_aturan }}</option>
                                 @endforeach
                             </select>
-                            {{-- <input list="siswa" type="text" name="nis" class="form-control" placeholder="Masukkan Nama Siswa"> --}}
                             @error('id_aturan')
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
                             @enderror
@@ -102,5 +108,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

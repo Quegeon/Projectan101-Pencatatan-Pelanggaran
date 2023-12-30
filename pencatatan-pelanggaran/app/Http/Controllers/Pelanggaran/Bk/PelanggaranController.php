@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pelanggaran\Bk;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,7 @@ use App\Models\Pelanggaran;
 use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Bk;
+use App\Models\DetailAturan;
 
 class PelanggaranController extends Controller
 {
@@ -73,28 +75,47 @@ class PelanggaranController extends Controller
         return view('home.bk.pelanggaran.create', $data);
     }
 
+
     public function store(Request $request)
     {
+        // 9
+
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
-            'keterangan' => 'required|max:255'
+            'keterangan' => 'required|max:255',
+            'no_pelanggaran' => 'required'
         ]);
 
-        // try {
-        $validated['id'] = Str::orderedUuid()->toString();
-        $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
-        $validated['tgl_pelanggaran'] = Carbon::today();
+        try {
+            $validated['id'] = Str::orderedUuid();
+            $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
+            $validated['tgl_pelanggaran'] = Carbon::today();
+            $validated['status'] = 'Beres';
+            // TODO: sum from tempaturan to total_poin
+            
+            TempAturan::query()
+                ->where('no_pelanggaran', $validated['no_pelanggaran'])
+                ->each(function($old) {
+                    $new = $old->replicate();
+                    $new->id = Str::orderedUuid();
+                    $new->setTable('detail_aturans');
+                    $new->save();
 
-        Pelanggaran::create($validated);
+                    $old->delete();
+                });
 
-        return redirect(url()->previous())
-            ->with('success', 'Data Berhasil Dibuat');
+            Pelanggaran::create($validated);
 
-        // } catch (\Throwable $th) {
-        //     return redirect()
-        //         ->route('dashboard.petugas')
-        //         ->with('error','Error Store Data');
-        // }
+            return redirect()
+                ->route('review.inbox')
+                ->with('success', 'Data Berhasil Dibuat');
+
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()
+                ->route('review.inbox')
+                ->with('error','Error Store Data');
+        }
     }
 
     public function edit(string $id)
@@ -122,11 +143,14 @@ class PelanggaranController extends Controller
 
     public function detail(string $id)
     {
+        $pelanggaran = Pelanggaran::find($id);
         $data = array(
-            'pelanggaran' => Pelanggaran::find($id),
+            'pelanggaran' => $pelanggaran,
             'aturan' => Aturan::all(),
             'siswa' => Siswa::all(),
-            'bk' => Bk::all()
+            'bk' => Bk::all(),
+            // 18
+            'detailaturan' => DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get()
         );
 
         if ($data['pelanggaran'] === null) {
@@ -236,17 +260,55 @@ class PelanggaranController extends Controller
     }
 
     public function temp_store(Request $request) {
-        $validated = $request->validate([
-            'id_aturan' => 'required'
+        // 3
+        $validated = Validator::make($request->all(), [
+            'id' => 'required',
+            'id_aturan' => 'required|unique:temp_aturans'
         ]);
-        $validated['no_pelanggaran'] = $request->no_pelanggaran;
-        TempAturan::create($validated);
+
+        if ($validated->fails()) {
+            return back()->with('error', 'Pelanggaran tidak boleh sama!');
+        }
+
+        $validated->getData()['no_pelanggaran'] = $request->no_pelanggaran;
+        $validated->getData()['id'] = $request->id;
+        TempAturan::create($validated->getData());
         return back()->with('success', 'Data berhasil dibuat');
     }
     
     public function temp_destroy($id) {
         TempAturan::find($id)->delete();
         return back()->with('success', 'Data berhasil dihapus');
+    }
+
+    // 5
+    public function cancel($opt, $atr) {
+        if($opt == 'kembali') {
+            TempAturan::query()
+                ->where('no_pelanggaran', $atr)
+                ->each(function($old) {
+                    $old->delete();
+                });
+
+            return redirect()
+                ->route('review.inbox')
+                ->with('success', 'Sukses membatalkan');
+        }
+
+        // ngambil ke sesion trus di loooping deh
+        TempAturan::query()
+            ->where('no_pelanggaran', $atr)
+            ->each(function($old) {
+                $new = $old->replicate();
+                $new->setTable(''); // detail_aturan
+                $new->save();
+
+                $old->delete();
+            });
+
+        return redirect()
+            ->route('review.inbox')
+            ->with('success', 'Sukses membatalkan edit');
     }
 
 }

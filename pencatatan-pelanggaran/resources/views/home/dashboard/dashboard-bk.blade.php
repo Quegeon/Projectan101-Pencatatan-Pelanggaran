@@ -172,6 +172,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    {{-- 11 --}}
                     <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i> Tambah Data</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
@@ -180,7 +181,6 @@
                                     <th>No</th>
                                     <th>Siswa</th>
                                     <th>Petugas</th>
-                                    <th>Aturan</th>
                                     <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -192,11 +192,11 @@
                                     <td align="center">{{$loop->iteration}}</td>
                                     <td>{{$k->Siswa->nama}}</td>
                                     <td>{{$k->User->nama}}</td>
-                                    <td>{{$k->Aturan->nama_aturan}}</td>
                                     <td>{{$k->keterangan}}</td>
                                     <td>{{$k->status}}</td>
                                     <td align="center" colspan="3">
-                                        <a class="btn btn-primary text-white" data-target="#{{ $k->id }}" data-toggle="modal"><i class="fas fa-info-circle mr-2"></i> Detail</a>
+                                        {{-- 13 --}}
+                                        <a class="btn btn-primary text-white" href="{{ route('review.detail', $k->id) }}"><i class="fas fa-info-circle mr-2"></i> Detail</a>
                                         <a target="_blank" class="btn btn-success" href="{{ route('receipt', ['id' => $k->id]) }}"><i class="fa fa-print"></i></a>
                                     </td>
                                 </tr>
@@ -211,7 +211,8 @@
 </div>
 
 <!-- Modal history -->
-@foreach ($history as $p)
+{{-- 12 --}}
+{{-- @foreach ($history as $p)
 <div class="modal fade" id="{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -255,5 +256,5 @@
         </div>
     </div>
 </div>
-@endforeach
+@endforeach --}}
 @endsection

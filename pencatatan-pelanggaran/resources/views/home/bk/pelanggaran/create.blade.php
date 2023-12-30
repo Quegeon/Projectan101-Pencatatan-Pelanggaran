@@ -11,7 +11,7 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Detail Data Pelanggaran</h4>
+            <h4 class="page-title">Create Data Pelanggaran</h4>
             <div class="btn-group btn-group-page-header ml-auto">
                 <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,13 +75,23 @@
                                 <option value="{{ $s->nis }}">{{ $s->nama }}</option>
                                 @endforeach
                             </select>
-
+                            @error('nis')
+                                <p class="text-danger timeout">{{ $message }}</p>
+                            @enderror
+                            
                             <label class="mt-3">Keterangan</label>
-                            <input type="text" placeholder="Masukan keterangan" class="my-3 form-control">
-
+                            <input type="text" name="keterangan" placeholder="Masukan keterangan" class="my-3 form-control">
+                            @error('keterangan')
+                                <p class="text-danger timeout">{{ $message }}</p>
+                            @enderror
+                            
                             <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
 
-                            <button type="submit" class="align-self-end w-25 btn btn-info">Proses</button>
+                            {{-- 2 --}}
+                            <div class="d-flex w-100 justify-content-end">
+                                <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'kembali', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
+                                <button type="submit" class="w-25 btn btn-info">Proses</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -114,6 +124,8 @@
                             @enderror
                         </div>
                         <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}"> 
+                        {{-- 8 --}}
+                        <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}"> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban"></i> Close</button>
