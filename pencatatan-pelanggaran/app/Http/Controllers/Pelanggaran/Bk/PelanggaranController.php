@@ -246,19 +246,23 @@ class PelanggaranController extends Controller
         $pelanggaran = Pelanggaran::find($id);
 
         if ($pelanggaran === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Invalid Target Data');
-        } else {
-            try {
-                $pelanggaran->delete();
-
-                return redirect(url()->previous())
-                    ->with('success', 'Data Berhasil Dihapus');
-            } catch (\Throwable $th) {
-                return redirect(url()->previous())
-                    ->with('error', 'Error Destroy Data');
-            }
         }
+            
+        try {
+            DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
+            $pelanggaran->delete();
+
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('success', 'Data Berhasil Dihapus');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error Destroy Data');
+        }
+    
     }
 
     public function printbk()
@@ -319,8 +323,7 @@ class PelanggaranController extends Controller
                 ->with('success', 'Sukses membatalkan');
         }
 
-        // ngambil ke sesion trus di loooping deh
-        // dd(cache('dataAwal'));
+        // ngambil ke cache trus di loooping deh
         $detailsToMove = cache('dataAwal');
 
         try {
