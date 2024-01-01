@@ -88,25 +88,42 @@ class PelanggaranController extends Controller
             'no_pelanggaran' => 'required',
             'total_poin' => 'required'
         ]);
+        $siswa = Siswa::find($validated['nis']);
 
         try {
             $validated['id'] = Str::orderedUuid();
             $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
             $validated['tgl_pelanggaran'] = Carbon::today();
             $validated['status'] = 'Beres';
+            $validated['id_bk'] = Auth()->User()->id;
             // TODO: sum from tempaturan to total_poin
+            $tempaturan = TempAturan::query()->where('no_pelanggaran', $validated['no_pelanggaran']);
             
-            TempAturan::query()
-                ->where('no_pelanggaran', $validated['no_pelanggaran'])
-                ->each(function($old) {
-                    $new = $old->replicate();
-                    $new->id = Str::orderedUuid();
-                    $new->setTable('detail_aturans');
-                    $new->save();
+            $tempaturan->each(function($old) {
+                $new = $old->replicate();
+                $new->id = Str::orderedUuid();
+                $new->setTable('detail_aturans');
+                $new->save();
 
-                    $old->delete();
-                });
+                $old->delete();
+            });
 
+            $poin = $siswa->poin + $validated['total_poin'];
+            $status = '';
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
             Pelanggaran::create($validated);
 
             return redirect()
@@ -244,6 +261,7 @@ class PelanggaranController extends Controller
     public function destroy($id)
     {
         $pelanggaran = Pelanggaran::find($id);
+        $siswa = Siswa::find($pelanggaran->nis);
 
         if ($pelanggaran === null) {
             return back()
@@ -251,6 +269,22 @@ class PelanggaranController extends Controller
         }
             
         try {
+            $poin = $siswa->poin - $pelanggaran->total_poin;
+            $status = '';
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
             DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
             $pelanggaran->delete();
 
