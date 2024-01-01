@@ -86,6 +86,7 @@
                             @enderror
                             
                             <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
+                            <input type="hidden" name="total_poin" value="{{ $total_poin }}"> 
 
                             {{-- 2 --}}
                             <div class="d-flex w-100 justify-content-end">

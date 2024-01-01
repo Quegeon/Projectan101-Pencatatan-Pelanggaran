@@ -56,7 +56,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ route('review.create') }}">
                         <i class="fas fa-file-signature"></i>
                         <p>Tambah Pelanggaran</p>
                     </a>

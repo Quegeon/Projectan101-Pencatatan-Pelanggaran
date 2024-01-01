@@ -18,6 +18,8 @@ use App\Models\DetailAturan;
 
 class PelanggaranController extends Controller
 {
+    private $dataAwal = [];
+
     public function inbox()
     {
         $data = array(
@@ -83,7 +85,8 @@ class PelanggaranController extends Controller
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
-            'no_pelanggaran' => 'required'
+            'no_pelanggaran' => 'required',
+            'total_poin' => 'required'
         ]);
 
         try {
@@ -107,7 +110,7 @@ class PelanggaranController extends Controller
             Pelanggaran::create($validated);
 
             return redirect()
-                ->route('review.inbox')
+                ->route('dashboard.bk')
                 ->with('success', 'Data Berhasil Dibuat');
 
         } catch (\Throwable $th) {
@@ -120,12 +123,33 @@ class PelanggaranController extends Controller
 
     public function edit(string $id)
     {
+        $pelanggaran = Pelanggaran::find($id);
         $data = array(
-            'pelanggaran' => Pelanggaran::find($id),
+            'pelanggaran' => $pelanggaran,
             'aturan' => Aturan::all(),
             'siswa' => Siswa::all(),
-            'bk' => Bk::all()
+            'bk' => Bk::all(),
+            'no_pelanggaran' => $pelanggaran->no_pelanggaran,
         );
+        
+        if(!cache()->has('dataAwal')) {
+            DetailAturan::query()
+                ->where('no_pelanggaran', $pelanggaran->no_pelanggaran)
+                ->each(function($old) {
+                    $new = $old->replicate();
+                    $new->id = Str::orderedUuid();
+                    $new->setTable('temp_aturans');
+                    $new->save();
+
+                    $cached = cache('dataAwal');
+                    $cached[] = $old;
+                    cache()->put('dataAwal', $cached);
+                    $old->delete();
+                });
+        }
+
+        // dd($this->dataAwal);
+        $data['tempaturan'] = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
 
         if ($data['pelanggaran'] === null) {
             return redirect(url()->previous())
@@ -137,7 +161,7 @@ class PelanggaranController extends Controller
             return redirect(url()->previous())
                 ->with('error', 'Reference Data Error');
         } else {
-            return view('home.bk.pelanggaran.review', $data);
+            return view('home.bk.pelanggaran.edit', $data);
         }
     }
 
@@ -296,19 +320,32 @@ class PelanggaranController extends Controller
         }
 
         // ngambil ke sesion trus di loooping deh
-        TempAturan::query()
-            ->where('no_pelanggaran', $atr)
-            ->each(function($old) {
-                $new = $old->replicate();
-                $new->setTable(''); // detail_aturan
-                $new->save();
+        // dd(cache('dataAwal'));
+        $detailsToMove = cache('dataAwal');
 
-                $old->delete();
-            });
+        try {
+            TempAturan::query()
+                ->where('no_pelanggaran', $atr)
+                ->each(function($old) {
+                    $old->delete();
+                });
+            
+            foreach ($detailsToMove as $detailCache) {
+                $details = new DetailAturan();
+                $details->id = Str::orderedUuid();
+                $details->fill($detailCache->toArray());
+                $details->save();
+            }
 
-        return redirect()
+            cache()->forget('dataAwal');
+
+            return redirect()
             ->route('review.inbox')
             ->with('success', 'Sukses membatalkan edit');
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
     }
 
 }

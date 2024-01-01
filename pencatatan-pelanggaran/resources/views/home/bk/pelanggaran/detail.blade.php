@@ -34,7 +34,6 @@
                                     <th>Aturan</th>
                                     <th>Hukuman</th>
                                     <th>Poin</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,30 +44,21 @@
                                     <td>{{ $a->Aturan->nama_aturan }}</td>
                                     <td>{{ $a->Aturan->Hukuman->hukuman }}</td>
                                     <td class="text-center">{{ $a->Aturan->poin }}</td>
-                                    <td>
-                                        <form action="{{ route('temp.destroy', 'id')}}" method="POST" class="d-inline">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger text-center">Hapus</button>
-                                        </form>
-                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
-                                    <td colspan="2" class="text-center bg-warning text-white">{{ $a->total_poin }}</td>
+                                    <td colspan="2" class="text-center bg-warning text-white">{{ $pelanggaran->total_poin }}</td>
                                     {{-- <td class="bg-info"></td> --}}
                                 </tr>
                             </tfoot>
                         </table>
-                        <form action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
-                            @csrf
-                            <label>Keterangan</label>
-                            <input type="text" value="{{ $pelanggaran->keterangan }}" placeholder="Masukan keterangan" class="my-3 form-control">
-                            <button type="submit" class="align-self-end w-25 btn btn-info">Proses</button>
-                        </form>
+                        <label>Keterangan</label>
+                        <input type="text" value="{{ $pelanggaran->keterangan }}" placeholder="Masukan keterangan" class="my-3 form-control" readonly>
+                        <a class="btn btn-danger float-right ml-2 text-white" onclick="confirmDel('{{ route('review.destroy', $pelanggaran->id) }}')"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-info float-right" href="{{ route('review.edit', $pelanggaran->id) }}">Edit Pelanggaran</a>
                     </div>
                 </div>
             </div>
