@@ -51,14 +51,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Histori Pelanggaran Yang Terjadi 7 Hari</div>
+                        <div class="card-title">Histori Pelaporan Pelanggaran</div>
                         <div class="card-tools">
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-                                <span class="btn-label">
-                                    <i class="fa fa-pencil"></i>
-                                </span>
-                                Export
-                            </a>
                             <a href="#" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">
                                     <i class="fa fa-print"></i>
@@ -87,17 +81,12 @@
                                 <td>{{$k->User->nama}}</td>
                                 <td>{{$k->status}}</td>
                                 <td align="center" colspan="3">
-                                    <a class="btn btn-primary text-white" data-target="#{{ $k->id }}" data-toggle="modal"><i class="fa fa-circle-info"></i> Detail</a>
+                                    <a class="btn btn-primary text-white" data-target="#{{ $k->id }}" data-toggle="modal"><i class="fa fa-info-circle mr-2"></i> Detail</a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="chart-container" style="min-height: 375px">
-                        <canvas id="statisticsChart">
-                        </canvas>
-                    </div>
-                    <div id="myChartLegend"></div>
                 </div>
             </div>
         </div>
@@ -115,37 +104,40 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="">Siswa</label>
-                    <input type="text" class="form-control" value="{{ $p->Siswa->nis }} | {{ $p->Siswa->nama }} | {{ $p->Siswa->Kelas->nama_kelas }}" readonly>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Siswa</label>
+                            <input type="text" class="form-control" value="{{ $p->nis }} | {{ $p->Siswa->nama }} | {{ $p->Siswa->Kelas->nama_kelas }}" readonly>    
+                        </div>
+                    </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Petugas</label>
-                            <input type="text" name="id_user" class="form-control" value="{{ $p->User->nama }}" readonly>
+                            <label>Petugas</label>
+                            <input type="text" class="form-control" value="{{ $p->User->nama }}" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Tanggal</label>
-                            <input type="text" class="form-control" value="{{$p->tgl_pelanggaran}}" readonly>
+                            <label>Tanggal Pelanggaran</label>
+                            <input type="text" class="form-control" value="{{ $p->tgl_pelanggaran }}" readonly>
                         </div>
                     </div>
                 </div>
-              
-                <div class="form-group">
-                    <label for="">Keterangan</label>
-                    <input type="text" name="keterangan" id="keterangan" class="form-control" value="{{ $p->keterangan }}" readonly>
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="tgl_pelanggaran" value="{{ date('Y-m-d') }}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <input type="text" class="form-control" value="{{ $p->keterangan }}" readonly>    
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('laporan.edit', (string) $p->id) }}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                <a  onclick="confirmDel('{{ route('laporan.destroy',  (string) $p->id) }}')" class="btn btn-secondary text-white"><i class="fa fa-trash"></i></a>
+                <a href="{{ route('laporan.edit', (string) $p->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                <a  onclick="confirmDel('{{ route('laporan.destroy',  (string) $p->id) }}')" class="btn btn-danger text-white"><i class="fa fa-trash"></i></a>
             </div>
         </div>
     </div>
@@ -191,7 +183,7 @@
 
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href=" {{ route('kelas.index') }} " class="card-link"> 
+            <a href="{{ route('kelas.index') }}" class="card-link"> 
                 <div class="card-body ">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -266,7 +258,7 @@
                             <div class="numbers">
                                 <p class="card-category">Jumlah Pelanggaran</p>
                                 <h4 class="card-title">
-                                    @if ($total_bulan->total_pelanggaran == null)
+                                    @if ($total_bulan->total_pelanggaran === null)
                                     0 
                                     @else
                                     {{$total_bulan->total_pelanggaran}}
@@ -287,12 +279,6 @@
                     <div class="card-head-row">
                         <div class="card-title">Histori Pelanggaran Yang Terjadi 7 Hari</div>
                         <div class="card-tools">
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-                                <span class="btn-label">
-                                    <i class="fa fa-pencil"></i>
-                                </span>
-                                Export
-                            </a>
                             <a href="{{ route('laporan.print') }}" target="_blank" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">
                                     <i class="fa fa-print"></i>
@@ -321,25 +307,18 @@
                             @foreach ($pelanggaran_admin as $k)
                             <tr>
                                 <td align="center">{{ $loop->iteration }}</td>
-                                <td>{{ optional($k->Siswa)->nama ?? "Kosong" }}</td>
-                                <td>{{ optional($k->Aturan)->nama_aturan ?? "Kosong" }}</td>
-                                <td>{{ optional($k->Bk)->nama ?? "Kosong" }}</td>
-                                <td>{{ optional($k->User)->nama ?? "Kosong" }}</td>
+                                <td>{{ ($k->Siswa)->nama ?? "Kosong" }}</td>
+                                <td>{{ ($k->Aturan)->nama_aturan ?? "Kosong" }}</td>
+                                <td>{{ ($k->Bk->nama) ?? "Kosong" }}</td>
+                                <td>{{ ($k->User->nama) ?? "Kosong" }}</td>
                                 <td>{{ $k->tgl_pelanggaran }}</td>
                                 <td>{{ $k->keterangan }}</td>
                                 <td>{{ $k->status }}</td>
-                                <td>{{ optional($k)->total_poin ?? "Kosong" }}</td>
+                                <td>{{ ($k->total_poin) ?? "Kosong" }}</td>
                             </tr>
-                        @endforeach
-                        
-                        
+                            @endforeach                        
                         </tbody>
                     </table>
-                    <div class="chart-container" style="min-height: 375px">
-                        <canvas id="statisticsChart">
-                        </canvas>
-                    </div>
-                    <div id="myChartLegend"></div>
                 </div>
             </div>
         </div>
