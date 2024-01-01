@@ -84,9 +84,9 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ route('laporan.create') }}">
                         <i class="fas fa-file-signature"></i>
-                        <p>Tambah Pelanggaran</p>
+                        <p>Tambah Laporan</p>
                     </a>
                 </li>
                 <li class="nav-item">
