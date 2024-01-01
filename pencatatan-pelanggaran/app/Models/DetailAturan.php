@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetailAturan extends Model
 {
     use HasFactory;
+    protected $keyType = 'string';
     // 10
     protected $fillable = [
         'id_aturan',

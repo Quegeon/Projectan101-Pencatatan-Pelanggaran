@@ -125,6 +125,7 @@ class PelanggaranController extends Controller
 
             $siswa->update(['poin' => $poin, 'status' => $status]);
             Pelanggaran::create($validated);
+            cache()->forget('dataAwal');
 
             return redirect()
                 ->route('dashboard.bk')
@@ -214,48 +215,56 @@ class PelanggaranController extends Controller
 
         if ($pelanggaran === null) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard.bk')
                 ->with('error', 'Invalid Target Data');
-        } else {
-            $validated = $request->validate([
-                'nis' => 'required|max:99999999999|numeric',
-                'keterangan' => 'required|max:255',
-                'id_aturan' => 'required',
-                'total_poin' => 'required'
-            ]);
-            $siswa = Siswa::find($validated['nis']);
-
-            try {
-                $validated['status'] = 'Beres';
-                $validated['id_bk'] = Auth::User()->id;
-                $pelanggaran->update($validated);
-
-                $poin = $siswa->poin + $validated['total_poin'];
-                $status = '';
-
-                if ($poin >= 0 && $poin <= 25) {
-                    $status = "Baik";
-                } elseif ($poin > 25 && $poin <= 50) {
-                    $status = "Kurang Baik";
-                } elseif ($poin > 50 && $poin <= 75) {
-                    $status = "Buruk";
-                } elseif ($poin > 75 && $poin <= 100) {
-                    $status = "Sangat Buruk";
-                } else {
-                    $status = "Undefined Status";
-                }
-
-                $siswa->update(['poin' => $poin, 'status' => $status]);
-
-                return redirect()
-                    ->route('dashboard.bk')
-                    ->with('success', 'Data Berhasil Diubah');
-            } catch (\Throwable $th) {
-                return redirect()
-                    ->route('dashboard.bk')
-                    ->with('error', 'Error Update Data');
-            }
         }
+        $validated = $request->validate([
+            'nis' => 'required|max:99999999999|numeric',
+            'keterangan' => 'required|max:255',
+            'total_poin' => 'required'
+        ]);
+        $siswa = Siswa::find($validated['nis']);
+
+        try {
+            $pelanggaran->update($validated);
+            $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
+            
+            $tempaturan->each(function($old) {
+                $new = $old->replicate();
+                $new->id = Str::orderedUuid();
+                $new->setTable('detail_aturans');
+                $new->save();
+
+                $old->delete();
+            });
+
+            $poin = $siswa->poin + $validated['total_poin'];
+            $status = '';
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
+            cache()->forget('dataAwal');
+
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('success', 'Data Berhasil Diubah');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error Update Data');
+        }
+        
     }
 
     public function destroy($id)

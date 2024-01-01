@@ -11,7 +11,7 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Create Data Pelanggaran</h4>
+            <h4 class="page-title">Edit Data Pelanggaran</h4>
             <div class="btn-group btn-group-page-header ml-auto">
                 <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +67,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <form action="{{ route('review.store') }}" class="d-flex flex-column" method="POST">
+                        <form action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
                             @csrf
                             <label class="mb-3">Siswa</label>
                             <select name="nis" class="select-search-no-modal">
@@ -80,7 +80,7 @@
                             @enderror
                             
                             <label class="mt-3">Keterangan</label>
-                            <input type="text" name="keterangan" placeholder="Masukan keterangan" class="my-3 form-control">
+                            <input type="text" name="keterangan" value="{{ $pelanggaran->keterangan }}" placeholder="Masukan keterangan" class="my-3 form-control">
                             @error('keterangan')
                                 <p class="text-danger timeout">{{ $message }}</p>
                             @enderror

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TempAturan extends Model
 {
     use HasFactory;
+    protected $keyType = 'string';
     protected $fillable = [
         'id',
         'no_pelanggaran',
