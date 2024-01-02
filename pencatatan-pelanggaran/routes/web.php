@@ -32,6 +32,8 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 |
 */
 
+Route::view('/', 'layouts.landing-page');
+
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
 Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('postlogin.user');
