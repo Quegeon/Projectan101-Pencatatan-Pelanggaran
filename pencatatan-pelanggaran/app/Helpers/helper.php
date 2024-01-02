@@ -2,6 +2,7 @@
 
 function IDGenerator($model, $trow, $length = 4, $prefix) {
     $data = $model::orderBy('id', 'desc')->first(); // DV-0002
+    // dd($data);
 
     if(!$data) {
         $code_length = $length - 1;

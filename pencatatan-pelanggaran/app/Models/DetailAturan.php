@@ -18,4 +18,9 @@ class DetailAturan extends Model
     public function Aturan() {
         return $this->belongsTo(Aturan::class, 'id_aturan', 'id');
     }
+
+    public function Detail () 
+    {
+        return $this->hasMany(Pelanggaran::class, 'no_pelanggaran', 'no_pelanggaran');
+    }
 }

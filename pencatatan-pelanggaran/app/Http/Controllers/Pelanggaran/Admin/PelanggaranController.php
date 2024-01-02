@@ -10,6 +10,7 @@ use App\Models\Pelanggaran;
 use App\Models\Aturan;
 use App\Models\Siswa;
 use App\Models\Bk;
+use App\Models\TempAturan;
 use Carbon\Carbon;
 
 class PelanggaranController extends Controller
@@ -21,6 +22,7 @@ class PelanggaranController extends Controller
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
+            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP')
         );
 
         if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
@@ -36,11 +38,10 @@ class PelanggaranController extends Controller
     {
         $validated = $request->validate([
             'nis' => 'required', 
-            'id_aturan' => 'required',
             'id_bk' => 'required',
+            'no_pelanggaran' => 'required',
             'keterangan' => 'required|string|max:255',
-            'total_poin' => 'required|numeric|max:100',
-            'status' => 'required',
+            'status' => 'required'
         ]);        
         
         try {
@@ -61,17 +62,30 @@ class PelanggaranController extends Controller
         }
 
     }
+
+    public function detail(string $id)
+    {
+        $pelanggaran = Pelanggaran::find($id);
+
+        if ($pelanggaran === null) {
+            return back()
+                ->with('error','Reference Data Error');
+        }
+
+        return view('home.admin.pelanggaran.detail', compact(['pelanggaran']));
+    }
     
     public function edit(string $id)
     {
+        $pelanggaran = Pelanggaran::find($id);
         $data = array(
-            'pelanggaran' => Pelanggaran::find($id),
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
+            'tempaturan' => TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get()
         );
 
-        if ($data['pelanggaran'] === null) {
+        if ($pelanggaran === null) {
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Invalid Target Data');
@@ -83,7 +97,7 @@ class PelanggaranController extends Controller
                 ->with('error', 'Reference Data Error');
         }
 
-        return view('home.admin.pelanggaran.edit', $data);
+        return view('home.admin.pelanggaran.edit', $data, compact(['pelanggaran']));
     }
     
     public function update(Request $request, string $id)
@@ -98,7 +112,6 @@ class PelanggaranController extends Controller
 
         $validated = $request->validate([
             'nis' => 'required', 
-            'id_aturan' => 'required',
             'id_bk' => 'required',
             'keterangan' => 'required|string|max:255',
             'total_poin' => 'required|numeric|max:100',
@@ -107,6 +120,33 @@ class PelanggaranController extends Controller
         ]);  
 
         try {
+            $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
+            $tempaturan->each(function($old){
+                $new = $old->replicate();
+                $new->id = Str::orderedUuid();
+                $new->setTable('detail_aturans');
+                $new->save();
+
+                $old->delete();
+            });
+
+            $siswa = Siswa::find($validated['nis']);
+            ($siswa->poin + $validated['total_poin'] > 100) ? $poin = 100 : $poin = $siswa->poin + $validated['total_poin'];
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
+
             $pelanggaran->update($validated);
 
             return redirect()

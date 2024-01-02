@@ -7,6 +7,8 @@ use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelang
 use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
 use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewPelanggaran;
 
+use App\Http\Controllers\Pelanggaran\Temporary\TempController as TempController;
+
 use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use App\Http\Controllers\Siswa\SiswaController as KelolaSiswa;
 use App\Http\Controllers\UserController as KelolaPetugas;
@@ -38,6 +40,11 @@ Route::post('/postlogin/user',[LoginController::class,'postlogin_user'])->name('
 Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('postlogin.bk');
 Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logout.user');
 Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout');
+
+Route::prefix('temp')->controller(TempController::class)->group(function() {
+    Route::post('/store', 'temp_store')->name('temp.store');
+    Route::delete('/{id}/destroy', 'temp_destroy')->name('temp.destroy');
+});
 
 Route::group(["husen ganteng"],function () {
     Route::group(['middleware' => ['auth', 'level:Admin']], function() {
@@ -103,6 +110,7 @@ Route::group(["husen ganteng"],function () {
         Route::prefix('kelola_pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
             Route::get('/', 'index')->name('pelanggaran.index');
             Route::post('/store', 'store')->name('pelanggaran.store');
+            Route::get('/detail', 'detail')->name('pelanggaran.detail');
             Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');
             Route::post('/{id}/update', 'update')->name('pelanggaran.update');
             Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
@@ -150,9 +158,5 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
         Route::post('/update', 'update_profile')->name('profile.bk.update');
         Route::post('/change_password', 'change_password')->name('profile.bk.change_password');
-    });
-    Route::prefix('temp')->controller(ReviewPelanggaran::class)->group(function() {
-        Route::post('/store', 'temp_store')->name('temp.store');
-        Route::delete('/{id}/destroy', 'temp_destroy')->name('temp.destroy');
     });
 });

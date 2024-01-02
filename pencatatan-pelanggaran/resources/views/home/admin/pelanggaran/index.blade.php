@@ -77,7 +77,7 @@
                 <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Siswa</label>
                                 <select name="nis" class="select-search">
@@ -87,37 +87,6 @@
                                     @endforeach
                                 </select>
                                 @error('nis')
-                                    <p class="text-danger timeout">* {{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>BK</label>
-                                <select class="select-search" name="id_bk">
-                                    <option></option>
-                                    @foreach ($bk as $b)
-                                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_bk')
-                                    <p class="text-danger timeout">* {{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Aturan</label>
-                                <select name="id_aturan" onchange="displayPoint({{ $aturan }}, this)" class="select-search">
-                                    <option></option>
-                                    @foreach ($aturan as $s)
-                                        <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_aturan')
                                     <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             </div>
@@ -139,8 +108,16 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Poin</label>
-                                <input type="text" name="total_poin" id="poin" class="form-control" value="" readonly>
+                                <label>BK</label>
+                                <select class="select-search" name="id_bk">
+                                    <option></option>
+                                    @foreach ($bk as $b)
+                                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('id_bk')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -153,6 +130,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>

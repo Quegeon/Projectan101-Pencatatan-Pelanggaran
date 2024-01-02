@@ -32,7 +32,7 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#submenu">
                         <i class="fas fa-table"></i>
-                        <p>Kelola Data</p>
+                        <p>Menu</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="submenu">

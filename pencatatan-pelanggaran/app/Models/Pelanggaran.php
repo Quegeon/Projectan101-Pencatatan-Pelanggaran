@@ -14,7 +14,6 @@ class Pelanggaran extends Model
     protected $fillable = [
         'id',
         'nis',
-        'id_aturan',
         'id_user',
         'id_bk',
         'no_pelanggaran',
@@ -23,11 +22,6 @@ class Pelanggaran extends Model
         'status',
         'total_poin',
     ];
-
-    public function Aturan()
-    {
-        return $this->belongsTo(Aturan::class, 'id_aturan', 'id');
-    }
 
     public function User()
     {
@@ -42,5 +36,10 @@ class Pelanggaran extends Model
     public function Siswa()
     {
         return $this->belongsTo(Siswa::class, 'nis', 'nis');
+    }
+
+    public function Detail () 
+    {
+        return $this->hasMany(Pelanggaran::class, 'no_pelanggaran', 'no_pelanggaran');
     }
 }
