@@ -81,7 +81,7 @@
 	<div class="hero" data-aos="fade-right">
 		<div class="hero-body">
 			<h1>APLIKASI PELANGGARAN SISWA</h1>
-			<p>aplikasi ini dibuat untuk memudahkan petugas atau guru piket mencatat siswa yang melanggar</p>
+			<p>Aplikasi ini dirancang untuk menggantikan metode manual pencatatan point pelanggaran siswa di SMK MARHAS MARGAHAYU</p>
 			<a href="#" class="full-width-button"><i class="fas fa-solid fa-play"></i> Lihat Video</a>
 		</div>
 	</div>
@@ -95,36 +95,31 @@
 			<h2>Tampilan Halaman</h2>
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/bk-hanya-bisa-melihat-data.png" onclick="openModal('/foto/bk-hanya-bisa-melihat-data.png','blablabalbalbaablal')">
+			<img class="mySlides" src="/foto/bk-hanya-bisa-melihat-data.png" onclick="openModal('/foto/bk-hanya-bisa-melihat-data.png','Dashboard BK, disini BK hanya bisa melihat data siswa yang melanggar')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/dashboard-bk-versi-2.png" onclick="openModal('/foto/dashboard-bk-versi-2.png','lorem')">
-			<div class="detail-text">Klik untuk lebih lengkap</div>
-			
-		</div>
-		<div class="image-container">
-			<img class="mySlides" src="/foto/dashboard-bk.png" onclick="openModal('/foto/dashboard-bk.png','blablabalbalbaablal')">
+			<img class="mySlides" src="/foto/dashboard-bk-versi-2.png" onclick="openModal('/foto/dashboard-bk-versi-2.png','Dashboard Utama BK, disini adalah halaman utama yaitu dahboard dan BK bisa melihat detail dari data siswa')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 			
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/dashboard-petugas.png" onclick="openModal('/foto/dashboard-petugas.png','blablabalbalbaablal')">
+			<img class="mySlides" src="/foto/dashboard-petugas.png" onclick="openModal('/foto/dashboard-petugas.png','Dashboard Petugas, ini adalah tampilan dashboard untuk petugas yaitu guru piket maupun pihak OSIS')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 			
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/inbox-bk.png" onclick="openModal('/foto/inbox-bk.png','blablabalbalbaablal')">
+			<img class="mySlides" src="/foto/inbox-bk.png" onclick="openModal('/foto/inbox-bk.png','Inbox BK, halaman ini untuk BK melihat laporan dari pelapor')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 			
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/login.png" onclick="openModal('/foto/login.png','blablabalbalbaablal')">
+			<img class="mySlides" src="/foto/login.png" onclick="openModal('/foto/login.png','Halaman Login, Sebelum anda memasuki halaman utama, adnda harus login terlebih dahulu sesuai dengan level anda, dan masukan username dan password sudah di berikan oleh admin.')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 			
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/memproses-laporan.png" onclick="openModal('/foto/memproses-laporan.png','blablabalbalbaablal')">
+			<img class="mySlides" src="/foto/memproses-laporan.png" onclick="openModal('/foto/memproses-laporan.png','Halaman Membuat Laporan, halaman ini untuk mencatat siswa yang melanggar, dan jika catatan dikirim maka akan tampil di inbox BK')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 		
 		</div>
@@ -189,7 +184,7 @@
 					<img src="/foto/foto-non-color/1.png" data-src="/foto/foto-color/1.png" alt="">
 					<div class="tittle-profile">
 						<h2>Yasel</h2>
-						<p>Dokumentation</p>
+						<p>Documentation</p>
 					</div>
 				</div>
 			</div>
@@ -221,7 +216,7 @@
 	<div class="footer-content">
 			<div class="footer-image">
 				<img src="/foto/mataw1.png" alt="">
-				<p>MATA adalah sebuah nama group yang beranggotakan 6 orang yang ditugaskan membuat sebuah aplikasi untuk sekolah</p>
+				<p>MATA adalah singkatan dari Marhas Technology Assosiation, yang beranggotakan 6 orang yang ditugaskan membuat sebuah aplikasi untuk sekolah</p>
 			</div>
 			<div class="footer-social">
 				<div class="mata-footer">
@@ -230,12 +225,12 @@
 				</div>
 				<div class="owner-footer">
 					<p>Social Media</p>
-					<a class="text-left pointer" href=""><i class="fa fa-instagram"></i>  Aldy</a>
-					<a class="text-left pointer" href=""><i class="fa fa-instagram"></i>  Maulana</a>
-					<a class="text-left pointer" href=""><i class="fa fa-instagram"></i>  Rafly</a>
-					<a class="text-left pointer" href=""><i class="fa fa-instagram"></i>  Ghifari</a>
-					<a class="text-left pointer" href=""><i class="fa fa-instagram"></i>  Yasel</a>
-					<a class="text-left pointer" href=""><i class="fa fa-instagram"></i>  Bintang</a>
+					<a class="text-left pointer" href="https://www.instagram.com/aldyaditiah/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Aldy</a>
+					<a class="text-left pointer" href="https://www.instagram.com/maulhusen_/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Maulana</a>
+					<a class="text-left pointer" href="https://www.instagram.com/raflisodri67/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Rafly</a>
+					<a class="text-left pointer" href="https://www.instagram.com/ghvvari/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Ghifari</a>
+					<a class="text-left pointer" href="https://www.instagram.com/mhyshelf/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Yasel</a>
+					<a class="text-left pointer" href="https://www.instagram.com/sstarrr4_/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Bintang</a>
 				</div>
 			</div>
 		</div>
