@@ -4,7 +4,7 @@
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">Dashboard</h4>
-        <div class="btn-group btn-group-page-header ml-auto">
+        {{-- <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
             </button>
@@ -16,7 +16,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
             </div>
-        </div>
+        </div> --}}
     </div>
     <style>
         .card-link:hover {
@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="#" class="card-link"> 
+            <a href="{{ route('view_siswa') }}" class="card-link"> 
                 <div class="card-body ">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -57,7 +57,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="#" class="card-link"> 
+            <a href="{{ route('view_aturan') }}" class="card-link"> 
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -78,7 +78,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="#" class="card-link"> 
+            <a href="{{ route('review.inbox') }}" class="card-link"> 
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -173,7 +173,7 @@
                 </div>
                 <div class="card-body">
                     {{-- 11 --}}
-                    <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i> Tambah Data</a>
+                    {{-- <a href=" " class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus"></i> Tambah Data</a> --}}
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>

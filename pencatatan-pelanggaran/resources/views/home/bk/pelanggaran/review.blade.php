@@ -11,7 +11,7 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title">Create Data Pelanggaran</h4>
+            <h4 class="page-title"> Data Pelanggaran</h4>
             <div class="btn-group btn-group-page-header ml-auto">
                 <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,7 +31,7 @@
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
                     <div class="card-body">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan">Tambah Aturan</button>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i> Tambah Aturan</button>
                         <table class="mt-4 table table-bordered">
                             <thead>
                                 <tr>
@@ -53,7 +53,7 @@
                                         <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger text-center">Hapus</button>
+                                            <button type="submit" class="btn btn-danger text-center"><i class="fa fa-trash mr-2"></i> Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -70,28 +70,24 @@
                         <form action="{{ route('review.store') }}" class="d-flex flex-column" method="POST">
                             @csrf
                             <label class="mb-3">Siswa</label>
-                            <select name="nis" class="select-search-no-modal">
-                                @foreach($siswa as $s)
-                                <option value="{{ $s->nis }}">{{ $s->nama }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
                             @error('nis')
                                 <p class="text-danger timeout">{{ $message }}</p>
                             @enderror
                             
                             <label class="mt-3">Keterangan</label>
-                            <input type="text" name="keterangan" placeholder="Masukan keterangan" class="my-3 form-control">
+                            <input type="text" name="keterangan" placeholder="Masukan keterangan" class="my-3 form-control" value="{{ $pelanggaran->keterangan }}">
                             @error('keterangan')
                                 <p class="text-danger timeout">{{ $message }}</p>
                             @enderror
                             
-                            <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
+                            <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}">
                             <input type="hidden" name="total_poin" value="{{ $total_poin }}"> 
 
                             {{-- 2 --}}
                             <div class="d-flex w-100 justify-content-end">
-                                <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'kembali', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
-                                <button type="submit" class="w-25 btn btn-info">Proses</button>
+                                <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'kembali', 'atr' => $pelanggaran->no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary"><i class="fa fa-ban mr-2"></i> Kembali</button>
+                                <button type="submit" class="w-25 btn btn-info"><i class="fa fa-file-signature mr-2"></i> Proses</button>
                             </div>
                         </form>
                     </div>
@@ -124,7 +120,7 @@
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
                             @enderror
                         </div>
-                        <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}"> 
+                        <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}"> 
                         {{-- 8 --}}
                         <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}"> 
                 </div>

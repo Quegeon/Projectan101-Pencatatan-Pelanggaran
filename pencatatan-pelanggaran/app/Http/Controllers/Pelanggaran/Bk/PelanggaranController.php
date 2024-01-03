@@ -15,6 +15,8 @@ use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Bk;
 use App\Models\DetailAturan;
+use Illuminate\Support\Arr;
+use SebastianBergmann\Template\Template;
 
 class PelanggaranController extends Controller
 {
@@ -65,7 +67,8 @@ class PelanggaranController extends Controller
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
-            'tempaturan' => TempAturan::where('no_pelanggaran', $no_pelanggaran)->get()
+            'tempaturan' => TempAturan::where('no_pelanggaran', $no_pelanggaran)->get(),
+            'tgl_pelanggaran' => Carbon::today()
         );
 
         if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
@@ -170,17 +173,39 @@ class PelanggaranController extends Controller
         $data['tempaturan'] = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
 
         if ($data['pelanggaran'] === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Invalid Target Data');
         }
 
 
         if ($data['siswa']->first() === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Reference Data Error');
         } else {
             return view('home.bk.pelanggaran.edit', $data);
         }
+    }
+
+    public function review(string $id) {
+        $pelanggaran = Pelanggaran::find($id);
+        $data = array(
+            'pelanggaran' => $pelanggaran,
+            'aturan' => Aturan::all(),
+            'siswa' => Siswa::find($pelanggaran->nis),
+            'tempaturan' => TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get()
+        );
+
+        if ($data['pelanggaran'] === null) {
+            return back()
+                ->with('error', 'Invalid Target Data');
+        }
+
+        if ($data['siswa'] === null) {
+            return back()
+                ->with('error', 'Reference Data Error');
+        }
+
+        return view('home.bk.pelanggaran.review', $data);
     }
 
     public function detail(string $id)
@@ -191,18 +216,17 @@ class PelanggaranController extends Controller
             'aturan' => Aturan::all(),
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
-            // 18
             'detailaturan' => DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get()
         );
 
         if ($data['pelanggaran'] === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Invalid Target Data');
         }
 
 
         if ($data['siswa']->first() === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Reference Data Error');
         } else {
             return view('home.bk.pelanggaran.detail', $data);
