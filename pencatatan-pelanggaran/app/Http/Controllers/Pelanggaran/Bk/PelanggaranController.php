@@ -233,6 +233,64 @@ class PelanggaranController extends Controller
         }
     }
 
+    public function proses(Request $request, string $id)
+    {
+        $pelanggaran = Pelanggaran::find($id);
+
+        if ($pelanggaran === null) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Invalid Target Data');
+        }
+        $validated = $request->validate([
+            'nis' => 'required|max:99999999999|numeric',
+            'keterangan' => 'required|max:255',
+            'total_poin' => 'required'
+        ]);
+        $siswa = Siswa::find($validated['nis']);
+
+        try {
+            $pelanggaran->update($validated);
+            $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
+            
+            $tempaturan->each(function($old) {
+                $new = $old->replicate();
+                $new->id = Str::orderedUuid();
+                $new->setTable('detail_aturans');
+                $new->save();
+
+                $old->delete();
+            });
+
+            $poin = $siswa->poin + $validated['total_poin'];
+            $status = '';
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
+            cache()->forget('dataAwal');
+
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('success', 'Data Berhasil Diubah');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error Update Data');
+        }
+        
+    }
+
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);

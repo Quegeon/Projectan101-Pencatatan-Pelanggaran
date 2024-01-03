@@ -67,9 +67,10 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <form action="{{ route('review.store') }}" class="d-flex flex-column" method="POST">
+                        <form action="{{ route('review.proses', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
                             @csrf
                             <label class="mb-3">Siswa</label>
+                            <input type="hidden" name="nis" class="form-control" value="{{ $pelanggaran->nis }}" readonly>
                             <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
                             @error('nis')
                                 <p class="text-danger timeout">{{ $message }}</p>
