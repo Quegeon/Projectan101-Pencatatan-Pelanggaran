@@ -1,26 +1,31 @@
 # APLIKASI PENCATATAN PELANGGARAN
 
-## Deskripsi Proyek
+## Pendahuluan
 
 Aplikasi pencatatan pelanggaran sekolah dibangun untuk memudahkan Pihak sekolah  dalam mencatat, mengelola, dan menentukan tingkat tindakan pelanggaran yang dilakukan oleh siswa. Tujuan dari aplikasi ini adalah untuk meningkatkan efisiensi dalam mengelola catatan pelanggaran, memudahkan tingkat penindakan, memberikan informasi yang lebih transparan serta mengantisipasi kehilangan buku catatan pelanggaran kepada semua pihak yang terlibat.
 
-## Fitur-Fitur
+## Fitur Aplikasi
 
 ### 1. Manajemen Pengguna
-- **Autentikasi Pengguna**: Sistem login yang aman untuk admin, guru, dan staf sekolah dengan kredensial yang unik.
+- **Autentikasi Pengguna**: Sistem login yang aman untuk petugas dan guru bk dengan kredensial yang khusus.
 - **Pengaturan Akses**: Pengaturan level akses yang memungkinkan setiap pengguna mengakses fungsi sesuai dengan peran dan tanggung jawabnya.
 
 ### 2. Pencatatan Pelanggaran
-- **Formulir Pencatatan Pelanggaran**: Formulir yang menyediakan bidang-bidang untuk mencatat detail pelanggaran seperti nama siswa, jenis pelanggaran, waktu, lokasi, dan keterangan tambahan.
+- **Formulir Pencatatan Pelanggaran**: Formulir yang menyediakan bidang-bidang untuk mencatat detail pelanggaran seperti nama siswa, jenis pelanggaran, dan keterangan tambahan.
 - **Kategori Pelanggaran**: Pengelompokkan pelanggaran berdasarkan jenis, seperti keterlambatan, kenakalan, atau pelanggaran disiplin lainnya.
+- **Tingkat penindakan**: pengelompokan tindakan atau konsekuensi yang diambil oleh guru bk sebagai respons terhadap pelanggaran atau perilaku yang tidak sesuai dari siswa.
 
 ### 3. Manajemen Data Pelanggaran
-- **Tampilan dan Edit Pelanggaran**: Tampilan daftar pelanggaran yang ada dan kemampuan untuk mengedit data jika diperlukan.
-- **Hapus Pelanggaran**: Fasilitas untuk menghapus catatan pelanggaran yang tidak relevan atau sudah tidak diperlukan.
+- **Data Petugas**: Merujuk pada proses manajemen informasi identitas, kredensial masuk, hak akses, riwayat aktivitas, manajemen profil serta keamanan data.
+- **Data Siswa**: Merujuk pada proses mengelola informasi yang terkait dengan siswa yang terlibat dalam pelanggaran di lingkungan sekolah. Ini mencakup: identitas siswa, informasi pelaku, kontak orangtua, privasi dan keamanan data.
+- **Data Guru Bk**: Merujuk pada proses manajemen informasi yang terkait dengan peran guru BK dalam pemantauan, mendokumentasikan, dan mengelola pelanggaran siswa. Ini mencakup: identitas guru bk, keterlibatan dalam penanganan pelanggaran dan analisis.
+- **Data Aturan**: Melibatkan manajemen informasi terkait dengan peraturan atau kebijakan yang diterapkan di lingkungan sekolah untuk memandu perilaku siswa. Ini mencakup: peraturan peraturan yang harus ditaati oleh para siswa dan siswi sekolah.
+- **Data Hukuman**: Melibatkan manajemen informasi terkait dengan jenis-jenis hukuman atau konsekuensi yang diberikan kepada siswa atas pelanggaran yang dilakukan. Ini mencakup: Daftar Hukuman atau Konsekuensi.
+- **Data Pelanggaran**: Mencakup manajemen informasi terkait dengan pelanggaran perilaku yang dilakukan oleh siswa di lingkungan sekolah. Ini mencakup: Pencatatan Pelanggaran, KRiwayat Pelanggaran Siswa, Tindakan yang Diambil, edit dan hapus.
 
 ### 4. Pelaporan
 - **Laporan Pelanggaran**: Fitur untuk menghasilkan laporan berdasarkan data pelanggaran yang tercatat.
-- **Analisis Statistik**: Visualisasi data berupa grafik atau diagram untuk menampilkan statistik pelanggaran dan tren perilaku siswa.
+- **Cetak Laporan**: Visualisasi data berupa salinan informasi atau data dari suatu sistem atau aplikasi ke dalam bentuk cetakan fisik yang dapat dibaca.
 
 ## Cara Penggunaan
 
@@ -31,9 +36,14 @@ Aplikasi pencatatan pelanggaran sekolah dibangun untuk memudahkan Pihak sekolah 
 3. **Manajemen Data**: Lihat, edit, atau hapus data pelanggaran yang sudah tercatat sesuai kebutuhan.
 4. **Pembuatan Laporan**: Buat laporan berdasarkan data pelanggaran untuk analisis atau pemantauan lebih lanjut.
 
-## Instalasi dan Konfigurasi
+## Our team
 
-Aplikasi Pencatatan Pelanggaran Sekolah dapat diakses melalui web browser dan tidak memerlukan instalasi khusus. Pastikan untuk menggunakan browser web yang terbaru untuk performa terbaik. Untuk mengakses aplikasi, buka browser web Anda, masukkan URL aplikasi, dan masuk dengan akun yang valid.
+- **backend** Ghivari [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
+- **backend** Husen [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
+- **frontend** Bintang [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
+- **Analyst** Rafly [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
+- **Documentations** Yasel [Akun Instagram Saya](https://www.instagram.com/mhyshelf/)
+
 
 ## Dukungan
 
