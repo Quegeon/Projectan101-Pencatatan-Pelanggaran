@@ -1,4 +1,4 @@
-# APLIKASI PENCATATAN PELANGGARAN
+# APLIKASI PENCATATAN PELANGGARAN SEKOLAH
 
 ## Pendahuluan
 
@@ -38,16 +38,17 @@ Aplikasi pencatatan pelanggaran sekolah dibangun untuk memudahkan Pihak sekolah 
 
 ## Our team
 
-- **backend** Ghivari [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
-- **backend** Husen [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
-- **frontend** Bintang [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
-- **Analyst** Rafly [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
-- **Documentations** Yasel [mhyshelf](https://www.instagram.com)
+- **Projec Manager**: Aldy [@aldyaditiah](https://www.instagram.com/nama_akun/)
+- **backend**: Ghivari [@ghvvari](https://www.instagram.com/nama_akun/)
+- **backend**: Husen [@maulhusen_](https://www.instagram.com/nama_akun/)
+- **frontend**: Bintang [@sstarrr4_](https://www.instagram.com/nama_akun/)
+- **Analyst**: Rafly [@raflisodri67](https://www.instagram.com/nama_akun/)
+- **Documentations**: Yasel [@mhyshelf](https://www.instagram.com)
 
 
 ## Dukungan
 
-Jika Anda mengalami masalah teknis atau membutuhkan bantuan lebih lanjut terkait penggunaan aplikasi, silakan hubungi tim dukungan kami melalui email support@pencatatanpelanggaransekolah.com.
+Jika Anda mengalami masalah teknis atau membutuhkan bantuan lebih lanjut terkait penggunaan aplikasi, silakan hubungi tim dukungan kami melalui email support mata.projectan101@proton.me
 
 Terima kasih telah menggunakan Aplikasi Pencatatan Pelanggaran Sekolah!
 
