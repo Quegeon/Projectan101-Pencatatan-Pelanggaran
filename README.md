@@ -16,12 +16,12 @@ Aplikasi pencatatan pelanggaran sekolah dibangun untuk memudahkan Pihak sekolah 
 - **Tingkat penindakan**: pengelompokan tindakan atau konsekuensi yang diambil oleh guru bk sebagai respons terhadap pelanggaran atau perilaku yang tidak sesuai dari siswa.
 
 ### 3. Manajemen Data Pelanggaran
-- **Data Petugas**: Merujuk pada proses manajemen informasi identitas, kredensial masuk, hak akses, riwayat aktivitas, manajemen profil serta keamanan data.
-- **Data Siswa**: Merujuk pada proses mengelola informasi yang terkait dengan siswa yang terlibat dalam pelanggaran di lingkungan sekolah. Ini mencakup: identitas siswa, informasi pelaku, kontak orangtua, privasi dan keamanan data.
-- **Data Guru Bk**: Merujuk pada proses manajemen informasi yang terkait dengan peran guru BK dalam pemantauan, mendokumentasikan, dan mengelola pelanggaran siswa. Ini mencakup: identitas guru bk, keterlibatan dalam penanganan pelanggaran dan analisis.
-- **Data Aturan**: Melibatkan manajemen informasi terkait dengan peraturan atau kebijakan yang diterapkan di lingkungan sekolah untuk memandu perilaku siswa. Ini mencakup: peraturan peraturan yang harus ditaati oleh para siswa dan siswi sekolah.
-- **Data Hukuman**: Melibatkan manajemen informasi terkait dengan jenis-jenis hukuman atau konsekuensi yang diberikan kepada siswa atas pelanggaran yang dilakukan. Ini mencakup: Daftar Hukuman atau Konsekuensi.
-- **Data Pelanggaran**: Mencakup manajemen informasi terkait dengan pelanggaran perilaku yang dilakukan oleh siswa di lingkungan sekolah. Ini mencakup: Pencatatan Pelanggaran, KRiwayat Pelanggaran Siswa, Tindakan yang Diambil, edit dan hapus.
+- **Kelola Data Petugas**: Merujuk pada proses manajemen informasi identitas, kredensial masuk, hak akses, riwayat aktivitas, manajemen profil serta keamanan data.
+- **Kelola Data Siswa**: Merujuk pada proses mengelola informasi yang terkait dengan siswa yang terlibat dalam pelanggaran di lingkungan sekolah. Ini mencakup: identitas siswa, informasi pelaku, kontak orangtua, privasi dan keamanan data.
+- **Kelola Data Guru Bk**: Merujuk pada proses manajemen informasi yang terkait dengan peran guru BK dalam pemantauan, mendokumentasikan, dan mengelola pelanggaran siswa. Ini mencakup: identitas guru bk, keterlibatan dalam penanganan pelanggaran dan analisis.
+- **Kelola Data Aturan**: Melibatkan manajemen informasi terkait dengan peraturan atau kebijakan yang diterapkan di lingkungan sekolah untuk memandu perilaku siswa. Ini mencakup: peraturan peraturan yang harus ditaati oleh para siswa dan siswi sekolah.
+- **Kelola Data Hukuman**: Melibatkan manajemen informasi terkait dengan jenis-jenis hukuman atau konsekuensi yang diberikan kepada siswa atas pelanggaran yang dilakukan. Ini mencakup: Daftar Hukuman atau Konsekuensi.
+- **Kelola Data Pelanggaran**: Mencakup manajemen informasi terkait dengan pelanggaran perilaku yang dilakukan oleh siswa di lingkungan sekolah. Ini mencakup: Pencatatan Pelanggaran, KRiwayat Pelanggaran Siswa, Tindakan yang Diambil, edit dan hapus.
 
 ### 4. Pelaporan
 - **Laporan Pelanggaran**: Fitur untuk menghasilkan laporan berdasarkan data pelanggaran yang tercatat.
