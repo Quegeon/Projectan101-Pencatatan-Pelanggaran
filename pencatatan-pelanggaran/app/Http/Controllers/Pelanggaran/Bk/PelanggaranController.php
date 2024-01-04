@@ -293,21 +293,29 @@ class PelanggaranController extends Controller
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
-
+        
         if ($pelanggaran === null) {
             return redirect()
                 ->route('dashboard.bk')
                 ->with('error', 'Invalid Target Data');
         }
+
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
             'total_poin' => 'required'
         ]);
+
         $siswa = Siswa::find($validated['nis']);
 
+        if($siswa === null) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error reference data');
+        }
+        // dd((int) $siswa->poin - (int) $pelanggaran->total_poin + (int) $validated['total_poin']);
+
         try {
-            $pelanggaran->update($validated);
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
             
             $tempaturan->each(function($old) {
@@ -320,7 +328,7 @@ class PelanggaranController extends Controller
             });
 
             //TODO: siswapoin - pelanggaranpoin + requestpoin
-            $poin = $siswa->poin + $validated['total_poin'];
+            $poin = ((int) $siswa->poin - (int) $pelanggaran->total_poin) + (int) $validated['total_poin'];
             $status = '';
 
             if ($poin >= 0 && $poin <= 25) {
@@ -336,6 +344,7 @@ class PelanggaranController extends Controller
             }
 
             $siswa->update(['poin' => $poin, 'status' => $status]);
+            $pelanggaran->update($validated);
             cache()->forget('dataAwal');
 
             return redirect()

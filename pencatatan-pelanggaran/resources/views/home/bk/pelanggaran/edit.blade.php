@@ -77,7 +77,7 @@
                                             <div class="form-group">
                                                 <label>Siswa</label>
                                                 <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
-                                                <input type="hidden" name="nis" value="{{ $pelanggaran->nis}}">
+                                                <input type="hidden" name="nis" value="{{ $pelanggaran->nis }}">
                                                 @error('nis')
                                                     <p class="text-danger timeout">{{ $message }}</p>
                                                 @enderror
