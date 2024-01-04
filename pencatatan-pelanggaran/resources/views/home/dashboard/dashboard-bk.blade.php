@@ -154,14 +154,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Histori Pelanggaran</div>
+                        <div class="card-title">Histori Pelaporan Pelanggaran</div>
                         <div class="card-tools">
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-                                <span class="btn-label">
-                                    <i class="fa fa-pencil"></i>
-                                </span>
-                                Export
-                            </a>
+                       
                             <a href="{{ route('printbk') }}" target="_blank" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">
                                     <i class="fa fa-print"></i>
@@ -222,20 +217,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
+       
                         <div class="form-group">
                             <label for="">Siswa</label>
-                            <input type="text" class="form-control" value="{{ $p->Siswa->nama }}" readonly>
+                            <input type="text" class="form-control" value="{{ $p->Siswa->nama }} | {{ $p->Siswa->Kelas->nama_kelas }} " readonly>
                         </div>
-                    </div>
-                    <div class="col-md-6">
+        
                         <div class="form-group">
                             <label for="">Aturan</label>
                             <input type="text" class="form-control" value="{{ $p->Aturan->nama_aturan }}" readonly>
                         </div>
-                    </div>
-                </div>
+            
                 <div class="form-group">
                     <label for="">Keterangan</label>
                     <input type="text" name="keterangan" class="form-control" value="{{ $p->keterangan }}" readonly>
