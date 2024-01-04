@@ -42,7 +42,7 @@ Aplikasi pencatatan pelanggaran sekolah dibangun untuk memudahkan Pihak sekolah 
 - **backend** Husen [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
 - **frontend** Bintang [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
 - **Analyst** Rafly [Akun Instagram Saya](https://www.instagram.com/nama_akun/)
-- **Documentations** Yasel [Akun Instagram Saya](https://www.instagram.com/mhyshelf/)
+- **Documentations** Yasel [mhyshelf](https://www.instagram.com)
 
 
 ## Dukungan
