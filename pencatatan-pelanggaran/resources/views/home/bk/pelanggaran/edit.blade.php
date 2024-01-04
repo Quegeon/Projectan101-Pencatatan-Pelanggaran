@@ -31,69 +31,98 @@
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
                     <div class="card-body">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan">Tambah Aturan</button>
-                        <table class="mt-4 table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Aturan</th>
-                                    <th>Hukuman</th>
-                                    <th>Poin</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($tempaturan as $t)
-                                <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $t->Aturan->nama_aturan }}</td>
-                                    <td>{{ $t->Aturan->Hukuman->hukuman }}</td>
-                                    <td class="text-center">{{ $t->Aturan->poin }}</td>
-                                    <td>
-                                        <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger text-center">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
-                                    <td colspan="2" class="text-center bg-warning text-white">{{ $total_poin }}</td>
-                                    {{-- <td class="bg-info"></td> --}}
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <form action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
-                            @csrf
-                            <label class="mb-3">Siswa</label>
-                            <select name="nis" class="select-search-no-modal">
-                                @foreach($siswa as $s)
-                                <option value="{{ $s->nis }}">{{ $s->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('nis')
-                                <p class="text-danger timeout">{{ $message }}</p>
-                            @enderror
-                            
-                            <label class="mt-3">Keterangan</label>
-                            <input type="text" name="keterangan" value="{{ $pelanggaran->keterangan }}" placeholder="Masukan keterangan" class="my-3 form-control">
-                            @error('keterangan')
-                                <p class="text-danger timeout">{{ $message }}</p>
-                            @enderror
-                            
-                            <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
-                            <input type="hidden" name="total_poin" value="{{ $total_poin }}"> 
+                        <div class="table-responsive">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-info mb-4 ml-2" data-toggle="modal" data-target="#modalAturan">Tambah Aturan</button>
+                                <table id="basic-datatables" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th>Aturan</th>
+                                            <th>Hukuman</th>
+                                            <th>Poin</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($tempaturan as $t)
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $t->Aturan->nama_aturan }}</td>
+                                            <td>{{ $t->Aturan->Hukuman->hukuman }}</td>
+                                            <td class="text-center">{{ $t->Aturan->poin }}</td>
+                                            <td>
+                                                <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" class="btn btn-danger text-center">Hapus</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
+                                            <td colspan="2" class="text-center bg-warning text-white">{{ $total_poin }}</td>
+                                            {{-- <td class="bg-info"></td> --}}
+                                        </tr>
+                                    </tfoot>
+                                </table>
 
-                            {{-- 2 --}}
-                            <div class="d-flex w-100 justify-content-end">
-                                <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
-                                <button type="submit" class="w-25 btn btn-info">Proses</button>
+                                <form action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Siswa</label>
+                                                <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
+                                                <input type="hidden" name="nis" value="{{ $pelanggaran->nis}}">
+                                                @error('nis')
+                                                    <p class="text-danger timeout">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Pelapor</label>
+                                                <input type="text" value="{{ $pelanggaran->User->username ?? '-'}}" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Hukuman</label>
+                                                <input type="text" value="{{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman }}" class="form-control" id="" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Keterangan</label>
+                                                <input type="text" name="keterangan" value="{{ $pelanggaran->keterangan }}" placeholder="Masukan keterangan" class="form-control">
+                                                @error('keterangan')
+                                                    <p class="text-danger timeout">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
+                                    <input type="hidden" name="total_poin" value="{{ $total_poin }}"> 
+        
+                                    {{-- 2 --}}
+                                    <div class="d-flex w-100 justify-content-end">
+                                        <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
+                                        <button type="submit" class="w-25 btn btn-info">Proses</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

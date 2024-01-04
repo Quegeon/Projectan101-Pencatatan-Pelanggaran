@@ -34,8 +34,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button>
-                                        <table class="mt-4 table table-bordered">
+                                        <button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button>
+                                        <table id="basic-datatables" class="mt-4 table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">No</th>
@@ -76,87 +76,98 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
+                                        <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Siswa</label>
+                                                        <select name="nis" class="select-search-no-modal">
+                                                            @foreach ($siswa as $s)
+                                                                <option value="{{ $s->nis }}">{{ $s->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('nis')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Petugas</label>
+                                                        <input type="text" class="form-control" value="-" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Hukuman</label>
+                                                        <select name="hukuman_pilihan" id="" class="select-search-no-modal">
+                                                            @foreach ($tempaturan as $t)
+                                                                <option value="{{ $t->Aturan->id }}">{{ $t->Aturan->Hukuman->hukuman }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Keterangan</label>
+                                                        <input type="text" name="keterangan" value="" class="form-control">
+                                                        @error('keterangan')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            {{-- <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>BK</label>
+                                                        <select class="select-search-no-modal" name="id_bk">
+                                                            <option value="{{ $pelanggaran->id_bk }}" selected>Default: {{ $pelanggaran->Bk->nama }}</option>
+                                                            @foreach ($bk as $b)
+                                                                <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('id_bk')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Tanggal Pelanggaran</label>
+                                                        <input type="date" class="form-control" name="tgl_pelanggaran" value="{{ $tgl_pelanggaran }}" placeholder="">
+                                                        @error('tgl_pelanggaran')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Status</label>
+                                                        <select class="form-control" name="status">
+                                                            <option value="Belum">Belum di proses</option>
+                                                            <option value="Beres">Sudah di proses</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+                                            <input type="hidden" name="total_poin" value="{{ $total_poin }}">
+                                            <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
+                                            <div class="modal-footer">
+                                                <a href="{{ route('review.cancel', [ 'atr' => 'kembali', 'opt' => $no_pelanggaran]) }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
 
-                            <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Siswa</label>
-                                            <select name="nis" class="select-search-no-modal">
-                                                @foreach ($siswa as $s)
-                                                    <option value="{{ $s->nis }}">{{ $s->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('nis')
-                                                <p class="text-danger timeout">* {{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Petugas</label>
-                                            <input type="text" class="form-control" value="-    " readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Keterangan</label>
-                                            <input type="text" name="keterangan" value="" class="form-control">
-                                            @error('keterangan')
-                                                <p class="text-danger timeout">* {{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
-                                    {{-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>BK</label>
-                                            <select class="select-search-no-modal" name="id_bk">
-                                                <option value="{{ $pelanggaran->id_bk }}" selected>Default: {{ $pelanggaran->Bk->nama }}</option>
-                                                @foreach ($bk as $b)
-                                                    <option value="{{ $b->id }}">{{ $b->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('id_bk')
-                                                <p class="text-danger timeout">* {{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Tanggal Pelanggaran</label>
-                                            <input type="date" class="form-control" name="tgl_pelanggaran" value="{{ $tgl_pelanggaran }}" placeholder="">
-                                            @error('tgl_pelanggaran')
-                                                <p class="text-danger timeout">* {{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select class="form-control" name="status">
-                                                <option value="Belum">Belum di proses</option>
-                                                <option value="Beres">Sudah di proses</option>
-                                            </select>
-                                        </div>
-                                    </div> --}}
-
-                                    <input type="hidden" name="total_poin" value="{{ $total_poin }}">
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="{{ route('review.cancel', [ 'atr' => 'kembali', 'opt' => $no_pelanggaran]) }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -189,7 +200,6 @@
                             @enderror
                         </div>
                         <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}"> 
-                        {{-- 8 --}}
                         <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}"> 
                 </div>
                 <div class="modal-footer">

@@ -36,7 +36,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button> --}}
-                                        <table class="mt-4 table table-bordered">
+                                        <table id="basic-datatables" class="mt-4 table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">No</th>
@@ -97,7 +97,14 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Hukuman</label>
+                                            <input type="text" value="{{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman }}" class="form-control" id="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">

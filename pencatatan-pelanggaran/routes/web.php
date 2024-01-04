@@ -149,6 +149,7 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
         
         Route::get('/{id}/review', 'review')->name('review.review');
+        Route::get('/{id}/proses', 'proses')->name('review.proses');
         Route::get('/inbox', 'inbox')->name('review.inbox');
         Route::get('/cancel/{opt}/{atr}', 'cancel')->name('review.cancel');
 

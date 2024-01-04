@@ -20,7 +20,6 @@ use SebastianBergmann\Template\Template;
 
 class PelanggaranController extends Controller
 {
-    private $dataAwal = [];
 
     public function inbox()
     {
@@ -83,33 +82,33 @@ class PelanggaranController extends Controller
 
     public function store(Request $request)
     {
-        // 9
 
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
             'no_pelanggaran' => 'required',
-            'total_poin' => 'required'
+            'total_poin' => 'required',
+            'hukuman_pilihan' => 'required',
         ]);
         $siswa = Siswa::find($validated['nis']);
 
         try {
             $validated['id'] = Str::orderedUuid();
-            $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
             $validated['tgl_pelanggaran'] = Carbon::today();
             $validated['status'] = 'Beres';
-            $validated['id_bk'] = Auth()->User()->id;
-            // TODO: sum from tempaturan to total_poin
+            $validated['id_bk'] = Auth::User()->id;
+            
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $validated['no_pelanggaran']);
             
-            $tempaturan->each(function($old) {
-                $new = $old->replicate();
-                $new->id = Str::orderedUuid();
-                $new->setTable('detail_aturans');
-                $new->save();
+            $tempaturan
+                ->each(function($old) {
+                    $new = $old->replicate();
+                    $new->id = Str::orderedUuid();
+                    $new->setTable('detail_aturans');
+                    $new->save();
 
-                $old->delete();
-            });
+                    $old->delete();
+                });
 
             $poin = $siswa->poin + $validated['total_poin'];
             $status = '';
@@ -320,6 +319,7 @@ class PelanggaranController extends Controller
                 $old->delete();
             });
 
+            //TODO: siswapoin - pelanggaranpoin + requestpoin
             $poin = $siswa->poin + $validated['total_poin'];
             $status = '';
 
@@ -414,44 +414,40 @@ class PelanggaranController extends Controller
 
     // 5
     public function cancel($opt, $atr) {
-        if($opt == 'kembali') {
-            TempAturan::query()
-                ->where('no_pelanggaran', $atr)
+        $tempaturan = TempAturan::query()->where('no_pelanggaran', $atr);
+
+        if($tempaturan !== null) {
+            $tempaturan
                 ->each(function($old) {
                     $old->delete();
                 });
+        }
 
+        if($opt == 'kembali') {
             return redirect()
                 ->route('review.inbox')
                 ->with('success', 'Sukses membatalkan');
         }
 
-        // ngambil ke cache trus di loooping deh
         $detailsToMove = cache('dataAwal');
 
-        try {
-            TempAturan::query()
-                ->where('no_pelanggaran', $atr)
-                ->each(function($old) {
-                    $old->delete();
-                });
-            
+        if($detailsToMove) {
             foreach ($detailsToMove as $detailCache) {
                 $details = new DetailAturan();
                 $details->id = Str::orderedUuid();
                 $details->fill($detailCache->toArray());
                 $details->save();
             }
-
+    
             cache()->forget('dataAwal');
-
+    
             return redirect()
-            ->route('review.inbox')
-            ->with('success', 'Sukses membatalkan edit');
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+                ->route('review.inbox')
+                ->with('success', 'Sukses membatalkan edit');
         }
 
+        return redirect()
+            ->route('review.inbox');
     }
 
 }
