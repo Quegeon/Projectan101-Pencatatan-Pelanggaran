@@ -53,12 +53,7 @@
                     <div class="card-head-row">
                         <div class="card-title">Histori Pelaporan Pelanggaran</div>
                         <div class="card-tools">
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm">
-                                <span class="btn-label">
-                                    <i class="fa fa-print"></i>
-                                </span>
-                                Print
-                            </a>
+                        
                         </div>
                     </div>
                 </div>
@@ -277,7 +272,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Histori Pelanggaran Yang Terjadi 7 Hari</div>
+                        <div class="card-title">Histori Pelaporan Pelanggaran</div>
                         <div class="card-tools">
                             <a href="{{ route('laporan.print') }}" target="_blank" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">

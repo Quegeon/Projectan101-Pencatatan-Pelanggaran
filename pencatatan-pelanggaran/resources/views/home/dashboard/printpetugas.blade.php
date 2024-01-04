@@ -11,14 +11,15 @@
   
     <div class="page-inner">
         <div class="page-header">
+            <center>
             <h4 class="page-title">Print Data Pelanggaran</h4>
+            </center>
         </div>
     
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Data Pelanggaran</h5>
                         <table class="table">
                             <thead>
                                 <tr>
