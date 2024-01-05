@@ -44,9 +44,4 @@ class Pelanggaran extends Model
     {
         return $this->belongsTo(Siswa::class, 'nis', 'nis');
     }
-
-    public function Hukuman_Pilihan ()
-    {
-        return $this->belongsTo(Aturan::class, 'hukuman_pilihan', 'id');
-    }
 }
