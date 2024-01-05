@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Pelanggaran\Temporary;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailAturan;
+use App\Models\Pelanggaran;
 use App\Models\TempAturan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,18 +13,23 @@ class TempController extends Controller
 {
     public function temp_store(Request $request) {
         // 3
-        $validated = Validator::make($request->all(), [
-            'id' => 'required',
-            'id_aturan' => 'required|unique:temp_aturans'
+        $validated = $request->validate([
+            'no_pelanggaran' => 'required',
+            'id_aturan' => 'required',
+            'id' => 'required'
         ]);
 
-        if ($validated->fails()) {
+        $unique = [
+            'temp' => TempAturan::where('no_pelanggaran', $validated['no_pelanggaran'])->where('id_aturan', $validated['id_aturan'])->first(),
+            'detail' => DetailAturan::where('no_pelanggaran', $validated['no_pelanggaran'])->where('id_aturan', $validated['id_aturan'])->first()
+        ];
+
+        if ($unique['temp'] !== null || $unique['detail'] !== null) {
             return back()->with('error', 'Pelanggaran tidak boleh sama!');
         }
 
-        $validated->getData()['no_pelanggaran'] = $request->no_pelanggaran;
-        $validated->getData()['id'] = $request->id;
-        TempAturan::create($validated->getData());
+        TempAturan::create($validated);
+
         return back()->with('success', 'Data berhasil dibuat');
     }
     

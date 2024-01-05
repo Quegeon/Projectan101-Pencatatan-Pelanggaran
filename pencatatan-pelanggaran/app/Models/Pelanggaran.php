@@ -16,6 +16,7 @@ class Pelanggaran extends Model
         'nis',
         'id_user',
         'id_bk',
+        'hukuman_pilihan',
         'no_pelanggaran',
         'tgl_pelanggaran',
         'keterangan',
@@ -38,8 +39,8 @@ class Pelanggaran extends Model
         return $this->belongsTo(Siswa::class, 'nis', 'nis');
     }
 
-    public function Detail () 
+    public function Hukuman_Pilihan ()
     {
-        return $this->hasMany(Pelanggaran::class, 'no_pelanggaran', 'no_pelanggaran');
+        return $this->belongsTo(Aturan::class, 'hukuman_pilihan', 'id');
     }
 }

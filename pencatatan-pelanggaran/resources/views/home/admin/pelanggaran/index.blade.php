@@ -46,12 +46,7 @@
                                         <td>{{$k->keterangan}}</td>
                                         <td>{{$k->status}}</td>
                                         <td align="center" colspan="3">
-                                            <a href="{{ route('pelanggaran.edit', (string) $k->id) }}" class="btn btn-link">
-                                                <i class="fa fa-edit fa-lg"></i>
-                                            </a>
-                                            <a href="{{ route('pelanggaran.destroy', (string) $k->id ) }}" class="btn btn-link">
-                                                <i class="fa fa-trash text-danger fa-lg"></i>
-                                            </a>
+                                            <a href="{{ route('pelanggaran.detail', $k->id) }}" class="btn btn-info text-white"><i class="fa fa-info-circle mr-2"></i>Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -106,7 +101,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>BK</label>
                                 <select class="select-search" name="id_bk">
@@ -120,16 +115,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="Belum">Belum di proses</option>
-                                    <option value="Beres">Sudah di proses</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
                     <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
             </div>

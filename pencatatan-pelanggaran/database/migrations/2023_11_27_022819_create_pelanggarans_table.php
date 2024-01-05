@@ -17,7 +17,10 @@ return new class extends Migration
                 ->nullable();
             $table->string('no_pelanggaran');
             $table->string('nis');
-            $table->string('id_user');
+            $table->string('id_user')
+                ->nullable();
+            $table->uuid('hukuman_pilihan')
+                ->nullable();
             $table->date('tgl_pelanggaran');
             $table->string('keterangan');
             $table->string('status', 20)

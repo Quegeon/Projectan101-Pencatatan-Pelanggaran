@@ -34,11 +34,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button>
-                                        <table class="mt-4 table table-bordered">
+                                        <button type="button" class="btn btn-info ml-3 mb-3" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button>
+                                        <table id="basic-datatables" class="mt-4 table table-bordered table-responsive-lg">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">No</th>
+                                                    <th>No</th>
                                                     <th>Aturan</th>
                                                     <th>Hukuman</th>
                                                     <th>Poin</th>
@@ -46,7 +46,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($tempaturan as $t)
+                                                @foreach ( $tempaturan as $t)
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td>{{ $t->Aturan->nama_aturan }}</td>
@@ -64,10 +64,10 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
-                                                    <td colspan="2" class="text-center bg-warning text-white">
+                                                    <th colspan="3" class="text-center bg-info text-white">Total poin</th>
+                                                    <td colspan="2" class="text-center bg-info text-white">
                                                         @if ($total_poin > 100)
-                                                            100 (Max)
+                                                            {{ $total_poin = 100 }}
                                                         @else
                                                             {{ $total_poin }}
                                                         @endif
@@ -108,6 +108,23 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label>Hukuman Pilihan</label>
+                                            <select name="hukuman_pilihan" class="select-search-no-modal">
+                                                <option></option>
+                                                @foreach ($tempaturan as $t)
+                                                    <option value="{{ $t->id_aturan }}">{{ $t->Aturan->Hukuman->hukuman }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('hukuman_pilihan')
+                                                <p class="text-danger timeout">* {{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label>Keterangan</label>
                                             <input type="text" name="keterangan" value="{{ $pelanggaran->keterangan }}" class="form-control">
                                             @error('keterangan')
@@ -118,7 +135,7 @@
                                 </div>
                                 
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>BK</label>
                                             <select class="select-search-no-modal" name="id_bk">
@@ -132,22 +149,13 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Tanggal Pelanggaran</label>
                                             <input type="date" class="form-control" name="tgl_pelanggaran" value="{{ $pelanggaran->tgl_pelanggaran }}" placeholder="{{ $pelanggaran->tgl_pelanggaran }}">
                                             @error('tgl_pelanggaran')
                                                 <p class="text-danger timeout">* {{ $message }}</p>
                                             @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <select class="form-control" name="status">
-                                                <option value="Belum">Belum di proses</option>
-                                                <option value="Beres">Sudah di proses</option>
-                                            </select>
                                         </div>
                                     </div>
 
