@@ -36,19 +36,16 @@ Aplikasi pencatatan pelanggaran sekolah dibangun untuk memudahkan Pihak sekolah 
 3. **Manajemen Data**: Lihat, edit, atau hapus data pelanggaran yang sudah tercatat sesuai kebutuhan.
 4. **Pembuatan Laporan**: Buat laporan berdasarkan data pelanggaran untuk analisis atau pemantauan lebih lanjut.
 
-## Our team
+## Kontak dan Dukungan
 
+Jika Anda mengalami masalah teknis atau membutuhkan bantuan lebih lanjut terkait penggunaan aplikasi, silakan hubungi tim dukungan kami melalui email support mata.projectan101@proton.me
+Atau Hubungi instagram kami:
 - **Projec Manager**: Aldy [@aldyaditiah](https://www.instagram.com/nama_akun/)
 - **backend**: Ghivari [@ghvvari](https://www.instagram.com/nama_akun/)
 - **backend**: Husen [@maulhusen_](https://www.instagram.com/nama_akun/)
 - **frontend**: Bintang [@sstarrr4_](https://www.instagram.com/nama_akun/)
 - **Analyst**: Rafly [@raflisodri67](https://www.instagram.com/nama_akun/)
 - **Documentations**: Yasel [@mhyshelf](https://www.instagram.com)
-
-
-## Dukungan
-
-Jika Anda mengalami masalah teknis atau membutuhkan bantuan lebih lanjut terkait penggunaan aplikasi, silakan hubungi tim dukungan kami melalui email support mata.projectan101@proton.me
-
+  
 Terima kasih telah menggunakan Aplikasi Pencatatan Pelanggaran Sekolah!
 
