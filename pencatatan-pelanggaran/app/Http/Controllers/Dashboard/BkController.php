@@ -46,4 +46,10 @@ class BkController extends Controller
         $hukuman = Hukuman::all();
         return view('home.bk.pelanggaran.aturan', compact('aturan','jenis','hukuman'));
     }
+
+    public function history_aturan($nis)
+    {
+        $siswa = Siswa::find($nis);
+        return view('home.bk.pelanggaran.aturan', compact('aturan','jenis','hukuman'));
+    }
 }

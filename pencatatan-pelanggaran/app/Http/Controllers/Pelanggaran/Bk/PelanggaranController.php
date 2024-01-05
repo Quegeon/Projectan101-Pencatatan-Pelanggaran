@@ -12,6 +12,7 @@ use App\Models\Pelanggaran;
 use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Bk;
+use App\Models\Kelas;
 
 class PelanggaranController extends Controller
 {
@@ -202,6 +203,21 @@ class PelanggaranController extends Controller
         $siswa = Siswa::all();
 
         return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
+    }
+
+    
+    public function detail($nis) {
+        $siswa = Siswa::find($nis);
+        return view('home.bk.pelanggaran.siswa',compact('siswa'));
+    }
+
+
+    public function history($nis)
+    {
+        $siswa = Siswa::find($nis);
+        $pelanggaran = Pelanggaran::where('nis', $nis)->get();
+        // dd($pelanggaran);
+        return view('home.bk.pelanggaran.historysiswa',compact(['siswa','pelanggaran']));
     }
 
 }
