@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('pelanggarans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('hukuman_pilihan');
+            $table->string('hukuman_pilihan')
+                ->nullable();
             $table->string('id_bk')
                 ->nullable();
             $table->string('no_pelanggaran');

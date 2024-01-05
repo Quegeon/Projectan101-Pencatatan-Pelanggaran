@@ -110,7 +110,11 @@
                                         <div class="form-group">
                                             <label>Hukuman Pilihan</label>
                                             <select name="hukuman_pilihan" class="select-search-no-modal">
-                                                <option></option>
+                                                @if ($pelanggaran->hukuman_pilihan !== null)
+                                                    <option value="{{ $pelanggaran->hukuman_pilihan }}" selected>Default: {{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman }}</option>
+                                                @else
+                                                    <option></option>
+                                                @endif
                                                 @foreach ($tempaturan as $t)
                                                     <option value="{{ $t->id_aturan }}">{{ $t->Aturan->Hukuman->hukuman }}</option>
                                                 @endforeach

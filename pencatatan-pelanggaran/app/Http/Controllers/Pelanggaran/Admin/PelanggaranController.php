@@ -42,15 +42,16 @@ class PelanggaranController extends Controller
             'id_bk' => 'required',
             'no_pelanggaran' => 'required',
             'keterangan' => 'required|string|max:255',
-        ]);        
+        ]);
+                    
+        $validated['id'] = Str::orderedUuid();
+        $validated['id_user'] = Auth::user()->id;
+        $validated['tgl_pelanggaran'] = Carbon::today();
+        $validated['status'] = 'Belum';
+
+        Pelanggaran::create($validated);
         
         try {
-            $validated['id'] = Str::orderedUuid();
-            $validated['id_user'] = Auth::user()->id;
-            $validated['tgl_pelanggaran'] = Carbon::today();
-            $validated['status'] = 'Belum';
-
-            Pelanggaran::create($validated);
 
             return redirect()
                 ->route('pelanggaran.index')
@@ -97,6 +98,8 @@ class PelanggaranController extends Controller
                     $new->id = Str::orderedUuid();
                     $new->setTable('temp_aturans');
                     $new->save();
+
+                    $old->delete();
                 });
             }
 

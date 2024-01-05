@@ -41,7 +41,7 @@
                                     <tr>
                                         <td align="center">{{$loop->iteration}}</td>
                                         <td>{{$k->Siswa->nama}}</td>
-                                        <td>{{$k->User->nama}}</td>
+                                        <td>{{($k->User->nama) ?? 'Kosong'}}</td>
                                         <td>{{ optional($k->Aturan)->nama_aturan ?? 'Kosong' }}</td>
                                         <td>{{$k->keterangan}}</td>
                                         <td>{{$k->status}}</td>
