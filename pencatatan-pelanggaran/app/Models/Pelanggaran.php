@@ -22,6 +22,7 @@ class Pelanggaran extends Model
         'keterangan',
         'status',
         'total_poin',
+        'hukuman_pilihan',
     ];
 
     public function User()
@@ -32,6 +33,11 @@ class Pelanggaran extends Model
     public function Bk()
     {
         return $this->belongsTo(Bk::class, 'id_bk', 'id');
+    }
+
+    public function Hukuman_Pilihan()
+    {
+        return $this->belongsTo(Aturan::class, 'hukuman_pilihan', 'id');
     }
     
     public function Siswa()

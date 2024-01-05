@@ -141,16 +141,18 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('siswa', [DashboardBk::class, 'view_siswa'])->name('view_siswa');
     Route::get('aturan', [DashboardBk::class, 'view_aturan'])->name('view_aturan');
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
-        Route::get('/', 'index')->name('review.index');
-        Route::get('/inbox', 'inbox')->name('review.inbox');
-        // 4
-        Route::get('/cancel/{opt}/{atr}', 'cancel')->name('review.cancel');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit');
         Route::get('/{id}/detail', 'detail')->name('review.detail');
         Route::post('/{id}/update', 'update')->name('review.update');
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
+        
+        Route::get('/{id}/review', 'review')->name('review.review');
+        Route::get('/{id}/proses', 'proses')->name('review.proses');
+        Route::get('/inbox', 'inbox')->name('review.inbox');
+        Route::get('/cancel/{opt}/{atr}', 'cancel')->name('review.cancel');
+
         Route::get('/printbk', 'printbk')->name('printbk');
         Route::get('/{id}/receipt', 'receipt')->name('receipt');
     });

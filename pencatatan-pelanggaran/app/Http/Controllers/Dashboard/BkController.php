@@ -36,7 +36,7 @@ class BkController extends Controller
     public function view_siswa()
     {
         $siswa = Siswa::all();
-        return view('home.bk.pelanggaran.siswa', compact('siswa'));
+        return view('home.bk.siswa', compact('siswa'));
     }
 
     public function view_aturan()
@@ -44,6 +44,6 @@ class BkController extends Controller
         $aturan = Aturan::all();
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
-        return view('home.bk.pelanggaran.aturan', compact('aturan','jenis','hukuman'));
+        return view('home.bk.aturan', compact('aturan','jenis','hukuman'));
     }
 }

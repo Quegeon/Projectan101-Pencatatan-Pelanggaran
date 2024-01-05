@@ -1,3 +1,8 @@
+@php
+    $currentRoute = Route::currentRouteName();
+    $activeRoutes = [ 'petugas', 'bk', 'siswa', 'kelas', 'aturan', 'hukuman', 'jenis', 'pelanggaran' ];
+    $kelola = ( array_filter($activeRoutes, fn($item) => Str::contains($currentRoute, $item)) ) ? 'active' : '';
+@endphp
 <div class="sidebar">
 
     <div class="sidebar-background"></div>
@@ -18,7 +23,7 @@
                 </div>
             </div>
             <ul class="nav">
-                <li class="nav-item active">
+                <li class="nav-item {{ ($currentRoute === 'dashboard') ? 'active' : '' }}">
                     <a href="{{ route('dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
@@ -31,7 +36,7 @@
                     <h4 class="text-section">Pilihan</h4>
                 </li>
                 @if(Auth()->User()->level == 'Admin')
-                <li class="nav-item">
+                <li class="nav-item {{ $kelola }}">
                     <a data-toggle="collapse" href="#submenu">
                         <i class="fas fa-table"></i>
                         <p>Kelola Data</p>

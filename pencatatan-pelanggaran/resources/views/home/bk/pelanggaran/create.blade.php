@@ -13,8 +13,7 @@
         <div class="page-header">
             <h4 class="page-title">Create Data Pelanggaran</h4>
             <div class="btn-group btn-group-page-header ml-auto">
-                <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-ellipsis-h"></i>
                 </button>
                 <div class="dropdown-menu">
@@ -31,69 +30,145 @@
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
                     <div class="card-body">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAturan">Tambah Aturan</button>
-                        <table class="mt-4 table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Aturan</th>
-                                    <th>Hukuman</th>
-                                    <th>Poin</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($tempaturan as $t)
-                                <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $t->Aturan->nama_aturan }}</td>
-                                    <td>{{ $t->Aturan->Hukuman->hukuman }}</td>
-                                    <td class="text-center">{{ $t->Aturan->poin }}</td>
-                                    <td>
-                                        <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
+                        <div class="table-responsive">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button>
+                                        <table id="basic-datatables" class="mt-4 table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">No</th>
+                                                    <th>Aturan</th>
+                                                    <th>Hukuman</th>
+                                                    <th>Poin</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($tempaturan as $t)
+                                                <tr>
+                                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td>{{ $t->Aturan->nama_aturan }}</td>
+                                                    <td>{{ $t->Aturan->Hukuman->hukuman }}</td>
+                                                    <td class="text-center">{{ $t->Aturan->poin }}</td>
+                                                    <td align="center" colspan="3">
+                                                        <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button type="submit" class="btn btn-danger text-center"><i class="fa fa-trash"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
+                                                    <td colspan="2" class="text-center bg-warning text-white">
+                                                        @if ($total_poin > 100)
+                                                            100 (Max)
+                                                        @else
+                                                            {{ $total_poin }}
+                                                        @endif
+                                                    </td>
+                                                    {{-- <td class="bg-info"></td> --}}
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger text-center">Hapus</button>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Siswa</label>
+                                                        <select name="nis" class="select-search-no-modal">
+                                                            @foreach ($siswa as $s)
+                                                                <option value="{{ $s->nis }}">{{ $s->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('nis')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Petugas</label>
+                                                        <input type="text" class="form-control" value="-" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Hukuman</label>
+                                                        <select name="hukuman_pilihan" id="" class="select-search-no-modal">
+                                                            @foreach ($tempaturan as $t)
+                                                                <option value="{{ $t->Aturan->id }}">{{ $t->Aturan->Hukuman->hukuman }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Keterangan</label>
+                                                        <input type="text" name="keterangan" value="" class="form-control">
+                                                        @error('keterangan')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            {{-- <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>BK</label>
+                                                        <select class="select-search-no-modal" name="id_bk">
+                                                            <option value="{{ $pelanggaran->id_bk }}" selected>Default: {{ $pelanggaran->Bk->nama }}</option>
+                                                            @foreach ($bk as $b)
+                                                                <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('id_bk')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Tanggal Pelanggaran</label>
+                                                        <input type="date" class="form-control" name="tgl_pelanggaran" value="{{ $tgl_pelanggaran }}" placeholder="">
+                                                        @error('tgl_pelanggaran')
+                                                            <p class="text-danger timeout">* {{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Status</label>
+                                                        <select class="form-control" name="status">
+                                                            <option value="Belum">Belum di proses</option>
+                                                            <option value="Beres">Sudah di proses</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+                                            <input type="hidden" name="total_poin" value="{{ $total_poin }}">
+                                            <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
+                                            <div class="modal-footer">
+                                                <a href="{{ route('review.cancel', [ 'atr' => 'kembali', 'opt' => $no_pelanggaran]) }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                                            </div>
                                         </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
-                                    <td colspan="2" class="text-center bg-warning text-white">{{ $total_poin }}</td>
-                                    {{-- <td class="bg-info"></td> --}}
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <form action="{{ route('review.store') }}" class="d-flex flex-column" method="POST">
-                            @csrf
-                            <label class="mb-3">Siswa</label>
-                            <select name="nis" class="select-search-no-modal">
-                                @foreach($siswa as $s)
-                                <option value="{{ $s->nis }}">{{ $s->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('nis')
-                                <p class="text-danger timeout">{{ $message }}</p>
-                            @enderror
-                            
-                            <label class="mt-3">Keterangan</label>
-                            <input type="text" name="keterangan" placeholder="Masukan keterangan" class="my-3 form-control">
-                            @error('keterangan')
-                                <p class="text-danger timeout">{{ $message }}</p>
-                            @enderror
-                            
-                            <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
-                            <input type="hidden" name="total_poin" value="{{ $total_poin }}"> 
-
-                            {{-- 2 --}}
-                            <div class="d-flex w-100 justify-content-end">
-                                <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'kembali', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
-                                <button type="submit" class="w-25 btn btn-info">Proses</button>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,12 +200,11 @@
                             @enderror
                         </div>
                         <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}"> 
-                        {{-- 8 --}}
                         <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}"> 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban"></i> Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
                 </form>
                 </div>
             </div>
