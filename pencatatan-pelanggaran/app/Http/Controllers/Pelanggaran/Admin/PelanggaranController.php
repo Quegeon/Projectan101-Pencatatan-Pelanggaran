@@ -144,4 +144,46 @@ class PelanggaranController extends Controller
                 ->with('error','Error Destroy Data'); 
         }
     }
+
+    public function history($nis)
+    {
+        $siswa = Siswa::find($nis);
+        $pelanggaran = Pelanggaran::where('nis', $nis)->get();
+
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+        return view('home.admin.siswa.historysiswa',compact(['siswa','pelanggaran']));
+    }
+
+    public function change_point($nis, Request $request)
+    {
+        $siswa = Siswa::find($nis);
+        
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+        
+        $request->validate(['poin' => 'required|numeric|max:100']);
+
+        if ($request->poin > $siswa->poin) {
+            return back()
+                ->with('error','Poin Pengurangan Melebihi Poin Siswa');
+        }
+        
+        try {
+            $siswa->update(['poin' => $request->poin]);
+            return back()
+                ->with('success','Poin Berhasil Diubah');
+
+        } catch (\Throwable $th) {
+            return back()
+                ->with('error','Error Update Poin');
+        }
+    }
+
 }

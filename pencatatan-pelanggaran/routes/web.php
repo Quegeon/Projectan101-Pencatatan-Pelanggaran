@@ -76,6 +76,8 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{nis}/edit', 'edit')->name('siswa.edit');
             Route::post('/{nis}/update', 'update')->name('siswa.update');
             Route::get('/{nis}/destroy', 'destroy')->name('siswa.destroy');
+            Route::get('/{nis}/history', 'history')->name('history.admin');
+            Route::post('/{nis}/change_point', 'change_point')->name('change.point.admin');
         });
 
         Route::prefix('kelola_jenis')->controller(KelolaJenis::class)->group(function() {
@@ -121,6 +123,7 @@ Route::group(["husen ganteng"],function () {
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
             Route::get('/print', 'print')->name('laporan.print');
+           
         });
         Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
             Route::view('/', 'home.admin.user.profile')->name('profile.user');

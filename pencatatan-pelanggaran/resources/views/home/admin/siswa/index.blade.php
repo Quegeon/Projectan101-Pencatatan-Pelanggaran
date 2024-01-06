@@ -53,6 +53,8 @@
                                                 <a href="{{ route('siswa.edit', (string) $s->nis) }}" class="btn btn-link">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
+                                                <br>
+                                                <a href="{{ route('history.admin', $s->nis)}}" class=""><i class="fas fa-info-circle fa-lg"></i></a>
                                                 <a class="btn btn-link" onclick="confirmDel('{{ route('siswa.destroy', $s->nis) }}')">
                                                     <i  class="fa fa-trash text-danger fa-lg"></i>
                                                 </a>
