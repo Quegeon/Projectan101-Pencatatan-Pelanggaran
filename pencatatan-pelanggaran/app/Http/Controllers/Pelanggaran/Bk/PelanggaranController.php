@@ -247,9 +247,10 @@ class PelanggaranController extends Controller
             return back()
                 ->with('error','Poin Pengurangan Melebihi Poin Siswa');
         }
-        
+
         try {
-            $siswa->update(['poin' => $request->poin]);
+            $update_poin = $siswa->poin - $request->poin;
+            $siswa->update(['poin' => $update_poin]);
             return back()
                 ->with('success','Poin Berhasil Diubah');
 
