@@ -222,7 +222,7 @@
 					<p>Social Media</p>
 					<a class="text-left pointer" href="https://www.instagram.com/aldyaditiah/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Aldy</a>
 					<a class="text-left pointer" href="https://www.instagram.com/maulhusen_/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Maulana</a>
-					<a class="text-left pointer" href="https://www.instagram.com/raflisodri67/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Rafly</a>
+					<a class="text-left pointer" href="https://www.instagram.com/raflisodri67/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Rafli</a>
 					<a class="text-left pointer" href="https://www.instagram.com/ghvvari/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Ghifari</a>
 					<a class="text-left pointer" href="https://www.instagram.com/mhyshelf/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Yasel</a>
 					<a class="text-left pointer" href="https://www.instagram.com/sstarrr4_/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Bintang</a>
