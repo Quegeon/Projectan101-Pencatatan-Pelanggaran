@@ -16,7 +16,6 @@ use App\Models\User;
 use App\Models\Bk;
 use App\Models\DetailAturan;
 use Illuminate\Support\Arr;
-use SebastianBergmann\Template\Template;
 
 class PelanggaranController extends Controller
 {
@@ -144,6 +143,8 @@ class PelanggaranController extends Controller
     public function edit(string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
         $data = array(
             'pelanggaran' => $pelanggaran,
             'aturan' => Aturan::all(),
@@ -152,18 +153,21 @@ class PelanggaranController extends Controller
             'no_pelanggaran' => $pelanggaran->no_pelanggaran,
         );
         
-        if(!cache()->has('dataAwal')) {
+        if(!cache()->has($cachekey)) {
             DetailAturan::query()
                 ->where('no_pelanggaran', $pelanggaran->no_pelanggaran)
                 ->each(function($old) {
+                    $auth = Auth::User();
+                    $cachekey = $auth->id.'dataEdit';
+
                     $new = $old->replicate();
                     $new->id = Str::orderedUuid();
                     $new->setTable('temp_aturans');
                     $new->save();
 
-                    $cached = cache('dataAwal');
+                    $cached = cache($cachekey);
                     $cached[] = $old;
-                    cache()->put('dataAwal', $cached);
+                    cache()->put($cachekey, $cached);
                     $old->delete();
                 });
         }
@@ -235,6 +239,8 @@ class PelanggaranController extends Controller
     public function proses(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
 
         if ($pelanggaran === null) {
             return redirect()
@@ -278,7 +284,7 @@ class PelanggaranController extends Controller
             }
 
             $siswa->update(['poin' => $poin, 'status' => $status]);
-            cache()->forget('dataAwal');
+            cache()->forget($cachekey);
 
             return redirect()
                 ->route('dashboard.bk')
@@ -294,6 +300,8 @@ class PelanggaranController extends Controller
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
         
         if ($pelanggaran === null) {
             return redirect()
@@ -346,7 +354,7 @@ class PelanggaranController extends Controller
 
             $siswa->update(['poin' => $poin, 'status' => $status]);
             $pelanggaran->update($validated);
-            cache()->forget('dataAwal');
+            cache()->forget($cachekey);
 
             return redirect()
                 ->route('dashboard.bk')
@@ -425,6 +433,8 @@ class PelanggaranController extends Controller
     // 5
     public function cancel($opt, $atr) {
         $tempaturan = TempAturan::query()->where('no_pelanggaran', $atr);
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
 
         if($tempaturan !== null) {
             $tempaturan
@@ -439,7 +449,7 @@ class PelanggaranController extends Controller
                 ->with('success', 'Sukses membatalkan');
         }
 
-        $detailsToMove = cache('dataAwal');
+        $detailsToMove = cache($cachekey);
 
         if($detailsToMove) {
             foreach ($detailsToMove as $detailCache) {
@@ -449,7 +459,7 @@ class PelanggaranController extends Controller
                 $details->save();
             }
     
-            cache()->forget('dataAwal');
+            cache()->forget($cachekey);
     
             return redirect()
                 ->route('review.inbox')
