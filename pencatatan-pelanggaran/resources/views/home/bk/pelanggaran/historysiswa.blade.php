@@ -67,7 +67,12 @@
                         <div class="col-md-6">
                             <table style="margin-left: 50%">
                                 <tr>      
-                                    <td style="font-size: 20px; padding-bottom: 20%;">Jumlah Poin</td>
+                                    <td style="font-size: 20px;">Jumlah Poin :</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td style="font-size: 80px; margin-top: 10%; color: 
                                         @if($siswa->poin >= 0 && $siswa->poin <= 25)
                                             blue;
@@ -113,7 +118,7 @@
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <tr style="background: blue; color: white;" >
+                                <tr class="bg-info" style= "color: white;" >
                                     <th colspan="2" style="text-align: center;">JUMLAH POIN</th>
                                     <th style="text-align: center">{{$siswa->poin}}</th>
                                 </tr>
