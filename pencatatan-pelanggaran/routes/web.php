@@ -147,7 +147,9 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::get('/{id}/receipt', 'receipt')->name('receipt');
         Route::get('/{nis}/detail', 'detail')->name('detail');
         Route::get('/{nis}/history', 'history')->name('history');
+        Route::post('/{nis}/change_point', 'change_point')->name('change.point');
     });
+    
     Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
         Route::post('/update', 'update_profile')->name('profile.bk.update');

@@ -285,6 +285,19 @@
     </script>
 
     <script>
+        function displaySubtract(subPoint){
+            const poinSiswa = document.getElementById('poin_siswa').value
+            const result = (parseInt(poinSiswa) || 0) - (parseInt(subPoint) || 0);
+
+            if (result < 0) {                
+                document.getElementById('result').value = 'Pengurangan Poin Melebihi Poin Siswa';
+            } else {
+                document.getElementById('result').value = result;
+            }
+        }
+    </script>
+
+    <script>
         $(document).ready(function() {
             $('.select-search').select2({
                 dropdownParent: $('.modal'),

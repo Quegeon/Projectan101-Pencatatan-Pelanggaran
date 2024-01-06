@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('title', 'History Pelanggaran Siswa')
 @section('content')
+@php
+    
+@endphp
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">History Pelanggaran Siswa</h4>
@@ -90,6 +93,7 @@
                     
                 </div>
                 <div class="card-body">
+                    <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalUpdate"><i class="fa fa-edit mr-2"></i>Kurangi Poin</a>
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover" >
                             <thead>
@@ -103,8 +107,8 @@
                                 @foreach ($pelanggaran as $p)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $p->Aturan->nama_aturan }}</td>
-                                        <td>{{ $p->Aturan->poin }}</td>
+                                        <td>{{ ($p->Aturan->nama_aturan) ?? 'Kosong'}}</td>
+                                        <td>{{ ($p->Aturan->poin) ?? 'Kosong' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -122,4 +126,53 @@
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" id="modalUpdate" role="dialog" aria-hidden="true" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" aria-labelledby="exampleModalLabel">Kurangi Poin Siswa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('change.point', $siswa->nis) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Poin Siswa</label>
+                                <input type="text" class="form-control" id="poin_siswa" value="{{ $siswa->poin }}" readonly>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Poin Hasil</label>
+                                <input type="text" class="form-control" id="result" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Poin Pengurangan</label>
+                                <input type="text" name="poin" class="form-control" placeholder="Masukan Poin Pengurangan" onkeyup="displaySubtract(this.value)" onkeydown="displaySubtract(this.value)">
+                                @error('poin')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
 @endsection
