@@ -246,6 +246,7 @@ class PelanggaranController extends Controller
             'keterangan' => 'required|max:255',
             'total_poin' => 'required'
         ]);
+        $validated['status'] = 'Beres';
         $siswa = Siswa::find($validated['nis']);
 
         try {

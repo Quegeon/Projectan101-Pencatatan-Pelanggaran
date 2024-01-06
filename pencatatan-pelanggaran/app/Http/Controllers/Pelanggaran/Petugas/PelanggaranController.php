@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pelanggaran\Petugas;
 use App\Http\Controllers\Controller;
 use App\Models\Aturan;
 use App\Models\Bk;
+use App\Models\DetailAturan;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
 use App\Models\TempAturan;
@@ -20,10 +21,10 @@ class PelanggaranController extends Controller
     {
         $data = array(
             'siswa' => Siswa::all(),
+            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP'),
             'aturan' => Aturan::all(),
-            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP')
         );
-    
+
         if ($data['siswa']->first() === null) {
             return redirect()
                 ->route('dashboard')

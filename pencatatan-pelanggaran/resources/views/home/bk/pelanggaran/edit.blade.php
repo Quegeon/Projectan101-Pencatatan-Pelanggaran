@@ -95,7 +95,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Hukuman</label>
-                                                <input type="text" value="{{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman }}" class="form-control" id="" readonly>
+                                                <select name="hukuman_pilihan"></select>
+                                                {{-- <input type="text" value="{{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman ?? '' }}" class="form-control" id="" readonly> --}}
                                             </div>
                                         </div>
                                     </div>

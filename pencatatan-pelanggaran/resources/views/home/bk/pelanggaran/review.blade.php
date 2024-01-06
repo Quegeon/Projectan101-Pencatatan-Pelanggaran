@@ -69,18 +69,43 @@
                         </table>
                         <form action="{{ route('review.proses', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
                             @csrf
-                            <label class="mb-3">Siswa</label>
-                            <input type="hidden" name="nis" class="form-control" value="{{ $pelanggaran->nis }}" readonly>
-                            <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
-                            @error('nis')
-                                <p class="text-danger timeout">{{ $message }}</p>
-                            @enderror
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="">Siswa</label>
+                                        <input type="hidden" name="nis" class="form-control" value="{{ $pelanggaran->nis }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
+                                        @error('nis')
+                                            <p class="text-danger timeout">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Hukuman</label>
+                                        <select name="hukuman_pilihan" id="" class="select-search-no-modal">
+                                            @foreach ($tempaturan as $t)
+                                                <option value="{{ $t->Aturan->id }}">{{ $t->Aturan->Hukuman->hukuman }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             
-                            <label class="mt-3">Keterangan</label>
-                            <input type="text" name="keterangan" placeholder="Masukan keterangan" class="my-3 form-control" value="{{ $pelanggaran->keterangan }}">
-                            @error('keterangan')
-                                <p class="text-danger timeout">{{ $message }}</p>
-                            @enderror
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="">Keterangan</label>
+                                        <input type="text" name="keterangan" placeholder="Masukan keterangan" class="form-control" value="{{ $pelanggaran->keterangan }}">
+                                        @error('keterangan')
+                                            <p class="text-danger timeout">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                             
                             <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}">
                             <input type="hidden" name="total_poin" value="{{ $total_poin }}"> 

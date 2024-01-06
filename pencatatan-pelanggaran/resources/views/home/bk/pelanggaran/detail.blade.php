@@ -101,7 +101,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Hukuman</label>
-                                            <input type="text" value="{{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman }}" class="form-control" id="" readonly>
+                                            <input type="text" value="{{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman ?? 'Belum Di Proses' }}" class="form-control" id="" readonly>
                                         </div>
                                     </div>
                                 </div>
