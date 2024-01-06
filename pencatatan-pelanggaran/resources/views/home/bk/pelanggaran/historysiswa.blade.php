@@ -25,8 +25,8 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <table>
-                                <tr>
+                            <table style="margin-top:6%">
+                                <tr >
                                     <th>
                                         Nis
                                     </th>
@@ -62,14 +62,14 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <table>
+                            <table style="margin-left: 50%">
                                 <tr>      
                                     <td style="font-size: 20px; padding-bottom: 20%;">Jumlah Poin</td>
-                                    <td style="font-size: 100px; color: 
+                                    <td style="font-size: 80px; margin-top: 10%; color: 
                                         @if($siswa->poin >= 0 && $siswa->poin <= 25)
-                                            green;
+                                            blue;
                                         @elseif($siswa->poin <= 50)
-                                            yellow;
+                                            green;
                                         @elseif($siswa->poin <= 75)
                                             red;
                                         @elseif($siswa->poin <= 99)
@@ -81,6 +81,7 @@
                                         {{ $siswa->poin }}
                                     </td>
                                 </tr>
+                                
                             </table>
                         </div>
                     </div>
