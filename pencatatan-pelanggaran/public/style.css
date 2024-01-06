@@ -488,6 +488,18 @@ header.scrolled .nav .toggle-btn {
         width: 100%;
     }
 }
+.w3-button.r,
+.w3-button.l {
+    transition: transform 0.5s ease;
+}
+
+.w3-button.r.clicked {
+    transform: translateX(-100%);
+}
+
+.w3-button.l.clicked {
+    transform: translateX(100%);
+}
 
 .w3-content img:hover {
     opacity: 1;
@@ -502,6 +514,17 @@ header.scrolled .nav .toggle-btn {
 .image-container:hover .detail-button {
     opacity: 1;
 }
+.w3-content .mySlides {
+    transition: transform 0.5s ease;
+}
+
+.w3-content.next .mySlides {
+    transform: translateX(-100%);
+}
+
+.w3-content.prev .mySlides {
+    transform: translateX(100%);
+}
 
 .w3-content {
     width: 100%;
@@ -515,7 +538,28 @@ header.scrolled .nav .toggle-btn {
 
 .w3-container h2 {
     color: #eee;
-    font-size: 30px;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+@media only screen and (max-width: 993px) {
+    .w3-container h2 {
+        color: #eee;
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 416px) {
+    .w3-container h2 {
+        color: #eee;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+    }
 }
 
 .mySlides {
@@ -570,7 +614,7 @@ header.scrolled .nav .toggle-btn {
     font-size: 20px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-    background: rgba(0, 0, 0, 0.397);
+    background: rgba(0, 0, 0, 0.664);
 }
 
 .w3-section.nav-buttons .r {
@@ -725,6 +769,28 @@ header.scrolled .nav .toggle-btn {
     .card-profile {
         margin-top: 500px;
     }
+    .image-card-profile .a {
+        content: url("/foto/foto-color/5.png");
+    }
+    .image-card-profile .b {
+        content: url("/foto/foto-color/6.png"); /* Ganti dengan path foto-color yang sesuai */
+    }
+
+    .image-card-profile .c {
+        content: url("/foto/foto-color/3.png"); /* Ganti dengan path foto-color yang sesuai */
+    }
+
+    .image-card-profile .d {
+        content: url("/foto/foto-color/4.png"); /* Ganti dengan path foto-color yang sesuai */
+    }
+
+    .image-card-profile .e {
+        content: url("/foto/foto-color/1.png"); /* Ganti dengan path foto-color yang sesuai */
+    }
+
+    .image-card-profile .f {
+        content: url("/foto/foto-color/2.png"); /* Ganti dengan path foto-color yang sesuai */
+    }
     .row {
         flex-wrap: wrap-reverse;
         margin: 0;
@@ -733,9 +799,6 @@ header.scrolled .nav .toggle-btn {
         width: 48%; /* Dua kolom pada layar kecil */
         margin-bottom: 20px; /* Tambahkan margin antara setiap kartu */
     }
-}
-.card-profile-responsive {
-    display: none;
 }
 .support {
     margin-top: 200px;
@@ -785,7 +848,9 @@ footer {
 .footer-social {
     display: flex;
 }
-
+.owner-footer {
+    margin-left: 25px;
+}
 .mata-footer,
 .owner-footer {
     display: flex;
