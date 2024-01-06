@@ -12,6 +12,7 @@ use App\Models\Pelanggaran;
 use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Bk;
+use App\Models\Kelas;
 
 class PelanggaranController extends Controller
 {
@@ -202,6 +203,61 @@ class PelanggaranController extends Controller
         $siswa = Siswa::all();
 
         return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
+    }
+
+    
+    public function detail($nis) {
+        $siswa = Siswa::find($nis);
+
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+        return view('home.bk.pelanggaran.siswa',compact('siswa'));
+    }
+
+
+    public function history($nis)
+    {
+        $siswa = Siswa::find($nis);
+        $pelanggaran = Pelanggaran::where('nis', $nis)->get();
+
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+        return view('home.bk.pelanggaran.historysiswa',compact(['siswa','pelanggaran']));
+    }
+
+    public function change_point($nis, Request $request)
+    {
+        $siswa = Siswa::find($nis);
+        
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+        
+        $request->validate(['poin' => 'required|numeric|max:100']);
+
+        if ($request->poin > $siswa->poin) {
+            return back()
+                ->with('error','Poin Pengurangan Melebihi Poin Siswa');
+        }
+
+        try {
+            $update_poin = $siswa->poin - $request->poin;
+            $siswa->update(['poin' => $update_poin]);
+            return back()
+                ->with('success','Poin Berhasil Diubah');
+
+        } catch (\Throwable $th) {
+            return back()
+                ->with('error','Error Update Poin');
+        }
     }
 
 }

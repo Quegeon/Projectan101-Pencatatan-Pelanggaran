@@ -76,6 +76,8 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{nis}/edit', 'edit')->name('siswa.edit');
             Route::post('/{nis}/update', 'update')->name('siswa.update');
             Route::get('/{nis}/destroy', 'destroy')->name('siswa.destroy');
+            Route::get('/{nis}/history', 'history')->name('history.admin');
+            Route::post('/{nis}/change_point', 'change_point')->name('change.point.admin');
         });
 
         Route::prefix('kelola_jenis')->controller(KelolaJenis::class)->group(function() {
@@ -121,6 +123,7 @@ Route::group(["husen ganteng"],function () {
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
             Route::get('/print', 'print')->name('laporan.print');
+           
         });
         Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
             Route::view('/', 'home.admin.user.profile')->name('profile.user');
@@ -133,6 +136,7 @@ Route::group(["husen ganteng"],function () {
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
     Route::get('siswa', [DashboardBk::class, 'view_siswa'])->name('view_siswa');
+    // Route::get('siswa', [DashboardBk::class, 'history_siswa'])->name('history_siswa');
     Route::get('aturan', [DashboardBk::class, 'view_aturan'])->name('view_aturan');
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
@@ -144,7 +148,11 @@ Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
         Route::get('/printbk', 'printbk')->name('printbk');
         Route::get('/{id}/receipt', 'receipt')->name('receipt');
+        Route::get('/{nis}/detail', 'detail')->name('detail');
+        Route::get('/{nis}/history', 'history')->name('history');
+        Route::post('/{nis}/change_point', 'change_point')->name('change.point');
     });
+    
     Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
         Route::post('/update', 'update_profile')->name('profile.bk.update');
