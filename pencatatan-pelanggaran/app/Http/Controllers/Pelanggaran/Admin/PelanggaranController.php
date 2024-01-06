@@ -89,8 +89,11 @@ class PelanggaranController extends Controller
                 ->with('error', 'Invalid Target Data');
         }
 
+        
         try {
             $convert_detail = DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
+            
+            $cached = cache()->put(Auth::user()->id . 'dataEdit', $convert_detail);
 
             if ($convert_detail !== null && TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->first() === null) {
                 $convert_detail->each(function($old){

@@ -47,7 +47,7 @@ Route::prefix('temp')->controller(TempController::class)->group(function() {
 });
 
 Route::group(["husen ganteng"],function () {
-    Route::group(['middleware' => ['auth', 'level:Admin']], function() {
+    Route::group(['middleware' => ['auth', 'level:Admin', 'checkdata']], function() {
         Route::prefix('kelola_petugas')->controller(KelolaPetugas::class)->group(function() {
             Route::get('/', 'index')->name('petugas.index');
             Route::post('/store', 'store')->name('petugas.store');
