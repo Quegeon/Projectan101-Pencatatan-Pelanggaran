@@ -136,7 +136,6 @@ Route::group(["husen ganteng"],function () {
 Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
     Route::get('siswa', [DashboardBk::class, 'view_siswa'])->name('view_siswa');
-    // Route::get('siswa', [DashboardBk::class, 'history_siswa'])->name('history_siswa');
     Route::get('aturan', [DashboardBk::class, 'view_aturan'])->name('view_aturan');
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/', 'index')->name('review.index');
