@@ -47,7 +47,7 @@
             <div class="logo-header">
 
                 <a href="index.html" class="logo">
-                    <img src="{{ asset('assets/img/logoazzara.svg') }}" alt="navbar brand" class="navbar-brand">
+                    <img src="{{ asset('/foto/mataw1.png') }}" alt="navbar brand" class="navbar-brand" style="width: 80px">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
