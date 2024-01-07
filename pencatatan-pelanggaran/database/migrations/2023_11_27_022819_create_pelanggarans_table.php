@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('pelanggarans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('id_aturan')
+            $table->string('hukuman_pilihan')
                 ->nullable();
             $table->string('id_bk')
                 ->nullable();
+            $table->string('no_pelanggaran');
             $table->string('nis');
-            $table->string('id_user');
+            $table->string('id_user')
+                ->nullable();
             $table->date('tgl_pelanggaran');
             $table->string('keterangan');
             $table->string('status', 20)

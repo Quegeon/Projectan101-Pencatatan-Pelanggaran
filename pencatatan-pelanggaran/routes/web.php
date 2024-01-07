@@ -7,6 +7,8 @@ use App\Http\Controllers\Pelanggaran\Admin\PelanggaranController as KelolaPelang
 use App\Http\Controllers\Pelanggaran\Petugas\PelanggaranController as LaporanController;
 use App\Http\Controllers\Pelanggaran\Bk\PelanggaranController as ReviewPelanggaran;
 
+use App\Http\Controllers\Pelanggaran\Temporary\TempController as TempController;
+
 use App\Http\Controllers\Siswa\KelasController as KelolaKelas;
 use App\Http\Controllers\Siswa\SiswaController as KelolaSiswa;
 use App\Http\Controllers\UserController as KelolaPetugas;
@@ -41,8 +43,13 @@ Route::post('/postlogin/bk',[LoginController::class,'postlogin_bk'])->name('post
 Route::get('/logout/user', [LoginController::class, 'logout_user'])->name('logout.user');
 Route::get('/logout/bk', [LoginController::class, 'logout_bk'])->name('logout');
 
+Route::prefix('temp')->controller(TempController::class)->group(function() {
+    Route::post('/store', 'temp_store')->name('temp.store');
+    Route::delete('/{id}/destroy', 'temp_destroy')->name('temp.destroy');
+});
+
 Route::group(["husen ganteng"],function () {
-    Route::group(['middleware' => ['auth', 'level:Admin']], function() {
+    Route::group(['middleware' => ['auth', 'level:Admin', 'checkdata']], function() {
         Route::prefix('kelola_petugas')->controller(KelolaPetugas::class)->group(function() {
             Route::get('/', 'index')->name('petugas.index');
             Route::post('/store', 'store')->name('petugas.store');
@@ -107,8 +114,9 @@ Route::group(["husen ganteng"],function () {
         Route::prefix('kelola_pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
             Route::get('/', 'index')->name('pelanggaran.index');
             Route::post('/store', 'store')->name('pelanggaran.store');
-            Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');
-            Route::post('/{id}/update', 'update')->name('pelanggaran.update');
+            Route::get('/{id}/detail', 'detail')->name('pelanggaran.detail');
+            Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit')->withoutMiddleware(['checkdata']);
+            Route::post('/{id}/update', 'update')->name('pelanggaran.update')->withoutMiddleware(['checkdata']);
             Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
         });
     });
@@ -133,18 +141,23 @@ Route::group(["husen ganteng"],function () {
     });
 });
 
-Route::prefix('bk')->middleware(['auth:bk'])->group(function () {
+Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
     Route::get('siswa', [DashboardBk::class, 'view_siswa'])->name('view_siswa');
     Route::get('aturan', [DashboardBk::class, 'view_aturan'])->name('view_aturan');
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
-        Route::get('/', 'index')->name('review.index');
-        Route::get('/inbox', 'inbox')->name('review.inbox');
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
-        Route::get('/{id}/edit', 'edit')->name('review.edit');
-        Route::post('/{id}/update', 'update')->name('review.update');
+        Route::get('/{id}/edit', 'edit')->name('review.edit')->withoutMiddleware(['checkdata']);
+        Route::get('/{id}/detail', 'detail')->name('review.detail');
+        Route::post('/{id}/update', 'update')->name('review.update')->withoutMiddleware(['checkdata']);
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
+        
+        Route::get('/{id}/review', 'review')->name('review.review');
+        Route::post('/{id}/proses', 'proses')->name('review.proses');
+        Route::get('/inbox', 'inbox')->name('review.inbox');
+        Route::get('/cancel/{opt}/{atr}', 'cancel')->name('review.cancel');
+
         Route::get('/printbk', 'printbk')->name('printbk');
         Route::get('/{id}/receipt', 'receipt')->name('receipt');
         Route::get('/{nis}/detail', 'detail')->name('detail');

@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             JenisSeeder::class,
             AturanSeeder::class,
             KelasSeeder::class,
-            // DummySeeder::class
+            DummySeeder::class
         ]);
     }
 }

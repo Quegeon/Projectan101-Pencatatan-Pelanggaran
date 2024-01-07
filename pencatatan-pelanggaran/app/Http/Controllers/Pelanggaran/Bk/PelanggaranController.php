@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\Pelanggaran\Bk;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Aturan;
+use App\Models\TempAturan;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Bk;
-use App\Models\Kelas;
+use App\Models\DetailAturan;
+use Illuminate\Support\Arr;
 
 class PelanggaranController extends Controller
 {
+
     public function inbox()
     {
         $data = array(
@@ -55,132 +59,362 @@ class PelanggaranController extends Controller
 
     public function create()
     {
-        $siswa = Siswa::all();
-
-        if ($siswa->first() === null) {
-            return redirect()
-                ->route('dashboard.petugas')
-                ->with('error', 'Reference Data Error');
+        $auth = Auth::User();
+        if(cache($auth->id.'newData')) {
+            $no_pelanggaran = cache($auth->id.'newData');
         } else {
-            return view('home.admin.user.create-laporan', compact(['siswa']));
+            $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP');
+            cache()->put($auth->id.'newData', $no_pelanggaran);
         }
+
+        $data = array(
+            'no_pelanggaran' => $no_pelanggaran,
+            'siswa' => Siswa::all(),
+            'bk' => Bk::all(),
+            'aturan' => Aturan::all(),
+            'tempaturan' => TempAturan::where('no_pelanggaran', $no_pelanggaran)->get(),
+            'tgl_pelanggaran' => Carbon::today()
+        );
+
+        if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
+            return redirect()
+                ->route('review.inbox')
+                ->with('error', 'Reference Data Error');
+        }
+
+        return view('home.bk.pelanggaran.create', $data);
     }
+
 
     public function store(Request $request)
     {
+        $auth = Auth::User();
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
-            'keterangan' => 'required|max:255'
+            'keterangan' => 'required|max:255',
+            'no_pelanggaran' => 'required',
+            'total_poin' => 'required',
+            'hukuman_pilihan' => 'required',
         ]);
+        $siswa = Siswa::find($validated['nis']);
 
-        // try {
-        $validated['id'] = Str::orderedUuid()->toString();
-        $validated['id_user'] = User::where(['username' => 'admin'])->first()->id;
-        $validated['tgl_pelanggaran'] = Carbon::today();
+        try {
+            $validated['id'] = Str::orderedUuid();
+            $validated['tgl_pelanggaran'] = Carbon::today();
+            $validated['status'] = 'Beres';
+            $validated['id_bk'] = Auth::User()->id;
+            
+            $tempaturan = TempAturan::query()->where('no_pelanggaran', $validated['no_pelanggaran']);
+            
+            $tempaturan
+                ->each(function($old) {
+                    $new = $old->replicate();
+                    $new->id = Str::orderedUuid();
+                    $new->setTable('detail_aturans');
+                    $new->save();
 
-        Pelanggaran::create($validated);
+                    $old->delete();
+                });
 
-        return redirect(url()->previous())
-            ->with('success', 'Data Berhasil Dibuat');
+            $poin = $siswa->poin + $validated['total_poin'];
+            $status = '';
 
-        // } catch (\Throwable $th) {
-        //     return redirect()
-        //         ->route('dashboard.petugas')
-        //         ->with('error','Error Store Data');
-        // }
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
+            Pelanggaran::create($validated);
+            cache()->forget('dataAwal');
+            cache()->forget($auth->id.'newData');
+
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('success', 'Data Berhasil Dibuat');
+
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()
+                ->route('review.inbox')
+                ->with('error','Error Store Data');
+        }
     }
 
     public function edit(string $id)
     {
+        $pelanggaran = Pelanggaran::find($id);
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
         $data = array(
-            'pelanggaran' => Pelanggaran::find($id),
+            'pelanggaran' => $pelanggaran,
             'aturan' => Aturan::all(),
             'siswa' => Siswa::all(),
-            'bk' => Bk::all()
+            'bk' => Bk::all(),
+            'no_pelanggaran' => $pelanggaran->no_pelanggaran,
         );
 
+        if(!cache()->has($cachekey)) {
+            DetailAturan::query()
+                ->where('no_pelanggaran', $pelanggaran->no_pelanggaran)
+                ->each(function($old) {
+                    $auth = Auth::User();
+                    $cachekey = $auth->id.'dataEdit';
+
+                    $new = $old->replicate();
+                    $new->id = Str::orderedUuid();
+                    $new->setTable('temp_aturans');
+                    $new->save();
+
+                    $cached = cache($cachekey);
+                    $cached[] = $old;
+                    cache()->put($cachekey, $cached);
+                    $old->delete();
+                });
+        }
+
+        // dd($this->dataAwal);
+        $data['tempaturan'] = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
+
+        // dd($data);
         if ($data['pelanggaran'] === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Invalid Target Data');
         }
 
 
         if ($data['siswa']->first() === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Reference Data Error');
         } else {
-            return view('home.bk.pelanggaran.review', $data);
+            return view('home.bk.pelanggaran.edit', $data);
         }
+    }
+
+    public function review(string $id) {
+        $pelanggaran = Pelanggaran::find($id);
+        $data = array(
+            'pelanggaran' => $pelanggaran,
+            'aturan' => Aturan::all(),
+            'siswa' => Siswa::find($pelanggaran->nis),
+            'tempaturan' => TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get()
+        );
+
+        if ($data['pelanggaran'] === null) {
+            return back()
+                ->with('error', 'Invalid Target Data');
+        }
+
+        if ($data['siswa'] === null) {
+            return back()
+                ->with('error', 'Reference Data Error');
+        }
+
+        return view('home.bk.pelanggaran.review', $data);
+    }
+
+    public function detail(string $id)
+    {
+        $pelanggaran = Pelanggaran::find($id);
+        $data = array(
+            'pelanggaran' => $pelanggaran,
+            'aturan' => Aturan::all(),
+            'siswa' => Siswa::all(),
+            'bk' => Bk::all(),
+            'detailaturan' => DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get()
+        );
+
+        if ($data['pelanggaran'] === null) {
+            return back()
+                ->with('error', 'Invalid Target Data');
+        }
+
+
+        if ($data['siswa']->first() === null) {
+            return back()
+                ->with('error', 'Reference Data Error');
+        } else {
+            return view('home.bk.pelanggaran.detail', $data);
+        }
+    }
+
+    public function proses(Request $request, string $id)
+    {
+        $pelanggaran = Pelanggaran::find($id);
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
+
+        if ($pelanggaran === null) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Invalid Target Data');
+        }
+        $validated = $request->validate([
+            'nis' => 'required|max:99999999999|numeric',
+            'keterangan' => 'required|max:255',
+            'total_poin' => 'required'
+        ]);
+        $validated['status'] = 'Beres';
+        $siswa = Siswa::find($validated['nis']);
+
+        try {
+            $pelanggaran->update($validated);
+            $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
+            
+            $tempaturan->each(function($old) {
+                $new = $old->replicate();
+                $new->id = Str::orderedUuid();
+                $new->setTable('detail_aturans');
+                $new->save();
+
+                $old->delete();
+            });
+
+            $poin = $siswa->poin + $validated['total_poin'];
+            $status = '';
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
+            cache()->forget($cachekey);
+
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('success', 'Data Berhasil Diubah');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error Update Data');
+        }
+        
     }
 
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
-
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
+        
         if ($pelanggaran === null) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard.bk')
                 ->with('error', 'Invalid Target Data');
-        } else {
-            $validated = $request->validate([
-                'nis' => 'required|max:99999999999|numeric',
-                'keterangan' => 'required|max:255',
-                'id_aturan' => 'required',
-                'total_poin' => 'required'
-            ]);
-            $siswa = Siswa::find($validated['nis']);
-
-            try {
-                $validated['status'] = 'Beres';
-                $validated['id_bk'] = Auth::User()->id;
-                $pelanggaran->update($validated);
-
-                $poin = $siswa->poin + $validated['total_poin'];
-                $status = '';
-
-                if ($poin >= 0 && $poin <= 25) {
-                    $status = "Baik";
-                } elseif ($poin > 25 && $poin <= 50) {
-                    $status = "Kurang Baik";
-                } elseif ($poin > 50 && $poin <= 75) {
-                    $status = "Buruk";
-                } elseif ($poin > 75 && $poin <= 100) {
-                    $status = "Sangat Buruk";
-                } else {
-                    $status = "Undefined Status";
-                }
-
-                $siswa->update(['poin' => $poin, 'status' => $status]);
-
-                return redirect()
-                    ->route('dashboard.bk')
-                    ->with('success', 'Data Berhasil Diubah');
-            } catch (\Throwable $th) {
-                return redirect()
-                    ->route('dashboard.bk')
-                    ->with('error', 'Error Update Data');
-            }
         }
+
+        $validated = $request->validate([
+            'nis' => 'required|max:99999999999|numeric',
+            'keterangan' => 'required|max:255',
+            'total_poin' => 'required'
+        ]);
+
+        $siswa = Siswa::find($validated['nis']);
+
+        if($siswa === null) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error reference data');
+        }
+        // dd((int) $siswa->poin - (int) $pelanggaran->total_poin + (int) $validated['total_poin']);
+
+        try {
+            $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
+            
+            $tempaturan->each(function($old) {
+                $new = $old->replicate();
+                $new->id = Str::orderedUuid();
+                $new->setTable('detail_aturans');
+                $new->save();
+
+                $old->delete();
+            });
+
+            //TODO: siswapoin - pelanggaranpoin + requestpoin
+            $poin = ((int) $siswa->poin - (int) $pelanggaran->total_poin) + (int) $validated['total_poin'];
+            $status = '';
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
+            $pelanggaran->update($validated);
+            cache()->forget($cachekey);
+
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('success', 'Data Berhasil Diubah');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error Update Data');
+        }
+        
     }
 
     public function destroy($id)
     {
         $pelanggaran = Pelanggaran::find($id);
+        $siswa = Siswa::find($pelanggaran->nis);
 
         if ($pelanggaran === null) {
-            return redirect(url()->previous())
+            return back()
                 ->with('error', 'Invalid Target Data');
-        } else {
-            try {
-                $pelanggaran->delete();
-
-                return redirect(url()->previous())
-                    ->with('success', 'Data Berhasil Dihapus');
-            } catch (\Throwable $th) {
-                return redirect(url()->previous())
-                    ->with('error', 'Error Destroy Data');
-            }
         }
+            
+        try {
+            $poin = $siswa->poin - $pelanggaran->total_poin;
+            $status = '';
+
+            if ($poin >= 0 && $poin <= 25) {
+                $status = "Baik";
+            } elseif ($poin > 25 && $poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($poin > 50 && $poin <= 75) {
+                $status = "Buruk";
+            } elseif ($poin > 75 && $poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
+
+            $siswa->update(['poin' => $poin, 'status' => $status]);
+            DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
+            $pelanggaran->delete();
+
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('success', 'Data Berhasil Dihapus');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('dashboard.bk')
+                ->with('error', 'Error Destroy Data');
+        }
+    
     }
 
     public function printbk()
@@ -205,59 +439,44 @@ class PelanggaranController extends Controller
         return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
     }
 
+    // 5
+    public function cancel($opt, $atr) {
+        $tempaturan = TempAturan::query()->where('no_pelanggaran', $atr);
+        $auth = Auth::User();
+        $cachekey = $auth->id.'dataEdit';
+
+        if($tempaturan !== null) {
+            $tempaturan
+                ->each(function($old) {
+                    $old->delete();
+                });
+        }
+
+        if($opt == 'kembali') {
+            return redirect()
+                ->route('review.inbox')
+                ->with('success', 'Sukses membatalkan');
+        }
+
+        $detailsToMove = cache($cachekey);
+
+        if($detailsToMove) {
+            foreach ($detailsToMove as $detailCache) {
+                $details = new DetailAturan();
+                $details->id = Str::orderedUuid();
+                $details->fill($detailCache->toArray());
+                $details->save();
+            }
     
-    public function detail($nis) {
-        $siswa = Siswa::find($nis);
-
-        if ($siswa === null) {
-            return back()
-                ->with('error','Target Data Error');
+            cache()->forget($cachekey);
+    
+            return redirect()
+                ->route('review.inbox')
+                ->with('success', 'Sukses membatalkan edit');
         }
 
-        return view('home.bk.pelanggaran.siswa',compact('siswa'));
-    }
-
-
-    public function history($nis)
-    {
-        $siswa = Siswa::find($nis);
-        $pelanggaran = Pelanggaran::where('nis', $nis)->get();
-
-        if ($siswa === null) {
-            return back()
-                ->with('error','Target Data Error');
-        }
-
-        return view('home.bk.pelanggaran.historysiswa',compact(['siswa','pelanggaran']));
-    }
-
-    public function change_point($nis, Request $request)
-    {
-        $siswa = Siswa::find($nis);
-        
-        if ($siswa === null) {
-            return back()
-                ->with('error','Target Data Error');
-        }
-
-        
-        $request->validate(['poin' => 'required|numeric|max:100']);
-
-        if ($request->poin > $siswa->poin) {
-            return back()
-                ->with('error','Poin Pengurangan Melebihi Poin Siswa');
-        }
-
-        try {
-            $update_poin = $siswa->poin - $request->poin;
-            $siswa->update(['poin' => $update_poin]);
-            return back()
-                ->with('success','Poin Berhasil Diubah');
-
-        } catch (\Throwable $th) {
-            return back()
-                ->with('error','Error Update Poin');
-        }
+        return redirect()
+            ->route('review.inbox');
     }
 
 }

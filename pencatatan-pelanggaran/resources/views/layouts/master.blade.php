@@ -159,6 +159,24 @@
                 }
             });
         }
+        
+        // 1
+        function alertConfirm(url, msg) {
+            Swal.fire({
+                title: "Konfirmasi",
+                text: msg,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#716aca",
+                cancelButtonColor: "#f3545d",
+                confirmButtonText: "Ya, Lakukan!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = url;
+                }
+            });
+        }
 
         // function confirmDel(url) {
         // 	Swal.fire({

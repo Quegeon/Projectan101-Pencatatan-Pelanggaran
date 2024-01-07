@@ -38,6 +38,18 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Aturan</label>
+                                <select name="id_aturan" class="select-search-no-modal">
+                                    <option value="{{ $tempaturan->id_aturan }}" selected>Default: {{ $tempaturan->Aturan->nama_aturan }}</option>
+                                    @foreach ($aturan as $s)
+                                        <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>                                        
+                                    @endforeach
+                                </select>
+                                @error('id_aturan')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Tanggal Pelanggaran</label>
                                 <input type="date" name="tgl_pelanggaran" value="{{ $pelanggaran->tgl_pelanggaran }}" placeholder="{{ $pelanggaran->tgl_pelanggaran }}" class="form-control">
                                 @error('tgl_pelanggaran')

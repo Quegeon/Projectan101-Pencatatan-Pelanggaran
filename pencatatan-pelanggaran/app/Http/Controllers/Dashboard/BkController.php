@@ -24,7 +24,9 @@ class BkController extends Controller
         $data = array(
             'count_siswa' => Siswa::count(),
             'count_aturan' => Aturan::count(),
-            'history' => Pelanggaran::select()->where('status','Beres')->orderBy('updated_at','asc')->limit(5)->get(),
+            'history' => Pelanggaran::select()->where('status','Beres')->orderBy('updated_at','desc')->limit(5)->get(),
+            // TODO: Solve Total Minggu
+            // 'total_minggu' => Pelanggaran::select()->whereBetween('tgl_pelanggaran',[(7 * $diffInWeek) - 7 + 1, 7 * $diffInWeek])->count(),
             'count_inbox' => Pelanggaran::where('status','Belum')->count(),
             'total_bulan' => Pelanggaran::select()->whereBetween('tgl_pelanggaran',[$start,$end])->count()
         );
@@ -34,7 +36,7 @@ class BkController extends Controller
     public function view_siswa()
     {
         $siswa = Siswa::all();
-        return view('home.bk.pelanggaran.siswa', compact('siswa'));
+        return view('home.bk.siswa', compact('siswa'));
     }
 
     public function view_aturan()
@@ -42,7 +44,7 @@ class BkController extends Controller
         $aturan = Aturan::all();
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
-        return view('home.bk.pelanggaran.aturan', compact('aturan','jenis','hukuman'));
+        return view('home.bk.aturan', compact('aturan','jenis','hukuman'));
     }
 
     public function history_aturan($nis)

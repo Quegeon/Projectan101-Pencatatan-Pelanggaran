@@ -30,7 +30,7 @@
                                     <th>No</th>
                                     <th>Siswa</th>
                                     <th>Petugas</th>
-                                    <th>Aturan</th>
+                                    <th>No Pelanggaran</th>
                                     <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -41,17 +41,12 @@
                                     <tr>
                                         <td align="center">{{$loop->iteration}}</td>
                                         <td>{{$k->Siswa->nama}}</td>
-                                        <td>{{$k->User->nama}}</td>
-                                        <td>{{ optional($k->Aturan)->nama_aturan ?? 'Kosong' }}</td>
+                                        <td>{{($k->User->nama) ?? 'Kosong'}}</td>
+                                        <td>{{ $k->no_pelanggaran }}</td>
                                         <td>{{$k->keterangan}}</td>
                                         <td>{{$k->status}}</td>
                                         <td align="center" colspan="3">
-                                            <a href="{{ route('pelanggaran.edit', (string) $k->id) }}" class="btn btn-link">
-                                                <i class="fa fa-edit fa-lg"></i>
-                                            </a>
-                                            <a href="{{ route('pelanggaran.destroy', (string) $k->id ) }}" class="btn btn-link">
-                                                <i class="fa fa-trash text-danger fa-lg"></i>
-                                            </a>
+                                            <a href="{{ route('pelanggaran.detail', $k->id) }}" class="btn btn-info text-white"><i class="fa fa-info-circle mr-2"></i>Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -77,7 +72,7 @@
                 <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Siswa</label>
                                 <select name="nis" class="select-search">
@@ -87,37 +82,6 @@
                                     @endforeach
                                 </select>
                                 @error('nis')
-                                    <p class="text-danger timeout">* {{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>BK</label>
-                                <select class="select-search" name="id_bk">
-                                    <option></option>
-                                    @foreach ($bk as $b)
-                                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_bk')
-                                    <p class="text-danger timeout">* {{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Aturan</label>
-                                <select name="id_aturan" onchange="displayPoint({{ $aturan }}, this)" class="select-search">
-                                    <option></option>
-                                    @foreach ($aturan as $s)
-                                        <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
-                                    @endforeach
-                                </select>
-                                @error('id_aturan')
                                     <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
                             </div>
@@ -137,22 +101,22 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label>Poin</label>
-                                <input type="text" name="total_poin" id="poin" class="form-control" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="Belum">Belum di proses</option>
-                                    <option value="Beres">Sudah di proses</option>
+                                <label>BK</label>
+                                <select class="select-search" name="id_bk">
+                                    <option></option>
+                                    @foreach ($bk as $b)
+                                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                    @endforeach
                                 </select>
+                                @error('id_bk')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
-                    </div>
+
+                    <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>

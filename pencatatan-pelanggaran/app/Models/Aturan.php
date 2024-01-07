@@ -37,4 +37,9 @@ class Aturan extends Model
     {
         return $this->hasMany(Aturan::class, 'id_aturan', 'id');
     }
+
+    // public function Hukuman_Pilihan ()
+    // {
+    //     return $this->hasMany(Aturan::class, 'hukuman_pilihan', 'id');
+    // }
 }

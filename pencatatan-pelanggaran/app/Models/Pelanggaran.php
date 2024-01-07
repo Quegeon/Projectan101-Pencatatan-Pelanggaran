@@ -14,19 +14,16 @@ class Pelanggaran extends Model
     protected $fillable = [
         'id',
         'nis',
-        'id_aturan',
         'id_user',
         'id_bk',
+        'hukuman_pilihan',
+        'no_pelanggaran',
         'tgl_pelanggaran',
         'keterangan',
         'status',
         'total_poin',
+        'hukuman_pilihan',
     ];
-
-    public function Aturan()
-    {
-        return $this->belongsTo(Aturan::class, 'id_aturan', 'id');
-    }
 
     public function User()
     {
@@ -36,6 +33,11 @@ class Pelanggaran extends Model
     public function Bk()
     {
         return $this->belongsTo(Bk::class, 'id_bk', 'id');
+    }
+
+    public function Hukuman_Pilihan()
+    {
+        return $this->belongsTo(Aturan::class, 'hukuman_pilihan', 'id');
     }
     
     public function Siswa()

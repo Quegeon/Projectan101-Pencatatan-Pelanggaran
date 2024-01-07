@@ -38,11 +38,27 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Aturan</label>
+                                <select name="id_aturan" class="select-search-no-modal">
+                                    <option></option>
+                                    @foreach ($aturan as $s)
+                                        <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>                                        
+                                    @endforeach
+                                </select>
+                                @error('id_aturan')
+                                    <p class="text-danger timeout">* {{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Keterangan</label>
                                 <input type="text" name="keterangan" placeholder="Masukkan Keterangan" class="form-control">
                                 @error('keterangan')
                                     <p class="text-danger timeout">* {{ $message }}</p>
                                 @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
                             </div>
                             <div class="modal-footer">
                                 <a href="{{ route('dashboard') }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
