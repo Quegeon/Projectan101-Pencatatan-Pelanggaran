@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckData
@@ -23,7 +24,9 @@ class CheckData
         if($auth) {
             $cacheKey = $auth->id.'dataEdit';
             $cached = cache($cacheKey);
-            if(!$cached) return $next($request);
+            // dd($cached);
+            // if(!$cached) return $next($request);
+            if(!$cached || $cached->isNotEmpty() === false) return $next($request);
 
             foreach ($cached as $detailCache) {
                 $details = new DetailAturan();
@@ -31,7 +34,7 @@ class CheckData
                 $details->fill($detailCache->toArray());
                 $details->save();
             }
-    
+        
             TempAturan::where('no_pelanggaran', $cached[0]->no_pelanggaran)
                 ->each(function($old) {
                     $old->delete();

@@ -1,13 +1,15 @@
 <?php
 
-function IDGenerator($model, $trow, $prefix, $length = 4) {
-    $rand = rand(1000, 9999);
-    $data = $model::where($trow, $rand)->first(); // DV-0002
-    // dd($data);
+function IDGenerator($model, $trow, $prefix) {
+    $no_pelanggaran = $prefix . '-' . random_int(1000, 9999);
 
-    if($data) {
-        return $prefix.'-'.rand(1000, 9999);
+    $check_exist = $model::where($trow, $no_pelanggaran)->first();
+
+    if ($check_exist !== null) {
+        $no_pelanggaran = $prefix . '-' . random_int(1000, 9999);
+        
+        return $no_pelanggaran;    
     }
 
-    return $prefix.'-'.$rand;
+    return $no_pelanggaran;
 }
