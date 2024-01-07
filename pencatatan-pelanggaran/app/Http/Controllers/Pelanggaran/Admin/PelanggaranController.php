@@ -23,7 +23,7 @@ class PelanggaranController extends Controller
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
-            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP')
+            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP')
         );
 
         if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
@@ -92,8 +92,8 @@ class PelanggaranController extends Controller
         
         try {
             $convert_detail = DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
-            
-            $cached = cache()->put(Auth::user()->id . 'dataEdit', $convert_detail);
+            $cacheKey = Auth::user()->id . 'dataEdit';
+            $cached = cache()->put($cacheKey, $convert_detail);
 
             if ($convert_detail !== null && TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->first() === null) {
                 $convert_detail->each(function($old){

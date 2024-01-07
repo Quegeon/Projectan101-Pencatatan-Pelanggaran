@@ -1,24 +1,15 @@
 <?php
 
-function IDGenerator($model, $trow, $length = 4, $prefix) {
-    $data = $model::orderBy('id', 'desc')->first(); // DV-0002
-    // dd($data);
+function IDGenerator($model, $trow, $prefix) {
+    $no_pelanggaran = $prefix . '-' . random_int(1000, 9999);
 
-    if(!$data) {
-        $code_length = $length - 1;
-        $last_number = 1;
-    } else {
-        $code_without_prefix = substr($data->$trow, strlen($prefix) + 1); // '0002'
-        $get_last_number = ($code_without_prefix / 1) * 1; // 2
-        $last_number_length = strlen($get_last_number); // 1
-        $code_length = $length - $last_number_length; // 3
-        $last_number = $get_last_number + 1; // 3
+    $check_exist = $model::where($trow, $no_pelanggaran)->first();
+
+    if ($check_exist !== null) {
+        $no_pelanggaran = $prefix . '-' . random_int(1000, 9999);
+        
+        return $no_pelanggaran;    
     }
 
-    $zeros = '';
-    for($i = 0; $i < $code_length; $i++) {
-        $zeros .= '0';
-    }
-
-    return $prefix.'-'.$zeros.$last_number;
+    return $no_pelanggaran;
 }

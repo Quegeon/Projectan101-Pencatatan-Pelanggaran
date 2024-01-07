@@ -111,8 +111,8 @@ Route::group(["husen ganteng"],function () {
             Route::get('/', 'index')->name('pelanggaran.index');
             Route::post('/store', 'store')->name('pelanggaran.store');
             Route::get('/{id}/detail', 'detail')->name('pelanggaran.detail');
-            Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit');
-            Route::post('/{id}/update', 'update')->name('pelanggaran.update');
+            Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit')->withoutMiddleware(['checkdata']);
+            Route::post('/{id}/update', 'update')->name('pelanggaran.update')->withoutMiddleware(['checkdata']);
             Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
         });
     });
