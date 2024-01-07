@@ -5,7 +5,7 @@
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">Dashboard</h4>
-        <div class="btn-group btn-group-page-header ml-auto">
+        {{-- <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
             </button>
@@ -17,7 +17,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-3">
@@ -32,13 +32,7 @@
                         <div class="col col-stats ml-3 ml-sm-0">
                             <div class="numbers">
                                 <p class="card-category">Jumlah Pelanggaran</p>
-                                <h4 class="card-title">
-                                    @if ($total_bulan->total_pelanggaran == null)
-                                    0 
-                                    @else
-                                    {{$total_bulan->total_pelanggaran}}
-                                    @endif
-                                </h4>
+                                <h4 class="card-title">{{ $total_bulan_petugas }}</h4>
                             </div>
                         </div>
                     </div>
@@ -144,7 +138,7 @@
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">Dashboard</h4>
-        <div class="btn-group btn-group-page-header ml-auto">
+        {{-- <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
             </button>
@@ -156,7 +150,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <style>
@@ -252,13 +246,7 @@
                         <div class="col col-stats ml-3 ml-sm-0">
                             <div class="numbers">
                                 <p class="card-category">Jumlah Pelanggaran</p>
-                                <h4 class="card-title">
-                                    @if ($total_bulan->total_pelanggaran === null)
-                                    0 
-                                    @else
-                                    {{$total_bulan->total_pelanggaran}}
-                                    @endif
-                                </h4>
+                                <h4 class="card-title">{{ $total_bulan_admin }}<h4>
                             </div>
                         </div>
                     </div>

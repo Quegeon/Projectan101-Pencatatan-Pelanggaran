@@ -65,9 +65,9 @@
             <!-- End Logo Header -->
 
             <!-- Navbar Header -->
-            <nav class="navbar navbar-header navbar-expand-lg">
+            {{-- <nav class="navbar navbar-header navbar-expand-lg"> --}}
 
-                <div class="container-fluid">
+                {{-- <div class="container-fluid">
                     <div class="collapse" id="search-nav">
                         <form class="navbar-left navbar-form nav-search mr-md-3">
                             <div class="input-group">
@@ -86,7 +86,7 @@
                                 aria-expanded="false" aria-controls="search-nav">
                                 <i class="fa fa-search"></i>
                             </a>
-                        </li>
+                        </li> --}}
 
                         {{-- ! UDH GA KEPAKE COY --}}
                         {{-- <li class="nav-item dropdown hidden-caret">
@@ -117,9 +117,9 @@
 								</li>
 							</ul>
 						</li> --}}
-                    </ul>
-                </div>
-            </nav>
+                    {{-- </ul>
+                </div> --}}
+            {{-- </nav> --}}
             <!-- End Navbar -->
         </div>
 
