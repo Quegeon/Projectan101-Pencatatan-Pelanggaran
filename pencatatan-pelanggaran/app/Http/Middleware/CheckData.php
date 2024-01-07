@@ -24,9 +24,7 @@ class CheckData
         if($auth) {
             $cacheKey = $auth->id.'dataEdit';
             $cached = cache($cacheKey);
-            // dd($cached);
-            // if(!$cached) return $next($request);
-            if(!$cached || $cached->isNotEmpty() === false) return $next($request);
+            if(!$cached)  return $next($request);
 
             foreach ($cached as $detailCache) {
                 $details = new DetailAturan();

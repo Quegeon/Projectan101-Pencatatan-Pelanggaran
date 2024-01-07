@@ -100,7 +100,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Petugas</label>
-                                            <input type="text" class="form-control" value="{{ $pelanggaran->User->username }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $pelanggaran->User->username ?? '-' }}" readonly>
                                         </div>
                                     </div>
                                 </div>
