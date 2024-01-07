@@ -4,7 +4,7 @@
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">Kelola Data Pelanggaran</h4>
-        <div class="btn-group btn-group-page-header ml-auto">
+        {{-- <div class="btn-group btn-group-page-header ml-auto">
             <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-ellipsis-h"></i>
             </button>
@@ -16,7 +16,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -30,7 +30,7 @@
                                     <th>No</th>
                                     <th>Siswa</th>
                                     <th>Petugas</th>
-                                    <th>Aturan</th>
+                                    <th>No Pelanggaran</th>
                                     <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -42,7 +42,7 @@
                                         <td align="center">{{$loop->iteration}}</td>
                                         <td>{{$k->Siswa->nama}}</td>
                                         <td>{{($k->User->nama) ?? 'Kosong'}}</td>
-                                        <td>{{ optional($k->Aturan)->nama_aturan ?? 'Kosong' }}</td>
+                                        <td>{{ $k->no_pelanggaran }}</td>
                                         <td>{{$k->keterangan}}</td>
                                         <td>{{$k->status}}</td>
                                         <td align="center" colspan="3">
