@@ -4,7 +4,7 @@
     <div class="page-inner">
         <div class="page-header">
             <h4 class="page-title">Edit Data Jenis</h4>
-            <div class="btn-group btn-group-page-header ml-auto">
+            {{-- <div class="btn-group btn-group-page-header ml-auto">
                 <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-ellipsis-h"></i>
                 </button>
@@ -16,7 +16,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Separated link</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="row">
             <div class="col-lg-12">

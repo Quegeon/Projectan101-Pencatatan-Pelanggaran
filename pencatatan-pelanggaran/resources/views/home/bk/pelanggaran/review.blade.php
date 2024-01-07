@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Pelanggaran')
+@section('title', 'Review Pelanggaran')
 @section('content')
 @php 
     $total_poin = 0;
@@ -11,8 +11,8 @@
 
     <div class="page-inner">
         <div class="page-header">
-            <h4 class="page-title"> Data Pelanggaran</h4>
-            <div class="btn-group btn-group-page-header ml-auto">
+            <h4 class="page-title">Review Pelanggaran</h4>
+            {{-- <div class="btn-group btn-group-page-header ml-auto">
                 <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-ellipsis-h"></i>
@@ -25,7 +25,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Separated link</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="row">
             <div class="col-lg-12">

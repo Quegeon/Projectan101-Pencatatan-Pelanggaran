@@ -4,7 +4,6 @@
     $kelola = ( array_filter($activeRoutes, fn($item) => Str::contains($currentRoute, $item)) ) ? 'active' : '';
 @endphp
 <div class="sidebar">
-
     <div class="sidebar-background"></div>
     <div class="sidebar-wrapper scrollbar-inner">
         <div class="sidebar-content">

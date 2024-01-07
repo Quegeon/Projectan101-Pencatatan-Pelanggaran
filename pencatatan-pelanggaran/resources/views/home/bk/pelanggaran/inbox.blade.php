@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('review.edit', $p->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Proses</a>
+                <a href="{{ route('review.edit', $p->id) }}" class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Proses</a>
                 <a class="btn btn-secondary text-white"><i class="fa fa-edit"></i></a>
                 <a onclick="confirmDel(`{{ route('review.destroy', $p->id) }}`)" class="btn btn-secondary text-white"><i class="fa fa-trash"></i></a>
             </div>

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Pelanggaran')
+@section('title', 'Edit Data Pelanggaran')
 @section('content')
 @php 
     $total_poin = 0;

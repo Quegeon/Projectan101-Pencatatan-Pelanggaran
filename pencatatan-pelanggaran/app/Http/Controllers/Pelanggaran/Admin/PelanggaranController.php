@@ -214,4 +214,5 @@ class PelanggaranController extends Controller
                 ->with('error','Error Destroy Data'); 
         }
     }
+
 }

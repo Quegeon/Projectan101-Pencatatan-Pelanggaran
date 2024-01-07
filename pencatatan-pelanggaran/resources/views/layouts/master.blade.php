@@ -47,7 +47,7 @@
             <div class="logo-header">
 
                 <a href="index.html" class="logo">
-                    <img src="{{ asset('assets/img/logoazzara.svg') }}" alt="navbar brand" class="navbar-brand">
+                    <img src="{{ asset('/foto/mataw1.png') }}" alt="navbar brand" class="navbar-brand" style="width: 80px">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,9 +65,9 @@
             <!-- End Logo Header -->
 
             <!-- Navbar Header -->
-            <nav class="navbar navbar-header navbar-expand-lg">
+            {{-- <nav class="navbar navbar-header navbar-expand-lg"> --}}
 
-                <div class="container-fluid">
+                {{-- <div class="container-fluid">
                     <div class="collapse" id="search-nav">
                         <form class="navbar-left navbar-form nav-search mr-md-3">
                             <div class="input-group">
@@ -86,7 +86,7 @@
                                 aria-expanded="false" aria-controls="search-nav">
                                 <i class="fa fa-search"></i>
                             </a>
-                        </li>
+                        </li> --}}
 
                         {{-- ! UDH GA KEPAKE COY --}}
                         {{-- <li class="nav-item dropdown hidden-caret">
@@ -117,9 +117,9 @@
 								</li>
 							</ul>
 						</li> --}}
-                    </ul>
-                </div>
-            </nav>
+                    {{-- </ul>
+                </div> --}}
+            {{-- </nav> --}}
             <!-- End Navbar -->
         </div>
 
@@ -298,6 +298,19 @@
                 if (a.id == arr[1].value) {
                     $('#poin').val(a.poin);
                 }
+            }
+        }
+    </script>
+
+    <script>
+        function displaySubtract(subPoint){
+            const poinSiswa = document.getElementById('poin_siswa').value
+            const result = (parseInt(poinSiswa) || 0) - (parseInt(subPoint) || 0);
+
+            if (result < 0) {                
+                document.getElementById('result').value = 'Pengurangan Poin Melebihi Poin Siswa';
+            } else {
+                document.getElementById('result').value = result;
             }
         }
     </script>
