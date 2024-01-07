@@ -13,6 +13,7 @@ use App\Models\Bk;
 use App\Models\DetailAturan;
 use App\Models\TempAturan;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class PelanggaranController extends Controller
 {
@@ -89,40 +90,33 @@ class PelanggaranController extends Controller
                 ->with('error', 'Invalid Target Data');
         }
 
-        
-        try {
-            $convert_detail = DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
-            $cacheKey = Auth::user()->id . 'dataEdit';
-            $cached = cache()->put($cacheKey, $convert_detail);
+        $convert_detail = DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
+        $temp_aturan = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
 
-            if ($convert_detail !== null && TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->first() === null) {
-                $convert_detail->each(function($old){
-                    $new = $old->replicate();
-                    $new->id = Str::orderedUuid();
-                    $new->setTable('temp_aturans');
-                    $new->save();
+        if ($convert_detail->isNotEmpty() === true) {
+            Cache::put(Auth::user()->id . 'dataEdit', $convert_detail);
+        }
 
-                    $old->delete();
-                });
-            }
-
-        } catch (\Throwable $th) {
-            return redirect()
-                ->route('pelanggaran.detail')
-                ->with('error', 'Convert Temporary Error');
+        if ($temp_aturan->first() === null) {
+            $convert_detail->each(function($old){
+                $new = $old->replicate();
+                $new->id = Str::orderedUuid();
+                $new->setTable('temp_aturans');
+                $new->save();
+                $old->delete();
+            });    
         }
 
         $data = array(
+            'tempaturan' => $temp_aturan,
             'siswa' => Siswa::all(),
-            'bk' => Bk::all(),
             'aturan' => Aturan::all(),
-            'tempaturan' => TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get(),
+            'bk' => Bk::all()
         );
 
-        if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {
-            return redirect()
-                ->route('pelanggaran.index')
-                ->with('error', 'Reference Data Error');
+        if ($data['siswa']->first() === null || $data['aturan']->first() === null || $data['bk']->first() === null) {
+            return back()
+                ->with('error','Reference Data Error');
         }
 
         return view('home.admin.pelanggaran.edit', $data, compact(['pelanggaran']));
@@ -148,8 +142,6 @@ class PelanggaranController extends Controller
         ]);  
 
         try {
-            DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
-
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
             $tempaturan->each(function($old){
                 $new = $old->replicate();
