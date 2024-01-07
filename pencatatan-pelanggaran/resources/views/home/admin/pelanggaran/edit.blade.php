@@ -203,12 +203,12 @@
                         </div>
                         <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}"> 
                         {{-- 8 --}}
-                        <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}"> 
+                        <input type="hidden" name="id" value="{{ Str::orderedUuid() }}"> 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
-                </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                    </form>
                 </div>
             </div>
         </div>
