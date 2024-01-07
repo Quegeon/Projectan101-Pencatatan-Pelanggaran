@@ -95,8 +95,10 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Hukuman</label>
-                                                <select name="hukuman_pilihan">
-                                                    
+                                                <select name="hukuman_pilihan" class="select-search-no-modal">
+                                                    @foreach ($tempaturan as $t)
+                                                        <option value="{{ $t->Aturan->id }}">{{ $t->Aturan->Hukuman->hukuman }}</option>
+                                                    @endforeach
                                                 </select>
                                                 {{-- <input type="text" value="{{ $pelanggaran->Hukuman_Pilihan->Hukuman->hukuman ?? '' }}" class="form-control" id="" readonly> --}}
                                             </div>

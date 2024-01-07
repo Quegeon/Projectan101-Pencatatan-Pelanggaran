@@ -59,7 +59,14 @@ class PelanggaranController extends Controller
 
     public function create()
     {
-        $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP');
+        $auth = Auth::User();
+        if(cache($auth->id.'newData')) {
+            $no_pelanggaran = cache($auth->id.'newData');
+        } else {
+            $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP');
+            cache()->put($auth->id.'newData', $no_pelanggaran);
+        }
+
         $data = array(
             'no_pelanggaran' => $no_pelanggaran,
             'siswa' => Siswa::all(),
@@ -81,7 +88,7 @@ class PelanggaranController extends Controller
 
     public function store(Request $request)
     {
-
+        $auth = Auth::User();
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
@@ -127,6 +134,7 @@ class PelanggaranController extends Controller
             $siswa->update(['poin' => $poin, 'status' => $status]);
             Pelanggaran::create($validated);
             cache()->forget('dataAwal');
+            cache()->forget($auth->id.'newData');
 
             return redirect()
                 ->route('dashboard.bk')
@@ -152,7 +160,7 @@ class PelanggaranController extends Controller
             'bk' => Bk::all(),
             'no_pelanggaran' => $pelanggaran->no_pelanggaran,
         );
-        
+
         if(!cache()->has($cachekey)) {
             DetailAturan::query()
                 ->where('no_pelanggaran', $pelanggaran->no_pelanggaran)
@@ -175,6 +183,7 @@ class PelanggaranController extends Controller
         // dd($this->dataAwal);
         $data['tempaturan'] = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
 
+        // dd($data);
         if ($data['pelanggaran'] === null) {
             return back()
                 ->with('error', 'Invalid Target Data');

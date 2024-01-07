@@ -23,7 +23,7 @@ class PelanggaranController extends Controller
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
             'aturan' => Aturan::all(),
-            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP')
+            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP')
         );
 
         if ($data['siswa']->first() === null || $data['bk']->first() === null || $data['aturan'] === null) {

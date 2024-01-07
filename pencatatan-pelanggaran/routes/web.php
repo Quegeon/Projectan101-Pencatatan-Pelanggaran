@@ -143,9 +143,9 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/create', 'create')->name('review.create');
         Route::post('/store', 'store')->name('review.store');
-        Route::get('/{id}/edit', 'edit')->name('review.edit');
+        Route::get('/{id}/edit', 'edit')->name('review.edit')->withoutMiddleware(['checkdata']);
         Route::get('/{id}/detail', 'detail')->name('review.detail');
-        Route::post('/{id}/update', 'update')->name('review.update');
+        Route::post('/{id}/update', 'update')->name('review.update')->withoutMiddleware(['checkdata']);
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
         
         Route::get('/{id}/review', 'review')->name('review.review');

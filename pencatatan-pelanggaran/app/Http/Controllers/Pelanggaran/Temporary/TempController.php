@@ -29,7 +29,7 @@ class TempController extends Controller
         }
 
         TempAturan::create($validated);
-
+        
         return back()->with('success', 'Data berhasil dibuat');
     }
     

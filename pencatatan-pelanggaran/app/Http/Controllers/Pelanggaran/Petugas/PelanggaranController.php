@@ -19,9 +19,17 @@ class PelanggaranController extends Controller
 {
     public function create()
     {
+        $auth = Auth::User();
+        if(cache($auth->id.'newData')) {
+            $no_pelanggaran = cache($auth->id.'newData');
+        } else {
+            $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP');
+            cache()->put($auth->id.'newData', $no_pelanggaran);
+        }
+
         $data = array(
             'siswa' => Siswa::all(),
-            'no_pelanggaran' => IDGenerator(new Pelanggaran, 'no_pelanggaran', 4, 'DP'),
+            'no_pelanggaran' => $no_pelanggaran,
             'aturan' => Aturan::all(),
         );
 
@@ -36,6 +44,7 @@ class PelanggaranController extends Controller
 
     public function store(Request $request)
     {
+        $auth = Auth::User();
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
@@ -54,6 +63,7 @@ class PelanggaranController extends Controller
             ]);
 
             Pelanggaran::create($validated);
+            cache()->forget($auth->id.'newData');
 
             return redirect()
                 ->route('dashboard')
