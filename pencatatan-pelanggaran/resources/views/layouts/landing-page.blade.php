@@ -30,7 +30,7 @@
 @vite('resources/css/app.css')
 </head>
 
-<body class="bg-abu ">
+<body class="bg-abu " id="body">
 	<div class="background flex">
 		<div class="image-slideshow absolute inset-y-0 right-0">
 			<div class="image fade">
@@ -59,7 +59,7 @@
 				<img id=navbarImage src="/foto/mataw.png" class="sm:w-30 h-28" alt="">
 			</span>
 			<ul class="links">
-				<li><a href="#">Home</a></li>
+				<li><a href="#body">Home</a></li>
 				<li><a href ="#card-profile">About us</a></li>
 				<li><a href ="#support">Support</a></li>
 				<li><a href ="#contact">Contact</a></li>
@@ -71,14 +71,14 @@
 		</div>
 
 		<div class="dropdown-menu">
-			<li><a href="#">Home</a></li>
+			<li><a href="#body">Home</a></li>
 			<li><a href="#card-profile">About us</a></li>
 			<li><a href="#support">Support</a></li>
 			<li><a href="#contact">Contact</a></li>
 			<li><a href="/login/user" class="btn-login">Login</a></li>
 		</div>
 	</header>
-	<div class="hero" data-aos="fade-right">
+	<div class="hero" data-aos="fade-right" id="hero">
 		<div class="hero-body">
 			<h1>APLIKASI PELANGGARAN SISWA</h1>
 			<p>Aplikasi ini dirancang untuk menggantikan metode manual pencatatan point pelanggaran siswa di SMK MARHAS MARGAHAYU</p>
@@ -95,33 +95,28 @@
 			<h2>Tampilan Halaman</h2>
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/bk-hanya-bisa-melihat-data.png" onclick="openModal('/foto/bk-hanya-bisa-melihat-data.png','Dashboard BK, disini BK hanya bisa melihat data siswa yang melanggar')">
+			<img class="mySlides" src="/foto/login.jpeg" onclick="openModal('/foto/login.jpeg','Halaman Login, Sebelum anda memasuki halaman utama, adnda harus login terlebih dahulu sesuai dengan level anda, dan masukan username dan password sudah di berikan oleh admin.')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/dashboard-bk-versi-2.png" onclick="openModal('/foto/dashboard-bk-versi-2.png','Dashboard Utama BK, disini adalah halaman utama yaitu dahboard dan BK bisa melihat detail dari data siswa')">
+			<img class="mySlides" src="/foto/admin-dashboard.jpeg" onclick="openModal('/foto/admin-dashboard.jpeg','Dashboard Admin, halaman ini adalah tampilan dashboard admin dan mempunyai banyak fitur')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
-			
 		</div>
 		<div class="image-container">
 			<img class="mySlides" src="/foto/dashboard-petugas.png" onclick="openModal('/foto/dashboard-petugas.png','Dashboard Petugas, ini adalah tampilan dashboard untuk petugas yaitu guru piket maupun pihak OSIS')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
-			
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/inbox-bk.png" onclick="openModal('/foto/inbox-bk.png','Inbox BK, halaman ini untuk BK melihat laporan dari pelapor')">
+			<img class="mySlides" src="/foto/laporan.jpeg" onclick="openModal('/foto/laporan.jpeg','Halaman Laporan, Pada tampilan ini petugas dapat membuat laporan yang nanti akan dikirim ke BK.')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
-			
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/login.png" onclick="openModal('/foto/login.png','Halaman Login, Sebelum anda memasuki halaman utama, adnda harus login terlebih dahulu sesuai dengan level anda, dan masukan username dan password sudah di berikan oleh admin.')">
+			<img class="mySlides" src="/foto/bk-dashboard.jpeg" onclick="openModal('/foto/bk-dashboard.jpeg','Dashboard Utama BK, disini adalah halaman utama yaitu dahboard dan BK bisa melihat detail dari data siswa')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
-			
 		</div>
 		<div class="image-container">
-			<img class="mySlides" src="/foto/memproses-laporan.png" onclick="openModal('/foto/memproses-laporan.png','Halaman Membuat Laporan, halaman ini untuk mencatat siswa yang melanggar, dan jika catatan dikirim maka akan tampil di inbox BK')">
+			<img class="mySlides" src="/foto/inbox.jpeg" onclick="openModal('/foto/inbox.jpeg','Inbox BK, halaman ini untuk BK melihat laporan dari pelapor')">
 			<div class="detail-text">Klik untuk lebih lengkap</div>
-		
 		</div>
 		<br>
 		<div class="dot-navigation">
@@ -151,21 +146,21 @@
 		<div class="card-profile-content"  data-aos="zoom-in">
 			<div class="row">
 				<div class="image-card-profile">
-					<img src="/foto/foto-non-color/5.png" data-src="/foto/foto-color/5.png" alt="">
+					<img class="a" src="/foto/foto-non-color/5.png" data-src="/foto/foto-color/5.png" alt="">
 					<div class="tittle-profile">
 						<h2>Maulana</h2>
 						<p>Backend</p>
 					</div>
 				</div>
 				<div class="image-card-profile">
-					<img src="/foto/foto-non-color/6.png" data-src="/foto/foto-color/6.png" alt="">
+					<img class="b" src="/foto/foto-non-color/6.png" data-src="/foto/foto-color/6.png" alt="">
 					<div class="tittle-profile">
 						<h2>Ghifari</h2>
 						<p>Backend</p>
 					</div>
 				</div>
 				<div class="image-card-profile">
-					<img src="/foto/foto-non-color/3.png" data-src="/foto/foto-color/3.png" alt="">
+					<img class="c" src="/foto/foto-non-color/3.png" data-src="/foto/foto-color/3.png" alt="">
 					<div class="tittle-profile">
 						<h2>Rafli</h2>
 						<p>Analyst</p>
@@ -174,14 +169,14 @@
 			</div>
 			<div class="row">
 				<div class="image-card-profile">
-					<img src="/foto/foto-non-color/4.png" data-src="/foto/foto-color/4.png" alt="">
+					<img class="d" src="/foto/foto-non-color/4.png" data-src="/foto/foto-color/4.png" alt="">
 					<div class="tittle-profile">
 						<h2>Bintang</h2>
 						<p>Frontend</p>
 					</div>
 				</div>
 				<div class="image-card-profile">
-					<img src="/foto/foto-non-color/1.png" data-src="/foto/foto-color/1.png" alt="">
+					<img class="e" src="/foto/foto-non-color/1.png" data-src="/foto/foto-color/1.png" alt="">
 					<div class="tittle-profile">
 						<h2>Yasel</h2>
 						<p>Documentation</p>
@@ -195,14 +190,14 @@
 		<div class="card-profile-content">
 			<div class="row">
 				<div class="image-card-profile"  data-aos="zoom-in">
-					<img src="/foto/foto-non-color/2.png" data-src="/foto/foto-color/2.png" alt="">
+					<img class="f" src="/foto/foto-non-color/2.png" data-src="/foto/foto-color/2.png" alt="">
 					<div class="tittle-profile">
 						<h2>Aldy</h2>
 						<p>Project Manager</p>
 					</div>
 				</div>
 			</div>
-	</div>
+		</div>
 	<div class="support" id="support">
 		<div class="support-content">
 			<h1>Thank's To</h1>
@@ -212,22 +207,22 @@
 			</div>
 		</div>
 	</div>
-	<footer class="fo" id="contact">
+	<footer class="fo mt-32" id="contact">
 	<div class="footer-content">
 			<div class="footer-image">
 				<img src="/foto/mataw1.png" alt="">
-				<p>MATA adalah singkatan dari Marhas Technology Assosiation, yang beranggotakan 6 orang yang ditugaskan membuat sebuah aplikasi untuk sekolah</p>
+				<p class="mt-10">MATA adalah Marhas Technology Assosiation, yang beranggotakan 6 orang yang ditugaskan membuat sebuah aplikasi untuk sekolah</p>
 			</div>
 			<div class="footer-social">
-				<div class="mata-footer">
+				<div class="mata-footer ">
 					<p>Contact us</p>
-					<a href=""><i class="fa fa-envelope"></i>   mata.projectan101@proton.me</a>
+					<a href="https://mail.google.com/mail/u/0/#inbox?compose=DmwnWsLTHnhnPBbdJZXXCcqHjgtKjwZPBcfpCjmDtShJndLcSzSLJWrxSJrQQZtHhpqlvzxptjkg"><i class="fa fa-envelope"></i>   mata.projectan101@proton.me</a>
 				</div>
 				<div class="owner-footer">
 					<p>Social Media</p>
 					<a class="text-left pointer" href="https://www.instagram.com/aldyaditiah/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Aldy</a>
 					<a class="text-left pointer" href="https://www.instagram.com/maulhusen_/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Maulana</a>
-					<a class="text-left pointer" href="https://www.instagram.com/raflisodri67/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Rafly</a>
+					<a class="text-left pointer" href="https://www.instagram.com/raflisodri67/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Rafli</a>
 					<a class="text-left pointer" href="https://www.instagram.com/ghvvari/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Ghifari</a>
 					<a class="text-left pointer" href="https://www.instagram.com/mhyshelf/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Yasel</a>
 					<a class="text-left pointer" href="https://www.instagram.com/sstarrr4_/?igsh=YzAwZjE1ZTI0Zg%3D%3D"><i class="fa fa-instagram"></i>  Bintang</a>
@@ -268,11 +263,10 @@
     var navbarImage = document.getElementById("navbarImage");
 
     window.addEventListener("scroll", function() {
-        // Ganti gambar saat Anda scroll ke bawah (sesuaikan dengan nilai scroll yang diinginkan)
         if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-            navbarImage.src = "/foto/mata.png"; // Ganti dengan path gambar yang baru
+            navbarImage.src = "/foto/mata.png"; 
         } else {
-            navbarImage.src = "/foto/mataw.png"; // Ganti dengan path gambar yang asli
+            navbarImage.src = "/foto/mataw.png"; 
         }
     });
 });
@@ -379,6 +373,62 @@ function displayImages() {
     images[index-1].classList.remove("zoom-in-out");
     displayImages();
   }, 3000);
+}
+
+</script>
+<script>
+	function plusDivs(n) {
+    showDivs(slideIndex += n);
+    const content = document.querySelector('.w3-content');
+    content.classList.add(n > 0 ? 'next' : 'prev');
+
+    setTimeout(() => {
+        content.classList.remove('next', 'prev');
+    }, 500); 
+}
+
+</script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  const navLinks = document.querySelectorAll('.nav .links a');
+  const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
+
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  function handleLinkClick(event) {
+    event.preventDefault();
+    const targetSectionId = this.getAttribute('href').substring(1);
+    scrollToSection(targetSectionId);
+  }
+
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', handleLinkClick);
+  });
+
+  dropdownLinks.forEach(function (link) {
+    link.addEventListener('click', handleLinkClick);
+  });
+});
+
+</script>
+<script>
+	function plusDivs(n) {
+    showDivs(slideIndex += n);
+    const buttons = document.querySelectorAll('.w3-button');
+    buttons.forEach(button => button.classList.add('clicked'));
+    setTimeout(() => {
+        buttons.forEach(button => button.classList.remove('clicked'));
+    }, 500); 
 }
 
 </script>
