@@ -107,6 +107,8 @@ class PelanggaranController extends Controller
             });    
         }
 
+        $temp_aturan = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
+
         $data = array(
             'tempaturan' => $temp_aturan,
             'siswa' => Siswa::all(),
@@ -196,7 +198,7 @@ class PelanggaranController extends Controller
             return redirect()
                 ->route('pelanggaran.index')
                 ->with('error', 'Invalid Target Data');
-        }
+        }  
 
         try {
             DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
