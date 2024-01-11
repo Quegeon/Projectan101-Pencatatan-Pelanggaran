@@ -41,9 +41,9 @@ Aplikasi pencatatan pelanggaran sekolah dibangun untuk memudahkan Pihak sekolah 
 Jika Anda mengalami masalah teknis atau membutuhkan bantuan lebih lanjut terkait penggunaan aplikasi, silakan hubungi tim dukungan kami melalui email support mata.projectan101@proton.me
 Atau Hubungi instagram kami:
 - **Projec Manager**: Aldy [@aldyaditiah](https://www.instagram.com/nama_akun/)
-- **backend**: Ghivari [@ghvvari](https://www.instagram.com/nama_akun/)
-- **backend**: Husen [@maulhusen_](https://www.instagram.com/nama_akun/)
-- **frontend**: Bintang [@sstarrr4_](https://www.instagram.com/nama_akun/)
+- **Backend**: Ghivari [@ghvvari](https://www.instagram.com/nama_akun/)
+- **Backend**: Husen [@maulhusen_](https://www.instagram.com/nama_akun/)
+- **Frontend**: Bintang [@sstarrr4_](https://www.instagram.com/nama_akun/)
 - **Analyst**: Rafly [@raflisodri67](https://www.instagram.com/nama_akun/)
 - **Documentations**: Yasel [@mhyshelf](https://www.instagram.com)
   
