@@ -38,10 +38,10 @@
                                             <td align="center">{{ $loop->iteration }}</td>
                                             <td>{{ $h->hukuman }}</td>
                                             <td align="center" colspan="3">
-                                                <a href="{{ route('hukuman.edit', $h->id) }}" class="btn btn-link">
+                                                <a href="{{ route('hukuman.edit', $h->id) }}" class="btn btn-link" data-toggle="tooltip" title="Edit">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
-                                                <a class="btn btn-link" onclick="confirmDel('{{ route('hukuman.destroy', $h->id) }}')">
+                                                <a class="btn btn-link" onclick="confirmDel('{{ route('hukuman.destroy', $h->id) }}')" data-toggle="tooltip" title="Hapus">
                                                     <i class="fa fa-trash text-danger fa-lg"></i>
                                                 </a>
                                             </td>

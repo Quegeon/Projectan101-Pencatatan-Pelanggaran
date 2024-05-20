@@ -46,10 +46,10 @@
                                             <td>{{$u->username}}</td>
                                             <td>{{$u->level}}</td>
                                             <td align="center" colspan="3">
-                                                <a href="{{ route('petugas.edit', $u->id) }}" class="btn btn-link">
+                                                <a href="{{ route('petugas.edit', $u->id) }}" class="btn btn-link" data-toggle="tooltip" title="Edit">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
-                                                <a class="btn btn-link" onclick="confirmDel('{{ route('petugas.destroy', $u->id) }}')">
+                                                <a class="btn btn-link" onclick="confirmDel('{{ route('petugas.destroy', $u->id) }}')" data-toggle="tooltip" title="Hapus">
                                                     <i class="fa fa-trash text-danger fa-lg"></i>
                                                 </a>
                                             </td>
