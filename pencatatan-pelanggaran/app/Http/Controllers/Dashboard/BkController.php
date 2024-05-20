@@ -52,4 +52,5 @@ class BkController extends Controller
         $siswa = Siswa::find($nis);
         return view('home.bk.pelanggaran.aturan', compact('aturan','jenis','hukuman'));
     }
+
 }

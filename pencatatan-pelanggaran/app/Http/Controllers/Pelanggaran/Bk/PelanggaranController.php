@@ -419,7 +419,10 @@ class PelanggaranController extends Controller
 
     public function printbk()
     {
-        $pelanggaran = Pelanggaran::all();
+        $userId = auth()->user()->id; 
+        $pelanggaran = Pelanggaran::where('id_bk', '=', $userId)
+        ->where('status', '=', 'Sudah')
+        ->get();
         $user = User::all();
         $bk = Bk::all();
         $aturan = Aturan::all();
@@ -431,12 +434,15 @@ class PelanggaranController extends Controller
     public function receipt($id)
     {
         $pelanggaran = Pelanggaran::find($id);
+        $nop = $pelanggaran->no_pelanggaran;
+        $detail = DetailAturan::where('no_pelanggaran', '=', $nop)->get();
+        // dd($detail);
         $user = User::all();
         $bk = Bk::all();
         $aturan = Aturan::all();
         $siswa = Siswa::all();
 
-        return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
+        return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan','detail'));
     }
 
     // 5

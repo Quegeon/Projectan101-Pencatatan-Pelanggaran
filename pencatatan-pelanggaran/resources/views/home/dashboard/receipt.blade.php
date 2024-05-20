@@ -85,29 +85,14 @@
             <td></td>
         </tr>
 
-        <tr>
-            <td>Jenis:</td>
-            <td>{{$pelanggaran->Aturan->Jenis->nama_jenis}}</td>
-            <td></td>
-        </tr>
+        @foreach ($detail as $i)
+            <tr>
+                <th>{{$i->no_pelanggaran}}</th>
+                <th>{{$i->id_aturan}}</th>
+                <th></th>
+            </tr>
+        @endforeach 
 
-        <tr>
-            <td>Aturan:</td>
-            <td>{{$pelanggaran->Aturan->nama_aturan}}</td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Hukuman:</td>
-            <td>{{$pelanggaran->Aturan->Hukuman->hukuman}}</td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Poin:</td>
-            <td>{{$pelanggaran->total_poin}}</td>
-            <td></td>
-        </tr>
     </table>
     <hr>
 
