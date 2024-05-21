@@ -132,9 +132,13 @@ Route::group(["husen ganteng"],function () {
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
             Route::get('/print', 'print')->name('laporan.print');
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 4c65a6150544551668aae7fac50218a0508f4b5b
+=======
+
+>>>>>>> 3efa527c19d4cc2f48a62714dfb00d8f5e0dfa91
         });
         Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
             Route::view('/', 'home.admin.user.profile')->name('profile.user');
