@@ -27,7 +27,6 @@
 <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 <link rel="stylesheet" href="{{asset('style.css')}}">
 <title>Aplikasi Pelanggaran</title>
-@vite('resources/css/app.css')
 </head>
 
 <body class="bg-abu " id="body">
@@ -36,11 +35,11 @@
 			<div class="image fade">
 				<img src="/foto/f1.JPG" class="fotos" alt="Mountain Top">
 				</div>
-				  
+
 				<div class="image fade">
 				<img src="/foto/f2.JPG" class="fotos" alt="Palm Trees">
 				</div>
-				  
+
 				<div class="image fade">
 				<img src="/foto/f3.JPG" class="fotos" alt="Neon Sign">
 				</div>
@@ -85,7 +84,7 @@
 			<a href="#" class="full-width-button"><i class="fas fa-solid fa-play"></i> Lihat Video</a>
 		</div>
 	</div>
-	
+
     <div class="w3-content" data-aos="fade-up">
 		<div class="w3-section nav-buttons">
             <button data-aos="fade-right" class="w3-button r" onclick="plusDivs(-1)"><i class="fas fa-solid fa-chevron-left" ></i></button>
@@ -264,9 +263,9 @@
 
     window.addEventListener("scroll", function() {
         if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-            navbarImage.src = "/foto/mata.png"; 
+            navbarImage.src = "/foto/mata.png";
         } else {
-            navbarImage.src = "/foto/mataw.png"; 
+            navbarImage.src = "/foto/mataw.png";
         }
     });
 });
@@ -332,24 +331,24 @@ function showDivs(n) {
     function closeModal() {
         modal.style.display = "none";
     }
-		
+
     </script>
 
 	<script>
 		const toggleBtn = document.querySelector('.toggle-btn');
 		const toggleBtnIcon = document.querySelector('.toggle-btn i');
 		const dropDownMenu = document.querySelector('.dropdown-menu');
-	
+
 		toggleBtn.onclick = function () {
 			dropDownMenu.classList.toggle('open');
 			const isOpen = dropDownMenu.classList.contains('open');
-	
+
 			toggleBtnIcon.className = isOpen
 				? 'fas fa-times'
 				: 'fas fa-bars';
 		};
 	</script>
-	
+
 <script>
 		let index = 0;
 displayImages();
@@ -360,15 +359,15 @@ function displayImages() {
   for (i = 0; i < images.length; i++) {
     images[i].style.display = "none";
   }
-  
+
   index++;
   if (index > images.length) {
     index = 1;
   }
-  
+
   images[index-1].style.display = "block";
   images[index-1].classList.add("zoom-in-out");
-  
+
   setTimeout(() => {
     images[index-1].classList.remove("zoom-in-out");
     displayImages();
@@ -384,7 +383,7 @@ function displayImages() {
 
     setTimeout(() => {
         content.classList.remove('next', 'prev');
-    }, 500); 
+    }, 500);
 }
 
 </script>
@@ -428,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function () {
     buttons.forEach(button => button.classList.add('clicked'));
     setTimeout(() => {
         buttons.forEach(button => button.classList.remove('clicked'));
-    }, 500); 
+    }, 500);
 }
 
 </script>
