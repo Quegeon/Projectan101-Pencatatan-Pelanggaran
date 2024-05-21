@@ -46,7 +46,7 @@
                                         <td>{{$k->keterangan}}</td>
                                         <td>{{$k->status}}</td>
                                         <td align="center" colspan="3">
-                                            <a href="{{ route('pelanggaran.detail', $k->id) }}" class="btn btn-info text-white"><i class="fa fa-info-circle mr-2"></i>Detail</a>
+                                            <a href="{{ route('pelanggaran.detail', $k->id) }}" class="btn btn-info text-white"><i class="fa fa-info-circle mr-2" data-toggle="tooltip" title="Detail"></i>Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach

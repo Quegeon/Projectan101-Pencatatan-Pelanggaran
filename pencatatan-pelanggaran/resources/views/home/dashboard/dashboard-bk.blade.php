@@ -26,7 +26,7 @@
             transform: scale(1.05);
             transition: transform 0.3s ease-in-out;
         }
-    
+
         /* Pilihan tambahan: Efek bayangan saat hover */
         .card-round:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="{{ route('view_siswa') }}" class="card-link"> 
+            <a href="{{ route('view_siswa') }}" class="card-link">
                 <div class="card-body ">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -57,7 +57,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="{{ route('view_aturan') }}" class="card-link"> 
+            <a href="{{ route('view_aturan') }}" class="card-link">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -78,7 +78,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="{{ route('review.inbox') }}" class="card-link"> 
+            <a href="{{ route('review.inbox') }}" class="card-link">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -156,7 +156,7 @@
                     <div class="card-head-row">
                         <div class="card-title">Histori Pelaporan Pelanggaran</div>
                         <div class="card-tools">
-                       
+
                             <a href="{{ route('printbk') }}" target="_blank" class="btn btn-info btn-border btn-round btn-sm">
                                 <span class="btn-label">
                                     <i class="fa fa-print"></i>
@@ -191,18 +191,18 @@
                                     <td>{{$k->status}}</td>
                                     <td align="center" colspan="3">
                                         {{-- 13 --}}
-                                        <a class="btn btn-primary text-white" href="{{ route('review.detail', $k->id) }}"><i class="fas fa-info-circle mr-2"></i> Detail</a>
-                                        <a target="_blank" class="btn btn-success" href="{{ route('receipt', ['id' => $k->id]) }}"><i class="fa fa-print"></i></a>
+                                        <a class="btn btn-primary text-white" href="{{ route('review.detail', $k->id) }}" data-toggle="tooltip" title="Detail"><i class="fas fa-info-circle "></i></a>
+                                        <a target="_blank" class="btn btn-success" href="{{ route('receipt', ['id' => $k->id]) }}" data-toggle="tooltip" title="Print"><i class="fa fa-print"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
                 </div>
             </div>
-        </div
-    </div>      
+        </div>
+    </div>
 </div>
 
 <!-- Modal history -->
@@ -218,17 +218,17 @@
                 </button>
             </div>
             <div class="modal-body">
-       
+
                         <div class="form-group">
                             <label for="">Siswa</label>
                             <input type="text" class="form-control" value="{{ $p->Siswa->nama }} | {{ $p->Siswa->Kelas->nama_kelas }} " readonly>
                         </div>
-        
+
                         <div class="form-group">
                             <label for="">Aturan</label>
                             <input type="text" class="form-control" value="{{ $p->Aturan->nama_aturan }}" readonly>
                         </div>
-            
+
                 <div class="form-group">
                     <label for="">Keterangan</label>
                     <input type="text" name="keterangan" class="form-control" value="{{ $p->keterangan }}" readonly>

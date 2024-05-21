@@ -46,7 +46,7 @@
                                     <td>{{$k->keterangan}}</td>
                                     <td>{{$k->status}}</td>
                                     <td>
-                                        <a class="btn btn-info text-white" data-toggle="modal" data-target="#{{ $k->id }}"><i class="fas fa-info-circle"></i> Detail</a>
+                                        <a class="btn btn-info text-white" data-toggle="modal" data-target="#{{ $k->id }}"><i class="fas fa-info-circle" data-toggle="tooltip" title="Detail"></i> Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -205,4 +205,4 @@
 		}
 	}
 </script>
-@endsection 
+@endsection

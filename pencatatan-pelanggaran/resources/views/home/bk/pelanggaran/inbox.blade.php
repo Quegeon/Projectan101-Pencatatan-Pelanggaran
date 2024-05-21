@@ -56,6 +56,7 @@
         </div>
     </div>
 </div>
+</div>
 
 
 {{-- @foreach ($pelanggaran as $p)

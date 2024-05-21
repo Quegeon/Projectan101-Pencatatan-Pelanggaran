@@ -40,10 +40,10 @@
                                             <td>{{$k->nama_kelas}}</td>
                                             <td>{{$k->jurusan}}</td>
                                             <td align="center" colspan="3">
-                                                <a href="{{ route('kelas.edit', (string) $k->id) }}" class="btn btn-link">
+                                                <a href="{{ route('kelas.edit', (string) $k->id) }}" class="btn btn-link" data-toggle="tooltip" title="Edit">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
-                                                <a onclick="confirmDel('{{ route('kelas.destroy', $k->id) }}')" class="btn btn-link">
+                                                <a onclick="confirmDel('{{ route('kelas.destroy', $k->id) }}')" class="btn btn-link" data-toggle="tooltip" title="Hapus">
                                                     <i class="fa fa-trash text-danger fa-lg"></i>
                                                 </a>
                                             </td>

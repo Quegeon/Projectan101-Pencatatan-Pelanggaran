@@ -28,7 +28,7 @@
             font-size: 1.2em;
         }
         .signature-table {
-            width: 50%;
+            width: 100%;
             margin: 20px auto;
         }
         .signature-table th, .signature-table td {
@@ -79,35 +79,40 @@
 
         <tr class="spacer"></tr>
 
-        <tr>
-            <td class="pelanggaran-title">Pelanggaran :</td>
-            <td></td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Jenis:</td>
-            <td>{{$pelanggaran->Aturan->Jenis->nama_jenis}}</td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Aturan:</td>
-            <td>{{$pelanggaran->Aturan->nama_aturan}}</td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Hukuman:</td>
-            <td>{{$pelanggaran->Aturan->Hukuman->hukuman}}</td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Poin:</td>
-            <td>{{$pelanggaran->total_poin}}</td>
-            <td></td>
-        </tr>
+        
+        <table border="1">
+            <thead>
+            <tr>
+                <th class="pelanggaran-title" colspan="3">Pelanggaran :</th>
+            </tr>
+                <tr>
+                    <td style="text-align: center"><strong> NO </strong></td>
+                    <td><strong> Aturan </strong></td>
+                    <td style="text-align: center"><strong> Poin </strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($detail as $i)
+                <tr>
+                    <td style="text-align: center">{{$loop->iteration}}</td>
+                    <td >{{$i->aturan->nama_aturan}}</td>
+                    <td style="text-align: center">{{$i->aturan->poin}}</td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td colspan="2" class="pelanggaran-title">Total Poin : </td>
+                    <td style="text-align: center">
+                        @php
+                            $totalPoin = 0;
+                            foreach ($detail as $i) {
+                                $totalPoin += $i->aturan->poin;
+                            }
+                            echo $totalPoin;
+                        @endphp
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </table>
     <hr>
 
