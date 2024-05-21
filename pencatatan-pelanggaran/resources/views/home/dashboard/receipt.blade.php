@@ -79,20 +79,40 @@
 
         <tr class="spacer"></tr>
 
-        <tr>
-            <td class="pelanggaran-title">Pelanggaran :</td>
-            <td></td>
-            <td></td>
-        </tr>
-
-        @foreach ($detail as $i)
+        
+        <table border="1">
+            <thead>
             <tr>
-                <th>{{$i->no_pelanggaran}}</th>
-                <th>{{$i->id_aturan}}</th>
-                <th></th>
+                <th class="pelanggaran-title" colspan="3">Pelanggaran :</th>
             </tr>
-        @endforeach 
-
+                <tr>
+                    <td style="text-align: center"><strong> NO </strong></td>
+                    <td><strong> Aturan </strong></td>
+                    <td style="text-align: center"><strong> Poin </strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($detail as $i)
+                <tr>
+                    <td style="text-align: center">{{$loop->iteration}}</td>
+                    <td >{{$i->aturan->nama_aturan}}</td>
+                    <td style="text-align: center">{{$i->aturan->poin}}</td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td colspan="2" class="pelanggaran-title">Total Poin : </td>
+                    <td style="text-align: center">
+                        @php
+                            $totalPoin = 0;
+                            foreach ($detail as $i) {
+                                $totalPoin += $i->aturan->poin;
+                            }
+                            echo $totalPoin;
+                        @endphp
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </table>
     <hr>
 
