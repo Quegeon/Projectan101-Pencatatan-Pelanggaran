@@ -421,7 +421,7 @@ class PelanggaranController extends Controller
     {
         $userId = auth()->user()->id; 
         $pelanggaran = Pelanggaran::where('id_bk', '=', $userId)
-        ->where('status', '=', 'Sudah')
+        ->whereIn('status',['Beres', 'Sudah'])
         ->get();
         $user = User::all();
         $bk = Bk::all();
