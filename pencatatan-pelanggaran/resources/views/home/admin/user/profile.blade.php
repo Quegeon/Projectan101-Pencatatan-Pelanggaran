@@ -15,33 +15,35 @@
                 </div> --}}
                 <div class="card-body">
                     <div class="row mt-3">
-                        <div class="col-md-4">
+                        <div class="col">
                             <div class="form-group form-group-default">
                                 <label>Nama</label>
-                                <input type="text" class="form-control" placeholder="{{ Auth::user()->nama }}" value="{{ Auth::user()->nama }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group form-group-default">
-                                <label>Username</label>
-                                <input type="text" class="form-control" placeholder="{{ Auth::user()->username }}" value="{{ Auth::user()->username }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group form-group-default">
-                                <label>Level</label>
-                                <input type="text" class="form-control" placeholder="{{ Auth::user()->username }}" value="{{ Auth::user()->username }}" readonly>
+                                <input type="text" class="form-control px-2" placeholder="{{ Auth::user()->nama }}" value="{{ Auth::user()->nama }}" readonly>
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
+                   <div class="row">
+                    <div class="col-6">
+                        <div class="form-group form-group-default">
+                            <label>Username</label>
+                            <input type="text" class="form-control px-2" placeholder="{{ Auth::user()->username }}" value="{{ Auth::user()->username }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group form-group-default">
+                            <label>Level</label>
+                            <input type="text" class="form-control px-2" placeholder="{{ Auth::user()->username }}" value="{{ Auth::user()->username }}" readonly>
+                        </div>
+                    </div>
+                   </div>
+                    {{-- <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
                                 <label>ID</label>
                                 <input type="text" class="form-control" placeholder="{{ Auth::user()->id }}" value="{{ Auth::user()->id }}" readonly>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="text-right mt-3 mb-3">
                         <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalUpdate"><i class="fa fa-edit mr-2"></i>Ubah Profile</a>
                         <a href="#" class="btn btn-secondary mb-2 ml-3" data-toggle="modal" data-target="#modalChangePassword"><i class="fa fa-key mr-2"></i>Ubah Password</a>
@@ -49,11 +51,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card card-profile card-secondary">
+        <div class="col-md-4 rounded">
+            <div class="card card-profile card-secondary rounded">
                 <div class="card-header" style="background-image: url('{{ asset('assets/img/blogpost.jpg') }}')">
-                    <div class="profile-picture">
-                        <div class="avatar avatar-xl">
+                    <div class="profile-picture rounded-top">
+                        <div class="avatar avatar-xl ">
                             <img src="{{ asset('fotopetugas/' . Auth::user()->foto ) }}" alt="{{ Auth::user()->foto }}" class="avatar-img rounded-circle">
                         </div>
                     </div>
@@ -68,6 +70,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,7 +96,7 @@
                         <label>Username</label>
                         <input type="text" name="username" class="form-control" placeholder="{{ Auth::user()->username }}" value="{{ Auth::user()->username }}">
                         @error('username')
-                            <p class="text-danger timeout">*{{ $message }}</p> 
+                            <p class="text-danger timeout">*{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -153,3 +156,4 @@
     </div>
 </div>
 @endsection
+aldy bau

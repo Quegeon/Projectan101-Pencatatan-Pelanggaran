@@ -44,10 +44,10 @@
                                             <td>{{$b->nama}}</td>
                                             <td>{{$b->username}}</td>
                                             <td align="center" colspan="3">
-                                                <a href="{{ route('bk.edit', $b->id) }}" class="btn btn-link">
+                                                <a href="{{ route('bk.edit', $b->id) }}" class="btn btn-link" data-toggle="tooltip" title="Edit">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
-                                                <a class="btn btn-link" onclick="confirmDel('{{ route('bk.destroy', $b->id) }}')">
+                                                <a class="btn btn-link" onclick="confirmDel('{{ route('bk.destroy', $b->id) }}')" data-toggle="tooltip" title="Hapus">
                                                     <i class="fa fa-trash text-danger fa-lg"></i>
                                                 </a>
                                             </td>
@@ -60,6 +60,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

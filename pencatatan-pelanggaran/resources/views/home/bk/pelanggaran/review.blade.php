@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Review Pelanggaran')
 @section('content')
-@php 
+@php
     $total_poin = 0;
 
     foreach ($tempaturan as $k) {
@@ -53,7 +53,7 @@
                                         <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger text-center"><i class="fa fa-trash mr-2"></i> Hapus</button>
+                                            <button type="submit" class="btn btn-danger text-center" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash mr-2"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -106,9 +106,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}">
-                            <input type="hidden" name="total_poin" value="{{ $total_poin }}"> 
+                            <input type="hidden" name="total_poin" value="{{ $total_poin }}">
 
                             {{-- 2 --}}
                             <div class="d-flex w-100 justify-content-end">
@@ -146,9 +146,9 @@
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
                             @enderror
                         </div>
-                        <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}"> 
+                        <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}">
                         {{-- 8 --}}
-                        <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}"> 
+                        <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban"></i> Close</button>

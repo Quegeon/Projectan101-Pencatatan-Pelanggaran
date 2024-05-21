@@ -47,7 +47,8 @@
             <div class="logo-header">
 
                 <a href="index.html" class="logo">
-                    <img src="{{ asset('/foto/mataw1.png') }}" alt="navbar brand" class="navbar-brand" style="width: 80px">
+                    <img src="{{ asset('/foto/mataw1.png') }}" alt="navbar brand" class="navbar-brand"
+                        style="width: 80px">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +68,7 @@
             <!-- Navbar Header -->
             {{-- <nav class="navbar navbar-header navbar-expand-lg"> --}}
 
-                {{-- <div class="container-fluid">
+            {{-- <div class="container-fluid">
                     <div class="collapse" id="search-nav">
                         <form class="navbar-left navbar-form nav-search mr-md-3">
                             <div class="input-group">
@@ -88,8 +89,8 @@
                             </a>
                         </li> --}}
 
-                        {{-- ! UDH GA KEPAKE COY --}}
-                        {{-- <li class="nav-item dropdown hidden-caret">
+            {{-- ! UDH GA KEPAKE COY --}}
+            {{-- <li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
 									<img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
@@ -117,7 +118,7 @@
 								</li>
 							</ul>
 						</li> --}}
-                    {{-- </ul>
+            {{-- </ul>
                 </div> --}}
             {{-- </nav> --}}
             <!-- End Navbar -->
@@ -134,9 +135,25 @@
         <div class="main-panel">
             <div class="content">
                 @yield('content')
+                <footer class="footer border-0">
+                    <div class="container-fluid">
+                        <div class="copyright mr-auto">
+                            2024, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://yourwebsite.com">MATA Group</a>
+                        </div>
+                        <nav class="pull-left">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        Contact
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </footer>
             </div>
         </div>
-
+        <!-- End Footer -->
     </div>
     </div>
 
@@ -159,7 +176,7 @@
                 }
             });
         }
-        
+
         // 1
         function alertConfirm(url, msg) {
             Swal.fire({
@@ -303,11 +320,11 @@
     </script>
 
     <script>
-        function displaySubtract(subPoint){
+        function displaySubtract(subPoint) {
             const poinSiswa = document.getElementById('poin_siswa').value
             const result = (parseInt(poinSiswa) || 0) - (parseInt(subPoint) || 0);
 
-            if (result < 0) {                
+            if (result < 0) {
                 document.getElementById('result').value = 'Pengurangan Poin Melebihi Poin Siswa';
             } else {
                 document.getElementById('result').value = result;

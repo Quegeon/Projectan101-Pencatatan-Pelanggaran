@@ -112,12 +112,12 @@ Route::group(["husen ganteng"],function () {
         });
 
         Route::prefix('kelola_pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
-            Route::get('/', 'index')->name('pelanggaran.index');
-            Route::post('/store', 'store')->name('pelanggaran.store');
-            Route::get('/{id}/detail', 'detail')->name('pelanggaran.detail');
-            Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit')->withoutMiddleware(['checkdata']);
-            Route::post('/{id}/update', 'update')->name('pelanggaran.update')->withoutMiddleware(['checkdata']);
-            Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
+            // Route::get('/', 'index')->name('pelanggaran.index');
+            // Route::post('/store', 'store')->name('pelanggaran.store');
+            // Route::get('/{id}/detail', 'detail')->name('pelanggaran.detail');
+            // Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit')->withoutMiddleware(['checkdata']);
+            // Route::post('/{id}/update', 'update')->name('pelanggaran.update')->withoutMiddleware(['checkdata']);
+            // Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
         });
     });
 
@@ -131,6 +131,7 @@ Route::group(["husen ganteng"],function () {
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
             Route::get('/print', 'print')->name('laporan.print');
+
         });
         Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
             Route::view('/', 'home.admin.user.profile')->name('profile.user');

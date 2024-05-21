@@ -34,7 +34,7 @@
                                     <th>Poin</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,13 +47,13 @@
                                     <td align="center">{{$s->poin}}</td>
                                     <td>{{$s->status}}</td>
                                     <td align="center" colspan="3">
-                                        <a href="{{ route('history', $s->nis)}}" class="btn btn-infox"><i class="fa fa-info-circle mr-2"></i>Detail</a>
+                                        <a href="{{ route('history', $s->nis)}}" class="btn btn-infox" data-toggle="tooltip" title="Detail"><i class="fa fa-info-circle mr-2"></i></a>
                                     </td>
-                                </tr>                            
+                                </tr>
                                 <!-- Akhir modal -->
                                 @endforeach
                             </tbody>
-                          
+
                         </table>
                     </div>
                 </div>
@@ -61,6 +61,7 @@
         </div>
     </div>
 </div>
+</div>  
 
 
 @endsection
