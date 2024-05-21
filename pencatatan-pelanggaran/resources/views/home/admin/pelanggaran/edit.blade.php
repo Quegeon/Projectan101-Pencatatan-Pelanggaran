@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Edit Data Pelanggaran')
 @section('content')
-@php 
+@php
     $total_poin = 0;
 
     foreach ($tempaturan as $k) {
@@ -87,9 +87,8 @@
                                         <div class="form-group">
                                             <label>Siswa</label>
                                             <select name="nis" class="select-search-no-modal">
-                                                <option value="{{ $pelanggaran->nis }}" selected>Default: {{ $pelanggaran->Siswa->nama }}</option>
                                                 @foreach ($siswa as $s)
-                                                    <option value="{{ $s->nis }}">{{ $s->nama }}</option>
+                                                    <option value="{{ $s->nis }}" {{ ($s->nis == $pelanggaran->nis) ? 'selected' :'' }}>{{ ($s->nis == $pelanggaran->nis) ? "Default: {$s->nama}" : $s->nama }}</option>
                                                 @endforeach
                                             </select>
                                             @error('nis')
@@ -137,15 +136,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>BK</label>
                                             <select class="select-search-no-modal" name="id_bk">
-                                                <option value="{{ $pelanggaran->id_bk }}" selected>Default: {{ $pelanggaran->Bk->nama }}</option>
                                                 @foreach ($bk as $b)
-                                                    <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                                                    <option value="{{ $b->id }}" {{ ($b->id == $pelanggaran->id_bk) ? 'selected': '' }}>{{ $b->nama }}</option>
                                                 @endforeach
                                             </select>
                                             @error('id_bk')
@@ -201,9 +199,9 @@
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
                             @enderror
                         </div>
-                        <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}"> 
+                        <input type="hidden" name="no_pelanggaran" value="{{ $pelanggaran->no_pelanggaran }}">
                         {{-- 8 --}}
-                        <input type="hidden" name="id" value="{{ Str::orderedUuid() }}"> 
+                        <input type="hidden" name="id" value="{{ Str::orderedUuid() }}">
                 </div>
                 <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
