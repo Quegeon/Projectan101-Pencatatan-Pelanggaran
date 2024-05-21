@@ -88,12 +88,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>BK</label>
-                                        <input type="text" value="{{ $pelanggaran->Bk->nama }}" placeholder="{{ $pelanggaran->Bk->nama }}" class="form-control" readonly>
+                                        <input type="text" value="{{ $pelanggaran->Bk->nama ?? '-' }}" placeholder="{{ $pelanggaran->Bk->nama ?? '-' }}" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
