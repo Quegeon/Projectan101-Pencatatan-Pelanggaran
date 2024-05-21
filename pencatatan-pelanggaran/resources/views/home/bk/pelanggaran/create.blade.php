@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Pelanggaran')
 @section('content')
-@php 
+@php
     $total_poin = 0;
 
     foreach ($tempaturan as $k) {
@@ -34,8 +34,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button>
-                                        <table id="basic-datatables" class="mt-4 table table-bordered">
+                                        <button type="button" class="btn btn-info ml-2 mb-5" data-toggle="modal" data-target="#modalAturan"><i class="fa fa-plus mr-2"></i>Tambah Aturan</button>
+                                        <table id="basic-datatables" class=" table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">No</th>
@@ -56,7 +56,7 @@
                                                         <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
                                                             @csrf
                                                             <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger text-center"><i class="fa fa-trash"></i></button>
+                                                            <button type="submit" class="btn btn-danger text-center" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -122,7 +122,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             {{-- <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
@@ -199,8 +199,8 @@
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
                             @enderror
                         </div>
-                        <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}"> 
-                        <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}"> 
+                        <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
+                        <input type="hidden" name="id" value="{{ \Str::orderedUuid() }}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>

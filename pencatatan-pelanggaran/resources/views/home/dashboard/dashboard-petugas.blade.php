@@ -47,7 +47,7 @@
                     <div class="card-head-row">
                         <div class="card-title">Histori Pelaporan Pelanggaran</div>
                         <div class="card-tools">
-                        
+
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Siswa</label>
-                            <input type="text" class="form-control" value="{{ $p->nis }} | {{ $p->Siswa->nama }} | {{ $p->Siswa->Kelas->nama_kelas }}" readonly>    
+                            <input type="text" class="form-control" value="{{ $p->nis }} | {{ $p->Siswa->nama }} | {{ $p->Siswa->Kelas->nama_kelas }}" readonly>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Keterangan</label>
-                            <input type="text" class="form-control" value="{{ $p->keterangan }}" readonly>    
+                            <input type="text" class="form-control" value="{{ $p->keterangan }}" readonly>
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
             transform: scale(1.05);
             transition: transform 0.3s ease-in-out;
         }
-    
+
         /* Pilihan tambahan: Efek bayangan saat hover */
         .card-round:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -172,7 +172,7 @@
 
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-            <a href="{{ route('kelas.index') }}" class="card-link"> 
+            <a href="{{ route('kelas.index') }}" class="card-link">
                 <div class="card-body ">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -193,7 +193,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-                <a href=" {{ route('siswa.index') }} " class="card-link"> 
+                <a href=" {{ route('siswa.index') }} " class="card-link">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -214,7 +214,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-                <a href=" {{ route('aturan.index') }} " class="card-link"> 
+                <a href=" {{ route('aturan.index') }} " class="card-link">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -235,7 +235,7 @@
         </div>
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
-                <a href=" {{ route('pelanggaran.index') }} " class="card-link"> 
+                <a href=" # " class="card-link">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-icon">
@@ -299,7 +299,7 @@
                                 <td>{{ $k->status }}</td>
                                 <td>{{ ($k->total_poin) ?? "Kosong" }}</td>
                             </tr>
-                            @endforeach                        
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

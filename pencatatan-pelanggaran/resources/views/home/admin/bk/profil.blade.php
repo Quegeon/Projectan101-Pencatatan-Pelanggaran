@@ -18,21 +18,13 @@
                             <div class="col-md-6">
                                 <div class="form-group form-group-default">
                                     <label>Nama</label>
-                                    <input type="text" class="form-control" placeholder="{{ Auth::user()->nama }}" value="{{ Auth::user()->nama }}" readonly>
+                                    <input type="text" class="form-control px-2" placeholder="{{ Auth::user()->nama }}" value="{{ Auth::user()->nama }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group form-group-default">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" placeholder="{{ Auth::user()->username }}" value="{{ Auth::user()->username }}" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <div class="form-group form-group-default">
-                                    <label>ID</label>
-                                    <input type="text" class="form-control" placeholder="{{ Auth::user()->id }}" value="{{ Auth::user()->id }}" readonly>
+                                    <input type="text" class="form-control px-2" placeholder="{{ Auth::user()->username }}" value="{{ Auth::user()->username }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -58,17 +50,17 @@
                             <div class="name">{{ Auth::user()->nama }}</div>
                             <div class="job">Guru BK</div>
                             {{-- <div class="social-media">
-                                <a class="btn btn-info btn-twitter btn-sm btn-link" href="#"> 
+                                <a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
                                     <span class="btn-label just-icon"><i class="flaticon-twitter"></i> </span>
                                 </a>
-                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#"> 
-                                    <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span> 
+                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                    <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
                                 </a>
-                                <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#"> 
-                                    <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span> 
+                                <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
+                                    <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
                                 </a>
-                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#"> 
-                                    <span class="btn-label just-icon"><i class="flaticon-dribbble"></i> </span> 
+                                <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                    <span class="btn-label just-icon"><i class="flaticon-dribbble"></i> </span>
                                 </a>
                             </div> --}}
                         </div>
@@ -92,8 +84,9 @@
                 </div>
             </div>
         </div>
-    </div>  
-    
+    </div>
+    </div>
+
     <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

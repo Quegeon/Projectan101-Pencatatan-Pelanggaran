@@ -103,9 +103,9 @@ class PelanggaranController extends Controller
             $validated['tgl_pelanggaran'] = Carbon::today();
             $validated['status'] = 'Beres';
             $validated['id_bk'] = Auth::User()->id;
-            
+
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $validated['no_pelanggaran']);
-            
+
             $tempaturan
                 ->each(function($old) {
                     $new = $old->replicate();
@@ -223,12 +223,21 @@ class PelanggaranController extends Controller
     public function detail(string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
+
+        if ($pelanggaran->status == 'Belum' && $pelanggaran->id_bk == null) {
+            $detail_aturan = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
+        }
+
+        if(($pelanggaran->status == 'Belum' || $pelanggaran->status == 'Beres') && $pelanggaran->id_bk != null) {
+            $detail_aturan = DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
+        }
+
         $data = array(
             'pelanggaran' => $pelanggaran,
             'aturan' => Aturan::all(),
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
-            'detailaturan' => DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get()
+            'detailaturan' => $detail_aturan
         );
 
         if ($data['pelanggaran'] === null) {
@@ -262,12 +271,14 @@ class PelanggaranController extends Controller
             'total_poin' => 'required'
         ]);
         $validated['status'] = 'Beres';
+        $validated['id_bk'] = $auth->id;
+
         $siswa = Siswa::find($validated['nis']);
 
         try {
             $pelanggaran->update($validated);
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
-            
+
             $tempaturan->each(function($old) {
                 $new = $old->replicate();
                 $new->id = Str::orderedUuid();
@@ -303,7 +314,7 @@ class PelanggaranController extends Controller
                 ->route('dashboard.bk')
                 ->with('error', 'Error Update Data');
         }
-        
+
     }
 
     public function update(Request $request, string $id)
@@ -311,7 +322,7 @@ class PelanggaranController extends Controller
         $pelanggaran = Pelanggaran::find($id);
         $auth = Auth::User();
         $cachekey = $auth->id.'dataEdit';
-        
+
         if ($pelanggaran === null) {
             return redirect()
                 ->route('dashboard.bk')
@@ -335,7 +346,7 @@ class PelanggaranController extends Controller
 
         try {
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
-            
+
             $tempaturan->each(function($old) {
                 $new = $old->replicate();
                 $new->id = Str::orderedUuid();
@@ -373,7 +384,7 @@ class PelanggaranController extends Controller
                 ->route('dashboard.bk')
                 ->with('error', 'Error Update Data');
         }
-        
+
     }
 
     public function destroy($id)
@@ -385,7 +396,7 @@ class PelanggaranController extends Controller
             return back()
                 ->with('error', 'Invalid Target Data');
         }
-            
+
         try {
             $poin = $siswa->poin - $pelanggaran->total_poin;
             $status = '';
@@ -414,7 +425,7 @@ class PelanggaranController extends Controller
                 ->route('dashboard.bk')
                 ->with('error', 'Error Destroy Data');
         }
-    
+
     }
 
     public function printbk()
@@ -473,9 +484,9 @@ class PelanggaranController extends Controller
                 $details->fill($detailCache->toArray());
                 $details->save();
             }
-    
+
             cache()->forget($cachekey);
-    
+
             return redirect()
                 ->route('review.inbox')
                 ->with('success', 'Sukses membatalkan edit');

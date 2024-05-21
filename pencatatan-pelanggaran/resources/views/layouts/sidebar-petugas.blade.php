@@ -78,11 +78,11 @@
                                     <span class="sub-item">Kelola Data Jenis</span>
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('pelanggaran.index') }}">
                                     <span class="sub-item">Kelola Data Pelanggaran</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>

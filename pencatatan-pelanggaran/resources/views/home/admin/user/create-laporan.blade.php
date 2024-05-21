@@ -30,7 +30,7 @@
                                 <select name="nis" class="select-search-no-modal">
                                     <option></option>
                                     @foreach ($siswa as $s)
-                                        <option value="{{ $s->nis }}">{{ $s->nama }} | {{ $s->Kelas->nama_kelas }}</option>                                        
+                                        <option value="{{ $s->nis }}">{{ $s->nama }} | {{ $s->Kelas->nama_kelas }}</option>
                                     @endforeach
                                 </select>
                                 @error('nis')
@@ -42,7 +42,7 @@
                                 <select name="id_aturan" class="select-search-no-modal">
                                     <option></option>
                                     @foreach ($aturan as $s)
-                                        <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>                                        
+                                        <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>
                                     @endforeach
                                 </select>
                                 @error('id_aturan')
@@ -70,5 +70,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

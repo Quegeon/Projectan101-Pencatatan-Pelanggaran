@@ -112,12 +112,12 @@ Route::group(["husen ganteng"],function () {
         });
 
         Route::prefix('kelola_pelanggaran')->controller(KelolaPelanggaran::class)->group(function() {
-            Route::get('/', 'index')->name('pelanggaran.index');
-            Route::post('/store', 'store')->name('pelanggaran.store');
-            Route::get('/{id}/detail', 'detail')->name('pelanggaran.detail');
-            Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit')->withoutMiddleware(['checkdata']);
-            Route::post('/{id}/update', 'update')->name('pelanggaran.update')->withoutMiddleware(['checkdata']);
-            Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
+            // Route::get('/', 'index')->name('pelanggaran.index');
+            // Route::post('/store', 'store')->name('pelanggaran.store');
+            // Route::get('/{id}/detail', 'detail')->name('pelanggaran.detail');
+            // Route::get('/{id}/edit', 'edit')->name('pelanggaran.edit')->withoutMiddleware(['checkdata']);
+            // Route::post('/{id}/update', 'update')->name('pelanggaran.update')->withoutMiddleware(['checkdata']);
+            // Route::get('/{id}/destroy', 'destroy')->name('pelanggaran.destroy');
         });
     });
 
@@ -131,7 +131,7 @@ Route::group(["husen ganteng"],function () {
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
             Route::get('/print', 'print')->name('laporan.print');
-           
+
         });
         Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
             Route::view('/', 'home.admin.user.profile')->name('profile.user');
@@ -152,7 +152,7 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
         Route::get('/{id}/detail', 'detail')->name('review.detail');
         Route::post('/{id}/update', 'update')->name('review.update')->withoutMiddleware(['checkdata']);
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
-        
+
         Route::get('/{id}/review', 'review')->name('review.review');
         Route::post('/{id}/proses', 'proses')->name('review.proses');
         Route::get('/inbox', 'inbox')->name('review.inbox');
@@ -164,7 +164,7 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
         Route::get('/{nis}/history', 'history')->name('history');
         Route::post('/{nis}/change_point', 'change_point')->name('change.point');
     });
-    
+
     Route::prefix('profil')->controller(ProfileBk::class)->group(function(){
         Route::view('/', 'home.admin.bk.profil')->name('profile.bk');
         Route::post('/update', 'update_profile')->name('profile.bk.update');

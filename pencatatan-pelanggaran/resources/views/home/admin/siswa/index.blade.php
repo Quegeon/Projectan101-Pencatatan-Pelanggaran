@@ -22,9 +22,10 @@
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i class="fa fa-plus mr-2"></i>Tambah Data</a>
+                        <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalCreate"><i
+                                class="fa fa-plus mr-2"></i>Tambah Data</a>
                         <div class="table-responsive">
-                            <table id="basic-datatables" class="display table table-striped table-hover" >
+                            <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -41,23 +42,27 @@
                                 <tbody>
                                     @foreach ($siswa as $s)
                                         <tr>
-                                            <td align="center">{{$loop->iteration}}</td>
-                                            <td>{{$s->nis}}</td>
-                                            <td>{{$s->nama}}</td>
-                                            <td>{{$s->Kelas->nama_kelas}} | {{$s->Kelas->jurusan}}</td>
-                                            <td>{{$s->no_telp}}</td>
-                                            <td>{{ ($s->alamat) ?? 'Kosong' }}</td>
-                                            <td align="center">{{$s->poin}}</td>
-                                            <td>{{$s->status}}</td>
+                                            <td align="center">{{ $loop->iteration }}</td>
+                                            <td>{{ $s->nis }}</td>
+                                            <td>{{ $s->nama }}</td>
+                                            <td>{{ $s->Kelas->nama_kelas }} | {{ $s->Kelas->jurusan }}</td>
+                                            <td>{{ $s->no_telp }}</td>
+                                            <td>{{ $s->alamat ?? 'Kosong' }}</td>
+                                            <td align="center">{{ $s->poin }}</td>
+                                            <td>{{ $s->status }}</td>
                                             <td align="center" colspan="3">
-                                                <a href="{{ route('siswa.edit', (string) $s->nis) }}" class="btn btn-link">
+                                                <a href="{{ route('siswa.edit', (string) $s->nis) }}" class="btn btn-link"
+                                                    data-toggle="tooltip" title="Edit">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
-                                                <a href="{{ route('history.admin', $s->nis)}}" class="btn btn-link">
+                                                <a href="{{ route('history.admin', $s->nis) }}" class="btn btn-link"
+                                                    data-toggle="tooltip" title="Detail">
                                                     <i class="fas fa-info-circle fa-lg"></i>
                                                 </a>
-                                                <a class="btn btn-link" onclick="confirmDel('{{ route('siswa.destroy', $s->nis) }}')">
-                                                    <i  class="fa fa-trash text-danger fa-lg"></i>
+                                                <a class="btn btn-link"
+                                                    onclick="confirmDel('{{ route('siswa.destroy', $s->nis) }}')"
+                                                    data-toggle="tooltip" title="Hapus">
+                                                    <i class="fa fa-trash text-danger fa-lg"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -70,8 +75,10 @@
             </div>
         </div>
     </div>
+    </div>
 
-    <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,7 +104,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="no_telp">No Telp</label>
-                                    <input class="form-control" type="text" name="no_telp" id="no_telp" placeholder="Masukkan No Telp">
+                                    <input class="form-control" type="text" name="no_telp" id="no_telp"
+                                        placeholder="Masukkan No Telp">
                                     @error('no_telp')
                                         <p class="text-danger timeout">* {{ $message }}</p>
                                     @enderror
@@ -109,7 +117,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Nama</label>
-                                    <input class="form-control" type="text" name="nama" placeholder="Masukkan Nama Siswa">
+                                    <input class="form-control" type="text" name="nama"
+                                        placeholder="Masukkan Nama Siswa">
                                     @error('nama')
                                         <p class="text-danger timeout">* {{ $message }}</p>
                                     @enderror
@@ -124,7 +133,8 @@
                                     <select name="id_kelas" class="select-search">
                                         <option></option>
                                         @foreach ($kelas as $k)
-                                            <option value="{{ $k->id }}">{{ $k->nama_kelas }} | {{ $k->jurusan }}</option>
+                                            <option value="{{ $k->id }}">{{ $k->nama_kelas }} |
+                                                {{ $k->jurusan }}</option>
                                         @endforeach
                                     </select>
                                     @error('id_kelas')
@@ -151,10 +161,11 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                            class="fa fa-ban mr-2"></i>Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
                 </div>
-                    </form>
+                </form>
             </div>
         </div>
     </div>
