@@ -28,7 +28,7 @@
             font-size: 1.2em;
         }
         .signature-table {
-            width: 50%;
+            width: 100%;
             margin: 20px auto;
         }
         .signature-table th, .signature-table td {
