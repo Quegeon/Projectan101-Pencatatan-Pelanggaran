@@ -121,12 +121,14 @@
                     </div>
                 </li>
                 @endif
-                {{-- <li class="nav-item">
+                @if (Auth()->User()->level == 'Petugas')
+                <li class="nav-item">
                     <a href="{{ route('laporan.create') }}">
                         <i class="fas fa-file-signature"></i>
                         <p>Tambah Laporan</p>
                     </a>
-                </li> --}}
+                </li>
+                @endif
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#settings">
                         <i class="fas fa-cog"></i>
