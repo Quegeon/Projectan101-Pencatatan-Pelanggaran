@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kelas;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
+use App\Models\DetailAturan;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -159,14 +160,14 @@ class SiswaController extends Controller
     public function history($nis)
     {
         $siswa = Siswa::find($nis);
-        $pelanggaran = Pelanggaran::where('nis', $nis)->get();
-
+        $pelanggaran = Pelanggaran::where('nis', $nis)->pluck('no_pelanggaran');
+        $no_pelanggaran = DetailAturan::whereIn('no_pelanggaran', $pelanggaran->toArray())->get();
         if ($siswa === null) {
             return back()
                 ->with('error','Target Data Error');
         }
 
-        return view('home.admin.siswa.historysiswa',compact(['siswa','pelanggaran']));
+        return view('home.admin.siswa.historysiswa',compact(['siswa','no_pelanggaran']));
     }
 
     public function change_point($nis, Request $request)

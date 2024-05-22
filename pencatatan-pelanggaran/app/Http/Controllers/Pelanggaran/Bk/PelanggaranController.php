@@ -463,6 +463,20 @@ class PelanggaranController extends Controller
         return view('home.dashboard.printbk', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
     }
 
+    public function history($nis)
+    {
+        $siswa = Siswa::find($nis);
+        $pelanggaran = Pelanggaran::where('nis', $nis)->pluck('no_pelanggaran');
+        $no_pelanggaran = DetailAturan::whereIn('no_pelanggaran', $pelanggaran->toArray())->get();
+
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+        return view('home.bk.pelanggaran.historysiswa',compact(['siswa','no_pelanggaran']));
+    }
+
     public function receipt($id)
     {
         $pelanggaran = Pelanggaran::find($id);
