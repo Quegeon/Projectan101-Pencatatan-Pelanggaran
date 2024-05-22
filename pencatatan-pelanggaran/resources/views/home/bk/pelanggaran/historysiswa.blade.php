@@ -106,7 +106,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pelanggaran as $p)
+                                @foreach ($no_pelanggaran as $p)
                                     <tr>
                                         <td style="text-align: center">{{ $loop->iteration }}</td>
                                         <td>{{ ($p->Aturan->nama_aturan) ?? 'Kosong'}}</td>
