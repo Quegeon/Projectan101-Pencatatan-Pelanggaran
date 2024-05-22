@@ -152,8 +152,8 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
         Route::post('/{id}/update', 'update')->name('review.update')->withoutMiddleware(['checkdata']);
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
 
-        Route::get('/{id}/review', 'review')->name('review.review');
-        Route::post('/{id}/proses', 'proses')->name('review.proses');
+        Route::get('/{id}/review', 'review')->name('review.review')->withoutMiddleware(['checkdata']);
+        Route::post('/{id}/proses', 'proses')->name('review.proses')->withoutMiddleware(['checkdata']);
         Route::get('/inbox', 'inbox')->name('review.inbox');
         Route::get('/cancel/{opt}/{atr}', 'cancel')->name('review.cancel');
 
