@@ -93,7 +93,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Pelapor</label>
-                                            <input type="text" class="form-control" value="-" readonly>
+                                            <input type="text" class="form-control" value="{{$pelanggaran->user->nama ?? '-' }}" readonly>
                                         </div>
                                     </div>
                                 </div>

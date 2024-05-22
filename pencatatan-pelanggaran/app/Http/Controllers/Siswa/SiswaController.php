@@ -28,7 +28,7 @@ class SiswaController extends Controller
             "alamat" => "max:255",
         ]);
 
-        try {
+        // try {
             $poin = $request->has("poin") ? $request->poin : 0;
             
             if ($poin >= 0 && $poin <= 25) {
@@ -58,11 +58,11 @@ class SiswaController extends Controller
                 ->route('siswa.index')
                 ->with("success", "Data Berhasil Dibuat");
             
-        } catch (\Throwable $th) {
-            return redirect()
-                ->route('siswa.index')
-                ->with('error', 'Error Store Data');
-        }
+        // } catch (\Throwable $th) {
+        //     return redirect()
+        //         ->route('siswa.index')
+        //         ->with('error', 'Error Store Data');
+        // }
     }
 
     public function edit(string $nis)
