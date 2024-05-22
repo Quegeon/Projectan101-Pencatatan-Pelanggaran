@@ -131,7 +131,6 @@ Route::group(["husen ganteng"],function () {
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
             Route::get('/print', 'print')->name('laporan.print');
-
         });
         Route::prefix('profil')->controller(ProfilePetugas::class)->group(function(){
             Route::view('/', 'home.admin.user.profile')->name('profile.user');
