@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Pelanggaran')
 @section('content')
-@php 
+@php
     $total_poin = 0;
 
     foreach ($detailaturan as $k) {
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 {{-- <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -160,7 +160,7 @@
                                     @else
                                     <a href="{{ route('review.edit', $pelanggaran->id) }}" class="btn btn-info"><i class="fa fa-edit mr-2"></i>Edit Pelanggaran</a>
                                     @endif
-                                    <a onclick="confirmDel('{{ route('review.destroy', $pelanggaran->id) }}')" class="btn btn-danger"><i class="fa fa-trash text-white"></i></a>
+                                    <a onclick="confirmDel('{{ route('review.destroy', $pelanggaran->id) }}')" class="btn btn-danger" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash text-white"></i></a>
                                 </div>
                             </form>
                         </div>

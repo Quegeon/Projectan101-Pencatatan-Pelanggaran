@@ -11,6 +11,7 @@ class DetailAturan extends Model
     protected $keyType = 'string';
     // 10
     protected $fillable = [
+        'id',
         'id_aturan',
         'no_pelanggaran'
     ];

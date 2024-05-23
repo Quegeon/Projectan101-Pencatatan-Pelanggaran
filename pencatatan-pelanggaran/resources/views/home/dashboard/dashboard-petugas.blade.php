@@ -87,7 +87,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Data AA</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -124,10 +124,12 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a href="{{ route('laporan.edit', (string) $p->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                <a  onclick="confirmDel('{{ route('laporan.destroy',  (string) $p->id) }}')" class="btn btn-danger text-white"><i class="fa fa-trash"></i></a>
-            </div>
+            @if($p->status !== 'Beres')
+                <div class="modal-footer">
+                    <a href="{{ route('laporan.edit', (string) $p->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                    <a  onclick="confirmDel('{{ route('laporan.destroy',  (string) $p->id) }}')" class="btn btn-danger text-white"><i class="fa fa-trash"></i></a>
+                </div>                
+            @endif
         </div>
     </div>
 </div>
