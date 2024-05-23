@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">Dashboard</h4>
@@ -203,6 +204,66 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card-header">
+                Jumlah Pelanggaran Per-Tahun
+            </div>
+            <div class="card p-5">
+                <div id="chart-container" style="height: 250px">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card-header">
+                TOP MOVERS SISWA
+            </div>
+            <div class="card p-4">
+                <div class="table-responsive">
+                    <table id="basic-datatables" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>NIS</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Total Pelanggaran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($top_movers as $mover)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{ $mover->nis }}</td>
+                                <td>{{ $mover->nama_siswa }}</td>
+                                <td>{{ $mover->nama_kelas }}</td>
+                                <td>{{ $mover->total_pelanggaran }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                            
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card-header">
+                Jumlah Pelanggaran Per-Jurusan
+            </div>
+            <div class="card p-4">
+                <div id="chart-container">
+                    <canvas id="pieChart"></canvas>
+                </div>        
+            </div>
+        </div>
+
+    </div>
+    <!-- Tabel Top 5 Mover Siswa -->
+       
 </div>
 
 <!-- Modal history -->
@@ -249,4 +310,78 @@
     </div>
 </div>
 @endforeach --}}
+<script>
+    var pelanggaranBulanan = @json($pelanggaran_bulanan);
+
+    var barChart = document.getElementById('barChart').getContext('2d');
+
+    var myBarChart = new Chart(barChart, {
+        type: 'bar',
+        data: {
+            // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [{
+                label: "Pelanggaran Beres/Selesai",
+                backgroundColor: 'rgb(23, 125, 255)',
+                borderColor: 'rgb(23, 125, 255)',
+                data: pelanggaranBulanan,
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+        }
+    });
+</script>
+
+<script>
+    var pieChart = document.getElementById('pieChart').getContext('2d');
+
+    var myPieChart = new Chart(pieChart, {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: @json(array_values($pelanggaran_per_jurusan)), // Menggunakan data pelanggaran siswa per jurusan
+                backgroundColor: ["#1d7af3", "#fdaf4b"],
+                borderWidth: 0
+            }],
+            labels: @json(array_keys($pelanggaran_per_jurusan)) // Menggunakan label jurusan
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontColor: 'rgb(154, 154, 154)',
+                    fontSize: 11,
+                    usePointStyle: true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+    });
+</script>
+
 @endsection
+
