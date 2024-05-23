@@ -1,7 +1,10 @@
 @php
     $currentRoute = Route::currentRouteName();
     $activeRoutes = [ 'petugas', 'bk', 'siswa', 'kelas', 'aturan', 'hukuman', 'jenis', 'pelanggaran' ];
-    $kelola = ( array_filter($activeRoutes, fn($item) => Str::contains($currentRoute, $item)) ) ? 'active' : '';
+    $kelolaData = (in_array('kelolaData', $activeRoutes)) ? 'active' : '';
+    $masterData = (in_array('masterData', $activeRoutes)) ? 'active' : '';
+    $masterDataSistem = (in_array('masterDataSistem', $activeRoutes)) ? 'active' : '';
+
 @endphp
 <div class="sidebar">
     <div class="sidebar-background"></div>
@@ -35,10 +38,10 @@
                     <h4 class="text-section">Pilihan</h4>
                 </li>
                 @if(Auth()->User()->level == 'Admin')
-                <li class="nav-item {{ $kelola }}">
+                <li class="nav-item {{ $kelolaData }}">
                     <a data-toggle="collapse" href="#submenu">
-                        <i class="fas fa-table"></i>
-                        <p>Kelola Data</p>
+                        <i class="fas fa-solid fa-users"></i>
+                        <p>Kelola User</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="submenu">
@@ -53,6 +56,24 @@
                                     <span class="sub-item">Kelola Data Bk</span>
                                 </a>
                             </li>
+                            {{-- <li>
+                                <a href="{{ route('pelanggaran.index') }}">
+                                    <span class="sub-item">Kelola Data Pelanggaran</span>
+                                </a>
+                            </li> --}}
+                        </ul>
+                    </div>
+                </li>
+                @endif
+                @if(Auth()->User()->level == 'Admin')
+                <li class="nav-item {{ $masterData }}">
+                    <a data-toggle="collapse" href="#submenu2">
+                        <i class="fas fa-solid fa-school"></i>
+                        <p>Master Data</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="submenu2">
+                        <ul class="nav nav-collapse">
                             <li>
                                 <a href="{{ route('siswa.index') }}">
                                     <span class="sub-item">Kelola Data Siswa</span>
@@ -63,6 +84,19 @@
                                     <span class="sub-item">Kelola Data Kelas</span>
                                 </a>
                             </li>
+                        </ul>
+                    </div>
+                </li>
+                @endif
+                @if(Auth()->User()->level == 'Admin')
+                <li class="nav-item {{ $masterDataSistem }}">
+                    <a data-toggle="collapse" href="#submenu3">
+                        <i class="fas fa-table"></i>
+                        <p>Master Data Sistem</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="submenu3">
+                        <ul class="nav nav-collapse">
                             <li>
                                 <a href="{{ route('aturan.index') }}">
                                     <span class="sub-item">Kelola Data Aturan</span>
@@ -87,12 +121,14 @@
                     </div>
                 </li>
                 @endif
+                @if (Auth()->User()->level == 'Petugas')
                 <li class="nav-item">
                     <a href="{{ route('laporan.create') }}">
                         <i class="fas fa-file-signature"></i>
                         <p>Tambah Laporan</p>
                     </a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#settings">
                         <i class="fas fa-cog"></i>

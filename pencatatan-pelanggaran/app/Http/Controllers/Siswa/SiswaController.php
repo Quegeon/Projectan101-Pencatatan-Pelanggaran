@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kelas;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
+use App\Models\DetailAturan;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -28,9 +29,9 @@ class SiswaController extends Controller
             "alamat" => "max:255",
         ]);
 
-        // try {
+        try {
             $poin = $request->has("poin") ? $request->poin : 0;
-            
+
             if ($poin >= 0 && $poin <= 25) {
                 $status = "Baik";
 
@@ -51,18 +52,18 @@ class SiswaController extends Controller
 
             $validated['poin'] = $poin;
             $validated['status'] = $status;
-    
+
             Siswa::create($validated);
 
             return redirect()
                 ->route('siswa.index')
                 ->with("success", "Data Berhasil Dibuat");
             
-        // } catch (\Throwable $th) {
-        //     return redirect()
-        //         ->route('siswa.index')
-        //         ->with('error', 'Error Store Data');
-        // }
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('siswa.index')
+                ->with('error', 'Error Store Data');
+        }
     }
 
     public function edit(string $nis)
@@ -99,7 +100,7 @@ class SiswaController extends Controller
 
         try {
             $poin = $request->poin;
-    
+
             if ($poin >= 0 && $poin <= 25) {
                 $status = "Baik";
 
@@ -117,14 +118,14 @@ class SiswaController extends Controller
                     ->route('siswa.index')
                     ->with('error','Invalid Poin');
             }
-   
+
             $validated['status'] = $status;
 
             $siswa->update($validated);
 
             return redirect()
                 ->route('siswa.index')
-                ->with("success", "Data Berhasil Diubah");   
+                ->with("success", "Data Berhasil Diubah");
 
         } catch (\Throwable $th) {
             return redirect()
@@ -148,7 +149,7 @@ class SiswaController extends Controller
             return redirect()
                 ->route('siswa.index')
                 ->with("success", "Data Berhasil Dihapus");
-            
+
         } catch (\Throwable $th) {
             return redirect()
                 ->route('siswa.index')
@@ -159,33 +160,33 @@ class SiswaController extends Controller
     public function history($nis)
     {
         $siswa = Siswa::find($nis);
-        $pelanggaran = Pelanggaran::where('nis', $nis)->get();
-
+        $pelanggaran = Pelanggaran::where('nis', $nis)->pluck('no_pelanggaran');
+        $no_pelanggaran = DetailAturan::whereIn('no_pelanggaran', $pelanggaran->toArray())->get();
         if ($siswa === null) {
             return back()
                 ->with('error','Target Data Error');
         }
 
-        return view('home.admin.siswa.historysiswa',compact(['siswa','pelanggaran']));
+        return view('home.admin.siswa.historysiswa',compact(['siswa','no_pelanggaran']));
     }
 
     public function change_point($nis, Request $request)
     {
         $siswa = Siswa::find($nis);
-        
+
         if ($siswa === null) {
             return back()
                 ->with('error','Target Data Error');
         }
 
-        
+
         $request->validate(['poin' => 'required|numeric|max:100']);
 
         if ($request->poin > $siswa->poin) {
             return back()
                 ->with('error','Poin Pengurangan Melebihi Poin Siswa');
         }
-        
+
         try {
             $update_poin = $siswa->poin - $request->poin;
             $siswa->update(['poin' => $update_poin]);
