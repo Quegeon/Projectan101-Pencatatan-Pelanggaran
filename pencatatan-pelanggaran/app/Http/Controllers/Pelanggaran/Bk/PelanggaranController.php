@@ -249,7 +249,7 @@ class PelanggaranController extends Controller
     {
         $pelanggaran = Pelanggaran::find($id);
         $detail_aturan = DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->get();
-        
+
         $data = array(
             'pelanggaran' => $pelanggaran,
             'aturan' => Aturan::all(),
@@ -286,7 +286,8 @@ class PelanggaranController extends Controller
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
-            'total_poin' => 'required'
+            'total_poin' => 'required',
+            'hukuman_pilihan' => 'required'
         ]);
         $validated['status'] = 'Beres';
         $validated['id_bk'] = $auth->id;
@@ -355,7 +356,8 @@ class PelanggaranController extends Controller
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
-            'total_poin' => 'required'
+            'total_poin' => 'required',
+            'hukuman_pilihan' => 'required'
         ]);
 
         $siswa = Siswa::find($validated['nis']);
@@ -462,7 +464,7 @@ class PelanggaranController extends Controller
 
     public function printbk()
     {
-        $userId = auth()->user()->id; 
+        $userId = auth()->user()->id;
         $pelanggaran = Pelanggaran::where('id_bk', '=', $userId)
             ->whereIn('status',['Beres', 'Sudah'])
             ->get();
