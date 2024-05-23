@@ -222,6 +222,7 @@
                 TOP MOVERS SISWA
             </div>
             <div class="card p-4">
+                <div class="table-responsive">
                     <table id="basic-datatables" class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -243,7 +244,9 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table>        
+                    </table>
+                </div>
+                            
             </div>
         </div>
 
