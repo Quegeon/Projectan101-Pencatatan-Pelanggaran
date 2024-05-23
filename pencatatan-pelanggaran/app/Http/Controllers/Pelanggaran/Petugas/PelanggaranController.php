@@ -52,11 +52,11 @@ class PelanggaranController extends Controller
         ]);
 
         try {
-            $validated['id'] = Str::orderedUuid()->toString();
+            $validated['id'] = Str::orderedUuid();
             $validated['id_user'] = Auth::user()->id;
             $validated['tgl_pelanggaran'] = Carbon::today();
 
-            TempAturan::create([
+            DetailAturan::create([
                 'id' => Str::orderedUuid(),
                 'no_pelanggaran' => $request->no_pelanggaran,
                 'id_aturan' => $request->id_aturan
@@ -71,7 +71,7 @@ class PelanggaranController extends Controller
 
         } catch (\Throwable $th) {
             return redirect()
-                ->route('dashboard.petugas')
+                ->route('dashboard')
                 ->with('error','Error Store Data');
         }
     }
@@ -81,7 +81,7 @@ class PelanggaranController extends Controller
         $pelanggaran = Pelanggaran::find($id);
         $data = array(
             'pelanggaran' => $pelanggaran,
-            'tempaturan' => TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->first(),
+            'tempaturan' => DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->first(),
             'siswa' => Siswa::all(),
             'aturan' => Aturan::all(),
         ); 
@@ -106,7 +106,7 @@ class PelanggaranController extends Controller
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
-        $tempaturan = TempAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->first();
+        $detailaturan = DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->first();
 
         if ($pelanggaran === null) {
             return redirect()
@@ -122,7 +122,7 @@ class PelanggaranController extends Controller
         ]);
 
         try {
-            $tempaturan->update(['id_aturan' => $request->id_aturan]);
+            $detailaturan->update(['id_aturan' => $request->id_aturan]);
             $pelanggaran->update($validated);
 
             return redirect()
@@ -148,6 +148,7 @@ class PelanggaranController extends Controller
 
         } else {
             try {
+                DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
                 $pelanggaran->delete();
 
                 return redirect()
