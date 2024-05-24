@@ -427,10 +427,6 @@ class PelanggaranController extends Controller
 
         try {
             $poin = $siswa->poin - $pelanggaran->total_poin;
-            if ($poin > 100) {
-                $poin = 100;
-                $status = "Sangat Buruk";
-            }
             $status = '';
 
             if ($poin >= 0 && $poin <= 25) {
@@ -444,7 +440,6 @@ class PelanggaranController extends Controller
             } else {
                 $status = "Undefined Status";
             }
-            $validated['total_poin'] = $validated['total_poin'] >= 100 ? 100 : $validated['total_poin'];
 
             $siswa->update(['poin' => $poin, 'status' => $status]);
             DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
