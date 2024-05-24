@@ -52,6 +52,7 @@ class SiswaController extends Controller
 
             $validated['poin'] = $poin;
             $validated['status'] = $status;
+            $validated['status_badge'] = $status_badge;
 
             Siswa::create($validated);
 
