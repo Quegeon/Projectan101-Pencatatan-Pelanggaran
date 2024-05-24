@@ -58,7 +58,7 @@ class SiswaController extends Controller
             return redirect()
                 ->route('siswa.index')
                 ->with("success", "Data Berhasil Dibuat");
-
+            
         } catch (\Throwable $th) {
             return redirect()
                 ->route('siswa.index')
