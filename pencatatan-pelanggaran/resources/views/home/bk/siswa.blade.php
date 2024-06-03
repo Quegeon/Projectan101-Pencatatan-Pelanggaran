@@ -45,7 +45,22 @@
                                     <td>{{$s->Kelas->nama_kelas}} | {{$s->Kelas->jurusan}}</td>
                                     <td>{{$s->nama}}</td>
                                     <td align="center">{{$s->poin}}</td>
-                                    <td>{{$s->status}}</td>
+                                    <td align="center">
+                                        @switch($s->status)
+                                            @case('Baik')
+                                                <span class="badge badge-success">{{ $s->status }}</span>
+                                                @break
+                                            @case('Kurang Baik')
+                                                <span class="badge badge-info">{{ $s->status }}</span>
+                                                @break
+                                            @case('Buruk')
+                                                <span class="badge badge-warning">{{ $s->status }}</span>
+                                                @break
+                                            @case('Sangat Buruk')
+                                                <span class="badge badge-danger">{{ $s->status }}</span>
+                                                @break
+                                        @endswitch
+                                    </td>
                                     <td align="center" colspan="3">
                                         <a href="{{ route('history', $s->nis)}}" class="btn btn-infox" data-toggle="tooltip" title="Detail"><i class="fa fa-info-circle mr-2"></i></a>
                                     </td>
@@ -61,7 +76,7 @@
         </div>
     </div>
 </div>
-</div>  
+</div>
 
 
 @endsection
