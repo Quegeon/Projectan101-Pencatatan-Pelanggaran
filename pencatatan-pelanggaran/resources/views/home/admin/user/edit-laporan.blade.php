@@ -27,11 +27,8 @@
                             @csrf
                             <div class="form-group">
                                 <label>Siswa</label>
-                                <select name="nis" class="select-search-no-modal">
+                                <select name="nis" id="siswa-search-server">
                                     <option value="{{ $pelanggaran->nis }}" selected>Default: {{ $pelanggaran->Siswa->nama }} | {{ $pelanggaran->Siswa->Kelas->nama_kelas }}</option>
-                                    @foreach ($siswa as $s)
-                                        <option value="{{ $s->nis }}">{{ $s->nama }} | {{ $s->Kelas->nama_kelas }}</option>                                        
-                                    @endforeach
                                 </select>
                                 @error('nis')
                                     <p class="text-danger timeout">* {{ $message }}</p>
@@ -39,11 +36,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Aturan</label>
-                                <select name="id_aturan" class="select-search-no-modal">
+                                <select name="id_aturan" id="aturan-search-server">
                                     <option value="{{ $tempaturan->id_aturan }}" selected>Default: {{ $tempaturan->Aturan->nama_aturan }}</option>
-                                    @foreach ($aturan as $s)
-                                        <option value="{{ $s->id }}">{{ $s->nama_aturan }}</option>                                        
-                                    @endforeach
                                 </select>
                                 @error('id_aturan')
                                     <p class="text-danger timeout">* {{ $message }}</p>
@@ -74,4 +68,65 @@
         </div>
     </div>
 </div>
+
+@section('script')
+<script>
+    $('#siswa-search-server').select2({
+        ajax: {
+            url: "{{ route('petugas.search.siswa') }}",
+            delay: 250,
+            dataType: 'json',
+            data: function(params) {
+                return {
+                    q: params.term,
+                    page: params.page || 1
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: data.results,
+                    pagination: {
+                        more: data.pagination.more
+                    }
+                }
+            },
+            cache: true
+        },
+        theme: 'bootstrap4',
+        minimumInputLength: 1,
+        width: 'auto',
+        allowClear: true,
+        placeholder: 'Cari Siswa'
+    });
+
+    $('#aturan-search-server').select2({
+        ajax: {
+            url: "{{ route('petugas.search.aturan') }}",
+            delay: 250,
+            dataType: 'json',
+            data: function(params) {
+                return {
+                    q: params.term,
+                    page: params.page || 1
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: data.results,
+                    pagination: {
+                        more: data.pagination.more
+                    }
+                }
+            },
+            cache: true
+        },
+        theme: 'bootstrap4',
+        minimumInputLength: 1,
+        width: 'auto',
+        allowClear: true,
+        placeholder: 'Cari Aturan'
+    });
+</script>
+@endsection
+
 @endsection

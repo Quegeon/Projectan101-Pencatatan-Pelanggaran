@@ -158,7 +158,6 @@
     </div>
 
 
-
     <script>
         function confirmDel(url) {
             Swal.fire({
@@ -437,6 +436,9 @@
             }
         });
     </script>
+
+    @yield('script');
+
 </body>
 
 </html>
