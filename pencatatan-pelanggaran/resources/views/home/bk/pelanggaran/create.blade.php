@@ -82,11 +82,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Siswa</label>
-                                                        <select name="nis" class="select-search-no-modal">
-                                                            @foreach ($siswa as $s)
-                                                                <option value="{{ $s->nis }}">{{ $s->nama }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        <select name="nis" id="siswa-search-server"></select>
                                                         @error('nis')
                                                             <p class="text-danger timeout">* {{ $message }}</p>
                                                         @enderror
@@ -189,11 +185,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="aturan">Aturan</label>
-                            <select class="select-search" name="id_aturan" id="aturan">
-                                @foreach ($aturan as $s)
-                                    <option value="{{ $s->id }}">{{ $s->poin }} | {{ $s->nama_aturan }}</option>
-                                @endforeach
-                            </select>
+                            <select name="id_aturan" id="aturan-search-server"></select>
                             {{-- <input list="siswa" type="text" name="nis" class="form-control" placeholder="Masukkan Nama Siswa"> --}}
                             @error('id_aturan')
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
@@ -210,4 +202,67 @@
             </div>
         </div>
     </div>
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#siswa-search-server').select2({
+            ajax: {
+                url: "{{ route('bk.search.siswa') }}",
+                delay: 250,
+                dataType: 'json',
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page || 1
+                    };
+                },
+                processResults: function(data) {
+                    return {
+                        results: data.results,
+                        pagination: {
+                            more: data.pagination.more
+                        }
+                    }
+                },
+                cache: true
+            },
+            theme: 'bootstrap4',
+            minimumInputLength: 1,
+            width: 'auto',
+            allowClear: true,
+            placeholder: 'Cari Siswa'
+        });
+
+        $('#aturan-search-server').select2({
+            ajax: {
+                url: "{{ route('bk.search.aturan') }}",
+                delay: 250,
+                dataType: 'json',
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.paginate || 1
+                    };
+                },
+                processResults: function(data) {
+                    return {
+                        results: data.results,
+                        pagination: {
+                            more: data.pagination.more
+                        }
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength: 1,
+            dropdownParent: $('.modal'),
+            width: 'auto',
+            allowClear: true,
+            placeholder: 'Cari Aturan'
+        });
+    });
+</script>
+@endsection
+
 @endsection

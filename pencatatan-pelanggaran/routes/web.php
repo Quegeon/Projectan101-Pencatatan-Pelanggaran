@@ -127,6 +127,8 @@ Route::group(["husen ganteng"],function () {
         Route::prefix('laporan')->controller(LaporanController::class)->group(function() {
             Route::get('/create', 'create')->name('laporan.create');
             Route::post('/store', 'store')->name('laporan.store');
+            Route::get('/server_search/siswa', 'search_siswa')->name('petugas.search.siswa');
+            Route::get('/server_search/aturan', 'search_aturan')->name('petugas.search.aturan');
             Route::get('/{id}/edit', 'edit')->name('laporan.edit');
             Route::post('/{id}/update', 'update')->name('laporan.update');
             Route::get('/{id}/destroy', 'destroy')->name('laporan.destroy');
@@ -146,6 +148,8 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
     Route::get('aturan', [DashboardBk::class, 'view_aturan'])->name('view_aturan');
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/create', 'create')->name('review.create');
+        Route::get('/server_search/siswa', 'search_siswa')->name('bk.search.siswa');
+        Route::get('/server_search/aturan', 'search_aturan')->name('bk.search.aturan');
         Route::post('/store', 'store')->name('review.store');
         Route::get('/{id}/edit', 'edit')->name('review.edit')->withoutMiddleware(['checkdata']);
         Route::get('/{id}/detail', 'detail')->name('review.detail');

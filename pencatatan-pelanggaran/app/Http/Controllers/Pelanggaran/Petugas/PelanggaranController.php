@@ -173,4 +173,52 @@ class PelanggaranController extends Controller
 
         return view('home.dashboard.printpetugas', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan'));
     }
+
+    public function search_siswa(Request $request)
+    {
+        $query = $request->get('q');
+        $per_page = 5;
+
+        $siswa = Siswa::with('Kelas')
+            ->where('nama', 'LIKE', '%' .  $query . '%')
+            ->orWhereHas('Kelas', function($q) use ($query) {
+                $q->where('nama_kelas', 'LIKE', '%' . $query . '%');
+            })
+            ->paginate($per_page);
+        
+        $results = [];
+        foreach ($siswa as $s) {
+            $results[] = [
+                'id' => $s->nis,
+                'text' => $s->nama . ' | ' . $s->Kelas->nama_kelas
+            ];
+        }
+        
+        return response()->json([
+            'results' => $results,
+            'pagination' => ['more' => $siswa->hasMorePages()]
+        ]);
+    }
+
+    public function search_aturan(Request $request)
+    {
+        $query = $request->get('q');
+        $per_page = 5;
+
+        $aturan = Aturan::where('nama_aturan', 'LIKE', '%' . $query . '%')
+            ->paginate($per_page);
+
+        $results = [];
+        foreach ($aturan as $a) {
+            $results[] = [
+                'id' => $a->id,
+                'text' => $a->nama_aturan
+            ];
+        }
+
+        return response()->json([
+            'results' => $results,
+            'pagination' => ['more' => $aturan->hasMorePages()]
+        ]);
+    }
 }
