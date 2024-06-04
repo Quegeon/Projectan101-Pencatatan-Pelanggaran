@@ -76,7 +76,7 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                        <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
+                                        <form id="specific-form" action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -161,7 +161,7 @@
                                             <input type="hidden" name="no_pelanggaran" value="{{ $no_pelanggaran }}">
                                             <div class="modal-footer">
                                                 <a href="{{ route('review.cancel', [ 'atr' => 'kembali', 'opt' => $no_pelanggaran]) }}" class="btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</a>
-                                                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                                                <button type="button" onclick="alertSubmit('Apakah anda yakin untuk menyimpan pelanggaran?', 'specific-form')" class="w-25 btn btn-info"><i class="fa fa-file-signature mr-2"></i> Simpan</button>
                                             </div>
                                         </form>
                                     </div>
@@ -211,3 +211,45 @@
         </div>
     </div>
 @endsection
+
+<script>
+    function alertSubmit(msg, formId) {
+    console.log(formId);
+    Swal.fire({
+        title: 'Konfirmasi',
+        text: msg,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#716aca',
+        cancelButtonColor: '#f3545d',
+        confirmButtonText: 'Ya, Simpan!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.getElementById(formId);
+            if (form) {
+                try {
+                    form.submit();
+                } catch (e) {
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Terjadi kesalahan saat mencoba mengirim form.',
+                        icon: 'error',
+                        confirmButtonColor: '#716aca',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Terjadi Kesalahan mohon hubungi admin.',
+                    icon: 'error',
+                    confirmButtonColor: '#716aca',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+    });
+}
+</script>
+

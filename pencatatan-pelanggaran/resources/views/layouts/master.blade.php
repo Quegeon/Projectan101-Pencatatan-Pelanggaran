@@ -195,6 +195,9 @@
             });
         }
 
+        
+
+
         // function confirmDel(url) {
         // 	Swal.fire({
         // 		title: "Yakin",
