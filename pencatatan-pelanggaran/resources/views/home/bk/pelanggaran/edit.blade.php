@@ -70,7 +70,7 @@
                                     </tfoot>
                                 </table>
 
-                                <form action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
+                                <form id="specific-form" action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -123,7 +123,7 @@
                                     {{-- 2 --}}
                                     <div class="d-flex w-100 justify-content-end">
                                         <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
-                                        <button type="submit" class="w-25 btn btn-info">Proses</button>
+                                        <button type="button" onclick="alertSubmit('Apakah anda yakin untuk memproses pelanggaran?', 'specific-form')" class="w-25 btn btn-info"><i class="fa fa-file-signature mr-2"></i> Proses</button>
                                     </div>
                                 </form>
                             </div>
@@ -148,11 +148,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="aturan">Aturan</label>
-                            <select class="select-search" name="id_aturan" id="aturan">
-                                @foreach ($aturan as $s)
-                                    <option value="{{ $s->id }}">{{ $s->poin }} | {{ $s->nama_aturan }}</option>
-                                @endforeach
-                            </select>
+                            <select name="id_aturan" id="aturan-search-server"></select>
                             {{-- <input list="siswa" type="text" name="nis" class="form-control" placeholder="Masukkan Nama Siswa"> --}}
                             @error('id_aturan')
                                 <p class="text-danger">* {{ $errors->first('id_aturan') }}</p>
@@ -170,4 +166,80 @@
             </div>
         </div>
     </div>
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#aturan-search-server').select2({
+                ajax: {
+                    url: "{{ route('bk.search.aturan') }}",
+                    delay: 250,
+                    dataType: 'json',
+                    data: function(params) {
+                        return {
+                            q: params.term,
+                            page: params.paginate || 1
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.results,
+                            pagination: {
+                                more: data.pagination.more
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+                dropdownParent: $('.modal'),
+                width: 'auto',
+                allowClear: true,
+                placeholder: 'Cari Aturan'
+            });
+        });
+    </script>
 @endsection
+
+@endsection
+
+<script>
+    function alertSubmit(msg, formId) {
+    console.log(formId);
+    Swal.fire({
+        title: 'Konfirmasi',
+        text: msg,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#716aca',
+        cancelButtonColor: '#f3545d',
+        confirmButtonText: 'Ya, Proses!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.getElementById(formId);
+            if (form) {
+                try {
+                    form.submit();
+                } catch (e) {
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Terjadi kesalahan saat mencoba mengirim form.',
+                        icon: 'error',
+                        confirmButtonColor: '#716aca',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Terjadi Kesalahan mohon hubungi admin.',
+                    icon: 'error',
+                    confirmButtonColor: '#716aca',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+    });
+}
+</script>

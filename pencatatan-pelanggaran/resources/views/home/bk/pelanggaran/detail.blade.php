@@ -160,7 +160,10 @@
                                     @else
                                     <a href="{{ route('review.edit', $pelanggaran->id) }}" class="btn btn-info"><i class="fa fa-edit mr-2"></i>Edit Pelanggaran</a>
                                     @endif
+                                    @if ($pelanggaran->status == 'Belum')
                                     <a onclick="confirmDel('{{ route('review.destroy', $pelanggaran->id) }}')" class="btn btn-danger" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash text-white"></i></a>
+                                    @endif
+
                                 </div>
                             </form>
                         </div>
