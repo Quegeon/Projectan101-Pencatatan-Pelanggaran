@@ -53,6 +53,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('view_pelanggaran') }}">
+                                    <span class="sub-item">Data Pelanggaran</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('review.inbox') }}">
                                     <span class="sub-item">Inbox</span>
                                 </a>
@@ -80,7 +85,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('logout') }}"> 
+                                <a href="{{ route('logout') }}">
                                     <span class="sub-item">Logout</span>
                                 </a>
                             </li>
