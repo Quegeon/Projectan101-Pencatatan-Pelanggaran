@@ -4,24 +4,14 @@
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">Laporan Petugas</h4>
-        {{-- <div class="btn-group btn-group-page-header ml-auto">
-            <button type="button" class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-ellipsis-h"></i>
-            </button>
-            <div class="dropdown-menu">
-                <div class="arrow"></div>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-        </div> --}}
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
+                        Unggah Excel
+                    </button>
                     <div class="table-responsive">
                         <form id="specific-form" action="{{ route('laporan.store') }}" method="POST">
                             @csrf
@@ -67,6 +57,42 @@
     </div>
 </div>
 </div>
+
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{-- <form id="uploadForm" action="{{ route('laporan.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Unggah Excel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file">Pilih File Excel</label>
+                        <input type="file" name="file" id="file" class="form-control">
+                        @error('file')
+                            <p class="text-danger">* {{ $message }}</p>
+                        @enderror
+                    </div>
+                    <a href="{{ route('laporan.template') }}" class="btn btn-success">Unduh Template</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Unggah</button>
+                </div>
+            </form> --}}
+            <form action="{{ route('laporan.import') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" accept=".xlsx, .xls">
+                <button type="submit">Import Data</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 @section('script')
 <script>
