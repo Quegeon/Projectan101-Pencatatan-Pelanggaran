@@ -51,7 +51,27 @@ class DummySeeder extends Seeder
             'no_telp' => '0895236745',
             'alamat' => 'Jl. Bondowoso',
             'poin' => 0,
-            'status' => 'Anak Baik'
+            'status' => 'Baik'
+        ]);
+
+        Siswa::create([
+            'nis' => '212210233',
+            'id_kelas' => Kelas::first()->id,
+            'nama' => 'Budi',
+            'no_telp' => '0895236745',
+            'alamat' => 'Jl. Bondowoso',
+            'poin' => 0,
+            'status' => 'Baik'
+        ]);
+
+        Siswa::create([
+            'nis' => '212210234',
+            'id_kelas' => Kelas::first()->id,
+            'nama' => 'Cantik',
+            'no_telp' => '0895236745',
+            'alamat' => 'Jl. Bondowoso',
+            'poin' => 0,
+            'status' => 'Baik'
         ]);
     }
 }

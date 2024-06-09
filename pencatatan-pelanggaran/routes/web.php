@@ -151,6 +151,7 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
     Route::get('dashboard', [DashboardBk::class, 'index'])->name('dashboard.bk');
     Route::get('siswa', [DashboardBk::class, 'view_siswa'])->name('view_siswa');
     Route::get('aturan', [DashboardBk::class, 'view_aturan'])->name('view_aturan');
+    Route::get('data-pelanggaran', [DashboardBk::class, 'view_pelanggaran'])->name('view_pelanggaran');
     Route::group(['controller' => ReviewPelanggaran::class, 'prefix' => 'pelanggaran'], function() {
         Route::get('/create', 'create')->name('review.create');
         Route::get('/server_search/siswa', 'search_siswa')->name('bk.search.siswa');
@@ -160,6 +161,8 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata'])->group(function () {
         Route::get('/{id}/detail', 'detail')->name('review.detail');
         Route::post('/{id}/update', 'update')->name('review.update')->withoutMiddleware(['checkdata']);
         Route::get('/{id}/destroy', 'destroy')->name('review.destroy');
+        Route::get('/{id}/private', 'private')->name('review.private');
+        Route::get('/{id}/public', 'public')->name('review.public');
 
         Route::get('/{id}/review', 'review')->name('review.review')->withoutMiddleware(['checkdata']);
         Route::post('/{id}/proses', 'proses')->name('review.proses')->withoutMiddleware(['checkdata']);

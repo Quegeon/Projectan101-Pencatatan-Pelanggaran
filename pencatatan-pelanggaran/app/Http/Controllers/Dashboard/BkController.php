@@ -10,11 +10,12 @@ use App\Models\Hukuman;
 use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\RateLimiter\PeekableRequestRateLimiterInterface;
 
 class BkController extends Controller
 {
 
-    
+
 //     public function getPelanggaranPerBulan()
 // {
 //     // Query untuk mendapatkan jumlah pelanggaran per bulan
@@ -83,7 +84,7 @@ class BkController extends Controller
         foreach ($top_movers as $mover) {
             $siswa = Siswa::where('nis', $mover->nis)->first();
             $mover->nama_siswa = $siswa->nama;
-        } 
+        }
         $pelanggaran_per_jurusan = Siswa::join('kelas', 'siswas.id_kelas', '=', 'kelas.id')
         ->select('kelas.jurusan', DB::raw('COUNT(pelanggarans.id) as total_pelanggaran'))
         ->leftJoin('pelanggarans', 'siswas.nis', '=', 'pelanggarans.nis')
@@ -108,7 +109,7 @@ class BkController extends Controller
             // 'total_minggu' => Pelanggaran::select()->whereBetween('tgl_pelanggaran',[(7 * $diffInWeek) - 7 + 1, 7 * $diffInWeek])->count(),
             'count_inbox' => Pelanggaran::where('status','Belum')->count(),
             'total_bulan' => Pelanggaran::select()->whereBetween('tgl_pelanggaran',[$start,$end])->count()
-            
+
         );
 
         return view('home.dashboard.dashboard-bk', $data, compact('pelanggaran_bulanan'));
@@ -125,6 +126,11 @@ class BkController extends Controller
         $jenis = Jenis::all();
         $hukuman = Hukuman::all();
         return view('home.bk.aturan', compact('aturan','jenis','hukuman'));
+    }
+
+    public function view_pelanggaran() {
+        $pelanggaran = Pelanggaran::where('is_active', 0)->get();
+        return view('home.bk.data-pelanggaran', compact('pelanggaran'));
     }
 
     public function history_aturan($nis)
