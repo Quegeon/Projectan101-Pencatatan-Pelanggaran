@@ -57,6 +57,35 @@ class PelanggaranController extends Controller
         return view('home.bk.pelanggaran.index', $data);
     }
 
+    public function change_point($nis, Request $request)
+    {
+        $siswa = Siswa::find($nis);
+
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+
+        $request->validate(['poin' => 'required|numeric|max:100']);
+
+        if ($request->poin > $siswa->poin) {
+            return back()
+                ->with('error','Poin Pengurangan Melebihi Poin Siswa');
+        }
+
+        try {
+            $update_poin = $siswa->poin - $request->poin;
+            $siswa->update(['poin' => $update_poin]);
+            return back()
+                ->with('success','Poin Berhasil Diubah');
+
+        } catch (\Throwable $th) {
+            return back()
+                ->with('error','Error Update Poin');
+        }
+    }
+
     public function create()
     {
         $auth = Auth::User();
