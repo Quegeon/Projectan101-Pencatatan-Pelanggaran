@@ -35,6 +35,8 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 Route::view('/', 'layouts.landing-page');
+Route::view('/pelanggaranPreview', 'layouts.global-preview');
+Route::view('/lihatSiswa', 'layouts.siswa-preview');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
@@ -50,7 +52,7 @@ Route::prefix('temp')->controller(TempController::class)->group(function() {
 
 Route::group(["husen ganteng"],function () {
     Route::group(['middleware' => ['auth', 'level:Admin', 'checkdata']], function() {
-        Route::prefix('kelola_petugas')->controller(KelolaPetugas::class)->group(function() {
+        Route::prefix('kelolw`a_petugas')->controller(KelolaPetugas::class)->group(function() {
             Route::get('/', 'index')->name('petugas.index');
             Route::post('/store', 'store')->name('petugas.store');
             Route::get('/{id}/edit', 'edit')->name('petugas.edit');
