@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Siswa;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class GlobalController extends Controller
      */
     public function index()
     {
-        return view('layouts.global-preview');
+        $siswa = Siswa::orderBy('poin', 'desc')->limit(5)->get();
+        return view('layouts.global-preview', compact(['siswa']));
     }
 
     /**

@@ -33,159 +33,151 @@
     </style>
 </head>
 <body>
-    <div class="navbar col card p-4 m-0">
+    {{-- <div class="navbar col card p-4 m-0">
         tes
-    </div>
-    <div class="col">
+    </div> --}}
+    <div class="col" >
         <div class="row gap-3">
-            <div class="top-movers col-7 card my-3 mr-3 p-0">
-                <div class="title p-3">
-                    <h2>Pelanggaran</h2>
+            <div class="card top-movers col-lg-4 mr-3 p-0">
+                <div class="card-header p-3">
+                    <h2 class="m-0">Pelanggaran</h2>
                 </div>
-                <hr class="mt-0">
-                <div class="px-3">
-                    <table class="table table-striped">
+                <div class="card-body px-3">
+                    <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nama Pelanggaran</th>
-                                <th scope="col">Jumlah Pelanggaran</th>
+                                <th scope="col" class="col-9">Nama Pelanggaran</th>
+                                <th scope="col" class="col-3">Jumlah Pelanggaran</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="font-weight-bold">
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Mark</td>
+                                <td style="height: 50px"">1</td>
+                                <td style="height: 50px"">Bolos</td>
+                                <td style="height: 50px"">2</td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Jacob</td>
+                                <td style="height: 50px"">2</td>
+                                <td style="height: 50px"">Sepatu Berwarna</td>
+                                <td style="height: 50px"">5</td>
                             </tr>
                             <tr>
-                                <td>3</td>
-                                <td>Larry the Bird</td>
-                                <td>Larry the Bird</td>
+                                <td style="height: 50px"">3</td>
+                                <td style="height: 50px"">Menggunakan Make up</td>
+                                <td style="height: 50px"">10</td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td>Larry the Bird</td>
-                                <td>Larry the Bird</td>
+                                <td style="height: 50px"">4</td>
+                                <td style="height: 50px"">Terlambat</td>
+                                <td style="height: 50px"">30</td>
                             </tr>
                             <tr>
-                                <td>5</td>
-                                <td>Larry the Bird</td>
-                                <td>Larry the Bird</td>
+                                <td style="height: 50px"">5</td>
+                                <td style="height: 50px"">Salah Seragam</td>
+                                <td style="height: 50px"">25</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="top-siswa col card my-3 p-0">
-                <div class="title p-3">
-                    <h2>Siswa</h2>
+            <div class="card top-siswa col-lg-4 p-0">
+                <div class="card-header p-3">
+                    <h2 class="m-0">Siswa</h2>
                 </div>
-                <hr class="mt-0">
-                <div class="px-3">
+                <div class="card-body px-3">
                     <div class="col">
-                        <div class="card py-2">
-                            <div class="row d-flex justify-content-between">
-                                <div class="col ml-3">
-                                    <h2>Maul Arfad</h2>
-                                    <span style="background-color: #1d7af3;" class="text-white p-1 rounded">PPLG</span>
-                                </div>
-                                <div class="col-3 border-left">
-                                    <h1 class="font-weight-bold m-0" style="font-size: 44px">100</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card py-2">
-                            <div class="row d-flex justify-content-between">
-                                <div class="col ml-3">
-                                    <h2>Maul Arfad</h2>
-                                    <span style="background-color: #FF9602;" class="text-white p-1 rounded">TMS</span>
-                                </div>
-                                <div class="col-3 border-left">
-                                    <h1 class="font-weight-bold m-0" style="font-size: 44px">100</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card py-2">
-                            <div class="row d-flex justify-content-between">
-                                <div class="col ml-3">
-                                    <h2>Maul Arfad</h2>
-                                    <span style="background-color: #1d7af3;" class="text-white p-1 rounded">PPLG</span>
-                                </div>
-                                <div class="col-3 border-left">
-                                    <h1 class="font-weight-bold m-0" style="font-size: 44px">100</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card py-2">
-                            <div class="row d-flex justify-content-between">
-                                <div class="col ml-3">
-                                    <h2>Maul Arfad</h2>
-                                    <span style="background-color: #1d7af3;" class="text-white p-1 rounded">PPLG</span>
-                                </div>
-                                <div class="col-3 border-left">
-                                    <h1 class="font-weight-bold m-0" style="font-size: 44px">100</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card py-2">
-                            <div class="row d-flex justify-content-between">
-                                <div class="col ml-3">
-                                    <h2>Maul Arfad</h2>
-                                    <span style="background-color: #1d7af3;" class="text-white p-1 rounded">PPLG</span>
-                                </div>
-                                <div class="col-3 border-left">
-                                    <h1 class="font-weight-bold m-0" style="font-size: 44px">100</h1>
-                                </div>
-                            </div>
-                        </div>
+                        {{-- {{dd($data)}} --}}
+                    @php
+                        $siswaWithPoints = $siswa->filter(function ($item) {
+                            return $item->poin > 0;
+                        });
+                    @endphp
 
+                    @if ($siswaWithPoints->isEmpty())
+                        <div class="align-items-center">
+                            <h3 class="text-center" style="color: #c5c5c5">Belum ada pelanggar</h3>
+                        </div>
+                    @else
+                        @foreach ($siswaWithPoints->sortByDesc('poin') as $item)
+                            <div class="card py-2 mb-2">
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-8 ml-3">
+                                        @if (strlen($item->nama) > 22)
+                                            <marquee scrollamount="2" scrolldelay="50"><h3 class="mb-2">{{ $item->nama }}</h3></marquee>
+                                        @else
+                                            <h3 class="mb-2">{{ $item->nama }}</h3>
+                                        @endif
+                                       <div class="col-5 p-0">
+                                            @if ($item->Kelas && $item->Kelas->jurusan == 'Pengembangan Perangkat Lunak Dan Gim')
+                                                <div class="text-white p-1 rounded text-center" style="background-color:#1D7AF3 ">
+                                                    {{ $item->Kelas->nama_kelas }}
+                                                </div>
+                                            @elseif ($item->Kelas && $item->Kelas->jurusan == 'Teknik Mesin')
+                                                <div class="text-white p-1 rounded text-center" style="background-color:#FF9602 ">
+                                                    {{ $item->Kelas->nama_kelas }}
+                                                </div>
+                                            @endif
+                                       </div>
+                                    </div>
+                                    <div class="col border-left d-flex justify-content-center pl-0" style="width: 5px">
+                                    @switch($item->poin)
+                                        @case($item->poin >=0 && $item->poin <=25 )
+                                            <span class="text-success font-weight-bold" style="font-size: 34px">{{ $item->poin }}</span>
+                                            @break
+                                        @case($item->poin >=25 && $item->poin <=50)
+                                            <span class="text-info font-weight-bold" style="font-size: 34px">{{ $item->poin }}</span>
+                                            @break
+                                        @case($item->poin >=50 && $item->poin <=75)
+                                            <span class="text-warning font-weight-bold" style="font-size: 34px">{{ $item->poin }}</span>
+                                            @break
+                                        @case($item->poin >=75 && $item->poin <=100)
+                                            <span class="text-danger font-weight-bold" style="font-size: 34px">{{ $item->poin }}</span>
+                                            @break
+                                    @endswitch
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="line-chart col-12 card mb-3 px-0">
-        <div class="title p-3">
-            <h2>Multiple Line Chart</h2>
-        </div>
-        <hr class="mt-0">
-        <div class="px-3">
-            <div id="chart-container">
-                <canvas id="multipleLineChart"></canvas>
+            <div class="card radar-chart col px-0 ml-3">
+                <div class="card-header p-3 d-flex justify-content-between">
+                    <h2 class="m-0">Radar Chart</h2>
+                    <div class="col-7 ">
+                        <div class="row justify-content-end">
+                            <button class="btn btn-secondary btn-xs" onclick="setActive(this)">Kelas 10</button>
+                            <button class="btn btn-secondary btn-border btn-xs mx-1" onclick="setActive(this)">Kelas 11</button>
+                            <button class="btn btn-secondary btn-border btn-xs" onclick="setActive(this)">Kelas 12</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" id="chart-container">
+                    <canvas id="radarChart" "></canvas>
+                </div>
             </div>
         </div>
     </div>
     <div class="col">
         <div class="row">
-            <div class="radar-chart col card mb-3 px-0">
-                <div class="title p-3 d-flex justify-content-between">
-                    <h2>Radar Chart</h2>
-                    <div class="col-4">
-                        <div class="row">
-                            <button class="btn btn-secondary btn-xs">Kelas 10</button>
-                            <button class="btn btn-secondary btn-border btn-xs mx-1">Kelas 11</button>
-                            <button class="btn btn-secondary btn-border btn-xs">Kelas 12</button>
-                        </div>
+            <div class="card line-chart col-9 mb-3 px-0">
+                <div class="card-header p-3">
+                    <h2 class="m-0">Multiple Line Chart</h2>
+                </div>
+                <div class="card-body px-3">
+                    <div id="chart-container">
+                        <canvas id="multipleLineChart" style="height:300px;"></canvas>
                     </div>
                 </div>
-                <hr class="mt-0">
-                <div id="chart-container">
-                    <canvas id="radarChart"></canvas>
-                </div>
             </div>
-            <div class="doughnut-chart col card mb-3 px-0 ml-3">
-                <div class="title p-3">
-                    <h2>Doughnut Chart</h2>
+            <div class="card doughnut-chart col mb-3 px-0 ml-3">
+                <div class="card-header p-3">
+                    <h2 class="m-0">Doughnut Chart</h2>
                 </div>
-                <hr class="mt-0">
-                <div id="chart-container">
-                    <canvas id="doughnutChart"></canvas>
+                <div id="card-body chart-container">
+                    <canvas id="doughnutChart" style="height:300px;"></canvas>
                 </div>
             </div>
         </div>
@@ -244,7 +236,7 @@
     var myMultipleLineChart = new Chart(multipleLineChart, {
         type: 'line',
         data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Juni", "Juli", "Agu", "Sep", "Okt", "Nov", "Des"],
             datasets: [{
                 label: "PPLG",
                 borderColor: "#1D7AF3",
@@ -300,9 +292,9 @@
 var myRadarChart = new Chart(radarChart, {
 	type: 'radar',
 	data: {
-		labels: ['PPLG 1', 'TMS 1', 'PPLG 2', 'TMS 2', 'PPLG 3', 'TMS 3','PPLG 4'],
+		labels: ['PPLG 1', 'PPLG 2', 'PPLG 3', 'PPLG 4', 'TMS 1', 'TMS 2','TMS 3'],
 		datasets: [{
-			data: [20, 10, 30, 2, 30],
+			data: [20, 10, 30, 10, 0, 0, 0],
 			borderColor: '#1d7af3',
 			backgroundColor : 'rgba(29, 122, 243, 0.25)',
 			pointBackgroundColor: "#1d7af3",
@@ -310,7 +302,7 @@ var myRadarChart = new Chart(radarChart, {
 			pointRadius: 3,
 			label: 'PPLG'
 		}, {
-			data: [10, 20, 15, 30, 22],
+			data: [0, 0, 0, 0, 30, 50, 20],
 			borderColor: '#FF9602',
 			backgroundColor: 'rgba(255, 150, 2, 0.25)',
 			pointBackgroundColor: "#FF9602",
@@ -336,13 +328,13 @@ var myDoughnutChart = new Chart(doughnutChart, {
 	type: 'doughnut',
 	data: {
 		datasets: [{
-			data: [30, 10],
-			backgroundColor: ['#FF9602','#1d7af3']
+			data: [10, 30],
+			backgroundColor: ['#1d7af3','#FF9602']
 		}],
 
 		labels: [
-		'TMS',
-		'PPLG'
+        'PPLG',
+		'TMS'
 		]
 	},
 	options: {
@@ -363,4 +355,24 @@ var myDoughnutChart = new Chart(doughnutChart, {
 });
     </script>
 
+<script>
+    function setActive(button) {
+        // Remove the active class from all buttons and set them to non-active class
+        var buttons = document.querySelectorAll('.btn');
+        buttons.forEach(function(btn) {
+            btn.classList.remove('btn-xs');
+            btn.classList.remove('btn-secondary');
+            btn.classList.remove('active');
+            btn.classList.add('btn-border');
+            btn.classList.add('btn-xs');
+            btn.classList.add('btn-secondary');
+        });
+
+        // Add the active class to the clicked button
+        button.classList.remove('btn-border');
+        button.classList.add('btn-xs');
+        button.classList.add('btn-secondary');
+        button.classList.add('active');
+    }
+</script>
 </html>

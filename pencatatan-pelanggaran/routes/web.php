@@ -23,6 +23,9 @@ use App\Http\Controllers\Profile\BkController as ProfileBk;
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 
+use App\Http\Controllers\GlobalController as Gb;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,7 +38,7 @@ use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 */
 
 Route::view('/', 'layouts.landing-page');
-Route::view('/pelanggaranPreview', 'layouts.global-preview');
+Route::get('/pelanggaranPreview', [Gb::class, 'index']);
 Route::view('/lihatSiswa', 'layouts.siswa-preview');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
