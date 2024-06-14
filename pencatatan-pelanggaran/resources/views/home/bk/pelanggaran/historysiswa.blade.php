@@ -63,14 +63,14 @@
                         </div>
                         <div class="col-md-6">
                             <table style="margin-left: 50%">
-                                <tr>      
+                                <tr>
                                     <td style="font-size: 20px;">Jumlah Poin :</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td style="font-size: 80px; margin-top: 10%; color: 
+                                    <td style="font-size: 80px; margin-top: 10%; color:
                                         @if($siswa->poin >= 0 && $siswa->poin <= 25)
                                             blue;
                                         @elseif($siswa->poin <= 50)
@@ -86,13 +86,13 @@
                                         {{ $siswa->poin }}
                                     </td>
                                 </tr>
-                                
+
                             </table>
                         </div>
                     </div>
-                    
 
-                    
+
+
                 </div>
                 <div class="card-body">
                     <a href="#" class="btn btn-primary mb-2 ml-3" data-toggle="modal" data-target="#modalUpdate"><i class="fa fa-edit mr-2"></i>Kurangi Poin</a>
@@ -141,22 +141,20 @@
                 <form action="{{ route('change.point', $siswa->nis) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Poin Siswa</label>
-                                <input type="text" class="form-control" id="poin_siswa" value="{{ $siswa->poin }}" readonly>    
+                                <input type="text" class="form-control" id="poin_siswa" value="{{ $siswa->poin }}" readonly>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Poin Hasil</label>
                                 <input type="text" class="form-control" id="result" readonly>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">

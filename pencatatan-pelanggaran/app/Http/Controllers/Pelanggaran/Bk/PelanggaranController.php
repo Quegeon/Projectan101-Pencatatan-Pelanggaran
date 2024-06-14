@@ -95,7 +95,7 @@ class PelanggaranController extends Controller
             $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP');
             cache()->put($auth->id.'newData', $no_pelanggaran);
         }
-
+        
         $data = array(
             'no_pelanggaran' => $no_pelanggaran,
             'siswa' => Siswa::all(),
