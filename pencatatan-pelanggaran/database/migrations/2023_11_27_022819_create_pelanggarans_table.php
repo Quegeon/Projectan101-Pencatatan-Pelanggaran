@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pelanggarans', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->boolean('is_active')->default(1);
             $table->string('hukuman_pilihan')
                 ->nullable();
             $table->string('id_bk')

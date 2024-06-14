@@ -16,6 +16,8 @@ use App\Models\User;
 use App\Models\Bk;
 use App\Models\DetailAturan;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class PelanggaranController extends Controller
 {
@@ -55,6 +57,35 @@ class PelanggaranController extends Controller
         return view('home.bk.pelanggaran.index', $data);
     }
 
+    public function change_point($nis, Request $request)
+    {
+        $siswa = Siswa::find($nis);
+
+        if ($siswa === null) {
+            return back()
+                ->with('error','Target Data Error');
+        }
+
+
+        $request->validate(['poin' => 'required|numeric|max:100']);
+
+        if ($request->poin > $siswa->poin) {
+            return back()
+                ->with('error','Poin Pengurangan Melebihi Poin Siswa');
+        }
+
+        try {
+            $update_poin = $siswa->poin - $request->poin;
+            $siswa->update(['poin' => $update_poin]);
+            return back()
+                ->with('success','Poin Berhasil Diubah');
+
+        } catch (\Throwable $th) {
+            return back()
+                ->with('error','Error Update Poin');
+        }
+    }
+
     public function create()
     {
         $auth = Auth::User();
@@ -64,7 +95,7 @@ class PelanggaranController extends Controller
             $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP');
             cache()->put($auth->id.'newData', $no_pelanggaran);
         }
-
+        
         $data = array(
             'no_pelanggaran' => $no_pelanggaran,
             'siswa' => Siswa::all(),
@@ -442,8 +473,9 @@ class PelanggaranController extends Controller
             }
 
             $siswa->update(['poin' => $poin, 'status' => $status]);
-            DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
-            $pelanggaran->delete();
+            // DetailAturan::where('no_pelanggaran', $pelanggaran->no_pelanggaran)->delete();
+            $pelanggaran->is_active = 0;
+            $pelanggaran->save();
 
             return redirect()
                 ->route('dashboard.bk')
@@ -474,7 +506,9 @@ class PelanggaranController extends Controller
     public function history($nis)
     {
         $siswa = Siswa::find($nis);
-        $pelanggaran = Pelanggaran::where('nis', $nis)->pluck('no_pelanggaran');
+        $pelanggaran = Pelanggaran::where('nis', $nis)
+            ->where('is_active', 1)
+            ->pluck('no_pelanggaran');
         $no_pelanggaran = DetailAturan::whereIn('no_pelanggaran', $pelanggaran->toArray())->get();
 
         if ($siswa === null) {
@@ -548,7 +582,7 @@ class PelanggaranController extends Controller
                 $q->where('nama_kelas', 'LIKE', '%' . $query . '%');
             })
             ->paginate($per_page);
-        
+
         $results = [];
         foreach ($siswa as $s) {
             $results[] = [
@@ -556,7 +590,7 @@ class PelanggaranController extends Controller
                 'text' => $s->nama . ' | ' . $s->Kelas->nama_kelas
             ];
         }
-        
+
         return response()->json([
             'results' => $results,
             'pagination' => ['more' => $siswa->hasMorePages()]
@@ -583,5 +617,81 @@ class PelanggaranController extends Controller
             'results' => $results,
             'pagination' => ['more' => $aturan->hasMorePages()]
         ]);
+    }
+
+    public function private(Request $request, $id) {
+        $pelanggaran = Pelanggaran::where('id', $id)->first();
+
+        if(!$pelanggaran) {
+            return redirect()
+                ->back()
+                ->with('error', 'Data Tidak Ditemukan');
+        }
+
+        $siswa = Siswa::where('nis', $pelanggaran->nis)->first();
+
+        if(!$siswa) {
+            return redirect()
+                ->back()
+                ->with('error', 'Data Tidak Ditemukan');
+        }
+
+        DB::beginTransaction();
+        try {
+            $siswa->poin -= $pelanggaran->total_poin;
+            if($siswa->save()) {
+                $pelanggaran->is_active = 0;
+                $pelanggaran->save();
+            }
+
+            DB::commit();
+            return redirect()
+                ->back()
+                ->with('success', 'Sukses Mengubah Data!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect()
+                ->back()
+                ->with('error', 'Something went wrong!');
+        }
+    }
+
+    public function public(Request $request, $id) {
+        $pelanggaran = Pelanggaran::where('id', $id)->first();
+
+        if(!$pelanggaran) {
+            return redirect()
+            ->back()
+            ->with('error', 'Data Tidak Ditemukan');
+        }
+
+        $siswa = Siswa::where('nis', $pelanggaran->nis)->first();
+
+        if(!$siswa) {
+            return redirect()
+                ->back()
+                ->with('error', 'Data Tidak Ditemukan');
+        }
+
+        DB::beginTransaction();
+        try {
+            $siswa->poin += $pelanggaran->total_poin;
+            if($siswa->save()) {
+                $pelanggaran->is_active = 1;
+                $pelanggaran->save();
+            }
+
+            DB::commit();
+            return redirect()
+                ->back()
+                ->with('success', 'Sukses Mengubah Data!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect()
+                ->back()
+                ->with('error', 'Something went wrong!');
+        }
     }
 }
