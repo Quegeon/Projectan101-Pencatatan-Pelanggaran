@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('log_poins', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('id_user')->nullable();
-            $table->string('id_bk');
+	    $table->string('id_bk');
+	    $table->sring('id_kelas')->nullable();
             $table->integer('poin_asal')->nullable();
             $table->integer('poin_perubahan')->nullable();
-            $table->boolean('is_reset')->default(false);
+	    $table->boolean('is_reset')->default(false);
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });
