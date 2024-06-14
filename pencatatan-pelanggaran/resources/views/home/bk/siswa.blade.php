@@ -48,16 +48,16 @@
                                     <td align="center">
                                         @switch($s->status)
                                             @case('Baik')
-                                                <span class="badge badge-success">{{ $s->status }}</span>
+                                                <span class="badge badge-success font-weight-bold">{{ $s->status }}</span>
                                                 @break
                                             @case('Kurang Baik')
-                                                <span class="badge badge-info">{{ $s->status }}</span>
+                                                <span class="badge badge-info font-weight-bold">{{ $s->status }}</span>
                                                 @break
                                             @case('Buruk')
-                                                <span class="badge badge-warning">{{ $s->status }}</span>
+                                                <span class="badge badge-warning font-weight-bold">{{ $s->status }}</span>
                                                 @break
                                             @case('Sangat Buruk')
-                                                <span class="badge badge-danger">{{ $s->status }}</span>
+                                                <span class="badge badge-danger font-weight-bold">{{ $s->status }}</span>
                                                 @break
                                         @endswitch
                                     </td>
