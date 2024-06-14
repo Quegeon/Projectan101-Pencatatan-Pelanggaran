@@ -52,15 +52,15 @@ class SiswaController extends Controller
 
             $validated['poin'] = $poin;
             $validated['status'] = $status;
-            $validated['status_badge'] = $status_badge;
 
             Siswa::create($validated);
 
             return redirect()
                 ->route('siswa.index')
                 ->with("success", "Data Berhasil Dibuat");
-            
+
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()
                 ->route('siswa.index')
                 ->with('error', 'Error Store Data');
