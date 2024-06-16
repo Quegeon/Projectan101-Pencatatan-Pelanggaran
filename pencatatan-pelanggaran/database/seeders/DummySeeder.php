@@ -38,40 +38,40 @@ class DummySeeder extends Seeder
         ]);
 
         //* SISWA
-        Kelas::create([
-            'id' => Str::orderedUuid(),
-            'nama_kelas' => 'XII PPLG CUK',
-            'jurusan' => 'PPLG'
-        ]);
+        // Kelas::create([
+        //     'id' => Str::orderedUuid(),
+        //     'nama_kelas' => 'XII PPLG CUK',
+        //     'jurusan' => 'PPLG'
+        // ]);
 
-        Siswa::create([
-            'nis' => '212210232',
-            'id_kelas' => Kelas::first()->id,
-            'nama' => 'Ansel',
-            'no_telp' => '0895236745',
-            'alamat' => 'Jl. Bondowoso',
-            'poin' => 0,
-            'status' => 'Baik'
-        ]);
+        // Siswa::create([
+        //     'nis' => '212210232',
+        //     'id_kelas' => Kelas::first()->id,
+        //     'nama' => 'Ansel',
+        //     'no_telp' => '0895236745',
+        //     'alamat' => 'Jl. Bondowoso',
+        //     'poin' => 0,
+        //     'status' => 'Baik'
+        // ]);
 
-        Siswa::create([
-            'nis' => '212210233',
-            'id_kelas' => Kelas::first()->id,
-            'nama' => 'Budi',
-            'no_telp' => '0895236745',
-            'alamat' => 'Jl. Bondowoso',
-            'poin' => 0,
-            'status' => 'Baik'
-        ]);
+        // Siswa::create([
+        //     'nis' => '212210233',
+        //     'id_kelas' => Kelas::first()->id,
+        //     'nama' => 'Budi',
+        //     'no_telp' => '0895236745',
+        //     'alamat' => 'Jl. Bondowoso',
+        //     'poin' => 0,
+        //     'status' => 'Baik'
+        // ]);
 
-        Siswa::create([
-            'nis' => '212210234',
-            'id_kelas' => Kelas::first()->id,
-            'nama' => 'Cantik',
-            'no_telp' => '0895236745',
-            'alamat' => 'Jl. Bondowoso',
-            'poin' => 0,
-            'status' => 'Baik'
-        ]);
+        // Siswa::create([
+        //     'nis' => '212210234',
+        //     'id_kelas' => Kelas::first()->id,
+        //     'nama' => 'Cantik',
+        //     'no_telp' => '0895236745',
+        //     'alamat' => 'Jl. Bondowoso',
+        //     'poin' => 0,
+        //     'status' => 'Baik'
+        // ]);
     }
 }
