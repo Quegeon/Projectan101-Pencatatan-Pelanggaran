@@ -9,7 +9,8 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="{{ asset('fotobk/'.Auth()->User()->foto) }}" alt="..." class="avatar-img rounded-circle">
+                    <img src="{{ asset('fotobk/' . Auth()->User()->foto) }}" alt="..."
+                        class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -22,7 +23,7 @@
                 </div>
             </div>
             <ul class="nav">
-                <li class="nav-item {{ ($currentRoute === 'dashboard.bk') ? 'active' : '' }}">
+                <li class="nav-item {{ $currentRoute === 'dashboard.bk' ? 'active' : '' }}">
                     <a href="{{ route('dashboard.bk') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
@@ -33,6 +34,12 @@
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
                     <h4 class="text-section">Pilihan</h4>
+                </li>
+                <li class="nav-item {{ $currentRoute === 'review.create' ? 'active' : '' }}">
+                    <a href="{{ route('review.create') }}">
+                        <i class="fas fa-file-signature"></i>
+                        <p>Tambah Pelanggaran</p>
+                    </a>
                 </li>
                 <li class="nav-item {{ $kelola }}">
                     <a data-toggle="collapse" href="#submenu">
@@ -65,10 +72,10 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item {{ ($currentRoute === 'review.create') ? 'active' : '' }}">
-                    <a href="{{ route('review.create') }}">
-                        <i class="fas fa-file-signature"></i>
-                        <p>Tambah Pelanggaran</p>
+                <li class="nav-item {{ $currentRoute === 'log-poin' ? 'active' : '' }}">
+                    <a href="{{ route('log-poin') }}">
+                        <i class="fas fa-history"></i>
+                        <p>Riwayat Poin</p>
                     </a>
                 </li>
                 <li class="nav-item">

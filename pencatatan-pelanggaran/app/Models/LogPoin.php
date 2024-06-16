@@ -11,23 +11,20 @@ class LogPoin extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
-    protected $fillable = [
-        'id',
-        'id_user',
-        'id_bk',
-        'poin_asal',
-        'poin_perubahan',
-        'is_reset',
-        'keterangan'
-    ];
+    protected $fillable = ['id', 'id_bk', 'id_user', 'poin_asal', 'poin_perubahan', 'is_reset', 'keterangan', 'id_kelas'];
 
-    public function User()
+    public function Siswa()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(Siswa::class, 'id_user', 'nis');
     }
 
     public function BK()
     {
         return $this->belongsTo(Bk::class, 'id_bk', 'id');
+    }
+
+    public function Kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas', 'id');
     }
 }
