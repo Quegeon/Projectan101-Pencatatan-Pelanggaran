@@ -9,9 +9,9 @@
         <div class="col-lg-12">
             <div class="card card-stats card-round">
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
+                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
                         Unggah Excel
-                    </button>
+                    </button> --}}
                     <div class="table-responsive">
                         <form id="specific-form" action="{{ route('laporan.store') }}" method="POST">
                             @csrf
@@ -58,10 +58,10 @@
 </div>
 </div>
 
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            {{-- <form id="uploadForm" action="{{ route('laporan.import') }}" method="POST" enctype="multipart/form-data">
+            <form id="uploadForm" action="{{ route('laporan.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadModalLabel">Unggah Excel</h5>
@@ -83,7 +83,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Unggah</button>
                 </div>
-            </form> --}}
+            </form>
             <form action="{{ route('laporan.import') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" accept=".xlsx, .xls">
@@ -91,7 +91,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 @section('script')
@@ -156,8 +156,8 @@
 
 @endsection
 
-<script>
-    function alertSubmit(msg, formId) {
+{{-- <script> --}}
+    {{-- function alertSubmit(msg, formId) {
     console.log(formId);
     Swal.fire({
         title: 'Konfirmasi',
@@ -194,6 +194,6 @@
             }
         }
     });
-}
-</script>
+} --}}
+{{-- </script> --}}
 
