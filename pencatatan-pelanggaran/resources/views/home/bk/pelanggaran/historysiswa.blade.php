@@ -136,8 +136,8 @@
                             <div class="d-flex align-items-center mx-3 mb-3 justify-content-between">
                                 <h3 class="m-0">Riwayat Pengurangan Poin {{ $siswa->nama }}</h3>
                                 <div class="d-flex align-items-center">
-                                    <button class="btn btn-sm btn-warning mr-2" id="btn-reset-poin">Reset Poin
-                                        Siswa</button>
+                                    {{-- <button class="btn btn-sm btn-warning mr-2" id="btn-reset-poin">Reset Poin
+                                        Siswa</button> --}}
                                     <a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
                                         data-target="#modalUpdate"><i class="fa fa-edit mr-2"></i>Kurangi Poin</a>
                                 </div>
