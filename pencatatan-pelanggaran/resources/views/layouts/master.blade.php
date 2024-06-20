@@ -35,6 +35,7 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/select2/css/theme.min.css') }}">
+    @yield('style')
 </head>
 
 <body>
@@ -138,7 +139,8 @@
                 <footer class="footer border-0">
                     <div class="container-fluid">
                         <div class="copyright mr-auto">
-                            2024, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://yourwebsite.com">MATA Group</a>
+                            2024, made with <i class="fa fa-heart heart text-danger"></i> by <a
+                                href="https://yourwebsite.com">MATA Group</a>
                         </div>
                         <nav class="pull-left">
                             <ul class="nav">
@@ -194,7 +196,7 @@
             });
         }
 
-        
+
 
 
         // function confirmDel(url) {

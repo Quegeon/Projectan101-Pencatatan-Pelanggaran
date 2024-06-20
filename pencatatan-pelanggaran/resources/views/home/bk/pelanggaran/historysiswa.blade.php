@@ -1,5 +1,12 @@
 @extends('layouts.master')
 @section('title', 'History Pelanggaran Siswa')
+@section('style')
+    <style>
+        .card .card-header {
+            border-bottom: 0px !important;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="page-inner">
         <div class="page-header">
@@ -8,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-stats card-round">
-                    <div class="card-header">
+                    <div class="card-header border-0">
 
                         <div class="row">
                             <div class="col-md-6">
@@ -77,7 +84,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex align-items-center mx-3 mb-4">
+                        {{-- <div class="d-flex align-items-center mx-3 mb-4">
                             <button class="btn btn-sm btn-outline-primary mr-3" id="btn-pelanggaran" data-toggle="tooltip"
                                 title="Data Pelanggaran Siswa">
                                 Pelanggaran
@@ -86,7 +93,15 @@
                                 title="Riwayat Pengurangan Poin Siswa">
                                 Riwayat Poin
                             </button>
-                        </div>
+                        </div> --}}
+                        <ul class="nav nav-tabs mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="btn-pelanggaran" href="#">Pelanggaran</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="btn-riwayat" href="#">Riwayat Poin</a>
+                            </li>
+                        </ul>
                         <section id="pelanggaran">
                             <h3 class="mx-3 mb-2">Pelanggaran Siswa</h3>
                             <div class="table-responsive">
@@ -238,8 +253,8 @@
 
             $('#btn-riwayat').click(function(e) {
                 e.preventDefault();
-                $(this).removeClass('btn-primary').addClass('btn-outline-primary');
-                $('#btn-pelanggaran').addClass('btn-primary').removeClass('btn-outline-primary');
+                $(this).addClass('active');
+                $('#btn-pelanggaran').removeClass('active');
 
                 $('#pelanggaran').addClass('d-none');
                 $('#histori-poin').removeClass('d-none');
@@ -247,8 +262,8 @@
 
             $('#btn-pelanggaran').click(function(e) {
                 e.preventDefault();
-                $(this).removeClass('btn-primary').addClass('btn-outline-primary');
-                $('#btn-riwayat').addClass('btn-primary').removeClass('btn-outline-primary');
+                $(this).addClass('active');
+                $('#btn-riwayat').removeClass('active');
 
                 $('#histori-poin').addClass('d-none');
                 $('#pelanggaran').removeClass('d-none');
