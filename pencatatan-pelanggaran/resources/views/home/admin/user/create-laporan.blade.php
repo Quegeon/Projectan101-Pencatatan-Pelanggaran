@@ -156,8 +156,8 @@
 
 @endsection
 
-{{-- <script> --}}
-    {{-- function alertSubmit(msg, formId) {
+<script> 
+    function alertSubmit(msg, formId) {
     console.log(formId);
     Swal.fire({
         title: 'Konfirmasi',
@@ -194,6 +194,6 @@
             }
         }
     });
-} --}}
-{{-- </script> --}}
+} 
+ </script> 
 

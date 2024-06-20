@@ -58,13 +58,7 @@
                                             <tfoot>
                                                 <tr>
                                                     <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
-                                                    <td colspan="2" class="text-center bg-warning text-white">
-                                                        @if ($total_poin > 100)
-                                                            100 (Max)
-                                                        @else
-                                                            {{ $total_poin }}
-                                                        @endif
-                                                    </td>
+                                                    <td colspan="2" class="text-center bg-warning text-white">{{ $total_poin > 100 ? '100 (Max)' : $total_poin }}</td>
                                                     {{-- <td class="bg-info"></td> --}}
                                                 </tr>
                                             </tfoot>
