@@ -22,6 +22,7 @@ use App\Http\Controllers\Profile\BkController as ProfileBk;
 
 use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
+use App\Http\Controllers\Pelanggaran\Petugas\ImportController;
 
 use App\Http\Controllers\GlobalController as Gb;
 use App\Http\Controllers\LogPoinController;
@@ -53,9 +54,12 @@ Route::prefix('temp')->controller(TempController::class)->group(function () {
     Route::delete('/{id}/destroy', 'temp_destroy')->name('temp.destroy');
 });
 
+Route::post('laporan/import', [ImportController::class, 'import'])->name('laporan.import');
+Route::get('laporan/template', [ImportController::class, 'downloadTemplate'])->name('laporan.template');
+
 Route::group(["husen ganteng"], function () {
     Route::group(['middleware' => ['auth', 'level:Admin', 'checkdata']], function () {
-        Route::prefix('kelolw`a_petugas')->controller(KelolaPetugas::class)->group(function () {
+        Route::prefix('kelola_petugas')->controller(KelolaPetugas::class)->group(function () {
             Route::get('/', 'index')->name('petugas.index');
             Route::post('/store', 'store')->name('petugas.store');
             Route::get('/{id}/edit', 'edit')->name('petugas.edit');
