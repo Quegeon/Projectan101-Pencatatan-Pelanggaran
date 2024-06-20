@@ -15,6 +15,7 @@ use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Bk;
 use App\Models\DetailAturan;
+use App\Models\LogPoin;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
@@ -60,10 +61,11 @@ class PelanggaranController extends Controller
     public function change_point($nis, Request $request)
     {
         $siswa = Siswa::find($nis);
+        $user = Auth::User();
 
         if ($siswa === null) {
             return back()
-                ->with('error','Target Data Error');
+                ->with('error', 'Target Data Error');
         }
 
 
@@ -71,31 +73,38 @@ class PelanggaranController extends Controller
 
         if ($request->poin > $siswa->poin) {
             return back()
-                ->with('error','Poin Pengurangan Melebihi Poin Siswa');
+                ->with('error', 'Poin Pengurangan Melebihi Poin Siswa');
         }
 
         try {
             $update_poin = $siswa->poin - $request->poin;
+            LogPoin::create([
+                'id' => Str::orderedUuid(),
+                'id_bk' => $user->id,
+                'id_user' => $siswa->nis,
+                'poin_asal' => $siswa->poin,
+                'poin_perubahan' => $update_poin,
+                'is_reset' => 0
+            ]);
             $siswa->update(['poin' => $update_poin]);
             return back()
-                ->with('success','Poin Berhasil Diubah');
-
+                ->with('success', 'Poin Berhasil Diubah');
         } catch (\Throwable $th) {
             return back()
-                ->with('error','Error Update Poin');
+                ->with('error', 'Error Update Poin');
         }
     }
 
     public function create()
     {
         $auth = Auth::User();
-        if (cache($auth->id.'newData')) {
-            $no_pelanggaran = cache($auth->id.'newData');
+        if (cache($auth->id . 'newData')) {
+            $no_pelanggaran = cache($auth->id . 'newData');
         } else {
             $no_pelanggaran = IDGenerator(new Pelanggaran, 'no_pelanggaran', 'DP');
-            cache()->put($auth->id.'newData', $no_pelanggaran);
+            cache()->put($auth->id . 'newData', $no_pelanggaran);
         }
-        
+
         $data = array(
             'no_pelanggaran' => $no_pelanggaran,
             'siswa' => Siswa::all(),
@@ -135,7 +144,7 @@ class PelanggaranController extends Controller
 
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $validated['no_pelanggaran']);
 
-            $tempaturan->each(function($old) {
+            $tempaturan->each(function ($old) {
                 $new = $old->replicate();
                 $new->id = Str::orderedUuid();
                 $new->setTable('detail_aturans');
@@ -173,7 +182,6 @@ class PelanggaranController extends Controller
             return redirect()
                 ->route('dashboard.bk')
                 ->with('success', 'Data Berhasil Dibuat');
-
         } catch (\Throwable $th) {
             dd($th);
             return redirect()
@@ -187,7 +195,7 @@ class PelanggaranController extends Controller
     {
         $pelanggaran = Pelanggaran::find($id);
         $auth = Auth::User();
-        $cachekey = $auth->id.'dataEdit';
+        $cachekey = $auth->id . 'dataEdit';
         $data = array(
             'pelanggaran' => $pelanggaran,
             'aturan' => Aturan::all(),
@@ -196,12 +204,12 @@ class PelanggaranController extends Controller
             'no_pelanggaran' => $pelanggaran->no_pelanggaran,
         );
 
-        if(!cache()->has($cachekey)) {
+        if (!cache()->has($cachekey)) {
             DetailAturan::query()
                 ->where('no_pelanggaran', $pelanggaran->no_pelanggaran)
-                ->each(function($old) {
+                ->each(function ($old) {
                     $auth = Auth::User();
-                    $cachekey = $auth->id.'dataEdit';
+                    $cachekey = $auth->id . 'dataEdit';
 
                     $new = $old->replicate();
                     $new->id = Str::orderedUuid();
@@ -230,7 +238,8 @@ class PelanggaranController extends Controller
         }
     }
 
-    public function review(string $id) {
+    public function review(string $id)
+    {
         $pelanggaran = Pelanggaran::find($id);
 
         $data = array(
@@ -250,14 +259,14 @@ class PelanggaranController extends Controller
         }
 
         $auth = Auth::User();
-        $cachekey = $auth->id.'dataEdit';
+        $cachekey = $auth->id . 'dataEdit';
 
-        if(!cache()->has($cachekey)) {
+        if (!cache()->has($cachekey)) {
             DetailAturan::query()
                 ->where('no_pelanggaran', $pelanggaran->no_pelanggaran)
-                ->each(function($old) {
+                ->each(function ($old) {
                     $auth = Auth::User();
-                    $cachekey = $auth->id.'dataEdit';
+                    $cachekey = $auth->id . 'dataEdit';
 
                     $new = $old->replicate();
                     $new->id = Str::orderedUuid();
@@ -307,7 +316,7 @@ class PelanggaranController extends Controller
     {
         $pelanggaran = Pelanggaran::find($id);
         $auth = Auth::User();
-        $cachekey = $auth->id.'dataEdit';
+        $cachekey = $auth->id . 'dataEdit';
 
         if ($pelanggaran === null) {
             return redirect()
@@ -329,7 +338,7 @@ class PelanggaranController extends Controller
             $pelanggaran->update($validated);
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
 
-            $tempaturan->each(function($old) {
+            $tempaturan->each(function ($old) {
                 $new = $old->replicate();
                 $new->id = Str::orderedUuid();
                 $new->setTable('detail_aturans');
@@ -369,14 +378,13 @@ class PelanggaranController extends Controller
                 ->route('dashboard.bk')
                 ->with('error', 'Error Update Data');
         }
-
     }
 
     public function update(Request $request, string $id)
     {
         $pelanggaran = Pelanggaran::find($id);
         $auth = Auth::User();
-        $cachekey = $auth->id.'dataEdit';
+        $cachekey = $auth->id . 'dataEdit';
 
         if ($pelanggaran === null) {
             return redirect()
@@ -402,7 +410,7 @@ class PelanggaranController extends Controller
         try {
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $pelanggaran->no_pelanggaran);
 
-            $tempaturan->each(function($old) {
+            $tempaturan->each(function ($old) {
                 $new = $old->replicate();
                 $new->id = Str::orderedUuid();
                 $new->setTable('detail_aturans');
@@ -443,7 +451,6 @@ class PelanggaranController extends Controller
                 ->route('dashboard.bk')
                 ->with('error', 'Error Update Data');
         }
-
     }
 
     public function destroy($id)
@@ -480,20 +487,18 @@ class PelanggaranController extends Controller
             return redirect()
                 ->route('dashboard.bk')
                 ->with('success', 'Data Berhasil Dihapus');
-
         } catch (\Throwable $th) {
             return redirect()
                 ->route('dashboard.bk')
                 ->with('error', 'Error Destroy Data');
         }
-
     }
 
     public function printbk()
     {
         $userId = auth()->user()->id;
         $pelanggaran = Pelanggaran::where('id_bk', '=', $userId)
-            ->whereIn('status',['Beres', 'Sudah'])
+            ->whereIn('status', ['Beres', 'Sudah'])
             ->get();
         $user = User::all();
         $bk = Bk::all();
@@ -513,10 +518,10 @@ class PelanggaranController extends Controller
 
         if ($siswa === null) {
             return back()
-                ->with('error','Target Data Error');
+                ->with('error', 'Target Data Error');
         }
 
-        return view('home.bk.pelanggaran.historysiswa',compact(['siswa','no_pelanggaran']));
+        return view('home.bk.pelanggaran.historysiswa', compact(['siswa', 'no_pelanggaran']));
     }
 
     public function receipt($id)
@@ -529,17 +534,18 @@ class PelanggaranController extends Controller
         $aturan = Aturan::all();
         $siswa = Siswa::all();
 
-        return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan','detail'));
+        return view('home.dashboard.receipt', compact('pelanggaran', 'siswa', 'bk', 'user', 'aturan', 'detail'));
     }
 
-    public function cancel($opt, $atr) {
+    public function cancel($opt, $atr)
+    {
         $tempaturan = TempAturan::query()->where('no_pelanggaran', $atr);
         $auth = Auth::User();
-        $cachekey = $auth->id.'dataEdit';
+        $cachekey = $auth->id . 'dataEdit';
 
-        if($tempaturan !== null) {
+        if ($tempaturan !== null) {
             $tempaturan
-                ->each(function($old) {
+                ->each(function ($old) {
                     $old->delete();
                 });
         }
@@ -578,7 +584,7 @@ class PelanggaranController extends Controller
 
         $siswa = Siswa::with('Kelas')
             ->where('nama', 'LIKE', '%' .  $query . '%')
-            ->orWhereHas('Kelas', function($q) use ($query) {
+            ->orWhereHas('Kelas', function ($q) use ($query) {
                 $q->where('nama_kelas', 'LIKE', '%' . $query . '%');
             })
             ->paginate($per_page);
@@ -619,10 +625,11 @@ class PelanggaranController extends Controller
         ]);
     }
 
-    public function private(Request $request, $id) {
+    public function private(Request $request, $id)
+    {
         $pelanggaran = Pelanggaran::where('id', $id)->first();
 
-        if(!$pelanggaran) {
+        if (!$pelanggaran) {
             return redirect()
                 ->back()
                 ->with('error', 'Data Tidak Ditemukan');
@@ -630,7 +637,7 @@ class PelanggaranController extends Controller
 
         $siswa = Siswa::where('nis', $pelanggaran->nis)->first();
 
-        if(!$siswa) {
+        if (!$siswa) {
             return redirect()
                 ->back()
                 ->with('error', 'Data Tidak Ditemukan');
@@ -639,7 +646,7 @@ class PelanggaranController extends Controller
         DB::beginTransaction();
         try {
             $siswa->poin -= $pelanggaran->total_poin;
-            if($siswa->save()) {
+            if ($siswa->save()) {
                 $pelanggaran->is_active = 0;
                 $pelanggaran->save();
             }
@@ -657,18 +664,19 @@ class PelanggaranController extends Controller
         }
     }
 
-    public function public(Request $request, $id) {
+    public function public(Request $request, $id)
+    {
         $pelanggaran = Pelanggaran::where('id', $id)->first();
 
-        if(!$pelanggaran) {
+        if (!$pelanggaran) {
             return redirect()
-            ->back()
-            ->with('error', 'Data Tidak Ditemukan');
+                ->back()
+                ->with('error', 'Data Tidak Ditemukan');
         }
 
         $siswa = Siswa::where('nis', $pelanggaran->nis)->first();
 
-        if(!$siswa) {
+        if (!$siswa) {
             return redirect()
                 ->back()
                 ->with('error', 'Data Tidak Ditemukan');
@@ -677,7 +685,7 @@ class PelanggaranController extends Controller
         DB::beginTransaction();
         try {
             $siswa->poin += $pelanggaran->total_poin;
-            if($siswa->save()) {
+            if ($siswa->save()) {
                 $pelanggaran->is_active = 1;
                 $pelanggaran->save();
             }

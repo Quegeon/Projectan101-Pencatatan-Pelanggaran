@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('id_user')->nullable();
             $table->string('id_bk');
-            $table->string('id_kelas')->nullable();  // Corrected line
+            $table->string('id_kelas')->nullable();
             $table->integer('poin_asal')->nullable();
             $table->integer('poin_perubahan')->nullable();
             $table->boolean('is_reset')->default(false);
