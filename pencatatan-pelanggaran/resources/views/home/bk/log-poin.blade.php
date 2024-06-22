@@ -118,7 +118,7 @@
                         name: 'Poin Asal'
                     },
                     {
-                        data: 'poin_baru',
+                        data: 'poin_perubahan',
                         name: 'Poin Perubahan'
                     },
                 ]

@@ -39,39 +39,33 @@ class LogPoinController extends Controller
             ->editColumn('poin_asal', function ($item) {
                 return $item->poin_asal ?? 0;
             })
-            ->addColumn('poin_baru', function ($item) {
-                return $item->poin_asal - $item->poin_perubahan;
-            })
             ->addColumn('aktivitas', function ($item) {
-                $masked_datetime = (new Carbon($item->created_at))
-                    ->locale('id')
-                    ->translatedFormat('l, d F Y \p\u\k\u\l H:i');
                 $el = '';
 
                 // Kalau Reset Semua
                 if ($item->is_reset && !$item->id_user && !$item->id_kelas) {
-                    $el = "{$item->BK->nama} Melakukan Reset poin ke seluruh siswa pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Melakukan Reset poin ke seluruh siswa";
                 }
 
                 // Reset Perkelas
                 if ($item->is_reset && !$item->id_user && $item->id_kelas) {
-                    $el = "{$item->BK->nama} Melakukan Reset poin ke siswa {$item->Kelas->nama_kelas} pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Melakukan Reset poin ke siswa {$item->Kelas->nama_kelas}";
                 }
 
                 // Reset Siswa
                 if ($item->is_reset && $item->id_user) {
-                    $el = "{$item->BK->nama} Mereset poin {$item->Siswa->nama} pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Mereset poin {$item->Siswa->nama}";
                 }
 
                 // Pengurangan biasa
                 if (!$item->is_reset && $item->id_user) {
-                    $el = "{$item->BK->nama} Mengurangi poin sebesar {$item->poin_perubahan} ke {$item->Siswa->nama} pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Mengurangi poin sebesar {$item->poin_perubahan} ke {$item->Siswa->nama}";
                 }
 
                 // CMIIW MASZEH
                 return $el;
             })
-            ->rawColumns(['nama_siswa', 'masked_datetime', 'aktivitas', 'poin_baru'])
+            ->rawColumns(['nama_siswa', 'masked_datetime', 'aktivitas'])
             ->toJson();
     }
 
@@ -97,42 +91,36 @@ class LogPoinController extends Controller
                     ->locale('id')
                     ->translatedFormat('l, d F Y \p\u\k\u\l H:i');
             })
-            ->addColumn('poin_baru', function ($item) {
-                return $item->poin_asal - $item->poin_perubahan;
-            })
             ->editColumn('poin_asal', function ($item) {
                 return $item->poin_asal ?? 0;
             })
             ->addColumn('aktivitas', function ($item) use ($nis) {
-                $masked_datetime = (new Carbon($item->created_at))
-                    ->locale('id')
-                    ->translatedFormat('l, d F Y \p\u\k\u\l H:i');
                 $el = '';
 
                 // Kalau Reset Semua
                 if ($item->is_reset && !$item->id_user && !$item->id_kelas) {
-                    $el = "{$item->BK->nama} Melakukan Reset poin ke seluruh siswa pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Melakukan Reset poin ke seluruh siswa";
                 }
 
                 // Reset Perkelas
                 if ($item->is_reset && !$item->id_user && $item->id_kelas) {
-                    $el = "{$item->BK->nama} Melakukan Reset poin ke siswa {$item->Kelas->nama_kelas} pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Melakukan Reset poin ke siswa {$item->Kelas->nama_kelas}";
                 }
 
                 // Reset Siswa
                 if ($item->is_reset && ($item->id_user && $item->id_user == $nis)) {
-                    $el = "{$item->BK->nama} Mereset poin {$item->Siswa->nama} pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Mereset poin {$item->Siswa->nama}";
                 }
 
                 // Pengurangan biasa
                 if (!$item->is_reset && ($item->id_user && $item->id_user == $nis)) {
-                    $el = "{$item->BK->nama} Mengurangi poin sebesar {$item->poin_perubahan} ke {$item->Siswa->nama} pada {$masked_datetime}";
+                    $el = "{$item->BK->nama} Mengurangi poin sebesar {$item->poin_perubahan} ke {$item->Siswa->nama}";
                 }
 
                 // CMIIW MASZEH
                 return $el;
             })
-            ->rawColumns(['masked_datetime', 'aktivitas', 'poin_baru'])
+            ->rawColumns(['masked_datetime', 'aktivitas'])
             ->toJson();
     }
 
@@ -170,6 +158,7 @@ class LogPoinController extends Controller
 
             $siswa->each(function ($item) {
                 $item->poin = 0;
+                $item->status = 'Baik';
                 $item->save();
             });
 
@@ -202,6 +191,7 @@ class LogPoinController extends Controller
                 'is_reset' => 1
             ]);
             $siswa->poin = 0;
+            $siswa->status = 'Baik';
             $siswa->save();
 
             DB::commit();

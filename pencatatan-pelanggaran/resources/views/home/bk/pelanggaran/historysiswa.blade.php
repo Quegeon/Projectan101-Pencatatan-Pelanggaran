@@ -94,7 +94,8 @@
                                 Riwayat Poin
                             </button>
                         </div> --}}
-                        <ul class="nav nav-tabs mb-4">
+
+                        <ul class="nav nav-tabs mb-4 mt-2">
                             <li class="nav-item">
                                 <a class="nav-link active" id="btn-pelanggaran" href="#">Pelanggaran</a>
                             </li>
@@ -102,6 +103,8 @@
                                 <a class="nav-link" id="btn-riwayat" href="#">Riwayat Poin</a>
                             </li>
                         </ul>
+                        <a href="#" class="btn btn-sm btn-primary float-right mb-4" data-toggle="modal"
+                            data-target="#modalUpdate"><i class="fa fa-edit mr-2"></i>Kurangi Poin</a>
                         <section id="pelanggaran">
                             <h3 class="mx-3 mb-2">Pelanggaran Siswa</h3>
                             <div class="table-responsive">
@@ -135,12 +138,10 @@
                         <section id="histori-poin" class="d-none w-100">
                             <div class="d-flex align-items-center mx-3 mb-3 justify-content-between">
                                 <h3 class="m-0">Riwayat Pengurangan Poin {{ $siswa->nama }}</h3>
-                                <div class="d-flex align-items-center">
-                                    {{-- <button class="btn btn-sm btn-warning mr-2" id="btn-reset-poin">Reset Poin
+                                {{-- <div class="d-flex align-items-center"> --}}
+                                {{-- <button class="btn btn-sm btn-warning mr-2" id="btn-reset-poin">Reset Poin
                                         Siswa</button> --}}
-                                    <a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#modalUpdate"><i class="fa fa-edit mr-2"></i>Kurangi Poin</a>
-                                </div>
+                                {{-- </div> --}}
                             </div>
                             <div class="table-responsive">
                                 <table id="table-histori" class="table table-striped table-bordered w-100">
@@ -245,7 +246,7 @@
                         name: 'Poin Asal'
                     },
                     {
-                        data: 'poin_baru',
+                        data: 'poin_perubahan',
                         name: 'Poin Perubahan'
                     },
                 ]
