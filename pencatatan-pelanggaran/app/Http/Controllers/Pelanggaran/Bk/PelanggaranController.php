@@ -78,15 +78,26 @@ class PelanggaranController extends Controller
 
         try {
             $update_poin = $siswa->poin - $request->poin;
+            if ($update_poin >= 0 && $update_poin <= 25) {
+                $status = "Baik";
+            } elseif ($update_poin > 25 && $update_poin <= 50) {
+                $status = "Kurang Baik";
+            } elseif ($update_poin > 50 && $update_poin <= 75) {
+                $status = "Buruk";
+            } elseif ($update_poin > 75 && $update_poin <= 100) {
+                $status = "Sangat Buruk";
+            } else {
+                $status = "Undefined Status";
+            }
             LogPoin::create([
                 'id' => Str::orderedUuid(),
                 'id_bk' => $user->id,
                 'id_user' => $siswa->nis,
                 'poin_asal' => $siswa->poin,
-                'poin_perubahan' => $update_poin,
+                'poin_perubahan' => $request->poin,
                 'is_reset' => 0
             ]);
-            $siswa->update(['poin' => $update_poin]);
+            $siswa->update(['poin' => $update_poin, 'status' => $status]);
             return back()
                 ->with('success', 'Poin Berhasil Diubah');
         } catch (\Throwable $th) {
