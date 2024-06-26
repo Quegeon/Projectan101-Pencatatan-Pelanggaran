@@ -70,7 +70,7 @@
                             <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Siswa</label>
                                             <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
@@ -84,10 +84,16 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Pelapor</label>
-                                            <input type="text" class="form-control" value="{{ optional($pelanggaran->User)->nama }}" readonly>
+                                            <input type="text" class="form-control" value="{{ optional($pelanggaran->User)->nama ?? optional($pelanggaran->Petugas_Bk)->nama }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Terakhir Diubah</label>
+                                            <input type="text" class="form-control" value="{{ $pelanggaran->Bk->nama }}" readonly>
                                         </div>
                                     </div>
                                 </div>

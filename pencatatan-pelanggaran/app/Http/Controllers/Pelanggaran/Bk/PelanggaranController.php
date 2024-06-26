@@ -120,6 +120,7 @@ class PelanggaranController extends Controller
             'no_pelanggaran' => $no_pelanggaran,
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
+            'petugasBk' => $auth,
             'aturan' => Aturan::all(),
             'tempaturan' => TempAturan::where('no_pelanggaran', $no_pelanggaran)->get(),
             'tgl_pelanggaran' => Carbon::today()
@@ -137,6 +138,7 @@ class PelanggaranController extends Controller
 
     public function store(Request $request)
     {
+        
         $auth = Auth::user();
         $validated = $request->validate([
             'nis' => 'required|max:99999999999|numeric',
@@ -144,6 +146,7 @@ class PelanggaranController extends Controller
             'no_pelanggaran' => 'required',
             'total_poin' => 'required|numeric',
             'hukuman_pilihan' => 'required',
+            'petugas_bk' => 'required|max:255'
         ]);
         $siswa = Siswa::find($validated['nis']);
 
@@ -152,6 +155,7 @@ class PelanggaranController extends Controller
             $validated['tgl_pelanggaran'] = Carbon::today();
             $validated['status'] = 'Beres';
             $validated['id_bk'] = $auth->id;
+            $validated['id_user'] = $validated['petugas_bk'];
 
             $tempaturan = TempAturan::query()->where('no_pelanggaran', $validated['no_pelanggaran']);
 
@@ -212,6 +216,7 @@ class PelanggaranController extends Controller
             'aturan' => Aturan::all(),
             'siswa' => Siswa::all(),
             'bk' => Bk::all(),
+            'id_bk' => $auth,
             'no_pelanggaran' => $pelanggaran->no_pelanggaran,
         );
 
@@ -407,7 +412,8 @@ class PelanggaranController extends Controller
             'nis' => 'required|max:99999999999|numeric',
             'keterangan' => 'required|max:255',
             'total_poin' => 'required',
-            'hukuman_pilihan' => 'required'
+            'hukuman_pilihan' => 'required',
+            'id_bk' => 'required|max:255'
         ]);
 
         $siswa = Siswa::find($validated['nis']);

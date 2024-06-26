@@ -73,7 +73,7 @@
                                 <form id="specific-form" action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Siswa</label>
                                                 <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
@@ -83,12 +83,19 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Pelapor</label>
-                                                <input type="text" value="{{ $pelanggaran->User->username ?? '-'}}" class="form-control" readonly>
+                                                <input type="text" value="{{ $pelanggaran->User->username ?? $pelanggaran->Petugas_Bk->nama}}" class="form-control" readonly>
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Terakhir Diubah</label>
+                                            <input type="text" class="form-control" value="{{ $pelanggaran->Bk->nama }}" readonly>
+                                            <input type="hidden" name="id_bk" value="{{ $id_bk->id }}">
+                                        </div>
+                                    </div>
                                     </div>
 
                                     <div class="row">

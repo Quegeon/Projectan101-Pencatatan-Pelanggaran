@@ -178,6 +178,7 @@
                                     <th>Siswa</th>
                                     <th>Petugas</th>
                                     <th>Keterangan</th>
+                                    <th>Terakhir Diubah</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -187,8 +188,9 @@
                                 <tr>
                                     <td align="center">{{$loop->iteration}}</td>
                                     <td>{{$k->Siswa->nama}}</td>
-                                    <td>{{$k->User->nama ?? '-'}}</td>
+                                    <td>{{$k->User->nama ?? $k->Petugas_Bk->nama}}</td>
                                     <td>{{$k->keterangan}}</td>
+                                    <td>{{$k->Bk->nama}}</td>
                                     <td>{{$k->status}}</td>
                                     <td align="center" colspan="3">
                                         {{-- 13 --}}
