@@ -51,7 +51,7 @@
                                             <td>{{ $t->Aturan->nama_aturan }}</td>
                                             <td>{{ $t->Aturan->Hukuman->hukuman }}</td>
                                             <td class="text-center">{{ $t->Aturan->poin }}</td>
-                                            <td>
+                                            <td align="center" colspan="3">
                                                 <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
@@ -129,7 +129,7 @@
 
                                     {{-- 2 --}}
                                     <div class="d-flex w-100 justify-content-end">
-                                        <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
+                                        <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</button>
                                         <button type="button" onclick="alertSubmit('Apakah anda yakin untuk memproses pelanggaran?', 'specific-form')" class="w-25 btn btn-info"><i class="fa fa-file-signature mr-2"></i> Proses</button>
                                     </div>
                                 </form>

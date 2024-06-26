@@ -24,8 +24,11 @@ use App\Http\Controllers\Dashboard\UserController as DashboardPetugas;
 use App\Http\Controllers\Dashboard\BkController as DashboardBk;
 use App\Http\Controllers\Pelanggaran\Petugas\ImportController;
 
-use App\Http\Controllers\GlobalController as Gb;
+use App\Http\Controllers\GlobalController as GlobalSummary;
+use App\Http\Controllers\PreviewController as SearchSiswa;
+
 use App\Http\Controllers\LogPoinController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +42,8 @@ use App\Http\Controllers\LogPoinController;
 */
 
 Route::view('/', 'layouts.landing-page');
-Route::get('/pelanggaranPreview', [Gb::class, 'index']);
-Route::view('/lihatSiswa', 'layouts.siswa-preview');
+Route::get('/global-summary', [GlobalSummary::class, 'index']);
+Route::get('/search-siswa', [SearchSiswa::class, 'index']);
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');

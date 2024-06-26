@@ -128,7 +128,7 @@
                 <div class="modal-footer">
                     <a href="{{ route('laporan.edit', (string) $p->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                     <a  onclick="confirmDel('{{ route('laporan.destroy',  (string) $p->id) }}')" class="btn btn-danger text-white"><i class="fa fa-trash"></i></a>
-                </div>                
+                </div>
             @endif
         </div>
     </div>
@@ -274,7 +274,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="basic-datatables" class="display table table-striped table-hover" >
+                    <table id="basic-datatables" class="display table table-responsive table-striped table-hover" >
                         <thead>
                             <tr>
                                 <th>No</th>

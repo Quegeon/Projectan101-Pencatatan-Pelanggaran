@@ -248,7 +248,7 @@
                         </tbody>
                     </table>
                 </div>
-                            
+
             </div>
         </div>
 
@@ -259,13 +259,13 @@
             <div class="card p-4">
                 <div id="chart-container">
                     <canvas id="pieChart"></canvas>
-                </div>        
+                </div>
             </div>
         </div>
 
     </div>
     <!-- Tabel Top 5 Mover Siswa -->
-       
+
 </div>
 
 <!-- Modal history -->

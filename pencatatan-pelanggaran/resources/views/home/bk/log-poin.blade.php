@@ -32,7 +32,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <div class="modal fade" tabindex="-1" id="modal-reset" role="dialog" aria-hidden="true"
         aria-labelledby="exampleModalLabel">
@@ -118,7 +117,7 @@
                         name: 'Poin Asal'
                     },
                     {
-                        data: 'poin_baru',
+                        data: 'poin_perubahan',
                         name: 'Poin Perubahan'
                     },
                 ]
