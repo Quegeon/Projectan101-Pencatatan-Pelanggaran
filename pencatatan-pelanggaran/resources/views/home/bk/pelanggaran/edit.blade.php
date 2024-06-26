@@ -51,7 +51,7 @@
                                             <td>{{ $t->Aturan->nama_aturan }}</td>
                                             <td>{{ $t->Aturan->Hukuman->hukuman }}</td>
                                             <td class="text-center">{{ $t->Aturan->poin }}</td>
-                                            <td>
+                                            <td align="center" colspan="3">
                                                 <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">

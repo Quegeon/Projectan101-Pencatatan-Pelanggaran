@@ -70,7 +70,7 @@
                                         @elseif($siswa->poin <= 50)
                                             blue;
                                         @elseif($siswa->poin <= 75)
-                                            yellow;
+                                            orange;
                                         @elseif($siswa->poin <= 100)
                                             red;
                                         @else
