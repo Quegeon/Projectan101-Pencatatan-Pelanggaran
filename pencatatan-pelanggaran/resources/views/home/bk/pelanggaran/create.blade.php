@@ -91,7 +91,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Petugas</label>
-                                                        <input type="text" class="form-control" value="-" readonly>
+                                                        <input type="text" class="form-control" value="{{$petugasBk->nama}}" readonly>
+                                                        <input type="hidden" name="petugas_bk"value="{{$petugasBk->id}}">
                                                     </div>
                                                 </div>
                                             </div>
