@@ -53,7 +53,7 @@
                                         <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger text-center" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash mr-2"></i></button>
+                                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash "></i></button>
                                         </form>
                                     </td>
                                 </tr>
