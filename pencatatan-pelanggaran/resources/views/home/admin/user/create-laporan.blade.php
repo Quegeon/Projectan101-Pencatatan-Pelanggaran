@@ -56,7 +56,6 @@
         </div>
     </div>
 </div>
-</div>
 
 {{-- <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -156,7 +155,7 @@
 
 @endsection
 
-<script> 
+<script>
     function alertSubmit(msg, formId) {
     console.log(formId);
     Swal.fire({
@@ -194,6 +193,6 @@
             }
         }
     });
-} 
- </script> 
+}
+ </script>
 
