@@ -204,7 +204,8 @@
                         <input type="hidden" name="id" value="{{ Str::orderedUuid() }}">
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
+                    <i
+                    class="fa fa-ban mr-2"></i>tton" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban mr-2"></i>Kembali</button>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
                     </form>
                 </div>

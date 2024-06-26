@@ -66,13 +66,13 @@
                                         <td></td>
                                         <td
                                             style="font-size: 80px; margin-top: 10%; color:
-                                        @if ($siswa->poin >= 0 && $siswa->poin <= 25) blue;
+                                        @if ($siswa->poin >= 0 && $siswa->poin <= 25) green;
                                         @elseif($siswa->poin <= 50)
-                                            green;
+                                            blue;
                                         @elseif($siswa->poin <= 75)
+                                            yellow;
+                                        @elseif($siswa->poin <= 100)
                                             red;
-                                        @elseif($siswa->poin <= 99)
-                                            darkred;
                                         @else
                                             black; @endif
                                     ">

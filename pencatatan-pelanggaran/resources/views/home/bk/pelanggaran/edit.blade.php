@@ -122,7 +122,7 @@
 
                                     {{-- 2 --}}
                                     <div class="d-flex w-100 justify-content-end">
-                                        <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
+                                        <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</button>
                                         <button type="button" onclick="alertSubmit('Apakah anda yakin untuk memproses pelanggaran?', 'specific-form')" class="w-25 btn btn-info"><i class="fa fa-file-signature mr-2"></i> Proses</button>
                                     </div>
                                 </form>
