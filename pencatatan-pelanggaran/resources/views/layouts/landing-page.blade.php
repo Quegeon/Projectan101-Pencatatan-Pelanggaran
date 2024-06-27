@@ -89,7 +89,7 @@
             <p>Aplikasi ini dirancang untuk menggantikan metode manual pencatatan point pelanggaran dan bimbingan siswa
                 di SMK MARHAS
                 MARGAHAYU</p>
-            <a href="#" class="full-width-button"><i class="fas fa-solid fa-play"></i> Lihat Video</a>
+            {{-- <a href="#" class="full-width-button"><i class="fas fa-solid fa-play"></i> Lihat Video</a> --}}
         </div>
     </div>
 
