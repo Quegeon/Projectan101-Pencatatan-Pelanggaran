@@ -51,7 +51,7 @@
                                             <td>{{ $t->Aturan->nama_aturan }}</td>
                                             <td>{{ $t->Aturan->Hukuman->hukuman }}</td>
                                             <td class="text-center">{{ $t->Aturan->poin }}</td>
-                                            <td>
+                                            <td align="center" colspan="3">
                                                 <form action="{{ route('temp.destroy', $t->id)}}" method="POST" class="d-inline">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
@@ -64,7 +64,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" class="text-center bg-warning text-white">Total poin</th>
-                                            <td colspan="2" class="text-center bg-warning text-white">{{ $total_poin }}</td>
+                                            <td colspan="2" class="text-center bg-warning text-white">{{ $total_poin > 100 ? '100 (Max)' : $total_poin }}</td>
                                             {{-- <td class="bg-info"></td> --}}
                                         </tr>
                                     </tfoot>
@@ -73,7 +73,7 @@
                                 <form id="specific-form" action="{{ route('review.update', $pelanggaran->id) }}" class="d-flex flex-column" method="POST">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Siswa</label>
                                                 <input type="text" class="form-control" value="{{ $pelanggaran->Siswa->nama }}" readonly>
@@ -83,12 +83,19 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Pelapor</label>
-                                                <input type="text" value="{{ $pelanggaran->User->username ?? '-'}}" class="form-control" readonly>
+                                                <input type="text" value="{{ $pelanggaran->User->username ?? $pelanggaran->Petugas_Bk->nama}}" class="form-control" readonly>
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Terakhir Diubah</label>
+                                            <input type="text" class="form-control" value="{{ $pelanggaran->Bk->nama }}" readonly>
+                                            <input type="hidden" name="id_bk" value="{{ $id_bk->id }}">
+                                        </div>
+                                    </div>
                                     </div>
 
                                     <div class="row">
@@ -122,7 +129,7 @@
 
                                     {{-- 2 --}}
                                     <div class="d-flex w-100 justify-content-end">
-                                        <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary">Kembali</button>
+                                        <button type="button" onclick="alertConfirm('{{ route('review.cancel', ['opt' => 'batal', 'atr' => $no_pelanggaran]) }}', 'Apakah anda ingin membatalkan?')" class="mr-2 btn btn-secondary"><i class="fa fa-ban mr-2"></i>Kembali</button>
                                         <button type="button" onclick="alertSubmit('Apakah anda yakin untuk memproses pelanggaran?', 'specific-form')" class="w-25 btn btn-info"><i class="fa fa-file-signature mr-2"></i> Proses</button>
                                     </div>
                                 </form>

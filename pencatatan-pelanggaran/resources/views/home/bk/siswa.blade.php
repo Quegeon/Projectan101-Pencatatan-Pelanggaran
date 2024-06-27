@@ -62,7 +62,7 @@
                                         @endswitch
                                     </td>
                                     <td align="center" colspan="3">
-                                        <a href="{{ route('history', $s->nis)}}" class="btn btn-infox" data-toggle="tooltip" title="Detail"><i class="fa fa-info-circle mr-2"></i></a>
+                                        <a href="{{ route('history', $s->nis)}}" class="btn btn-info" data-toggle="tooltip" title="Detail"><i class="fa fa-info-circle mr-1"></i>Detail</a>
                                     </td>
                                 </tr>
                                 <!-- Akhir modal -->
@@ -75,7 +75,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

@@ -46,6 +46,7 @@ class BkController extends Controller
         $end = $dupe_start->addDays($daysInMonth);
 
         $pelanggaran_per_bulan = Pelanggaran::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->where('is_active', 1)
         ->whereIn('status', ['Beres', 'Selesai'])
         ->groupBy('month')
         ->get()
@@ -75,6 +76,7 @@ class BkController extends Controller
         $top_movers = Siswa::select('siswas.nis', 'siswas.nama', 'kelas.nama_kelas', DB::raw('COUNT(pelanggarans.id) as total_pelanggaran'))
         ->leftJoin('kelas', 'siswas.id_kelas', '=', 'kelas.id')
         ->leftJoin('pelanggarans', 'siswas.nis', '=', 'pelanggarans.nis')
+        ->where('pelanggarans.is_active', 1)
         ->whereIn('pelanggarans.status', ['Beres', 'Selesai'])
         ->groupBy('siswas.nis', 'siswas.nama', 'kelas.nama_kelas')
         ->orderByDesc('total_pelanggaran')
@@ -88,6 +90,7 @@ class BkController extends Controller
         $pelanggaran_per_jurusan = Siswa::join('kelas', 'siswas.id_kelas', '=', 'kelas.id')
         ->select('kelas.jurusan', DB::raw('COUNT(pelanggarans.id) as total_pelanggaran'))
         ->leftJoin('pelanggarans', 'siswas.nis', '=', 'pelanggarans.nis')
+        ->where('pelanggarans.is_active', 1)
         ->whereIn('pelanggarans.status', ['Beres', 'Selesai'])
         ->groupBy('kelas.jurusan')
         ->get();
@@ -102,13 +105,18 @@ class BkController extends Controller
         $data = array(
             'count_siswa' => Siswa::count(),
             'count_aturan' => Aturan::count(),
-            'history' => Pelanggaran::select()->where('status','Beres')->orderBy('updated_at','desc')->limit(5)->get(),
+            'history' => Pelanggaran::select()
+                ->where('status','Beres')
+                ->where('is_active',1)
+                ->orderBy('updated_at','desc')->limit(5)->get(),
             // TODO: Solve Total Minggu
             'top_movers' => $top_movers,
             'pelanggaran_per_jurusan' => $data_jurusan,
             // 'total_minggu' => Pelanggaran::select()->whereBetween('tgl_pelanggaran',[(7 * $diffInWeek) - 7 + 1, 7 * $diffInWeek])->count(),
             'count_inbox' => Pelanggaran::where('status','Belum')->count(),
-            'total_bulan' => Pelanggaran::select()->whereBetween('tgl_pelanggaran',[$start,$end])->count()
+            'total_bulan' => Pelanggaran::select()
+                ->where('is_active', 1)
+                ->whereBetween('tgl_pelanggaran',[$start,$end])->count()
 
         );
 

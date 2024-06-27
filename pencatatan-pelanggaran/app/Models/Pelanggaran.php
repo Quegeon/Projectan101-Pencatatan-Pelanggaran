@@ -30,6 +30,11 @@ class Pelanggaran extends Model
         return $this->belongsTo(User::class, 'id_user', 'id');
     }
     
+    public function Petugas_Bk()
+    {
+        return $this->belongsTo(Bk::class, 'id_user', 'id');
+    }
+
     public function Bk()
     {
         return $this->belongsTo(Bk::class, 'id_bk', 'id');

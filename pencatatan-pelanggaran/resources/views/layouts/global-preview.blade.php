@@ -38,7 +38,7 @@
     </div> --}}
     <div class="col" >
         <div class="row gap-3">
-            <div class="card top-movers col-lg-4 mr-3 p-0">
+            <div class="card top-movers col-lg-4 mr-lg-3 p-0">
                 <div class="card-header p-3">
                     <h2 class="m-0">Pelanggaran</h2>
                 </div>
@@ -143,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card radar-chart col px-0 ml-3">
+            <div class="card radar-chart col-lg px-0 ml-lg-3">
                 <div class="card-header p-3 d-flex justify-content-between">
                     <h2 class="m-0">Radar Chart</h2>
                     <div class="col-7 ">
@@ -162,7 +162,7 @@
     </div>
     <div class="col">
         <div class="row">
-            <div class="card line-chart col-9 mb-3 px-0">
+            <div class="card line-chart col-lg-9 mb-3 px-0">
                 <div class="card-header p-3">
                     <h2 class="m-0">Multiple Line Chart</h2>
                 </div>
@@ -172,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card doughnut-chart col mb-3 px-0 ml-3">
+            <div class="card doughnut-chart col-lg mb-3 px-0 ml-lg-3">
                 <div class="card-header p-3">
                     <h2 class="m-0">Doughnut Chart</h2>
                 </div>
