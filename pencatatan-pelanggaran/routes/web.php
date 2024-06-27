@@ -44,6 +44,7 @@ use App\Http\Controllers\LogPoinController;
 Route::view('/', 'layouts.landing-page', ['current_year' => \Carbon\Carbon::now()->year]);
 Route::get('/global-summary', [GlobalSummary::class, 'index']);
 Route::get('/search-siswa', [SearchSiswa::class, 'index']);
+Route::get('/display-siswa', [SearchSiswa::class, 'search'])->name('display.siswa');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
