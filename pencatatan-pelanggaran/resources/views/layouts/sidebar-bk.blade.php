@@ -1,8 +1,9 @@
 @php
     $currentRoute = Route::currentRouteName();
-    $activeRoutes = ['review.inbox', 'review.review', 'review.edit', 'view_siswa', 'view_aturan'];
+    $activeRoutes = ['review.inbox', 'review.review', 'review.edit', 'view_siswa', 'view_aturan', 'review.create', 'profile.bk'];
     $kelola = in_array($currentRoute, $activeRoutes) ? 'active' : '';
 @endphp
+
 <div class="sidebar">
     <div class="sidebar-background"></div>
     <div class="sidebar-wrapper scrollbar-inner">
@@ -42,29 +43,29 @@
                     </a>
                 </li>
                 <li class="nav-item {{ $kelola }}">
-                    <a data-toggle="collapse" href="#submenu">
+                    <a data-toggle="collapse" href="#submenu" class="{{ in_array($currentRoute, ['view_siswa', 'view_aturan', 'view_pelanggaran', 'review.inbox']) ? 'collapsed' : '' }}">
                         <i class="fas fa-table"></i>
                         <p>Menu</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="submenu">
+                    <div class="collapse {{ in_array($currentRoute, ['view_siswa', 'view_aturan', 'view_pelanggaran', 'review.inbox']) ? 'show' : '' }}" id="submenu">
                         <ul class="nav nav-collapse">
-                            <li>
+                            <li class="{{ ($currentRoute === 'view_siswa') ? 'active' : '' }}">
                                 <a href="{{ route('view_siswa') }}">
                                     <span class="sub-item">Data Siswa</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ ($currentRoute === 'view_aturan') ? 'active' : '' }}">
                                 <a href="{{ route('view_aturan') }}">
                                     <span class="sub-item">Data Aturan</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ ($currentRoute === 'view_pelanggaran') ? 'active' : '' }}">
                                 <a href="{{ route('view_pelanggaran') }}">
                                     <span class="sub-item">Data Pelanggaran</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ ($currentRoute === 'review.inbox') ? 'active' : '' }}">
                                 <a href="{{ route('review.inbox') }}">
                                     <span class="sub-item">Inbox</span>
                                 </a>
@@ -86,7 +87,7 @@
                     </a>
                     <div class="collapse" id="settings">
                         <ul class="nav nav-collapse">
-                            <li>
+                            <li class="{{ ($currentRoute === 'profile.bk') ? 'active' : '' }}">
                                 <a href="{{ route('profile.bk') }}">
                                     <span class="sub-item">Profile</span>
                                 </a>

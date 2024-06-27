@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             BKSeeder::class,
             UserSeeder::class,
+            UpdateSiswaPasswordsSeeder::class,
         ]);
     }
 }
