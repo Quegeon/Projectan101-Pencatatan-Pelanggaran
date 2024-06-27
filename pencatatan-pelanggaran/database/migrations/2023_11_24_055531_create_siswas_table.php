@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswas', function (Blueprint $table) {
-            $table->string('nis',15)
+            $table->string('nis', 15)
                 ->primary();
             $table->string('id_kelas');
-            $table->string('nama',100);
-            $table->string('no_telp',13);
+            $table->string('nama', 100);
+            $table->string('no_telp', 13);
             $table->integer('poin');
-            $table->string('alamat',255)
+            $table->string('alamat', 255)
                 ->nullable();
             $table->string('status');
+            $table->string('password')->nullable();
+            $table->string('view_password')->nullable();
             $table->timestamps();
             // $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade');
         });
