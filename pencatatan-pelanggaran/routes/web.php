@@ -41,7 +41,7 @@ use App\Http\Controllers\LogPoinController;
 |
 */
 
-Route::view('/', 'layouts.landing-page');
+Route::view('/', 'layouts.landing-page', ['current_year' => \Carbon\Carbon::now()->year]);
 Route::get('/global-summary', [GlobalSummary::class, 'index']);
 Route::get('/search-siswa', [SearchSiswa::class, 'index']);
 
