@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+
 class BKSeeder extends Seeder
 {
     /**
@@ -12,7 +13,7 @@ class BKSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         \App\Models\Bk::create([
             'id' => Str::orderedUuid(),
             'nama' => 'Test BK',
@@ -30,10 +31,9 @@ class BKSeeder extends Seeder
         \App\Models\Bk::create([
             'id' => Str::orderedUuid(),
             'nama' => 'Bk2',
-            'username' => 'Bk1',
+            'username' => 'Bk2',
             'password' => bcrypt('321'),
             'foto' => 'default.png',
         ]);
-
     }
 }
