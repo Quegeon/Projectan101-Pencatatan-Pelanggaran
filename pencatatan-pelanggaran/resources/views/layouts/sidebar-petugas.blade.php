@@ -1,11 +1,10 @@
 @php
     $currentRoute = Route::currentRouteName();
-    $activeRoutes = [ 'petugas', 'bk', 'siswa', 'kelas', 'aturan', 'hukuman', 'jenis', 'pelanggaran' ];
-    $kelolaData = (in_array('kelolaData', $activeRoutes)) ? 'active' : '';
-    $masterData = (in_array('masterData', $activeRoutes)) ? 'active' : '';
-    $masterDataSistem = (in_array('masterDataSistem', $activeRoutes)) ? 'active' : '';
-
+    $activeRoutes = ['dashboard', 'petugas.index', 'bk.index', 'siswa.index', 'kelas.index', 'aturan.index', 'hukuman.index', 'jenis.index', 'laporan.create', 'profile.user', 'logout.user'];
+    $isAdmin = (Auth()->User()->level === 'Admin');
+    $isPetugas = (Auth()->User()->level === 'Petugas');
 @endphp
+
 <div class="sidebar">
     <div class="sidebar-background"></div>
     <div class="sidebar-wrapper scrollbar-inner">
@@ -37,49 +36,42 @@
                     </span>
                     <h4 class="text-section">Pilihan</h4>
                 </li>
-                @if(Auth()->User()->level == 'Admin')
-                <li class="nav-item {{ $kelolaData }}">
-                    <a data-toggle="collapse" href="#submenu">
+                @if($isAdmin)
+                <li class="nav-item {{ ($currentRoute === 'petugas.index' || $currentRoute === 'bk.index') ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#submenu" class="{{ ($currentRoute === 'petugas.index' || $currentRoute === 'bk.index') ? 'collapsed' : '' }}">
                         <i class="fas fa-solid fa-users"></i>
                         <p>Kelola User</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="submenu">
+                    <div class="collapse {{ ($currentRoute === 'petugas.index' || $currentRoute === 'bk.index') ? 'show' : '' }}" id="submenu">
                         <ul class="nav nav-collapse">
-                            <li>
+                            <li class="{{ ($currentRoute === 'petugas.index') ? 'active' : '' }}">
                                 <a href="{{ route('petugas.index') }}">
                                     <span class="sub-item">Kelola Data Petugas</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ ($currentRoute === 'bk.index') ? 'active' : '' }}">
                                 <a href="{{ route('bk.index') }}">
                                     <span class="sub-item">Kelola Data Bk</span>
                                 </a>
                             </li>
-                            {{-- <li>
-                                <a href="{{ route('pelanggaran.index') }}">
-                                    <span class="sub-item">Kelola Data Pelanggaran</span>
-                                </a>
-                            </li> --}}
                         </ul>
                     </div>
                 </li>
-                @endif
-                @if(Auth()->User()->level == 'Admin')
-                <li class="nav-item {{ $masterData }}">
-                    <a data-toggle="collapse" href="#submenu2">
+                <li class="nav-item {{ ($currentRoute === 'siswa.index' || $currentRoute === 'kelas.index') ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#submenu2" class="{{ ($currentRoute === 'siswa.index' || $currentRoute === 'kelas.index') ? 'collapsed' : '' }}">
                         <i class="fas fa-solid fa-school"></i>
                         <p>Master Data</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="submenu2">
+                    <div class="collapse {{ ($currentRoute === 'siswa.index' || $currentRoute === 'kelas.index') ? 'show' : '' }}" id="submenu2">
                         <ul class="nav nav-collapse">
-                            <li>
+                            <li class="{{ ($currentRoute === 'siswa.index') ? 'active' : '' }}">
                                 <a href="{{ route('siswa.index') }}">
                                     <span class="sub-item">Kelola Data Siswa</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ ($currentRoute === 'kelas.index') ? 'active' : '' }}">
                                 <a href="{{ route('kelas.index') }}">
                                     <span class="sub-item">Kelola Data Kelas</span>
                                 </a>
@@ -87,68 +79,52 @@
                         </ul>
                     </div>
                 </li>
-                @endif
-                @if(Auth()->User()->level == 'Admin')
-                <li class="nav-item {{ $masterDataSistem }}">
-                    <a data-toggle="collapse" href="#submenu3">
+                <li class="nav-item {{ ($currentRoute === 'aturan.index' || $currentRoute === 'hukuman.index' || $currentRoute === 'jenis.index') ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#submenu3" class="{{ ($currentRoute === 'aturan.index' || $currentRoute === 'hukuman.index' || $currentRoute === 'jenis.index') ? 'collapsed' : '' }}">
                         <i class="fas fa-table"></i>
                         <p>Master Data Sistem</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="submenu3">
+                    <div class="collapse {{ ($currentRoute === 'aturan.index' || $currentRoute === 'hukuman.index' || $currentRoute === 'jenis.index') ? 'show' : '' }}" id="submenu3">
                         <ul class="nav nav-collapse">
-                            <li>
+                            <li class="{{ ($currentRoute === 'aturan.index') ? 'active' : '' }}">
                                 <a href="{{ route('aturan.index') }}">
                                     <span class="sub-item">Kelola Data Aturan</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ ($currentRoute === 'hukuman.index') ? 'active' : '' }}">
                                 <a href="{{ route('hukuman.index') }}">
                                     <span class="sub-item">Kelola Data Hukuman</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ ($currentRoute === 'jenis.index') ? 'active' : '' }}">
                                 <a href="{{ route('jenis.index') }}">
                                     <span class="sub-item">Kelola Data Jenis</span>
                                 </a>
                             </li>
-                            {{-- <li>
-                                <a href="{{ route('pelanggaran.index') }}">
-                                    <span class="sub-item">Kelola Data Pelanggaran</span>
-                                </a>
-                            </li> --}}
                         </ul>
                     </div>
                 </li>
                 @endif
-                @if (Auth()->User()->level == 'Petugas')
-                <li class="nav-item">
+                @if ($isPetugas)
+                <li class="nav-item {{ ($currentRoute === 'laporan.create') ? 'active' : '' }}">
                     <a href="{{ route('laporan.create') }}">
                         <i class="fas fa-file-signature"></i>
                         <p>Tambah Laporan</p>
                     </a>
                 </li>
                 @endif
-                <li class="nav-item">
-                    <a data-toggle="collapse" href="#settings">
+                <li class="nav-item {{ ($currentRoute === 'profile.user') ? 'active' : '' }}">
+                    <a href="{{ route('profile.user') }}">
                         <i class="fas fa-cog"></i>
                         <p>Pengaturan</p>
-                        <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="settings">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="{{ route('profile.user') }}">
-                                    <span class="sub-item">Profile</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('logout.user') }}">
-                                    <span class="sub-item">Logout</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                </li>
+                <li class="nav-item {{ ($currentRoute === 'logout.user') ? 'active' : '' }}">
+                    <a href="{{ route('logout.user') }}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <p>Logout</p>
+                    </a>
                 </li>
             </ul>
         </div>
