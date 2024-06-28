@@ -8,6 +8,7 @@ use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -71,8 +72,12 @@ class LogPoinController extends Controller
 
     public function get_per_siswa($nis)
     {
-        $siswa = Siswa::where('nis', $nis)->first();
-        $data = LogPoin::orderBy('created_at', 'desc')
+        try {
+            $decrypt = Crypt::decrypt($nis);
+            $nis = $decrypt['id'];
+            $siswa = Siswa::where('nis', $nis)->first();
+
+            $data = LogPoin::orderBy('created_at', 'desc')
             ->where(function ($query) use ($nis) {
                 return $query->where('id_user', $nis)
                     ->orWhere('id_user', null);
@@ -84,44 +89,99 @@ class LogPoinController extends Controller
             ->with(['Siswa', 'BK', 'Kelas'])
             ->get();
 
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('masked_datetime', function ($item) {
-                return (new Carbon($item->created_at))
-                    ->locale('id')
-                    ->translatedFormat('l, d F Y \p\u\k\u\l H:i');
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('masked_datetime', function ($item) {
+                    return (new Carbon($item->created_at))
+                        ->locale('id')
+                        ->translatedFormat('l, d F Y \p\u\k\u\l H:i');
+                })
+                ->editColumn('poin_asal', function ($item) {
+                    return $item->poin_asal ?? 0;
+                })
+                ->addColumn('aktivitas', function ($item) use ($nis) {
+                    $el = '';
+
+                    // Kalau Reset Semua
+                    if ($item->is_reset && !$item->id_user && !$item->id_kelas) {
+                        $el = "{$item->BK->nama} Melakukan Reset poin ke seluruh siswa";
+                    }
+
+                    // Reset Perkelas
+                    if ($item->is_reset && !$item->id_user && $item->id_kelas) {
+                        $el = "{$item->BK->nama} Melakukan Reset poin ke siswa {$item->Kelas->nama_kelas}";
+                    }
+
+                    // Reset Siswa
+                    if ($item->is_reset && ($item->id_user && $item->id_user == $nis)) {
+                        $el = "{$item->BK->nama} Mereset poin {$item->Siswa->nama}";
+                    }
+
+                    // Pengurangan biasa
+                    if (!$item->is_reset && ($item->id_user && $item->id_user == $nis)) {
+                        $el = "{$item->BK->nama} Mengurangi poin sebesar {$item->poin_perubahan} ke {$item->Siswa->nama}";
+                    }
+
+                    // CMIIW MASZEH
+                    return $el;
+                })
+                ->rawColumns(['masked_datetime', 'aktivitas'])
+                ->toJson();
+            
+        } catch (\Throwable $th) {
+            $siswa = Siswa::where('nis', $nis)->first();
+
+            $data = LogPoin::orderBy('created_at', 'desc')
+            ->where(function ($query) use ($nis) {
+                return $query->where('id_user', $nis)
+                    ->orWhere('id_user', null);
             })
-            ->editColumn('poin_asal', function ($item) {
-                return $item->poin_asal ?? 0;
+            ->where(function ($query) use ($siswa) {
+                return $query->where('id_kelas', $siswa->id_kelas)
+                    ->orWhere('id_kelas', null);
             })
-            ->addColumn('aktivitas', function ($item) use ($nis) {
-                $el = '';
+            ->with(['Siswa', 'BK', 'Kelas'])
+            ->get();
 
-                // Kalau Reset Semua
-                if ($item->is_reset && !$item->id_user && !$item->id_kelas) {
-                    $el = "{$item->BK->nama} Melakukan Reset poin ke seluruh siswa";
-                }
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('masked_datetime', function ($item) {
+                    return (new Carbon($item->created_at))
+                        ->locale('id')
+                        ->translatedFormat('l, d F Y \p\u\k\u\l H:i');
+                })
+                ->editColumn('poin_asal', function ($item) {
+                    return $item->poin_asal ?? 0;
+                })
+                ->addColumn('aktivitas', function ($item) use ($nis) {
+                    $el = '';
 
-                // Reset Perkelas
-                if ($item->is_reset && !$item->id_user && $item->id_kelas) {
-                    $el = "{$item->BK->nama} Melakukan Reset poin ke siswa {$item->Kelas->nama_kelas}";
-                }
+                    // Kalau Reset Semua
+                    if ($item->is_reset && !$item->id_user && !$item->id_kelas) {
+                        $el = "{$item->BK->nama} Melakukan Reset poin ke seluruh siswa";
+                    }
 
-                // Reset Siswa
-                if ($item->is_reset && ($item->id_user && $item->id_user == $nis)) {
-                    $el = "{$item->BK->nama} Mereset poin {$item->Siswa->nama}";
-                }
+                    // Reset Perkelas
+                    if ($item->is_reset && !$item->id_user && $item->id_kelas) {
+                        $el = "{$item->BK->nama} Melakukan Reset poin ke siswa {$item->Kelas->nama_kelas}";
+                    }
 
-                // Pengurangan biasa
-                if (!$item->is_reset && ($item->id_user && $item->id_user == $nis)) {
-                    $el = "{$item->BK->nama} Mengurangi poin sebesar {$item->poin_perubahan} ke {$item->Siswa->nama}";
-                }
+                    // Reset Siswa
+                    if ($item->is_reset && ($item->id_user && $item->id_user == $nis)) {
+                        $el = "{$item->BK->nama} Mereset poin {$item->Siswa->nama}";
+                    }
 
-                // CMIIW MASZEH
-                return $el;
-            })
-            ->rawColumns(['masked_datetime', 'aktivitas'])
-            ->toJson();
+                    // Pengurangan biasa
+                    if (!$item->is_reset && ($item->id_user && $item->id_user == $nis)) {
+                        $el = "{$item->BK->nama} Mengurangi poin sebesar {$item->poin_perubahan} ke {$item->Siswa->nama}";
+                    }
+
+                    // CMIIW MASZEH
+                    return $el;
+                })
+                ->rawColumns(['masked_datetime', 'aktivitas'])
+                ->toJson();
+        }
     }
 
     public function reset_semua(Request $request)
