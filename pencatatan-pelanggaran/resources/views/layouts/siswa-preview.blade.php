@@ -73,6 +73,10 @@
             background-color: white !important;
             /* Ubah background menjadi putih */
         }
+
+        .tab-pane {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -113,10 +117,35 @@
                     </div>
                     <div id="content" class="card mt-4 p-5">
                         <div class="m-0 text-center text-muted h3">Tidak ada data...</div>
+
+                        {{-- <table id="basic-datatables" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Pelanggaran</th>
+                                            <th>Poin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align: center">1</td>
+                                            <td>bolos</td>
+                                            <td style="text-align: center">90</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="bg-info" style="color: white;">
+                                            <th colspan="2" style="text-align: center;">JUMLAH POIN</th>
+                                            <th style="text-align: center">90</th>
+                                        </tr>
+                                    </tfoot>
+                                </table> --}}
                     </div>
                 </div>
             </div>
-            {{-- <footer class="footer border-0 mt-5">
+        </div>
+    </div>
+    {{-- <footer class="footer border-0 mt-5">
         <div class="container-fluid d-flex">
             <div class="copyright mr-auto">
                 2024, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://yourwebsite.com">MATA
@@ -133,7 +162,6 @@
             </nav>
         </div>
     </footer> --}}
-        </div>
     </div>
 
     <!-- Core JS Files -->
@@ -183,12 +211,22 @@
                     method: 'GET',
                     url: "{{ route('display.siswa') }}",
                     data: formData,
-                    success: function(res) {},
+                    success: function(res) {
+                        // console.log(res.data);
+                        if (res.data) {
+                            $('#content').html(res.data);
+
+                        } else {
+                            $('#content').html(
+                                '<div class="m-0 text-center text-muted h3">Tidak ada data...</div>'
+                            )
+                        }
+                    },
                     error: function(err) {
                         console.log(err);
                     }
                 });
-            })
+            });
         });
     </script>
 </body>

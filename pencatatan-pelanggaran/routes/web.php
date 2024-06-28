@@ -29,7 +29,6 @@ use App\Http\Controllers\PreviewController as SearchSiswa;
 
 use App\Http\Controllers\LogPoinController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +44,9 @@ Route::view('/', 'layouts.landing-page', ['current_year' => \Carbon\Carbon::now(
 Route::get('/global-summary', [GlobalSummary::class, 'index']);
 Route::get('/search-siswa', [SearchSiswa::class, 'index']);
 Route::get('/display-siswa', [SearchSiswa::class, 'search'])->name('display.siswa');
+
+Route::get('log-points-siswa/{nis}', [LogPoinController::class, 'get_per_siswa'])->name('log-poin-siswa');
+Route::get('/pelanggaran-siswa/{nis}', [SearchSiswa::class, 'history_siswa'])->name('search.history.siswa');
 
 Route::view('/login/user', 'home.login.auth-user')->name('login.user');
 Route::view('/login/bk', 'home.login.auth-bk')->name('login.bk');
@@ -187,7 +189,6 @@ Route::prefix('bk')->middleware(['auth:bk', 'checkdata', 'newdata'])->group(func
 
     Route::get('log-points', [LogPoinController::class, 'index'])->name('log-poin');
     Route::get('log-points-all', [LogPoinController::class, 'get_log_poin'])->name('log-poin-all');
-    Route::get('log-points-siswa/{nis}', [LogPoinController::class, 'get_per_siswa'])->name('log-poin-siswa');
 
     // Reset Poin
     Route::prefix('reset')->controller(LogPoinController::class)->group(function () {
